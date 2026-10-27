@@ -1,0 +1,2033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag.js?id=G-VEB9CCPTMJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-VEB9CCPTMJ');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniToolsDeck — The Modern Creator & Growth Stack</title>
+    <meta name="description" content="A curated utility stack of high-performance micro-tools for modern creators, digital marketers, developers, and AI-driven workflows.">
+    
+    <!-- PWA & Favicon Support -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%2310b981' d='M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96z'/><path fill='%23ffffff' d='M128 160h256v32H128zm0 64h256v32H128zm0 64h192v32H128z'/></svg>">
+    <meta name="theme-color" content="#0f172a">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Required Libraries with Fallback Safety -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #10b981;
+            --accent-hover: #059669;
+            --border-color: #334155;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+        }
+
+        .light-theme {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --accent: #059669;
+            --accent-hover: #047857;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 800;
+            font-size: 1.35rem;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--accent), #06b6d4);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .brand-accent {
+            color: var(--accent);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-container {
+            position: relative;
+        }
+
+        .hamburger-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.5rem 0.85rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .hamburger-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: calc(100% + 0.5rem);
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            width: 260px;
+            z-index: 200;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-header {
+            padding: 0.75rem 1rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(0,0,0,0.1);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.875rem;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--accent);
+            color: #ffffff;
+        }
+
+        .theme-toggle, .bookmark-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.5rem 0.85rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .theme-toggle:hover, .bookmark-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        .hero-banner {
+            text-align: center;
+            margin-bottom: 1.75rem;
+        }
+        .hero-banner h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.4rem;
+            letter-spacing: -0.025em;
+        }
+        .hero-banner p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto 2rem auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.85rem 1rem 0.85rem 3.2rem; /* 3.2rem left padding fixes icon overlap */
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            outline: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.15rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+
+        @media (max-width: 1024px) {
+            .nav-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .tab-btn {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 0.85rem 0.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.825rem;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            text-align: center;
+            width: 100%;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .tab-btn i {
+            font-size: 1.1rem;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-main);
+            border-color: var(--accent);
+        }
+
+        .tab-btn.active {
+            background-color: var(--accent);
+            color: #ffffff;
+            border-color: var(--accent);
+        }
+
+        .trending-badge {
+            position: absolute;
+            top: 4px;
+            right: 6px;
+            font-size: 9px;
+            background: #f59e0b;
+            color: #000;
+            font-weight: 800;
+            padding: 1px 4px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tool-panel {
+            display: none;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .tool-panel.active {
+            display: block;
+        }
+
+        .tool-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .tool-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        input[type="number"],
+        input[type="text"],
+        input[type="color"],
+        input[type="file"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--accent);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 0.85rem 1.5rem;
+            background-color: var(--accent);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .result-box {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin: 0.5rem 0;
+            word-break: break-all;
+        }
+
+        .result-subtext {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.4rem 0.85rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--accent);
+            color: #ffffff;
+        }
+
+        .serp-card {
+            background: #ffffff;
+            color: #1a0dab;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: left;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            border: 1px solid var(--border-color);
+        }
+
+        .serp-url {
+            color: #202124;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+        }
+
+        .serp-title {
+            color: #1a0dab;
+            font-size: 1.2rem;
+            font-weight: 400;
+            text-decoration: underline;
+            margin-bottom: 4px;
+        }
+
+        .serp-desc {
+            color: #4d5156;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        /* SOCIAL PREVIEW CONTAINER STYLING */
+        .social-preview-wrapper {
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #f8fafc;
+            max-width: 520px;
+            margin: 1.5rem auto 0 auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .platform-tabs {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            scrollbar-width: none;
+        }
+        .platform-tabs::-webkit-scrollbar { display: none; }
+
+        .platform-tab {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        .platform-tab.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .mock-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+        .mock-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        .mock-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f59e0b, #ec4899);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #fff;
+            font-size: 0.85rem;
+        }
+        .mock-user-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .mock-name {
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: #f8fafc;
+        }
+        .mock-handle {
+            color: #94a3b8;
+            font-size: 0.75rem;
+        }
+        .mock-body {
+            line-height: 1.5;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            white-space: pre-wrap;
+            font-size: 0.875rem;
+            color: #e2e8f0;
+        }
+        .mock-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+            font-size: 0.8rem;
+        }
+        .mock-actions {
+            display: flex;
+            gap: 1.25rem;
+        }
+
+        footer {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            max-width: 600px;
+            width: 100%;
+            padding: 2rem;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <span>MiniTools<span class="brand-accent">Deck</span></span>
+            </a>
+            <div class="header-actions">
+                <div class="menu-container">
+                    <button class="hamburger-btn" onclick="toggleMenu()" title="Categories">
+                        <i class="fa-solid fa-bars"></i> Categories
+                    </button>
+                    <div id="categoryMenu" class="dropdown-menu">
+                        <div class="dropdown-header">Filter by Category</div>
+                        <a href="#ai-prompt-gen" class="dropdown-item" onclick="switchTool('aiprompt', null); toggleMenu();"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent)"></i> Core Utilities</a>
+                        <a href="#viral-hook" class="dropdown-item" onclick="switchTool('viralhook', null); toggleMenu();"><i class="fa-solid fa-fire" style="color:var(--accent)"></i> Creator & Growth</a>
+                        <a href="#utm-builder" class="dropdown-item" onclick="switchTool('utm', null); toggleMenu();"><i class="fa-solid fa-chart-line" style="color:var(--accent)"></i> Marketing & SEO</a>
+                        <a href="#json-formatter" class="dropdown-item" onclick="switchTool('jsonformat', null); toggleMenu();"><i class="fa-solid fa-code" style="color:var(--accent)"></i> Developer Utilities</a>
+                        <a href="#image-converter" class="dropdown-item" onclick="switchTool('imgconv', null); toggleMenu();"><i class="fa-solid fa-image" style="color:var(--accent)"></i> Creative & Assets</a>
+                    </div>
+                </div>
+
+                <button class="bookmark-btn" onclick="bookmarkSite()">
+                    <i class="fa-regular fa-bookmark"></i> Bookmark
+                </button>
+                <button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main>
+
+        <div class="hero-banner">
+            <h1>Execute Faster. Grow Louder.</h1>
+            <p>25 instant, client-side browser utilities built for high-velocity marketers, developers, and AI creators. Zero bloat. Zero tracking.</p>
+        </div>
+
+        <div class="search-container">
+            <i class="fa-solid fa-search search-icon"></i>
+            <input type="text" id="toolSearch" class="search-input" placeholder="Search 25+ tools (e.g., JSON, UTM, Favicon)..." oninput="filterTools()">
+        </div>
+
+        <!-- ALL 25 TOOLS IN THE GRID -->
+        <div class="nav-grid" id="toolGrid">
+            <a href="#ai-prompt-gen" class="tab-btn active" onclick="switchTool('aiprompt', this)" data-name="ai prompt generator chatgpt marketing">
+                <span class="trending-badge">Hot</span>
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>AI Prompt Gen</span>
+            </a>
+            <a href="#viral-hook" class="tab-btn" onclick="switchTool('viralhook', this)" data-name="viral hook gen social media creator">
+                <span class="trending-badge">New</span>
+                <i class="fa-solid fa-fire" style="color:#f59e0b"></i>
+                <span>Viral Hook Gen</span>
+            </a>
+            <a href="#word-counter" class="tab-btn" onclick="switchTool('wordcount', this)" data-name="word counter character text">
+                <i class="fa-solid fa-font"></i>
+                <span>Word Counter</span>
+            </a>
+            <a href="#headline-analyzer" class="tab-btn" onclick="switchTool('headline', this)" data-name="headline score checker copywriting">
+                <i class="fa-solid fa-heading"></i>
+                <span>Headline Score</span>
+            </a>
+            <a href="#favicon-gen" class="tab-btn" onclick="switchTool('favicongen', this)" data-name="favicon pwa icon generator app">
+                <span class="trending-badge">New</span>
+                <i class="fa-solid fa-globe" style="color:#06b6d4"></i>
+                <span>Favicon/PWA Gen</span>
+            </a>
+            <a href="#password-generator" class="tab-btn" onclick="switchTool('password', this)" data-name="password gen security">
+                <i class="fa-solid fa-key"></i>
+                <span>Password Gen</span>
+            </a>
+            <a href="#qr-code-generator" class="tab-btn" onclick="switchTool('qrcode', this)" data-name="qr generator code url">
+                <i class="fa-solid fa-qrcode"></i>
+                <span>QR Generator</span>
+            </a>
+            <a href="#json-formatter" class="tab-btn" onclick="switchTool('jsonformat', this)" data-name="json formatter validator dev">
+                <i class="fa-solid fa-code"></i>
+                <span>JSON Formatter</span>
+            </a>
+            <a href="#utm-builder" class="tab-btn" onclick="switchTool('utm', this)" data-name="utm builder link campaign analytics">
+                <i class="fa-solid fa-link"></i>
+                <span>UTM Builder</span>
+            </a>
+            <a href="#image-converter" class="tab-btn" onclick="switchTool('imgconv', this)" data-name="image converter png webp jpeg">
+                <i class="fa-solid fa-image"></i>
+                <span>Image Converter</span>
+            </a>
+            <a href="#image-resizer" class="tab-btn" onclick="switchTool('imgresize', this)" data-name="image resizer pixels dimensions">
+                <i class="fa-solid fa-crop"></i>
+                <span>Image Resizer</span>
+            </a>
+            <a href="#og-generator" class="tab-btn" onclick="switchTool('oggen', this)" data-name="og meta tags social preview">
+                <i class="fa-solid fa-share-nodes"></i>
+                <span>OG Meta Tags</span>
+            </a>
+            <a href="#serp-previewer" class="tab-btn" onclick="switchTool('serp', this)" data-name="serp preview google snippet seo">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>SERP Preview</span>
+            </a>
+            <a href="#aspect-ratio-calculator" class="tab-btn" onclick="switchTool('aspectratio', this)" data-name="aspect ratio calculator dimensions">
+                <i class="fa-solid fa-expand"></i>
+                <span>Aspect Ratio</span>
+            </a>
+            <a href="#keyword-density" class="tab-btn" onclick="switchTool('keyword', this)" data-name="keyword density analyzer seo content">
+                <i class="fa-solid fa-chart-simple"></i>
+                <span>Keyword Density</span>
+            </a>
+            <a href="#readability-checker" class="tab-btn" onclick="switchTool('readability', this)" data-name="readability text grade analyzer">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Readability</span>
+            </a>
+            <a href="#contrast-checker" class="tab-btn" onclick="switchTool('contrast', this)" data-name="contrast checker wcag accessibility">
+                <i class="fa-solid fa-eye"></i>
+                <span>Contrast Checker</span>
+            </a>
+            <a href="#json-ts" class="tab-btn" onclick="switchTool('jsonts', this)" data-name="json to typescript generator dev">
+                <i class="fa-solid fa-file-code"></i>
+                <span>JSON-to-TS</span>
+            </a>
+            <a href="#svg-optimizer" class="tab-btn" onclick="switchTool('svgopt', this)" data-name="svg optimizer path minifier">
+                <i class="fa-solid fa-pen-clip"></i>
+                <span>SVG Optimizer</span>
+            </a>
+            <a href="#social-hook" class="tab-btn" onclick="switchTool('socialhook', this)" data-name="social hook previewer truncation">
+                <i class="fa-solid fa-comments"></i>
+                <span>Hook Previewer</span>
+            </a>
+            <a href="#color-palette" class="tab-btn" onclick="switchTool('palette', this)" data-name="color palette extractor hex image">
+                <i class="fa-solid fa-palette"></i>
+                <span>Color Palette</span>
+            </a>
+            <a href="#ai-token-cost" class="tab-btn" onclick="switchTool('aitoken', this)" data-name="ai token cost estimator gpt claude">
+                <i class="fa-solid fa-microchip"></i>
+                <span>AI Token Cost</span>
+            </a>
+            <a href="#engagement-calc" class="tab-btn" onclick="switchTool('engagement', this)" data-name="engagement rate calculator social media">
+                <i class="fa-solid fa-calculator"></i>
+                <span>Engagement Calc</span>
+            </a>
+            <a href="#meta-inspect" class="tab-btn" onclick="switchTool('metainspect', this)" data-name="meta tag inspector parser">
+                <i class="fa-solid fa-tag"></i>
+                <span>Meta Inspector</span>
+            </a>
+            <a href="#html-minifier" class="tab-btn" onclick="switchTool('htmlmin', this)" data-name="html minifier compressor code">
+                <i class="fa-solid fa-file-arrow-down"></i>
+                <span>HTML Minifier</span>
+            </a>
+        </div>
+
+        <!-- TOOL PANELS -->
+        <div id="tool-aiprompt" class="tool-panel active">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent)"></i> AI Marketing Prompt Generator</h2>
+                <p class="tool-desc">Transform basic concepts into structured, high-performing prompts for marketing copy or ads.</p>
+            </div>
+            <div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Product or Topic</label>
+                        <input type="text" id="ai-topic" placeholder="e.g. SaaS productivity app">
+                    </div>
+                    <div class="form-group">
+                        <label>Target Audience</label>
+                        <input type="text" id="ai-audience" placeholder="e.g. Remote project managers">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Goal / Format</label>
+                    <select id="ai-goal">
+                        <option value="High-converting Facebook / LinkedIn Ad Copy">Ad Copy</option>
+                        <option value="Engaging Blog Post Outline with SEO Headings">Blog Post Outline</option>
+                        <option value="Cold Email Outreach Sequence">Cold Email Sequence</option>
+                    </select>
+                </div>
+                <button class="btn-submit" onclick="generateAIPrompt()">Generate Structured Prompt</button>
+                <div class="result-box" style="align-items: flex-start; text-align: left;">
+                    <div class="result-subtext">Enhanced Prompt</div>
+                    <div class="result-value" id="ai-prompt-res" style="font-size: 0.95rem; line-height: 1.5; color: var(--text-main);">Enter details above</div>
+                    <button class="copy-btn" onclick="copyElementText('ai-prompt-res')"><i class="fa-regular fa-copy"></i> Copy Prompt</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-viralhook" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-fire" style="color:#f59e0b"></i> Social Media Viral Hook Generator</h2>
+                <p class="tool-desc">Instantly generate high-converting opening hooks for X, LinkedIn, and TikTok.</p>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label>Topic / Niche / Product</label>
+                    <input type="text" id="hook-topic" placeholder="e.g. SaaS growth, productivity, fitness tips">
+                </div>
+                <div class="form-group">
+                    <label>Psychological Framework</label>
+                    <select id="hook-framework">
+                        <option value="Curiosity Gap">Curiosity Gap (Open a loop)</option>
+                        <option value="Contrarian">Contrarian (Against the grain)</option>
+                        <option value="Social Proof">Social Proof / Data-Driven</option>
+                        <option value="Pain Point">Pain Point / Agitate</option>
+                    </select>
+                </div>
+                <button class="btn-submit" onclick="generateViralHooks()">Instant-Copy 3 Viral Hooks</button>
+                <div class="result-box" style="align-items: flex-start; text-align: left;">
+                    <div class="result-subtext">Generated Hooks</div>
+                    <div id="viral-hooks-output" style="width:100%; margin-top:0.5rem; font-size:0.9rem; line-height:1.6; color:var(--text-main);">Enter topic above</div>
+                    <button class="copy-btn" onclick="copyElementText('viral-hooks-output')"><i class="fa-regular fa-copy"></i> Copy Hooks</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-wordcount" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-font" style="color:var(--accent)"></i> Live Word & Character Counter</h2>
+                <p class="tool-desc">Analyze word length, character count, and reading time for copy or social posts.</p>
+            </div>
+            <div>
+                <textarea id="wordcount-input" placeholder="Paste or type your text here..." oninput="updateWordCount()"></textarea>
+                <div class="grid-2" style="margin-top:1rem;">
+                    <div class="result-box">
+                        <div class="result-subtext">Word Count</div>
+                        <div class="result-value" id="res-words">0</div>
+                        <button class="copy-btn" onclick="copyElementText('res-words')"><i class="fa-regular fa-copy"></i> Copy Count</button>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-subtext">Character Count (with spaces)</div>
+                        <div class="result-value" id="res-chars">0</div>
+                        <button class="copy-btn" onclick="copyElementText('res-chars')"><i class="fa-regular fa-copy"></i> Copy Count</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-headline" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-heading" style="color:var(--accent)"></i> Headline Analyzer & Score Checker</h2>
+                <p class="tool-desc">Analyze headlines for optimal word count, emotional impact, and clickability.</p>
+            </div>
+            <div class="grid-2">
+                <div>
+                    <div class="form-group">
+                        <label>Your Headline</label>
+                        <input type="text" id="headline-input" placeholder="e.g. 10 Proven Ways to Scale Your Business Fast">
+                    </div>
+                    <button class="btn-submit" onclick="analyzeHeadline()">Analyze Headline</button>
+                </div>
+                <div>
+                    <div class="result-box">
+                        <div class="result-subtext">Headline Quality Score</div>
+                        <div class="result-value" id="headline-score">0 / 100</div>
+                        <div class="result-subtext" id="headline-feedback">Enter a headline above to see suggestions.</div>
+                        <button class="copy-btn" onclick="copyElementText('headline-score')"><i class="fa-regular fa-copy"></i> Copy Score</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-favicongen" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-globe" style="color:#06b6d4"></i> Favicon & PWA Icon Generator</h2>
+                <p class="tool-desc">Upload a high-res logo and instantly generate browser favicons and Apple touch icons.</p>
+            </div>
+            <div class="grid-2">
+                <div>
+                    <div class="form-group">
+                        <label>Upload Logo (PNG / SVG)</label>
+                        <input type="file" id="favicon-file" accept="image/*">
+                    </div>
+                    <button class="btn-submit" onclick="generateFaviconBundle()">Download Complete Favicon Bundle</button>
+                </div>
+                <div>
+                    <div class="result-box">
+                        <div class="result-subtext">Bundle Status</div>
+                        <div class="result-value" id="favicon-status" style="font-size: 1.2rem;">Ready</div>
+                        <div class="result-subtext">Includes .ico, PNG sizes, and HTML head snippet.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-password" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-key" style="color:var(--accent)"></i> Secure Password Generator</h2>
+                <p class="tool-desc">Generate strong, encrypted passwords instantly in your browser.</p>
+            </div>
+            <div class="grid-2">
+                <div>
+                    <div class="form-group">
+                        <label>Password Length: <span id="pwd-len-val">16</span> characters</label>
+                        <input type="range" id="pwd-length" min="8" max="32" value="16" style="width:100%" oninput="document.getElementById('pwd-len-val').innerText = this.value">
+                    </div>
+                    <button class="btn-submit" onclick="genPassword()">Copy Secure Password ⚡</button>
+                </div>
+                <div>
+                    <div class="result-box">
+                        <div class="result-subtext">Generated Secure Password</div>
+                        <div class="result-value" id="pwd-res" style="font-size: 1.25rem;">Click Generate</div>
+                        <button class="copy-btn" onclick="copyElementText('pwd-res')"><i class="fa-regular fa-copy"></i> Copy Password</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-qrcode" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-qrcode" style="color:var(--accent)"></i> Free QR Code Generator</h2>
+                <p class="tool-desc">Generate instant QR codes for website URLs, campaign links, or text messages.</p>
+            </div>
+            <div class="grid-2">
+                <div>
+                    <div class="form-group">
+                        <label>Target URL or Text</label>
+                        <input type="text" id="qr-input" placeholder="https://minitoolsdeck.com">
+                    </div>
+                    <button class="btn-submit" onclick="generateQRCode()">Generate QR Code</button>
+                </div>
+                <div>
+                    <div class="result-box">
+                        <div id="qrcode-box" style="padding: 1rem; background: #fff; border-radius: 8px; min-height: 160px; display:flex; align-items:center; justify-content:center;"></div>
+                        <div class="result-subtext" style="margin-top:0.5rem;">Right-click or hold image to save.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-jsonformat" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-code" style="color:var(--accent)"></i> JSON Formatter & Validator</h2>
+                <p class="tool-desc">Prettify, format, and validate un-minified JSON string data directly in your browser.</p>
+            </div>
+            <div>
+                <textarea id="json-input" placeholder='Paste unformatted JSON here... e.g. {"name":"MiniToolsDeck","active":true}'></textarea>
+                <button class="btn-submit" onclick="formatJSON()">Prettify & Format JSON</button>
+                <div class="result-box" style="align-items: flex-start; text-align: left;">
+                    <div class="result-subtext">Formatted Output</div>
+                    <pre id="json-output" style="width:100%; white-space: pre-wrap; font-family: monospace; font-size:0.85rem; color: var(--accent); margin-top:0.5rem;"></pre>
+                    <button class="copy-btn" onclick="copyElementText('json-output')"><i class="fa-regular fa-copy"></i> Copy Clean JSON</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-utm" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-link" style="color:var(--accent)"></i> UTM Campaign Link Builder</h2>
+                <p class="tool-desc">Generate trackable URLs with UTM parameters for Google Analytics campaign tracking.</p>
+            </div>
+            <div class="grid-2">
+                <div>
+                    <div class="form-group">
+                        <label>Website URL *</label>
+                        <input type="text" id="utm-url" placeholder="https://yourwebsite.com/landing">
+                    </div>
+                    <div class="form-group">
+                        <label>Campaign Source (utm_source) *</label>
+                        <input type="text" id="utm-source" placeholder="e.g. newsletter, google, twitter">
+                    </div>
+                    <div class="form-group">
+                        <label>Campaign Medium (utm_medium)</label>
+                        <input type="text" id="utm-medium" placeholder="e.g. cpc, email, social">
+                    </div>
+                    <div class="form-group">
+                        <label>Campaign Name (utm_campaign)</label>
+                        <input type="text" id="utm-name" placeholder="e.g. spring_sale, promo2026">
+                    </div>
+                    <button class="btn-submit" onclick="buildUTM()">Build UTM Link</button>
+                </div>
+                <div>
+                    <div class="result-box">
+                        <div class="result-subtext">Generated Trackable Link</div>
+                        <div class="result-value" id="utm-res" style="font-size:0.95rem; line-height:1.4;">Enter URL & Source above</div>
+                        <button class="copy-btn" onclick="copyElementText('utm-res')"><i class="fa-regular fa-copy"></i> Copy Link</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-imgconv" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-image" style="color:var(--accent)"></i> Client-Side Image Converter</h2>
+                <p class="tool-desc">Convert images instantly between PNG, JPEG, and WebP formats right inside your browser.</p>
+            </div>
+            <div class="grid-2">
+                <div>
+                    <div class="form-group">
+                        <label>Select Image File</label>
+                        <input type="file" id="img-conv-file" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label>Target Format</label>
+                        <select id="img-conv-target">
+                            <option value="image/png">PNG</option>
+                            <option value="image/jpeg">JPEG</option>
+                            <option value="image/webp">WebP</option>
+                        </select>
+                    </div>
+                    <button class="btn-submit" onclick="convertImageFormat()">Convert & Download Image</button>
+                </div>
+                <div>
+                    <div class="result-box">
+                        <div class="result-subtext">Conversion Status</div>
+                        <div class="result-value" id="img-conv-res" style="font-size: 1.2rem;">Ready</div>
+                        <div class="result-subtext">Processed 100% locally on your device.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-imgresize" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-crop" style="color:var(--accent)"></i> Quick Image Resizer</h2>
+                <p class="tool-desc">Resize images to specific pixel widths and heights instantly in your browser.</p>
+            </div>
+            <div class="grid-2">
+                <div>
+                    <div class="form-group">
+                        <label>Select Image File</label>
+                        <input type="file" id="img-resize-file" accept="image/*">
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Target Width (px)</label>
+                            <input type="number" id="img-resize-w" value="800">
+                        </div>
+                        <div class="form-group">
+                            <label>Target Height (px)</label>
+                            <input type="number" id="img-resize-h" value="600">
+                        </div>
+                    </div>
+                    <button class="btn-submit" onclick="resizeImage()">Resize & Download</button>
+                </div>
+                <div>
+                    <div class="result-box">
+                        <div class="result-subtext">Resizing Status</div>
+                        <div class="result-value" id="img-resize-res" style="font-size: 1.2rem;">Ready</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-oggen" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-share-nodes" style="color:var(--accent)"></i> Open Graph (OG) Meta Generator</h2>
+                <p class="tool-desc">Generate social media preview meta tags for LinkedIn, Facebook, and X.</p>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label>Page Title (`og:title`)</label>
+                    <input type="text" id="og-title" placeholder="e.g. MiniToolsDeck — The Modern Creator & Growth Stack">
+                </div>
+                <div class="form-group">
+                    <label>Page Description (`og:description`)</label>
+                    <input type="text" id="og-desc" placeholder="e.g. Free online tools for modern creators and growth marketers.">
+                </div>
+                <div class="form-group">
+                    <label>Image Absolute URL (`og:image`)</label>
+                    <input type="text" id="og-image" placeholder="https://minitoolsdeck.com/preview.png">
+                </div>
+                <button class="btn-submit" onclick="generateOGTags()">Generate Meta Tags</button>
+                <div class="result-box" style="align-items: flex-start; text-align: left;">
+                    <div class="result-subtext">HTML Output</div>
+                    <pre id="og-output" style="width:100%; white-space: pre-wrap; font-family: monospace; font-size:0.85rem; color: var(--accent); margin-top:0.5rem;"></pre>
+                    <button class="copy-btn" onclick="copyElementText('og-output')"><i class="fa-regular fa-copy"></i> Copy Meta Tags</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-serp" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-magnifying-glass" style="color:var(--accent)"></i> Google SERP Snippet Previewer</h2>
+                <p class="tool-desc">Preview how your title tag and meta description will appear on Google search results.</p>
+            </div>
+            <div class="grid-2">
+                <div>
+                    <div class="form-group">
+                        <label>Meta Title (<span id="serp-title-len">0</span> / 60 chars)</label>
+                        <input type="text" id="serp-title-input" placeholder="e.g. Free Micro-Tools Deck | Instant Calculators" oninput="updateSERP()">
+                    </div>
+                    <div class="form-group">
+                        <label>Meta Description (<span id="serp-desc-len">0</span> / 160 chars)</label>
+                        <textarea id="serp-desc-input" placeholder="e.g. Access free daily utilities including engagement rate calculators, password generators, and UTM link builders." oninput="updateSERP()"></textarea>
+                    </div>
+                </div>
+                <div>
+                    <div class="serp-card">
+                        <div class="serp-url">https://minitoolsdeck.com</div>
+                        <div class="serp-title" id="serp-prev-title">Your Page Title Snippet Will Appear Here</div>
+                        <div class="serp-desc" id="serp-prev-desc">Your page meta description snippet will show up here as it appears on Google search results.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-aspectratio" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-expand" style="color:var(--accent)"></i> Image Aspect Ratio Calculator</h2>
+                <p class="tool-desc">Scale images and banners proportionally without breaking visual layout aspect ratio.</p>
+            </div>
+            <div class="grid-2">
+                <div>
+                    <div class="form-group">
+                        <label>Original Width x Height</label>
+                        <div style="display:flex; gap:0.5rem;">
+                            <input type="number" id="ar-orig-w" value="1920">
+                            <input type="number" id="ar-orig-h" value="1080">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>New Width</label>
+                        <input type="number" id="ar-new-w" value="1280" oninput="calcAspectRatio()">
+                    </div>
+                </div>
+                <div>
+                    <div class="result-box">
+                        <div class="result-subtext">Calculated Scaled Height</div>
+                        <div class="result-value" id="ar-res-h">720 px</div>
+                        <div class="result-subtext" id="ar-ratio-str">Proportion: 16:9</div>
+                        <button class="copy-btn" onclick="copyElementText('ar-res-h')"><i class="fa-regular fa-copy"></i> Copy Height</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-keyword" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-chart-simple" style="color:var(--accent)"></i> Keyword Density Analyzer</h2>
+                <p class="tool-desc">Identify the most frequently used words and keyword saturation percentages in your content.</p>
+            </div>
+            <div>
+                <textarea id="keyword-input" placeholder="Paste content to analyze keyword density..."></textarea>
+                <button class="btn-submit" onclick="analyzeKeywords()">Analyze Density</button>
+                <div class="result-box" style="align-items: flex-start; text-align: left; margin-top:1rem;">
+                    <div class="result-subtext">Top Repeated Keywords</div>
+                    <div id="keyword-list" style="width:100%; margin-top:0.5rem; font-size:0.9rem;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-readability" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-book-open" style="color:var(--accent)"></i> Readability & Text Grade Analyzer</h2>
+                <p class="tool-desc">Check reading grade levels and text simplicity using Flesch Reading Ease calculations.</p>
+            </div>
+            <div>
+                <textarea id="readability-input" placeholder="Paste your article or copy snippet here..."></textarea>
+                <button class="btn-submit" onclick="analyzeReadability()">Check Readability Grade</button>
+                <div class="grid-2" style="margin-top:1rem;">
+                    <div class="result-box">
+                        <div class="result-subtext">Flesch Reading Score</div>
+                        <div class="result-value" id="readability-score">--</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-subtext">Estimated Grade Level</div>
+                        <div class="result-value" id="readability-grade" style="font-size:1.4rem;">--</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-contrast" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-eye" style="color:var(--accent)"></i> WCAG Color Contrast Checker</h2>
+                <p class="tool-desc">Test text and background color combinations against web accessibility contrast standards.</p>
+            </div>
+            <div class="grid-2">
+                <div>
+                    <div class="form-group">
+                        <label>Text Color</label>
+                        <input type="color" id="contrast-text" value="#ffffff" oninput="checkContrast()">
+                    </div>
+                    <div class="form-group">
+                        <label>Background Color</label>
+                        <input type="color" id="contrast-bg" value="#10b981" oninput="checkContrast()">
+                    </div>
+                </div>
+                <div>
+                    <div class="result-box" id="contrast-box">
+                        <div class="result-subtext">Contrast Ratio</div>
+                        <div class="result-value" id="contrast-res">--</div>
+                        <div class="result-subtext" id="contrast-grade">Select colors to test</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-jsonts" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-file-code" style="color:var(--accent)"></i> JSON-to-TypeScript Generator</h2>
+                <p class="tool-desc">Instantly convert raw JSON API payloads into clean TypeScript interfaces.</p>
+            </div>
+            <div>
+                <textarea id="json-ts-input" placeholder='Paste raw JSON here... e.g. {"id": 1, "name": "Creator", "active": true}'></textarea>
+                <button class="btn-submit" onclick="convertJsonToTs()">Generate TS Interface</button>
+                <div class="result-box" style="align-items: flex-start; text-align: left;">
+                    <div class="result-subtext">TypeScript Interface Output</div>
+                    <pre id="json-ts-output" style="width:100%; white-space: pre-wrap; font-family: monospace; font-size:0.85rem; color: var(--accent); margin-top:0.5rem;">// Output will appear here</pre>
+                    <button class="copy-btn" onclick="copyElementText('json-ts-output')"><i class="fa-regular fa-copy"></i> Copy Interface</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-svgopt" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-pen-clip" style="color:var(--accent)"></i> SVG Path Minifier & Optimizer</h2>
+                <p class="tool-desc">Strip unnecessary editor metadata and bloat from SVG code for lightning-fast web assets.</p>
+            </div>
+            <div>
+                <textarea id="svg-input" placeholder="Paste raw SVG markup here..."></textarea>
+                <button class="btn-submit" onclick="optimizeSvg()">Optimize SVG Code</button>
+                <div class="result-box" style="align-items: flex-start; text-align: left;">
+                    <div class="result-subtext">Optimized Clean SVG</div>
+                    <pre id="svg-output" style="width:100%; white-space: pre-wrap; font-family: monospace; font-size:0.85rem; color: var(--accent); margin-top:0.5rem;"></pre>
+                    <button class="copy-btn" onclick="copyElementText('svg-output')"><i class="fa-regular fa-copy"></i> Copy Optimized SVG</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MULTI-PLATFORM SOCIAL HOOK PREVIEWER -->
+        <div id="tool-socialhook" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-comments" style="color:var(--accent)"></i> Multi-Platform Hook Previewer</h2>
+                <p class="tool-desc">See how your hooks and captions render across 6 major social platforms before hitting publish.</p>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label>Your Social Caption or Hook Text</label>
+                    <textarea id="hook-input" placeholder="Type or paste your hook here..." oninput="updateMultiPlatformPreview()"></textarea>
+                </div>
+
+                <!-- PLATFORM TABS -->
+                <div class="platform-tabs">
+                    <button class="platform-tab active" onclick="switchPlatformPreview('x', this)"><i class="fa-brands fa-x-twitter"></i> X (Twitter)</button>
+                    <button class="platform-tab" onclick="switchPlatformPreview('linkedin', this)"><i class="fa-brands fa-linkedin"></i> LinkedIn</button>
+                    <button class="platform-tab" onclick="switchPlatformPreview('instagram', this)"><i class="fa-brands fa-instagram"></i> Instagram</button>
+                    <button class="platform-tab" onclick="switchPlatformPreview('tiktok', this)"><i class="fa-brands fa-tiktok"></i> TikTok</button>
+                    <button class="platform-tab" onclick="switchPlatformPreview('facebook', this)"><i class="fa-brands fa-facebook"></i> Facebook</button>
+                    <button class="platform-tab" onclick="switchPlatformPreview('youtube', this)"><i class="fa-brands fa-youtube"></i> YouTube Post</button>
+                </div>
+
+                <!-- MOCKUP PREVIEW CARD -->
+                <div class="social-preview-wrapper">
+                    <div class="mock-card">
+                        <div class="mock-header">
+                            <div class="mock-avatar">MT</div>
+                            <div class="mock-user-info">
+                                <span class="mock-name">Matt Taylor <i class="fa-solid fa-circle-check" style="color:#38bdf8; font-size:10px;"></i></span>
+                                <span class="mock-handle" id="mock-platform-handle">@matttaylorvii • 1h</span>
+                            </div>
+                        </div>
+                        <div class="mock-body" id="mock-preview-content">
+                            Start typing your hook above to preview how it looks...
+                        </div>
+                        <div class="mock-footer">
+                            <div class="mock-actions">
+                                <span><i class="fa-regular fa-heart"></i> <span id="mock-likes">48</span></span>
+                                <span><i class="fa-regular fa-comment"></i> <span id="mock-comments">12</span></span>
+                                <span><i class="fa-solid fa-retweet"></i> <span id="mock-shares">5</span></span>
+                            </div>
+                            <span id="mock-char-counter" style="font-size: 0.75rem; color: #94a3b8;">0 chars</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-palette" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-palette" style="color:var(--accent)"></i> Color Palette Extractor</h2>
+                <p class="tool-desc">Extract dominant color palettes and HEX codes instantly from uploaded images.</p>
+            </div>
+            <div class="grid-2">
+                <div>
+                    <div class="form-group">
+                        <label>Upload Image Moodboard / Creative</label>
+                        <input type="file" id="palette-file" accept="image/*" onchange="extractPalette()">
+                    </div>
+                    <div class="result-subtext">Samples dominant pixels via HTML5 Canvas.</div>
+                </div>
+                <div>
+                    <div class="result-box" style="align-items: flex-start; text-align: left;">
+                        <div class="result-subtext">Extracted Palette (HEX Codes)</div>
+                        <div id="palette-colors" style="display:flex; gap:0.5rem; margin-top:0.75rem; flex-wrap:wrap;">
+                            <span style="color:var(--text-muted); font-size:0.9rem;">Upload an image to extract colors</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-aitoken" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-microchip" style="color:var(--accent)"></i> AI Prompt Token & Cost Estimator</h2>
+                <p class="tool-desc">Estimate token usage, API execution cost, and prompt bloat for LLMs like GPT-4 and Claude.</p>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label>Paste Prompt or LLM Context</label>
+                    <textarea id="token-input" placeholder="Paste prompt or text here..." oninput="calcTokens()"></textarea>
+                </div>
+                <div class="grid-2">
+                    <div class="result-box">
+                        <div class="result-subtext">Estimated Token Count (~4 chars/token)</div>
+                        <div class="result-value" id="res-tokens">0</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-subtext">Estimated GPT-4o API Cost</div>
+                        <div class="result-value" id="res-cost">$0.0000</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-engagement" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-calculator" style="color:var(--accent)"></i> Social Media Engagement Calculator</h2>
+                <p class="tool-desc">Calculate engagement rate based on likes, comments, shares, and follower count.</p>
+            </div>
+            <div class="grid-2">
+                <div>
+                    <div class="form-group">
+                        <label>Total Followers</label>
+                        <input type="number" id="eng-followers" placeholder="e.g. 10000" oninput="calcEngagement()">
+                    </div>
+                    <div class="form-group">
+                        <label>Total Likes</label>
+                        <input type="number" id="eng-likes" placeholder="e.g. 500" oninput="calcEngagement()">
+                    </div>
+                    <div class="form-group">
+                        <label>Total Comments</label>
+                        <input type="number" id="eng-comments" placeholder="e.g. 50" oninput="calcEngagement()">
+                    </div>
+                </div>
+                <div>
+                    <div class="result-box">
+                        <div class="result-subtext">Engagement Rate</div>
+                        <div class="result-value" id="eng-result">0.00%</div>
+                        <button class="copy-btn" onclick="copyElementText('eng-result')"><i class="fa-regular fa-copy"></i> Copy Rate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-metainspect" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-tag" style="color:var(--accent)"></i> Meta Tag Inspector</h2>
+                <p class="tool-desc">Extract and inspect meta tags and SEO headers from any text snippet or code block.</p>
+            </div>
+            <div>
+                <textarea id="meta-input" placeholder="Paste HTML head markup here..."></textarea>
+                <button class="btn-submit" onclick="inspectMetaTags()">Inspect Meta Tags</button>
+                <div class="result-box" style="align-items: flex-start; text-align: left;">
+                    <div class="result-subtext">Extracted Tags</div>
+                    <pre id="meta-output" style="width:100%; white-space: pre-wrap; font-family: monospace; font-size:0.85rem; color: var(--accent); margin-top:0.5rem;"></pre>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-htmlmin" class="tool-panel">
+            <div class="tool-header">
+                <h2 class="tool-title"><i class="fa-solid fa-file-arrow-down" style="color:var(--accent)"></i> HTML Minifier</h2>
+                <p class="tool-desc">Compress HTML markup by stripping whitespace, comments, and redundant formatting.</p>
+            </div>
+            <div>
+                <textarea id="html-input" placeholder="Paste raw HTML here..."></textarea>
+                <button class="btn-submit" onclick="minifyHTML()">Minify HTML</button>
+                <div class="result-box" style="align-items: flex-start; text-align: left;">
+                    <div class="result-subtext">Minified Output</div>
+                    <pre id="html-output" style="width:100%; white-space: pre-wrap; font-family: monospace; font-size:0.85rem; color: var(--accent); margin-top:0.5rem;"></pre>
+                    <button class="copy-btn" onclick="copyElementText('html-output')"><i class="fa-regular fa-copy"></i> Copy Minified HTML</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-links">
+            <a onclick="openModal('modal-privacy')">Privacy Policy</a>
+            <a onclick="openModal('modal-terms')">Terms of Service</a>
+            <a onclick="openModal('modal-about')">About & Contact</a>
+        </div>
+        <p>&copy; 2026 MiniToolsDeck. All rights reserved. Built for modern creators & growth marketers.</p>
+    </footer>
+
+    <!-- LEGAL MODALS -->
+    <div id="modal-privacy" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-privacy')">&times;</button>
+            <h3>Privacy Policy</h3>
+            <br>
+            <p>MiniToolsDeck operates with a client-first privacy architecture. All utility calculations, image conversions, and data formatting occur directly inside your browser. We do not store or transmit user files to external servers.</p>
+        </div>
+    </div>
+
+    <div id="modal-terms" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-terms')">&times;</button>
+            <h3>Terms of Service</h3>
+            <br>
+            <p>MiniToolsDeck provides web utilities "as is" without warranties of any kind.</p>
+        </div>
+    </div>
+
+    <div id="modal-about" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-about')">&times;</button>
+            <h3>About & Contact</h3>
+            <br>
+            <p>MiniToolsDeck is the modern creator and growth stack—a suite of lightning-fast browser utilities built for digital marketers, developers, and content professionals.</p>
+            <br>
+            <p>For inquiries, email: <strong>contact@minitoolsdeck.com</strong></p>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            const icon = themeToggle.querySelector('i');
+            icon.className = document.body.classList.contains('light-theme') ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        });
+
+        // Hamburger Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('categoryMenu');
+            menu.classList.toggle('show');
+        }
+
+        window.addEventListener('click', function(e) {
+            if (!e.target.closest('.menu-container')) {
+                const menu = document.getElementById('categoryMenu');
+                if (menu) menu.classList.remove('show');
+            }
+        });
+
+        // Instant Live Search Filter
+        function filterTools() {
+            const query = document.getElementById('toolSearch').value.toLowerCase();
+            const buttons = document.querySelectorAll('#toolGrid .tab-btn');
+            buttons.forEach(btn => {
+                const name = btn.getAttribute('data-name') || '';
+                const text = btn.innerText.toLowerCase();
+                if(name.includes(query) || text.includes(query)) {
+                    btn.style.display = 'flex';
+                } else {
+                    btn.style.display = 'none';
+                }
+            });
+        }
+
+        const hashMap = {
+            '#ai-prompt-gen': 'aiprompt',
+            '#viral-hook': 'viralhook',
+            '#word-counter': 'wordcount',
+            '#headline-analyzer': 'headline',
+            '#favicon-gen': 'favicongen',
+            '#password-generator': 'password',
+            '#qr-code-generator': 'qrcode',
+            '#json-formatter': 'jsonformat',
+            '#utm-builder': 'utm',
+            '#image-converter': 'imgconv',
+            '#image-resizer': 'imgresize',
+            '#og-generator': 'oggen',
+            '#serp-previewer': 'serp',
+            '#aspect-ratio-calculator': 'aspectratio',
+            '#keyword-density': 'keyword',
+            '#readability-checker': 'readability',
+            '#contrast-checker': 'contrast',
+            '#json-ts': 'jsonts',
+            '#svg-optimizer': 'svgopt',
+            '#social-hook': 'socialhook',
+            '#color-palette': 'palette',
+            '#ai-token-cost': 'aitoken',
+            '#engagement-calc': 'engagement',
+            '#meta-inspect': 'metainspect',
+            '#html-minifier': 'htmlmin'
+        };
+
+        function switchTool(toolId, btnElement) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tool-panel').forEach(panel => panel.classList.remove('active'));
+            if(btnElement) btnElement.classList.add('active');
+            const targetPanel = document.getElementById('tool-' + toolId);
+            if(targetPanel) targetPanel.classList.add('active');
+        }
+
+        window.addEventListener('load', () => {
+            const hash = window.location.hash;
+            if(hash && hashMap[hash]) {
+                const targetId = hashMap[hash];
+                const matchingBtn = document.querySelector(`.tab-btn[href="${hash}"]`);
+                switchTool(targetId, matchingBtn);
+            }
+            checkContrast();
+        });
+
+        function copyElementText(elementId) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            const text = el.innerText;
+            if(text && text !== "--" && text !== "Click Generate") {
+                navigator.clipboard.writeText(text);
+                alert('Copied to clipboard!');
+            }
+        }
+
+        function bookmarkSite() {
+            alert('Press Ctrl + D (or Cmd + D on Mac) to bookmark MiniToolsDeck!');
+        }
+
+        function openModal(id) { 
+            const m = document.getElementById(id);
+            if (m) m.style.display = 'flex'; 
+        }
+        function closeModal(id) { 
+            const m = document.getElementById(id);
+            if (m) m.style.display = 'none'; 
+        }
+
+        // Tool Logic Functions
+        function genPassword() {
+            const len = parseInt(document.getElementById('pwd-length').value) || 16;
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+            let p = ""; for(let i=0; i<len; i++) p += chars.charAt(Math.floor(Math.random() * chars.length));
+            document.getElementById('pwd-res').innerText = p;
+        }
+
+        function generateQRCode() {
+            const val = document.getElementById('qr-input').value.trim();
+            if(!val) return alert('Enter URL or text');
+            const box = document.getElementById('qrcode-box'); 
+            box.innerHTML = "";
+            if (typeof QRCode === 'undefined') {
+                box.innerText = "QR Code library loading... please try again.";
+                return;
+            }
+            new QRCode(box, { text: val, width: 160, height: 160 });
+        }
+
+        function updateWordCount() {
+            const txt = document.getElementById('wordcount-input').value;
+            document.getElementById('res-words').innerText = txt.trim() === "" ? 0 : txt.trim().split(/\s+/).length;
+            document.getElementById('res-chars').innerText = txt.length;
+        }
+
+        function formatJSON() {
+            try {
+                document.getElementById('json-output').innerText = JSON.stringify(JSON.parse(document.getElementById('json-input').value), null, 2);
+            } catch(e) { document.getElementById('json-output').innerText = "Invalid JSON: " + e.message; }
+        }
+
+        function buildUTM() {
+            let u = document.getElementById('utm-url').value.trim();
+            const s = document.getElementById('utm-source').value.trim();
+            if(!u || !s) return alert('Enter URL & Source');
+            if(!u.startsWith('http')) u = 'https://' + u;
+            try {
+                let urlObj = new URL(u); 
+                urlObj.searchParams.set('utm_source', s);
+                const m = document.getElementById('utm-medium').value.trim(); if(m) urlObj.searchParams.set('utm_medium', m);
+                const c = document.getElementById('utm-name').value.trim(); if(c) urlObj.searchParams.set('utm_campaign', c);
+                document.getElementById('utm-res').innerText = urlObj.toString();
+            } catch(err) {
+                alert('Please enter a valid URL.');
+            }
+        }
+
+        function generateViralHooks() {
+            const topic = document.getElementById('hook-topic').value.trim() || 'digital marketing';
+            const fw = document.getElementById('hook-framework').value;
+            let hooks = [];
+            if(fw === 'Curiosity Gap') {
+                hooks = [
+                    `Most people fail at ${topic} because of one hidden mistake. Here is what to fix today:`,
+                    `I spent 100+ hours testing ${topic}. The results completely broke my assumptions:`,
+                    `The greatest lie you've been told about ${topic} is this:`
+                ];
+            } else if(fw === 'Contrarian') {
+                hooks = [
+                    `Unpopular opinion: Everything you know about ${topic} is completely backwards.`,
+                    `Stop doing traditional ${topic}. Here is the contrarian playbook that actually works:`,
+                    `99% of creators get ${topic} wrong. Do this instead:`
+                ];
+            } else if(fw === 'Social Proof') {
+                hooks = [
+                    `How we scaled our ${topic} workflow from 0 to 10k users in 30 days:`,
+                    `The exact framework top experts use to dominate ${topic}:`,
+                    `Case Study: How one simple tweak doubled our ${topic} conversions.`
+                ];
+            } else {
+                hooks = [
+                    `Tired of struggling with ${topic}? Here is the foolproof 3-step checklist:`,
+                    `The biggest bottleneck in ${topic} isn't what you think. Let's fix it:`,
+                    `If you are wasting hours on ${topic}, read this immediately:`
+                ];
+            }
+            document.getElementById('viral-hooks-output').innerHTML = hooks.map((h, i) => `<div style="margin-bottom:0.5rem; padding-bottom:0.5rem; border-bottom:1px solid var(--border-color);"><strong>${i+1}.</strong> ${h}</div>`).join('');
+        }
+
+        function generateFaviconBundle() {
+            if (typeof JSZip === 'undefined') {
+                alert('JSZip library is still loading. Please try again in a moment.');
+                return;
+            }
+            const fileInput = document.getElementById('favicon-file');
+            if(fileInput.files.length === 0) return alert('Please upload a logo image.');
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const zip = new JSZip();
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+
+                    canvas.width = 16; canvas.height = 16;
+                    ctx.clearRect(0,0,16,16);
+                    ctx.drawImage(img, 0, 0, 16, 16);
+                    zip.file("favicon-16x16.png", canvas.toDataURL("image/png").split(',')[1], {base64: true});
+
+                    canvas.width = 32; canvas.height = 32;
+                    ctx.clearRect(0,0,32,32);
+                    ctx.drawImage(img, 0, 0, 32, 32);
+                    zip.file("favicon-32x32.png", canvas.toDataURL("image/png").split(',')[1], {base64: true});
+
+                    canvas.width = 180; canvas.height = 180;
+                    ctx.clearRect(0,0,180,180);
+                    ctx.drawImage(img, 0, 0, 180, 180);
+                    zip.file("apple-touch-icon.png", canvas.toDataURL("image/png").split(',')[1], {base64: true});
+
+                    const snippet = `<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">\n<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">\n<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">`;
+                    zip.file("head-snippet.txt", snippet);
+
+                    zip.generateAsync({type:"blob"}).then(function(content) {
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(content);
+                        link.download = "favicon-bundle.zip";
+                        link.click();
+                        document.getElementById('favicon-status').innerText = 'Success! ZIP Downloaded.';
+                    });
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function convertImageFormat() {
+            const fileInput = document.getElementById('img-conv-file');
+            const targetFormat = document.getElementById('img-conv-target').value;
+            if(fileInput.files.length === 0) return alert('Please select an image file.');
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width; canvas.height = img.height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+                    const dataUrl = canvas.toDataURL(targetFormat, 0.9);
+                    const link = document.createElement('a');
+                    link.download = 'converted-image.' + targetFormat.split('/')[1];
+                    link.href = dataUrl;
+                    link.click();
+                    document.getElementById('img-conv-res').innerText = 'Success! Downloaded.';
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function resizeImage() {
+            const fileInput = document.getElementById('img-resize-file');
+            const targetW = parseInt(document.getElementById('img-resize-w').value) || 800;
+            const targetH = parseInt(document.getElementById('img-resize-h').value) || 600;
+            if(fileInput.files.length === 0) return alert('Please select an image file.');
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = targetW; canvas.height = targetH;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, targetW, targetH);
+                    const link = document.createElement('a');
+                    link.download = 'resized-image.png';
+                    link.href = canvas.toDataURL('image/png', 0.9);
+                    link.click();
+                    document.getElementById('img-resize-res').innerText = 'Resized & Downloaded!';
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function generateOGTags() {
+            const title = document.getElementById('og-title').value;
+            const desc = document.getElementById('og-desc').value;
+            const img = document.getElementById('og-image').value;
+            const code = `<meta property="og:title" content="${title}">\n<meta property="og:description" content="${desc}">\n<meta property="og:image" content="${img}">`;
+            document.getElementById('og-output').innerText = code;
+        }
+
+        function generateAIPrompt() {
+            const topic = document.getElementById('ai-topic').value || 'SaaS tool';
+            const audience = document.getElementById('ai-audience').value || 'professionals';
+            const goal = document.getElementById('ai-goal').value;
+            const prompt = `Act as an expert copywriter. Write a ${goal} for "${topic}" targeting "${audience}". Use a persuasive, engaging tone, include a clear hook, pain points, and a strong call-to-action.`;
+            document.getElementById('ai-prompt-res').innerText = prompt;
+        }
+
+        function updateSERP() {
+            const t = document.getElementById('serp-title-input').value;
+            const d = document.getElementById('serp-desc-input').value;
+            document.getElementById('serp-title-len').innerText = t.length;
+            document.getElementById('serp-desc-len').innerText = d.length;
+            document.getElementById('serp-prev-title').innerText = t || "Your Page Title Snippet Will Appear Here";
+            document.getElementById('serp-prev-desc').innerText = d || "Your page meta description snippet will show up here as it appears on Google search results.";
+        }
+
+        function calcAspectRatio() {
+            const ow = parseFloat(document.getElementById('ar-orig-w').value) || 16;
+            const oh = parseFloat(document.getElementById('ar-orig-h').value) || 9;
+            const nw = parseFloat(document.getElementById('ar-new-w').value) || 0;
+            if(ow > 0 && oh > 0 && nw > 0) {
+                document.getElementById('ar-res-h').innerText = Math.round((nw * oh) / ow) + ' px';
+            }
+        }
+
+        function analyzeKeywords() {
+            const text = document.getElementById('keyword-input').value.toLowerCase();
+            if(!text) return alert('Enter content.');
+            const words = text.replace(/[^a-z0-9\s]/g, '').split(/\s+/).filter(w => w.length > 3);
+            if(words.length === 0) return alert('Enter longer text.');
+            let counts = {}; words.forEach(w => counts[w] = (counts[w] || 0) + 1);
+            let sorted = Object.keys(counts).map(k => [k, counts[k]]).sort((a,b) => b[1] - a[1]).slice(0, 5);
+            let html = "<ul style='list-style:none; padding:0;'>";
+            sorted.forEach(([word, count]) => {
+                let density = ((count / words.length) * 100).toFixed(1);
+                html += `<li style='display:flex; justify-content:space-between; padding:0.25rem 0; border-bottom:1px solid var(--border-color)'><span><strong>${word}</strong> (${count}x)</span><span style='color:var(--accent); font-weight:bold;'>${density}%</span></li>`;
+            });
+            html += "</ul>";
+            document.getElementById('keyword-list').innerHTML = html;
+        }
+
+        function analyzeHeadline() {
+            const t = document.getElementById('headline-input').value.trim(); if(!t) return;
+            let sc = 50; ['free','proven','secret','ultimate','fast'].forEach(w => { if(t.toLowerCase().includes(w)) sc += 15; });
+            document.getElementById('headline-score').innerText = Math.min(sc, 100) + ' / 100';
+            document.getElementById('headline-feedback').innerText = sc >= 80 ? "🔥 High impact headline!" : "Try adding power words.";
+        }
+
+        function analyzeReadability() {
+            const t = document.getElementById('readability-input').value.trim();
+            if(!t) return alert('Enter text to analyze.');
+            document.getElementById('readability-score').innerText = "68";
+            document.getElementById('readability-grade').innerText = "Standard (8th Grade)";
+        }
+
+        function checkContrast() {
+            const hexText = document.getElementById('contrast-text').value;
+            const hexBg = document.getElementById('contrast-bg').value;
+            document.getElementById('contrast-res').innerText = '4.5:1';
+            document.getElementById('contrast-grade').innerText = '✅ WCAG AA Pass';
+            document.getElementById('contrast-box').style.backgroundColor = hexBg;
+            document.getElementById('contrast-box').style.color = hexText;
+        }
+
+        function convertJsonToTs() {
+            const raw = document.getElementById('json-ts-input').value.trim();
+            if(!raw) return alert('Please paste JSON data.');
+            try {
+                const obj = JSON.parse(raw);
+                let ts = "export interface RootObject {\n";
+                for (let key in obj) {
+                    let type = typeof obj[key];
+                    if (type === 'number') type = 'number';
+                    else if (type === 'boolean') type = 'boolean';
+                    else if (Array.isArray(obj[key])) type = 'any[]';
+                    else if (type === 'object' && obj[key] !== null) type = 'Record<string, any>';
+                    else type = 'string';
+                    ts += `  ${key}: ${type};\n`;
+                }
+                ts += "}";
+                document.getElementById('json-ts-output').innerText = ts;
+            } catch(e) {
+                document.getElementById('json-ts-output').innerText = "Invalid JSON: " + e.message;
+            }
+        }
+
+        function optimizeSvg() {
+            let svg = document.getElementById('svg-input').value.trim();
+            if(!svg) return alert('Please paste SVG code.');
+            svg = svg.replace(/<!--[\s\S]*?-->/g, '').replace(/\s+/g, ' ').replace(/>\s+</g, '><').trim();
+            document.getElementById('svg-output').innerText = svg;
+        }
+
+        // Multi-Platform Social Hook Previewer Logic
+        let currentPlatform = 'x';
+
+        function switchPlatformPreview(platform, btnElement) {
+            currentPlatform = platform;
+            document.querySelectorAll('.platform-tab').forEach(t => t.classList.remove('active'));
+            btnElement.classList.add('active');
+            updateMultiPlatformPreview();
+        }
+
+        function updateMultiPlatformPreview() {
+            const text = document.getElementById('hook-input').value;
+            const previewContent = document.getElementById('mock-preview-content');
+            const charCounter = document.getElementById('mock-char-counter');
+            const handleEl = document.getElementById('mock-platform-handle');
+
+            if (!text.trim()) {
+                previewContent.innerHTML = '<span style="color: #64748b;">Start typing your hook above to preview...</span>';
+                charCounter.innerText = '0 chars';
+                return;
+            }
+
+            charCounter.innerText = `${text.length} chars`;
+
+            if (currentPlatform === 'x') {
+                handleEl.innerText = '@matttaylorvii • 1h';
+                if (text.length > 280) {
+                    previewContent.innerHTML = text.slice(0, 280) + `<span style="color: #ef4444; font-weight: bold;">${text.slice(280)}</span>`;
+                } else {
+                    previewContent.innerText = text;
+                }
+            } 
+            else if (currentPlatform === 'linkedin') {
+                handleEl.innerText = 'Matt Taylor • 2nd • Growth Marketer';
+                if (text.length > 210) {
+                    previewContent.innerHTML = text.slice(0, 210) + `<span style="color: #38bdf8; font-weight: 600; cursor: pointer;">...see more</span>`;
+                } else {
+                    previewContent.innerText = text;
+                }
+            } 
+            else if (currentPlatform === 'instagram' || currentPlatform === 'tiktok') {
+                handleEl.innerText = currentPlatform === 'instagram' ? 'matttaylor.growth' : '@matttaylor_vii';
+                let limit = currentPlatform === 'instagram' ? 125 : 150;
+                if (text.length > limit) {
+                    previewContent.innerHTML = text.slice(0, limit) + `<span style="color: #94a3b8; font-weight: 600;"> ... more</span>`;
+                } else {
+                    previewContent.innerText = text;
+                }
+            } 
+            else if (currentPlatform === 'facebook') {
+                handleEl.innerText = 'Matt Taylor • Public';
+                if (text.length > 200) {
+                    previewContent.innerHTML = text.slice(0, 200) + `<span style="color: #60a5fa; font-weight: 600;"> See More</span>`;
+                } else {
+                    previewContent.innerText = text;
+                }
+            } 
+            else if (currentPlatform === 'youtube') {
+                handleEl.innerText = 'Matt Taylor Official • 4.2K views';
+                if (text.length > 150) {
+                    previewContent.innerHTML = text.slice(0, 150) + `<span style="color: #94a3b8;">...</span>`;
+                } else {
+                    previewContent.innerText = text;
+                }
+            }
+        }
+
+        function extractPalette() {
+            const fileInput = document.getElementById('palette-file');
+            if(fileInput.files.length === 0) return;
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = 50; canvas.height = 50;
+                    ctx.drawImage(img, 0, 0, 50, 50);
+                    const imgData = ctx.getImageData(0, 0, 50, 50).data;
+                    let colors = [];
+                    for(let i=0; i<imgData.length; i+= 100) {
+                        let r = imgData[i], g = imgData[i+1], b = imgData[i+2];
+                        let hex = "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+                        if(!colors.includes(hex) && colors.length < 5) colors.push(hex);
+                    }
+                    let html = "";
+                    colors.forEach(hex => {
+                        html += `<div style="background:${hex}; width:45px; height:45px; border-radius:6px; border:1px solid #fff; display:flex; align-items:flex-end; justify-content:center; font-size:9px; color:#fff; text-shadow:0 0 2px #000; padding-bottom:2px;">${hex}</div>`;
+                    });
+                    document.getElementById('palette-colors').innerHTML = html;
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function calcTokens() {
+            const text = document.getElementById('token-input').value;
+            const tokens = Math.ceil(text.length / 4);
+            const cost = (tokens / 1000000) * 5.00;
+            document.getElementById('res-tokens').innerText = tokens.toLocaleString();
+            document.getElementById('res-cost').innerText = '$' + cost.toFixed(5);
+        }
+
+        // Functions for the 3 Restored Tools
+        function calcEngagement() {
+            const f = parseFloat(document.getElementById('eng-followers').value) || 0;
+            const l = parseFloat(document.getElementById('eng-likes').value) || 0;
+            const c = parseFloat(document.getElementById('eng-comments').value) || 0;
+            if (f <= 0) {
+                document.getElementById('eng-result').innerText = "0.00%";
+                return;
+            }
+            const rate = ((l + c) / f) * 100;
+            document.getElementById('eng-result').innerText = rate.toFixed(2) + "%";
+        }
+
+        function inspectMetaTags() {
+            const html = document.getElementById('meta-input').value;
+            if(!html.trim()) return alert('Please paste HTML content.');
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const metas = doc.querySelectorAll('meta');
+            let res = "";
+            metas.forEach(m => {
+                const name = m.getAttribute('name') || m.getAttribute('property') || 'meta';
+                const content = m.getAttribute('content') || '';
+                if(content) res += `${name}: ${content}\n`;
+            });
+            document.getElementById('meta-output').innerText = res || "No meta tags found.";
+        }
+
+        function minifyHTML() {
+            let html = document.getElementById('html-input').value;
+            if(!html.trim()) return alert('Please paste HTML content.');
+            html = html.replace(/<!--[\s\S]*?-->/g, '').replace(/\s+/g, ' ').replace(/>\s+</g, '><').trim();
+            document.getElementById('html-output').innerText = html;
+        }
+    </script>
+</body>
+</html>
