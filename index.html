@@ -1059,9 +1059,20 @@
                     <label>Your Headline</label>
                     <input type="text" id="headline-input" placeholder="e.g. 10 Proven Ways to Scale Your Business Fast" oninput="analyzeHeadline()">
                 </div>
-                <button class="btn-submit" onclick="analyzeHeadline()">Analyze Headline</button>
+                <div class="form-group">
+                    <label>Headline Type / Platform</label>
+                    <select id="headline-platform" onchange="analyzeHeadline()">
+                        <option value="blog">Blog / SEO Title</option>
+                        <option value="youtube">YouTube Title</option>
+                        <option value="email">Email Subject Line</option>
+                        <option value="linkedin">LinkedIn</option>
+                        <option value="twitter">X (Twitter)</option>
+                        <option value="social">Social Media (General)</option>
+                        <option value="ad">Ad Headline</option>
+                    </select>
+                </div>
 
-                <div class="result-box" style="margin-top:1.5rem; align-items:flex-start; text-align:left;">
+                <div class="result-box" style="margin-top:1.25rem; align-items:flex-start; text-align:left;">
                     <div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:0.75rem;">
                         <div class="result-subtext" style="margin:0;">Headline Quality Score</div>
                         <div class="result-value" id="headline-score" style="font-size:1.8rem; margin:0;">0 / 100</div>
@@ -1071,7 +1082,7 @@
                         <div id="headline-score-fill" style="height:100%; width:0%; background:var(--accent); transition:width 0.4s ease;"></div>
                     </div>
 
-                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap:0.75rem; width:100%; margin-bottom:1.25rem;">
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap:0.75rem; width:100%; margin-bottom:1.25rem;">
                         <div style="background:var(--bg-primary); padding:0.75rem; border-radius:8px; text-align:center;">
                             <div class="result-subtext">Words</div>
                             <div id="hl-words" style="font-weight:700; font-size:1.1rem;">0</div>
@@ -1087,7 +1098,12 @@
                     </div>
 
                     <div class="result-subtext" style="margin-bottom:0.4rem;">Feedback & Suggestions</div>
-                    <div id="headline-feedback" style="font-size:0.9rem; line-height:1.6; color:var(--text-main);">Enter a headline above to see suggestions.</div>
+                    <div id="headline-feedback" style="font-size:0.9rem; line-height:1.6; color:var(--text-main); margin-bottom:1.5rem;">Enter a headline above to see suggestions.</div>
+
+                    <div class="result-subtext" style="margin-bottom:0.6rem;">Recommended Stronger Headlines</div>
+                    <div id="headline-recommendations" style="width:100%; font-size:0.9rem; color:var(--text-muted);">
+                        Type a headline to get 3 improved alternatives.
+                    </div>
                 </div>
             </div>
         </div>
@@ -2103,8 +2119,10 @@
             document.getElementById('keyword-list').innerHTML = html;
         }
 
-        function analyzeHeadline() {
+                function analyzeHeadline() {
             const t = document.getElementById('headline-input').value.trim();
+            const platform = document.getElementById('headline-platform') ? document.getElementById('headline-platform').value : 'blog';
+
             if (!t) {
                 document.getElementById('headline-score').innerText = '0 / 100';
                 document.getElementById('headline-score-fill').style.width = '0%';
@@ -2113,6 +2131,8 @@
                 document.getElementById('hl-chars').innerText = '0';
                 document.getElementById('hl-power').innerText = '0';
                 document.getElementById('headline-feedback').innerHTML = 'Enter a headline above to see suggestions.';
+                const rec = document.getElementById('headline-recommendations');
+                if (rec) rec.innerHTML = 'Type a headline to get 3 improved alternatives.';
                 return;
             }
 
@@ -2121,47 +2141,40 @@
             const wordCount = words.length;
             const charCount = t.length;
 
-            // Power words list
-            const powerWords = ['free','proven','secret','ultimate','fast','easy','new','amazing','essential','powerful','guaranteed','instant','simple','effective','best','top','complete','ultimate','proven','secret','boost','grow','scale','double','triple','skyrocket','unlock','discover','revealed','limited','exclusive','now','today','instantly'];
+            const ideals = {
+                blog:     { minC: 40, maxC: 60, minW: 6, maxW: 12 },
+                youtube:  { minC: 40, maxC: 70, minW: 5, maxW: 12 },
+                email:    { minC: 30, maxC: 50, minW: 4, maxW: 9  },
+                linkedin: { minC: 40, maxC: 80, minW: 5, maxW: 14 },
+                twitter:  { minC: 20, maxC: 70, minW: 4, maxW: 12 },
+                social:   { minC: 30, maxC: 80, minW: 4, maxW: 12 },
+                ad:       { minC: 20, maxC: 40, minW: 3, maxW: 8  }
+            };
+            const ideal = ideals[platform] || ideals.blog;
+
+            const powerWords = ['free','proven','secret','ultimate','fast','easy','new','amazing','essential','powerful','guaranteed','instant','simple','effective','best','top','complete','boost','grow','scale','double','triple','skyrocket','unlock','discover','revealed','limited','exclusive','now','today','instantly','shocking','surprising','incredible'];
             const foundPower = powerWords.filter(w => lower.includes(w));
             const powerCount = foundPower.length;
 
-            // Scoring
-            let score = 40; // base
+            let score = 35;
 
-            // Ideal length (6-12 words is sweet spot)
-            if (wordCount >= 6 && wordCount <= 12) score += 20;
-            else if (wordCount >= 4 && wordCount <= 15) score += 10;
-            else if (wordCount < 4) score -= 10;
-            else score -= 5;
+            if (charCount >= ideal.minC && charCount <= ideal.maxC) score += 18;
+            else if (charCount >= ideal.minC - 10 && charCount <= ideal.maxC + 15) score += 8;
+            else score -= 8;
 
-            // Character length (good for SEO / social ~40-70)
-            if (charCount >= 40 && charCount <= 70) score += 10;
-            else if (charCount > 90) score -= 10;
+            if (wordCount >= ideal.minW && wordCount <= ideal.maxW) score += 12;
+            else if (wordCount < ideal.minW) score -= 6;
 
-            // Power words
-            score += Math.min(powerCount * 8, 24);
-
-            // Contains a number
+            score += Math.min(powerCount * 7, 21);
             if (/\d/.test(t)) score += 12;
-
-            // Is a question
             if (t.includes('?')) score += 8;
+            if (/^(how|why|what|when|which|\d+)/i.test(t)) score += 8;
+            if (/(you|your|love|hate|need|want)/i.test(t)) score += 6;
 
-            // Starts with How / Why / What / 10 / etc.
-            if (/^(how|why|what|when|which|10|\d+)/i.test(t)) score += 8;
+            score = Math.max(0, Math.min(100, Math.round(score)));
 
-            // Emotional / benefit words
-            const emotionWords = ['you','your','love','hate','need','want','feel','amazing','incredible','shocking','surprising'];
-            if (emotionWords.some(w => lower.includes(w))) score += 6;
-
-            score = Math.max(0, Math.min(100, score));
-
-            // UI updates
             document.getElementById('headline-score').innerText = score + ' / 100';
             document.getElementById('headline-score-fill').style.width = score + '%';
-            
-            // Color the bar
             const fill = document.getElementById('headline-score-fill');
             if (score >= 80) fill.style.background = '#10b981';
             else if (score >= 60) fill.style.background = '#f59e0b';
@@ -2171,22 +2184,62 @@
             document.getElementById('hl-chars').innerText = charCount;
             document.getElementById('hl-power').innerText = powerCount;
 
-            // Feedback
             let tips = [];
-            if (wordCount < 6) tips.push("Try making it a bit longer (ideal is 6–12 words).");
-            if (wordCount > 14) tips.push("Consider shortening it — headlines over 14 words lose impact.");
-            if (powerCount === 0) tips.push("Add power words like <strong>proven</strong>, <strong>easy</strong>, <strong>secret</strong>, or <strong>ultimate</strong>.");
+            if (charCount < ideal.minC) tips.push(`A bit short for this platform. Aim for around ${ideal.minC}–${ideal.maxC} characters.`);
+            if (charCount > ideal.maxC + 10) tips.push(`This may get cut off. Ideal length is ~${ideal.minC}–${ideal.maxC} characters.`);
+            if (powerCount === 0) tips.push("Add power words like <strong>proven</strong>, <strong>easy</strong>, <strong>secret</strong> or <strong>ultimate</strong>.");
             if (!/\d/.test(t)) tips.push("Adding a number (e.g. “7 Ways…”) often increases clicks.");
-            if (!t.includes('?') && wordCount < 10) tips.push("Question headlines can perform very well.");
-            if (charCount > 80) tips.push("This may get cut off in Google or social previews.");
             if (score >= 85) tips.push("🔥 Excellent headline — strong click potential!");
-            else if (score >= 70) tips.push("Solid headline. A few small tweaks could push it higher.");
+            else if (score >= 70) tips.push("Solid headline. Small tweaks could push it higher.");
             else if (tips.length === 0) tips.push("Decent start. Try adding power words or a number.");
 
             document.getElementById('headline-feedback').innerHTML = tips.map(t => `• ${t}`).join('<br>');
+
+            // Recommendations
+            let recommendations = [];
+            const clean = t.replace(/[.?!]$/, '');
+
+            if (platform === 'email') {
+                recommendations = [
+                    `Quick tip: ${clean}`,
+                    `[Important] ${clean}`,
+                    `You're missing this: ${clean}`
+                ];
+            } else if (platform === 'youtube') {
+                recommendations = [
+                    `${clean} (Full Guide)`,
+                    `I Tried ${clean} — Here's What Happened`,
+                    `Stop Getting ${clean} Wrong`
+                ];
+            } else if (platform === 'ad') {
+                recommendations = [
+                    `${clean} — Starting Today`,
+                    `Get Better Results with ${clean}`,
+                    `Limited Offer: ${clean}`
+                ];
+            } else {
+                recommendations = [
+                    `How to ${clean.replace(/^(how to|why|what|the)\s+/i, '')} (Even If You're a Beginner)`,
+                    `7 Proven Ways to ${clean.replace(/^(how to|why|what|the|\d+\s+ways?\s+to)\s+/i, '')}`,
+                    `The Secret to ${clean.replace(/^(how to|why|what|the|the secret to)\s+/i, '')} That Actually Works`
+                ];
+            }
+
+            let recHtml = '';
+            recommendations.forEach((h, i) => {
+                const id = `rec-headline-${i}`;
+                recHtml += `<div style="margin-bottom:0.7rem; padding:0.75rem; background:var(--bg-primary); border:1px solid var(--border-color); border-radius:8px; display:flex; justify-content:space-between; align-items:flex-start; gap:0.75rem;">
+                    <div id="${id}" style="flex:1; line-height:1.45;">${h}</div>
+                    <button class="copy-btn" style="padding:0.3rem 0.65rem; font-size:0.75rem; flex-shrink:0;" onclick="navigator.clipboard.writeText(document.getElementById('${id}').innerText).then(()=>alert('Copied!'))">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>`;
+            });
+            const recEl = document.getElementById('headline-recommendations');
+            if (recEl) recEl.innerHTML = recHtml;
         }
 
-        function analyzeReadability() {
+function analyzeReadability() {
             const t = document.getElementById('readability-input').value.trim();
             if(!t) return alert('Enter text to analyze.');
             document.getElementById('readability-score').innerText = "68";
