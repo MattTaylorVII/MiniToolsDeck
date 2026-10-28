@@ -2195,7 +2195,7 @@
 
             document.getElementById('headline-feedback').innerHTML = tips.map(t => `• ${t}`).join('<br>');
 
-            // === IMPROVED RECOMMENDATIONS ENGINE ===
+            // === SMART RECOMMENDATIONS ENGINE ===
             
             // 1. Extract the core subject by stripping common fluff words
             const stopWords = ['why', 'is', 'the', 'a', 'an', 'how', 'to', 'best', 'top', 'great', 'good', 'you', 'your', 'should', 'use', 'using', 'are', 'what', 'this', 'that', 'it', 'in', 'on', 'for', 'my', 'do', 'does', 'can', 'will', 'just', 'about', 'from', 'with'];
@@ -2492,4 +2492,30 @@
                 return;
             }
             const rate = ((l + c) / f) * 100;
-            document.getElementById('eng
+            document.getElementById('eng-result').innerText = rate.toFixed(2) + "%";
+        }
+
+        function inspectMetaTags() {
+            const html = document.getElementById('meta-input').value;
+            if(!html.trim()) return alert('Please paste HTML content.');
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const metas = doc.querySelectorAll('meta');
+            let res = "";
+            metas.forEach(m => {
+                const name = m.getAttribute('name') || m.getAttribute('property') || 'meta';
+                const content = m.getAttribute('content') || '';
+                if(content) res += `${name}: ${content}\n`;
+            });
+            document.getElementById('meta-output').innerText = res || "No meta tags found.";
+        }
+
+        function minifyHTML() {
+            let html = document.getElementById('html-input').value;
+            if(!html.trim()) return alert('Please paste HTML content.');
+            html = html.replace(/<!--[\s\S]*?-->/g, '').replace(/\s+/g, ' ').replace(/>\s+</g, '><').trim();
+            document.getElementById('html-output').innerText = html;
+        }
+    </script>
+</body>
+</html>
