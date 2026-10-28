@@ -221,7 +221,7 @@
 
         .hero-banner {
             text-align: center;
-            margin-bottom: 1.75rem;
+            margin-bottom: 2.5rem;
         }
         .hero-banner h1 {
             font-size: 2rem;
@@ -234,39 +234,6 @@
             font-size: 1rem;
             max-width: 600px;
             margin: 0 auto;
-        }
-
-        .search-container {
-            max-width: 500px;
-            margin: 0 auto 2rem auto;
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 0.85rem 1rem 0.85rem 3.2rem; /* Clean 3.2rem left padding clears search icon */
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            color: var(--text-main);
-            font-size: 0.95rem;
-            outline: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .search-input:focus {
-            border-color: var(--accent);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 1.15rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            pointer-events: none;
         }
 
         .nav-grid {
@@ -726,113 +693,108 @@
             <p>25 instant, client-side browser utilities built for high-velocity marketers, developers, and AI creators. Zero bloat. Zero tracking.</p>
         </div>
 
-        <div class="search-container">
-            <i class="fa-solid fa-search search-icon"></i>
-            <input type="text" id="toolSearch" class="search-input" placeholder="Search 25+ tools (e.g., JSON, UTM, Favicon)..." oninput="filterTools()">
-        </div>
-
         <!-- ALL 25 TOOLS IN THE GRID -->
         <div class="nav-grid" id="toolGrid">
-            <a href="#ai-prompt-gen" class="tab-btn active" onclick="switchTool('aiprompt', this)" data-name="ai prompt generator chatgpt marketing">
+            <a href="#ai-prompt-gen" class="tab-btn active" onclick="switchTool('aiprompt', this)">
                 <span class="trending-badge">Hot</span>
                 <i class="fa-solid fa-wand-magic-sparkles"></i>
                 <span>AI Prompt Gen</span>
             </a>
-            <a href="#viral-hook" class="tab-btn" onclick="switchTool('viralhook', this)" data-name="viral hook gen social media creator">
+            <a href="#viral-hook" class="tab-btn" onclick="switchTool('viralhook', this)">
                 <span class="trending-badge">New</span>
                 <i class="fa-solid fa-fire" style="color:#f59e0b"></i>
                 <span>Viral Hook Gen</span>
             </a>
-            <a href="#word-counter" class="tab-btn" onclick="switchTool('wordcount', this)" data-name="word counter character text">
+            <a href="#word-counter" class="tab-btn" onclick="switchTool('wordcount', this)">
                 <i class="fa-solid fa-font"></i>
                 <span>Word Counter</span>
             </a>
-            <a href="#headline-analyzer" class="tab-btn" onclick="switchTool('headline', this)" data-name="headline score checker copywriting">
+            <a href="#headline-analyzer" class="tab-btn" onclick="switchTool('headline', this)">
                 <i class="fa-solid fa-heading"></i>
                 <span>Headline Score</span>
             </a>
-            <a href="#favicon-gen" class="tab-btn" onclick="switchTool('favicongen', this)" data-name="favicon pwa icon generator app">
+            <a href="#favicon-gen" class="tab-btn" onclick="switchTool('favicongen', this)">
                 <span class="trending-badge">New</span>
                 <i class="fa-solid fa-globe" style="color:#06b6d4"></i>
                 <span>Favicon/PWA Gen</span>
             </a>
-            <a href="#password-generator" class="tab-btn" onclick="switchTool('password', this)" data-name="password gen security">
+            <a href="#password-generator" class="tab-btn" onclick="switchTool('password', this)">
                 <i class="fa-solid fa-key"></i>
                 <span>Password Gen</span>
             </a>
-            <a href="#qr-code-generator" class="tab-btn" onclick="switchTool('qrcode', this)" data-name="qr generator code url">
+            <a href="#qr-code-generator" class="tab-btn" onclick="switchTool('qrcode', this)">
                 <i class="fa-solid fa-qrcode"></i>
                 <span>QR Generator</span>
             </a>
-            <a href="#json-formatter" class="tab-btn" onclick="switchTool('jsonformat', this)" data-name="json formatter validator dev">
+            <a href="#json-formatter" class="tab-btn" onclick="switchTool('jsonformat', this)">
                 <i class="fa-solid fa-code"></i>
                 <span>JSON Formatter</span>
             </a>
-            <a href="#utm-builder" class="tab-btn" onclick="switchTool('utm', this)" data-name="utm builder link campaign analytics">
+            <a href="#utm-builder" class="tab-btn" onclick="switchTool('utm', this)">
                 <i class="fa-solid fa-link"></i>
                 <span>UTM Builder</span>
             </a>
-            <a href="#image-converter" class="tab-btn" onclick="switchTool('imgconv', this)" data-name="image converter png webp jpeg">
+            <a href="#image-converter" class="tab-btn" onclick="switchTool('imgconv', this)">
                 <i class="fa-solid fa-image"></i>
                 <span>Image Converter</span>
             </a>
-            <a href="#image-resizer" class="tab-btn" onclick="switchTool('imgresize', this)" data-name="image resizer pixels dimensions">
+            <a href="#image-resizer" class="tab-btn" onclick="switchTool('imgresize', this)">
                 <i class="fa-solid fa-crop"></i>
                 <span>Image Resizer</span>
             </a>
-            <a href="#og-generator" class="tab-btn" onclick="switchTool('oggen', this)" data-name="og meta tags social preview">
+            <a href="#og-generator" class="tab-btn" onclick="switchTool('oggen', this)">
                 <i class="fa-solid fa-share-nodes"></i>
                 <span>OG Meta Tags</span>
             </a>
-            <a href="#serp-previewer" class="tab-btn" onclick="switchTool('serp', this)" data-name="serp preview google snippet seo">
+            <a href="#serp-previewer" class="tab-btn" onclick="switchTool('serp', this)">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <span>SERP Preview</span>
             </a>
-            <a href="#aspect-ratio-calculator" class="tab-btn" onclick="switchTool('aspectratio', this)" data-name="aspect ratio calculator dimensions">
+            <a href="#aspect-ratio-calculator" class="tab-btn" onclick="switchTool('aspectratio', this)">
                 <i class="fa-solid fa-expand"></i>
                 <span>Aspect Ratio</span>
             </a>
-            <a href="#keyword-density" class="tab-btn" onclick="switchTool('keyword', this)" data-name="keyword density analyzer seo content">
+            <a href="#keyword-density" class="tab-btn" onclick="switchTool('keyword', this)">
                 <i class="fa-solid fa-chart-simple"></i>
                 <span>Keyword Density</span>
             </a>
-            <a href="#readability-checker" class="tab-btn" onclick="switchTool('readability', this)" data-name="readability text grade analyzer">
+            <a href="#readability-checker" class="tab-btn" onclick="switchTool('readability', this)">
                 <i class="fa-solid fa-book-open"></i>
                 <span>Readability</span>
             </a>
-            <a href="#contrast-checker" class="tab-btn" onclick="switchTool('contrast', this)" data-name="contrast checker wcag accessibility">
+            <a href="#contrast-checker" class="tab-btn" onclick="switchTool('contrast', this)">
                 <i class="fa-solid fa-eye"></i>
                 <span>Contrast Checker</span>
             </a>
-            <a href="#json-ts" class="tab-btn" onclick="switchTool('jsonts', this)" data-name="json to typescript generator dev">
+            <a href="#json-ts" class="tab-btn" onclick="switchTool('jsonts', this)">
                 <i class="fa-solid fa-file-code"></i>
                 <span>JSON-to-TS</span>
             </a>
-            <a href="#svg-optimizer" class="tab-btn" onclick="switchTool('svgopt', this)" data-name="svg optimizer path minifier">
+            <a href="#svg-optimizer" class="tab-btn" onclick="switchTool('svgopt', this)">
                 <i class="fa-solid fa-pen-clip"></i>
                 <span>SVG Optimizer</span>
             </a>
-            <a href="#social-hook" class="tab-btn" onclick="switchTool('socialhook', this)" data-name="social hook previewer truncation">
+            <a href="#social-hook" class="tab-btn" onclick="switchTool('socialhook', this)">
                 <i class="fa-solid fa-comments"></i>
                 <span>Hook Previewer</span>
             </a>
-            <a href="#color-palette" class="tab-btn" onclick="switchTool('palette', this)" data-name="color palette extractor hex image">
+            <a href="#color-palette" class="tab-btn" onclick="switchTool('palette', this)">
                 <i class="fa-solid fa-palette"></i>
                 <span>Color Palette</span>
             </a>
-            <a href="#ai-token-cost" class="tab-btn" onclick="switchTool('aitoken', this)" data-name="ai token cost estimator gpt claude">
+            <a href="#ai-token-cost" class="tab-btn" onclick="switchTool('aitoken', this)">
                 <i class="fa-solid fa-microchip"></i>
                 <span>AI Token Cost</span>
             </a>
-            <a href="#engagement-calc" class="tab-btn" onclick="switchTool('engagement', this)" data-name="engagement rate calculator social media">
+            <a href="#engagement-calc" class="tab-btn" onclick="switchTool('engagement', this)">
                 <i class="fa-solid fa-calculator"></i>
                 <span>Engagement Calc</span>
             </a>
-            <a href="#meta-inspect" class="tab-btn" onclick="switchTool('metainspect', this)" data-name="meta tag inspector parser">
+            <a href="#meta-inspect" class="tab-btn" onclick="switchTool('metainspect', this)">
                 <i class="fa-solid fa-tag"></i>
                 <span>Meta Inspector</span>
             </a>
-            <a href="#html-minifier" class="tab-btn" onclick="switchTool('htmlmin', this)" data-name="html minifier compressor code">
+            <a href="#html-minifier" class="tab-btn" onclick="switchTool('htmlmin', this)">
                 <i class="fa-solid fa-file-arrow-down"></i>
                 <span>HTML Minifier</span>
             </a>
@@ -1526,21 +1488,6 @@
             }
         });
 
-        // Instant Live Search Filter
-        function filterTools() {
-            const query = document.getElementById('toolSearch').value.toLowerCase();
-            const buttons = document.querySelectorAll('#toolGrid .tab-btn');
-            buttons.forEach(btn => {
-                const name = btn.getAttribute('data-name') || '';
-                const text = btn.innerText.toLowerCase();
-                if(name.includes(query) || text.includes(query)) {
-                    btn.style.display = 'flex';
-                } else {
-                    btn.style.display = 'none';
-                }
-            });
-        }
-
         const hashMap = {
             '#ai-prompt-gen': 'aiprompt',
             '#viral-hook': 'viralhook',
@@ -1994,7 +1941,7 @@
             document.getElementById('res-cost').innerText = '$' + cost.toFixed(5);
         }
 
-        // Functions for the 3 Restored Tools
+        // Functions for Restored Tools
         function calcEngagement() {
             const f = parseFloat(document.getElementById('eng-followers').value) || 0;
             const l = parseFloat(document.getElementById('eng-likes').value) || 0;
