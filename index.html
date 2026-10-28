@@ -921,7 +921,7 @@
         <div id="tool-aiprompt" class="tool-panel active">
             <div class="tool-header">
                 <h2 class="tool-title"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent)"></i> AI Marketing Prompt Generator</h2>
-                <p class="tool-desc">Create high-converting AI prompts for ads, emails, and social posts in seconds — no prompt engineering skills needed.</p>
+                <p class="tool-desc">Create high-converting AI prompts using professional frameworks. Enter your details below to generate a structured prompt.</p>
             </div>
             <div>
                 <div class="grid-2">
@@ -934,25 +934,64 @@
                         <input type="text" id="ai-audience" placeholder="e.g. Remote project managers">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>Goal / Format</label>
-                    <select id="ai-goal">
-                        <option value="high-converting ad copy for Facebook, LinkedIn or Google Ads">Ad Copy</option>
-                        <option value="engaging social media post">Social Media Post</option>
-                        <option value="persuasive email or newsletter">Email / Newsletter</option>
-                        <option value="detailed blog post or article outline">Blog Post / Article</option>
-                        <option value="high-converting landing page copy">Landing Page Copy</option>
-                        <option value="compelling product description">Product Description</option>
-                        <option value="engaging video script or short-form video hook">Video Script / Hook</option>
-                        <option value="persuasive case study or customer success story">Case Study / Success Story</option>
-                        <option value="engaging webinar or presentation outline">Webinar / Presentation</option>
-                        <option value="persuasive about us or brand story">About Us / Brand Story</option>
-                    </select>
+                
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Goal / Content Type</label>
+                        <select id="ai-goal">
+                            <option value="high-converting ad copy for Facebook, LinkedIn or Google Ads">Ad Copy</option>
+                            <option value="engaging social media post">Social Media Post</option>
+                            <option value="persuasive email or newsletter">Email / Newsletter</option>
+                            <option value="detailed blog post or article outline">Blog Post / Article</option>
+                            <option value="high-converting landing page copy">Landing Page Copy</option>
+                            <option value="compelling product description">Product Description</option>
+                            <option value="engaging video script or short-form video hook">Video Script / Hook</option>
+                            <option value="persuasive case study or customer success story">Case Study / Success Story</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tone of Voice</label>
+                        <select id="ai-tone">
+                            <option value="Professional and authoritative">Professional & Authoritative</option>
+                            <option value="Conversational and friendly">Conversational & Friendly</option>
+                            <option value="Witty and clever">Witty & Clever</option>
+                            <option value="Empathetic and understanding">Empathetic & Understanding</option>
+                            <option value="Urgent and action-oriented">Urgent & Action-Oriented</option>
+                            <option value="Luxurious and premium">Luxurious & Premium</option>
+                        </select>
+                    </div>
                 </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Output Structure</label>
+                        <select id="ai-output-format">
+                            <option value="a single, cohesive paragraph">Single Cohesive Paragraph</option>
+                            <option value="a bulleted list of key points">Bulleted List of Key Points</option>
+                            <option value="3 distinct variations/options">3 Distinct Variations</option>
+                            <option value="a structured framework (Hook, Body, CTA)">Structured (Hook, Body, CTA)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Prompt Framework</label>
+                        <select id="ai-framework">
+                            <option value="standard">Standard (Simple & Direct)</option>
+                            <option value="rctf">RCTF (Role, Context, Task, Format)</option>
+                            <option value="pas">PAS (Problem, Agitate, Solution)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Specific Constraints (Optional)</label>
+                    <input type="text" id="ai-constraints" placeholder="e.g. Max 100 words, include a statistic, do not use emojis">
+                </div>
+
                 <button class="btn-submit" onclick="generateAIPrompt()">Generate Structured Prompt</button>
+                
                 <div class="result-box" style="align-items: flex-start; text-align: left;">
-                    <div class="result-subtext">Enhanced Prompt</div>
-                    <div class="result-value" id="ai-prompt-res" style="font-size: 0.95rem; line-height: 1.5; color: var(--text-main);">Enter details above</div>
+                    <div class="result-subtext">Your Engineered Prompt</div>
+                    <div class="result-value" id="ai-prompt-res" style="font-size: 0.95rem; line-height: 1.6; color: var(--text-main); font-family: monospace; white-space: pre-wrap;">Enter details above and click Generate</div>
                     <button class="copy-btn" onclick="copyElementText('ai-prompt-res')"><i class="fa-regular fa-copy"></i> Copy Prompt</button>
                 </div>
             </div>
@@ -2077,11 +2116,33 @@
             document.getElementById('og-output').innerText = code;
         }
 
+        // === NEW UPGRADED AI PROMPT GENERATOR ===
         function generateAIPrompt() {
-            const topic = document.getElementById('ai-topic').value || 'SaaS tool';
-            const audience = document.getElementById('ai-audience').value || 'professionals';
+            const topic = document.getElementById('ai-topic').value.trim() || '[Product or Topic]';
+            const audience = document.getElementById('ai-audience').value.trim() || '[Target Audience]';
             const goal = document.getElementById('ai-goal').value;
-            const prompt = `Act as an expert copywriter. Write a ${goal} for "${topic}" targeting "${audience}". Use a persuasive, engaging tone, include a clear hook, pain points, and a strong call-to-action.`;
+            const tone = document.getElementById('ai-tone').value;
+            const format = document.getElementById('ai-output-format').value;
+            const constraints = document.getElementById('ai-constraints').value.trim();
+            const framework = document.getElementById('ai-framework').value;
+
+            let prompt = "";
+
+            if (framework === 'rctf') {
+                prompt = `Role: You are an expert copywriter and marketer.\nContext: We are creating ${goal} for "${topic}" aimed at "${audience}". The tone should be ${tone}.\nTask: Write the copy based on the context.\nFormat: Provide the output as ${format}.`;
+            } 
+            else if (framework === 'pas') {
+                prompt = `Act as an expert copywriter. Write ${goal} for "${topic}" targeting "${audience}" using the Problem-Agitate-Solution framework.\n\nUse a ${tone} tone. Format the output as ${format}.`;
+            } 
+            else {
+                // Standard
+                prompt = `Act as an expert copywriter. Write ${goal} for "${topic}" targeting "${audience}".\n\nUse a ${tone} tone. Format the output as ${format}.`;
+            }
+
+            if (constraints !== '') {
+                prompt += `\n\nConstraints: ${constraints}`;
+            }
+
             document.getElementById('ai-prompt-res').innerText = prompt;
         }
 
