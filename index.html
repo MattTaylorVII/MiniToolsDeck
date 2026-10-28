@@ -905,6 +905,11 @@
         .imgc-seo-content details { border-bottom: 1px solid var(--border-color); padding: 12px 0; }
         .imgc-seo-content summary { color: var(--text-main); font-weight: 600; cursor: pointer; }
         .imgc-seo-content details p { margin: 10px 0 0; }
+        .favicon-dropzone { margin-bottom: 18px; }
+        .favicon-dropzone .imgc-upload-icon { pointer-events: none; }
+        .favicon-dropzone input[type="file"] { display: none; }
+        .favicon-file-name { margin-top: 10px; color: var(--text-main); font-size: .88rem; overflow-wrap: anywhere; }
+        .favicon-privacy { margin: 12px 0 18px; color: var(--text-muted); font-size: .84rem; line-height: 1.5; }
         @media (max-width: 640px) { .imgc-dropzone { padding: 28px 14px; } .imgc-settings { grid-template-columns: 1fr; padding: 14px; } .imgc-file-list { grid-template-columns: 1fr; } .imgc-actions { flex-direction: column; } .imgc-actions button { width: 100%; } }
 
     </style>
@@ -1394,11 +1399,16 @@
                 <h2 class="tool-title"><i class="fa-solid fa-globe" style="color:#06b6d4"></i> Website Icon Generator</h2>
                 <p class="tool-desc">Turn any logo into a complete set of favicons and Apple touch icons ready for your website.</p>
             </div>
-            <div>
-                <div class="form-group">
-                    <label>Upload Logo (PNG, JPG or SVG)</label>
-                    <input type="file" id="favicon-file" accept="image/*" onchange="previewFaviconSource(this)">
+            <div class="favicon-shell">
+                <div id="favicon-dropzone" class="imgc-dropzone favicon-dropzone" role="button" tabindex="0" aria-label="Choose a logo or drag and drop it here">
+                    <div class="imgc-upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                    <h3>Drop your logo here</h3>
+                    <p>or <span class="imgc-browse">browse files</span> from your device</p>
+                    <small>PNG, JPG, WebP or SVG · Choose one logo</small>
+                    <input type="file" id="favicon-file" accept="image/png,image/jpeg,image/webp,image/svg+xml,.png,.jpg,.jpeg,.webp,.svg" aria-label="Choose logo file">
+                    <div id="favicon-file-name" class="favicon-file-name" hidden></div>
                 </div>
+                <p class="favicon-privacy"><i class="fa-solid fa-shield-halved"></i> Your logo is processed in your browser and is not uploaded.</p>
 
                 <div id="favicon-preview-area" style="display:none; margin-bottom:1.25rem;">
                     <div class="result-subtext" style="margin-bottom:0.5rem;">Preview</div>
@@ -2363,32 +2373,85 @@
             document.getElementById('hook-topic').removeAttribute('aria-invalid');
         }
 
+        function drawFaviconContained(ctx, image, size) {
+            ctx.clearRect(0, 0, size, size);
+            const width = image.naturalWidth || image.width;
+            const height = image.naturalHeight || image.height;
+            if (!width || !height) throw new Error('The selected logo has invalid dimensions.');
+            const scale = Math.min(size / width, size / height);
+            const drawWidth = Math.max(1, Math.round(width * scale));
+            const drawHeight = Math.max(1, Math.round(height * scale));
+            ctx.drawImage(image, Math.round((size - drawWidth) / 2), Math.round((size - drawHeight) / 2), drawWidth, drawHeight);
+        }
+
         function previewFaviconSource(input) {
-            if (!input.files || !input.files[0]) return;
+            const file = input && input.files && input.files[0];
+            if (!file) return;
+            if (!file.type.startsWith('image/') && !/\.(png|jpe?g|webp|svg)$/i.test(file.name)) {
+                document.getElementById('favicon-status').textContent = 'Please choose a PNG, JPG, WebP or SVG image.';
+                input.value = '';
+                return;
+            }
+            const status = document.getElementById('favicon-status');
+            status.textContent = 'Loading logo…';
             const reader = new FileReader();
+            reader.onerror = () => { status.textContent = 'Could not read this file. Please try another image.'; };
             reader.onload = function(e) {
                 const img = new Image();
+                img.onerror = () => { status.textContent = 'This image could not be opened. Please try a PNG, JPG, WebP or SVG file.'; };
                 img.onload = function() {
-                    document.getElementById('favicon-preview-area').style.display = 'block';
-                    document.getElementById('fav-preview-src').src = e.target.result;
-
-                    // Generate quick previews
-                    const makePreview = (size, targetId) => {
-                        const canvas = document.createElement('canvas');
-                        canvas.width = size; canvas.height = size;
-                        const ctx = canvas.getContext('2d');
-                        ctx.clearRect(0,0,size,size);
-                        ctx.drawImage(img, 0, 0, size, size);
-                        document.getElementById(targetId).src = canvas.toDataURL('image/png');
-                    };
-                    makePreview(32, 'fav-preview-32');
-                    makePreview(180, 'fav-preview-180');
-                    document.getElementById('favicon-status').innerText = 'Logo loaded — ready to generate';
+                    try {
+                        document.getElementById('favicon-preview-area').style.display = 'block';
+                        document.getElementById('fav-preview-src').src = e.target.result;
+                        const makePreview = (size, targetId) => {
+                            const canvas = document.createElement('canvas');
+                            canvas.width = size; canvas.height = size;
+                            const ctx = canvas.getContext('2d');
+                            if (!ctx) throw new Error('Canvas is unavailable in this browser.');
+                            drawFaviconContained(ctx, img, size);
+                            document.getElementById(targetId).src = canvas.toDataURL('image/png');
+                        };
+                        makePreview(32, 'fav-preview-32');
+                        makePreview(180, 'fav-preview-180');
+                        const name = document.getElementById('favicon-file-name');
+                        name.textContent = file.name;
+                        name.hidden = false;
+                        status.textContent = 'Logo ready — download your favicon bundle when you’re ready.';
+                    } catch (error) {
+                        status.textContent = error.message || 'Could not preview this logo. Please try another file.';
+                    }
                 };
                 img.src = e.target.result;
             };
-            reader.readAsDataURL(input.files[0]);
+            reader.readAsDataURL(file);
         }
+
+        function initFaviconDropzone() {
+            const dropzone = document.getElementById('favicon-dropzone');
+            const input = document.getElementById('favicon-file');
+            if (!dropzone || !input || dropzone.dataset.ready === 'true') return;
+            dropzone.dataset.ready = 'true';
+            dropzone.addEventListener('click', event => {
+                if (!event.target.closest('input')) input.click();
+            });
+            dropzone.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); input.click(); }
+            });
+            input.addEventListener('change', () => previewFaviconSource(input));
+            ['dragenter', 'dragover'].forEach(type => dropzone.addEventListener(type, event => {
+                event.preventDefault(); event.stopPropagation(); dropzone.classList.add('is-dragging');
+            }));
+            ['dragleave', 'drop'].forEach(type => dropzone.addEventListener(type, event => {
+                event.preventDefault(); event.stopPropagation(); dropzone.classList.remove('is-dragging');
+            }));
+            dropzone.addEventListener('drop', event => {
+                const file = Array.from(event.dataTransfer.files || []).find(item => item.type.startsWith('image/') || /\.(png|jpe?g|webp|svg)$/i.test(item.name));
+                if (!file) { document.getElementById('favicon-status').textContent = 'Drop a supported image file: PNG, JPG, WebP or SVG.'; return; }
+                const transfer = new DataTransfer(); transfer.items.add(file); input.files = transfer.files;
+                previewFaviconSource(input);
+            });
+        }
+        initFaviconDropzone();
 
         function generateFaviconBundle() {
             if (typeof JSZip === 'undefined') {
@@ -2396,7 +2459,7 @@
                 return;
             }
             const fileInput = document.getElementById('favicon-file');
-            if(fileInput.files.length === 0) return alert('Please upload a logo image first.');
+            if(fileInput.files.length === 0) { document.getElementById('favicon-status').textContent = 'Add a logo first by dropping it above or browsing for a file.'; return; }
             
             document.getElementById('favicon-status').innerText = 'Generating icons...';
             
@@ -2421,8 +2484,7 @@
                     sizes.forEach(({name, size}) => {
                         canvas.width = size;
                         canvas.height = size;
-                        ctx.clearRect(0, 0, size, size);
-                        ctx.drawImage(img, 0, 0, size, size);
+                        drawFaviconContained(ctx, img, size);
                         zip.file(name, canvas.toDataURL('image/png').split(',')[1], {base64: true});
                     });
 
@@ -2440,8 +2502,9 @@
                         const link = document.createElement('a');
                         link.href = URL.createObjectURL(blob);
                         link.download = "favicon-bundle.zip";
-                        link.click();
-                        document.getElementById('favicon-status').innerText = '✅ Success! ZIP downloaded with 6 icon sizes.';
+                        document.body.appendChild(link); link.click(); link.remove();
+                        setTimeout(() => URL.revokeObjectURL(link.href), 30000);
+                        document.getElementById('favicon-status').innerText = 'Success! Your ZIP contains six icon sizes and the HTML snippet.';
                     });
                 };
                 img.src = e.target.result;
