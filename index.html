@@ -470,6 +470,7 @@
         input[type="text"],
         input[type="color"],
         input[type="file"],
+        input[type="range"],
         textarea,
         select {
             width: 100%;
@@ -704,6 +705,46 @@
             gap: 1.25rem;
         }
 
+        /* NEW FAVICON SPECIFIC STYLES */
+        .browser-tab-mock {
+            background: #1a1b26;
+            border: 1px solid #334155;
+            border-radius: 8px 8px 0 0;
+            padding: 0.6rem 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            max-width: 220px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+            margin-bottom: 1rem;
+        }
+        .browser-tab-mock img {
+            width: 16px; height: 16px; border-radius: 2px;
+        }
+        .browser-tab-mock .close-tab {
+            margin-left: auto; color: #64748b; font-size: 0.7rem;
+        }
+
+        .favicon-preview-grid {
+            display: flex;
+            gap: 1rem; align-items: flex-end; flex-wrap: wrap;
+            background: var(--bg-primary);
+            padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+        }
+        .favicon-preview-item {
+            text-align: center;
+        }
+        .favicon-preview-item img {
+            background: #fff; border-radius: 4px; border: 1px solid var(--border-color);
+            object-fit: contain;
+        }
+        .favicon-preview-item span {
+            display: block; font-size: 0.7rem; color: var(--text-muted); margin-top: 6px;
+        }
+
         footer {
             background-color: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
@@ -833,7 +874,7 @@
             <a href="#favicon-gen" class="tab-btn" onclick="switchTool('favicongen', this)">
                 <span class="trending-badge">New</span>
                 <i class="fa-solid fa-globe" style="color:#06b6d4"></i>
-                <span>Website Icon Generator</span>
+                <span>Favicon & PWA Gen</span>
             </a>
             <a href="#password-generator" class="tab-btn" onclick="switchTool('password', this)">
                 <i class="fa-solid fa-key"></i>
@@ -1223,44 +1264,114 @@
             </div>
         </div>
 
+        <!-- NEW UPGRADED FAVICON GENERATOR -->
         <div id="tool-favicongen" class="tool-panel">
             <div class="tool-header">
-                <h2 class="tool-title"><i class="fa-solid fa-globe" style="color:#06b6d4"></i> Website Icon Generator</h2>
-                <p class="tool-desc">Turn any logo into a complete set of favicons and Apple touch icons ready for your website.</p>
+                <h2 class="tool-title"><i class="fa-solid fa-globe" style="color:#06b6d4"></i> Smart Favicon & PWA Icon Generator</h2>
+                <p class="tool-desc">Turn any logo or text into a complete favicon suite. Generates 16px–512px PNGs, Apple Touch icons, Maskable PWA icons, and a Web App Manifest. 100% free & private.</p>
             </div>
-            <div>
-                <div class="form-group">
-                    <label>Upload Logo (PNG, JPG or SVG)</label>
-                    <input type="file" id="favicon-file" accept="image/*" onchange="previewFaviconSource(this)">
-                </div>
+            <div class="grid-2">
+                <!-- Left Side: Controls -->
+                <div>
+                    <div class="platform-tabs" style="margin-bottom:1.5rem;">
+                        <button class="platform-tab active" onclick="switchFaviconMode('upload', this)"><i class="fa-solid fa-upload"></i> Upload Logo</button>
+                        <button class="platform-tab" onclick="switchFaviconMode('text', this)"><i class="fa-solid fa-font"></i> Text / Initials</button>
+                    </div>
 
-                <div id="favicon-preview-area" style="display:none; margin-bottom:1.25rem;">
-                    <div class="result-subtext" style="margin-bottom:0.5rem;">Preview</div>
-                    <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:flex-end;">
-                        <div style="text-align:center;">
-                            <img id="fav-preview-src" style="width:64px; height:64px; object-fit:contain; border-radius:8px; background:#fff; border:1px solid var(--border-color);">
-                            <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Original</div>
+                    <!-- Upload Mode -->
+                    <div id="favicon-mode-upload">
+                        <div class="form-group">
+                            <label>Select Image File</label>
+                            <input type="file" id="favicon-file" accept="image/*" onchange="handleFaviconUpload(this)">
                         </div>
-                        <div style="text-align:center;">
-                            <img id="fav-preview-32" style="width:32px; height:32px; object-fit:contain; border-radius:4px; background:#fff; border:1px solid var(--border-color);">
-                            <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">32×32</div>
+                    </div>
+
+                    <!-- Text Mode -->
+                    <div id="favicon-mode-text" style="display:none;">
+                        <div class="form-group">
+                            <label>Icon Text (1-3 characters)</label>
+                            <input type="text" id="favicon-text" maxlength="3" placeholder="e.g. MT" oninput="updateFaviconPreview()" style="text-transform:uppercase;">
                         </div>
-                        <div style="text-align:center;">
-                            <img id="fav-preview-180" style="width:48px; height:48px; object-fit:contain; border-radius:8px; background:#fff; border:1px solid var(--border-color);">
-                            <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">180×180</div>
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Text Color</label>
+                                <input type="color" id="favicon-text-color" value="#ffffff" oninput="updateFaviconPreview()" style="height:40px; padding:2px;">
+                            </div>
+                            <div class="form-group">
+                                <label>Background Color</label>
+                                <input type="color" id="favicon-bg-color" value="#10b981" oninput="updateFaviconPreview()" style="height:40px; padding:2px;">
+                            </div>
                         </div>
+                    </div>
+
+                    <!-- Common Settings -->
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Icon Shape</label>
+                            <select id="favicon-shape" onchange="updateFaviconPreview()">
+                                <option value="square">Square</option>
+                                <option value="rounded" selected>Rounded Square</option>
+                                <option value="circle">Circle</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Padding: <span id="fav-pad-val">10</span>%</label>
+                            <input type="range" id="favicon-padding" min="0" max="30" value="10" oninput="document.getElementById('fav-pad-val').innerText = this.value; updateFaviconPreview();" style="padding:0; margin-top:10px;">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>App Name (For PWA Manifest)</label>
+                        <input type="text" id="favicon-app-name" placeholder="My Awesome App" oninput="updateFaviconPreview()">
+                    </div>
+
+                    <button class="btn-submit" onclick="generateFaviconBundle()">Download Complete Icon Bundle</button>
+
+                    <div class="result-box" style="margin-top:1.5rem; align-items:flex-start; text-align:left;">
+                        <div class="result-subtext">Status</div>
+                        <div class="result-value" id="favicon-status" style="font-size:1.1rem; margin-bottom:0.75rem;">Ready to generate</div>
+                        
+                        <div class="result-subtext" style="margin-bottom:0.4rem;">HTML Snippet (copy into &lt;head&gt;)</div>
+                        <pre id="favicon-snippet" style="width:100%; background:var(--bg-primary); padding:0.85rem; border-radius:8px; font-size:0.75rem; overflow-x:auto; color:var(--text-main); white-space:pre-wrap; margin:0 0 0.75rem 0;">Upload a logo or type initials to get the code.</pre>
+                        <button class="copy-btn" onclick="copyElementText('favicon-snippet')"><i class="fa-regular fa-copy"></i> Copy HTML Snippet</button>
                     </div>
                 </div>
 
-                <button class="btn-submit" onclick="generateFaviconBundle()">Download Complete Favicon Bundle</button>
+                <!-- Right Side: Previews -->
+                <div>
+                    <!-- Browser Tab Mockup -->
+                    <div style="background:var(--bg-primary); padding:2rem 1rem 0; border-radius:8px 8px 0 0; border:1px solid var(--border-color); border-bottom:none;">
+                        <div class="browser-tab-mock">
+                            <img id="preview-16-tab" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style="width:16px; height:16px; border-radius:2px;">
+                            <span id="preview-tab-title" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">My Awesome App</span>
+                            <span class="close-tab">✕</span>
+                        </div>
+                    </div>
 
-                <div class="result-box" style="margin-top:1.5rem; align-items:flex-start; text-align:left;">
-                    <div class="result-subtext">Status</div>
-                    <div class="result-value" id="favicon-status" style="font-size:1.1rem; margin-bottom:0.75rem;">Ready — upload a logo to begin</div>
-                    
-                    <div class="result-subtext" style="margin-bottom:0.4rem;">HTML Snippet (copy into &lt;head&gt;)</div>
-                    <pre id="favicon-snippet" style="width:100%; background:var(--bg-primary); padding:0.85rem; border-radius:8px; font-size:0.8rem; overflow-x:auto; color:var(--text-main); white-space:pre-wrap; margin:0 0 0.75rem 0;">Upload a logo and generate the bundle to get the HTML snippet.</pre>
-                    <button class="copy-btn" onclick="copyElementText('favicon-snippet')"><i class="fa-regular fa-copy"></i> Copy HTML Snippet</button>
+                    <!-- Size Previews -->
+                    <div class="favicon-preview-grid">
+                        <div class="favicon-preview-item">
+                            <img id="preview-16" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style="width:16px; height:16px;">
+                            <span>16x16 (Tab)</span>
+                        </div>
+                        <div class="favicon-preview-item">
+                            <img id="preview-32" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style="width:32px; height:32px;">
+                            <span>32x32</span>
+                        </div>
+                        <div class="favicon-preview-item">
+                            <img id="preview-180" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style="width:64px; height:64px;">
+                            <span>Apple Touch</span>
+                        </div>
+                        <div class="favicon-preview-item">
+                            <img id="preview-maskable" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style="width:64px; height:64px; border-radius:50%;">
+                            <span>Maskable (PWA)</span>
+                        </div>
+                    </div>
+
+                    <div class="result-box" style="align-items: flex-start; text-align: left; margin-top:1rem;">
+                        <div class="result-subtext">manifest.json Output</div>
+                        <pre id="favicon-manifest-output" style="width:100%; white-space: pre-wrap; font-family: monospace; font-size:0.75rem; color: var(--accent); margin-top:0.5rem; max-height:200px; overflow-y:auto;">// Manifest will appear here</pre>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2424,6 +2535,216 @@
             if (recEl) recEl.innerHTML = recHtml;
         }
 
+        // === UPGRADED FAVICON GENERATOR ===
+        let faviconMode = 'upload';
+        let uploadedFaviconImage = null;
+
+        function switchFaviconMode(mode, btnElement) {
+            faviconMode = mode;
+            document.querySelectorAll('#tool-favicongen .platform-tab').forEach(t => t.classList.remove('active'));
+            btnElement.classList.add('active');
+            
+            document.getElementById('favicon-mode-upload').style.display = mode === 'upload' ? 'block' : 'none';
+            document.getElementById('favicon-mode-text').style.display = mode === 'text' ? 'block' : 'none';
+            
+            updateFaviconPreview();
+        }
+
+        function handleFaviconUpload(input) {
+            if (!input.files || !input.files[0]) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    uploadedFaviconImage = img;
+                    updateFaviconPreview();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        function drawFaviconCanvas(size, isMaskable = false) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            const shape = document.getElementById('favicon-shape').value;
+            const paddingPct = parseInt(document.getElementById('favicon-padding').value) / 100;
+            const bgColor = document.getElementById('favicon-bg-color').value;
+            
+            // For maskable icons, Android crops to a circle of roughly 80% diameter.
+            // We need to scale the inner content down to fit in the "safe zone" (center 80%).
+            const safeZoneScale = isMaskable ? 0.8 : 1;
+            const effectivePadding = isMaskable ? (paddingPct + 0.1) : paddingPct; 
+
+            ctx.clearRect(0, 0, size, size);
+
+            // Draw Shape & Background
+            ctx.beginPath();
+            const rectSize = size;
+            const radius = shape === 'circle' ? size/2 : (shape === 'rounded' ? size * 0.2 : 0);
+            
+            if (shape === 'circle') {
+                ctx.arc(size/2, size/2, size/2, 0, Math.PI * 2);
+            } else if (shape === 'rounded') {
+                ctx.roundRect(0, 0, rectSize, rectSize, radius);
+            } else {
+                ctx.rect(0, 0, rectSize, rectSize);
+            }
+            
+            ctx.fillStyle = bgColor;
+            ctx.fill();
+            ctx.clip(); // Clip everything inside the shape
+
+            if (faviconMode === 'text') {
+                const text = document.getElementById('favicon-text').value || 'A';
+                const textColor = document.getElementById('favicon-text-color').value;
+                
+                ctx.fillStyle = textColor;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                
+                // Dynamic font size based on text length and padding
+                let fontSize = size * (0.5 - effectivePadding);
+                if (text.length === 2) fontSize *= 0.8;
+                if (text.length === 3) fontSize *= 0.6;
+                
+                ctx.font = `bold ${fontSize}px Inter, sans-serif`;
+                ctx.fillText(text.toUpperCase(), size/2, size/2 + (fontSize*0.05)); // Slight vertical tweak
+            } 
+            else if (faviconMode === 'upload' && uploadedFaviconImage) {
+                const img = uploadedFaviconImage;
+                
+                // Calculate dimensions to fit the image inside the canvas with padding
+                const paddingPx = size * effectivePadding;
+                const maxW = size - (paddingPx * 2);
+                const maxH = size - (paddingPx * 2);
+                
+                const scale = Math.min(maxW / img.width, maxH / img.height);
+                const drawW = img.width * scale;
+                const drawH = img.height * scale;
+                const x = (size - drawW) / 2;
+                const y = (size - drawH) / 2;
+                
+                ctx.drawImage(img, x, y, drawW, drawH);
+            }
+
+            return canvas.toDataURL('image/png');
+        }
+
+        function updateFaviconPreview() {
+            // Update Tab Title
+            const appName = document.getElementById('favicon-app-name').value || 'My Awesome App';
+            document.getElementById('preview-tab-title').innerText = appName;
+
+            // Generate Previews
+            document.getElementById('preview-16-tab').src = drawFaviconCanvas(16);
+            document.getElementById('preview-16').src = drawFaviconCanvas(16);
+            document.getElementById('preview-32').src = drawFaviconCanvas(32);
+            document.getElementById('preview-180').src = drawFaviconCanvas(180);
+            document.getElementById('preview-maskable').src = drawFaviconCanvas(192, true);
+
+            // Update Manifest JSON Text
+            const manifest = {
+                name: appName,
+                short_name: appName,
+                icons: [
+                    { src: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
+                    { src: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
+                    { src: "/maskable-icon-192x192.png", sizes: "192x192", type: "image/png", purpose: "maskable" },
+                    { src: "/maskable-icon-512x512.png", sizes: "512x512", type: "image/png", purpose: "maskable" }
+                ],
+                theme_color: document.getElementById('favicon-bg-color').value,
+                background_color: document.getElementById('favicon-bg-color').value,
+                display: "standalone"
+            };
+            document.getElementById('favicon-manifest-output').innerText = JSON.stringify(manifest, null, 2);
+        }
+
+        function generateFaviconBundle() {
+            if (typeof JSZip === 'undefined') {
+                alert('JSZip library is still loading. Please try again in a moment.');
+                return;
+            }
+            if (faviconMode === 'upload' && !uploadedFaviconImage) {
+                return alert('Please upload a logo image first.');
+            }
+            if (faviconMode === 'text' && !document.getElementById('favicon-text').value) {
+                return alert('Please enter some text for the icon.');
+            }
+            
+            document.getElementById('favicon-status').innerText = 'Generating icons...';
+            
+            setTimeout(() => {
+                const zip = new JSZip();
+                
+                // Standard Icons
+                const sizes = [
+                    { name: 'favicon-16x16.png', size: 16 },
+                    { name: 'favicon-32x32.png', size: 32 },
+                    { name: 'favicon-48x48.png', size: 48 },
+                    { name: 'apple-touch-icon.png', size: 180 },
+                    { name: 'android-chrome-192x192.png', size: 192 },
+                    { name: 'android-chrome-512x512.png', size: 512 }
+                ];
+                
+                sizes.forEach(({name, size}) => {
+                    const dataUrl = drawFaviconCanvas(size, false);
+                    zip.file(name, dataUrl.split(',')[1], {base64: true});
+                });
+
+                // Maskable Icons (PWA)
+                const maskableSizes = [
+                    { name: 'maskable-icon-192x192.png', size: 192 },
+                    { name: 'maskable-icon-512x512.png', size: 512 }
+                ];
+                
+                maskableSizes.forEach(({name, size}) => {
+                    const dataUrl = drawFaviconCanvas(size, true);
+                    zip.file(name, dataUrl.split(',')[1], {base64: true});
+                });
+
+                // Manifest & Snippet
+                const appName = document.getElementById('favicon-app-name').value || 'My App';
+                const themeColor = document.getElementById('favicon-bg-color').value;
+
+                const manifest = {
+                    name: appName,
+                    short_name: appName,
+                    icons: [
+                        { src: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
+                        { src: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
+                        { src: "/maskable-icon-192x192.png", sizes: "192x192", type: "image/png", purpose: "maskable" },
+                        { src: "/maskable-icon-512x512.png", sizes: "512x512", type: "image/png", purpose: "maskable" }
+                    ],
+                    theme_color: themeColor,
+                    background_color: themeColor,
+                    display: "standalone"
+                };
+                zip.file("site.webmanifest", JSON.stringify(manifest, null, 2));
+
+                const snippet = `<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="${themeColor}">`;
+
+                zip.file("html-snippet.txt", snippet);
+                document.getElementById('favicon-snippet').textContent = snippet;
+
+                zip.generateAsync({type:"blob"}).then(function(blob) {
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = "favicon-bundle.zip";
+                    link.click();
+                    document.getElementById('favicon-status').innerText = '✅ Success! ZIP downloaded with all icons & manifest.';
+                });
+            }, 100);
+        }
+
         function analyzeReadability() {
             const text = document.getElementById('readability-input').value.trim();
             if (!text) return alert('Enter text to analyze.');
@@ -2673,6 +2994,11 @@
             html = html.replace(/<!--[\s\S]*?-->/g, '').replace(/\s+/g, ' ').replace(/>\s+</g, '><').trim();
             document.getElementById('html-output').innerText = html;
         }
+
+        // Initialize Favicon Preview on load
+        window.addEventListener('load', () => {
+            updateFaviconPreview();
+        });
     </script>
 </body>
 </html>
