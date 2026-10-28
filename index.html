@@ -1422,7 +1422,7 @@
                     </div>
                     <div class="result-box">
                         <div class="result-subtext">Estimated Grade Level</div>
-                        <div class="result-value" id="readability-grade" style="font-size:1.4rem;">--</div>
+                        <div class="result-value" id="readability-grade" style="font-size:1.1rem; line-height:1.4;">--</div>
                     </div>
                 </div>
             </div>
@@ -1448,7 +1448,7 @@
                     <div class="result-box" id="contrast-box">
                         <div class="result-subtext">Contrast Ratio</div>
                         <div class="result-value" id="contrast-res">--</div>
-                        <div class="result-subtext" id="contrast-grade">Select colors to test</div>
+                        <div class="result-subtext" id="contrast-grade" style="font-weight:600;">Select colors to test</div>
                     </div>
                 </div>
             </div>
@@ -2120,8 +2120,6 @@
         }
 
         function analyzeHeadline() {
-            console.log("🔥 NEW SMART HEADLINE ENGINE ACTIVE"); // Verify this prints in your console!
-            
             const t = document.getElementById('headline-input').value.trim();
             const platform = document.getElementById('headline-platform') ? document.getElementById('headline-platform').value : 'blog';
 
@@ -2334,20 +2332,97 @@
             if (recEl) recEl.innerHTML = recHtml;
         }
 
+        // Helper to count syllables for readability
+        function countSyllables(word) {
+            word = word.toLowerCase().replace(/[^a-z]/g, '');
+            if (word.length <= 3) return 1;
+            word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
+            word = word.replace(/^y/, '');
+            const syllables = word.match(/[aeiouy]{1,2}/g);
+            return syllables ? syllables.length : 1;
+        }
+
         function analyzeReadability() {
-            const t = document.getElementById('readability-input').value.trim();
-            if(!t) return alert('Enter text to analyze.');
-            document.getElementById('readability-score').innerText = "68";
-            document.getElementById('readability-grade').innerText = "Standard (8th Grade)";
+            const text = document.getElementById('readability-input').value.trim();
+            if (!text) return alert('Enter text to analyze.');
+            
+            const words = text.match(/\b\w+\b/g) || [];
+            const wordCount = words.length;
+            if (wordCount === 0) return alert('Enter more text.');
+
+            const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+            const sentenceCount = Math.max(1, sentences.length);
+
+            let syllableCount = 0;
+            words.forEach(word => syllableCount += countSyllables(word));
+
+            const asl = wordCount / sentenceCount;
+            const asw = syllableCount / wordCount;
+            
+            // Flesch Reading Ease (0-100)
+            let readingEase = 206.835 - (1.015 * asl) - (84.6 * asw);
+            readingEase = Math.max(0, Math.min(100, readingEase)).toFixed(1);
+
+            // Flesch-Kincaid Grade Level
+            let gradeLevel = (0.39 * asl) + (11.8 * asw) - 15.59;
+            gradeLevel = Math.max(1, Math.round(gradeLevel));
+
+            document.getElementById('readability-score').innerText = readingEase;
+
+            let description = "";
+            if (readingEase >= 90) description = "Very Easy (5th Grade)";
+            else if (readingEase >= 80) description = "Easy (6th Grade)";
+            else if (readingEase >= 70) description = "Fairly Easy (7th Grade)";
+            else if (readingEase >= 60) description = "Standard (8th-9th Grade)";
+            else if (readingEase >= 50) description = "Fairly Difficult (10th-12th Grade)";
+            else if (readingEase >= 30) description = "Difficult (College)";
+            else description = "Very Confusing (College Grad)";
+
+            document.getElementById('readability-grade').innerText = `Grade ${gradeLevel} - ${description}`;
+        }
+
+        // Helpers for Contrast Checker
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
+
+        function getLuminance(rgb) {
+            const a = [rgb.r, rgb.g, rgb.b].map(function (v) {
+                v /= 255;
+                return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+            });
+            return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
         }
 
         function checkContrast() {
             const hexText = document.getElementById('contrast-text').value;
             const hexBg = document.getElementById('contrast-bg').value;
-            document.getElementById('contrast-res').innerText = '4.5:1';
-            document.getElementById('contrast-grade').innerText = '✅ WCAG AA Pass';
+            
+            const rgbText = hexToRgb(hexText);
+            const rgbBg = hexToRgb(hexBg);
+
+            const lumText = getLuminance(rgbText);
+            const lumBg = getLuminance(rgbBg);
+
+            const contrast = (Math.max(lumText, lumBg) + 0.05) / (Math.min(lumText, lumBg) + 0.05);
+            const ratio = contrast.toFixed(2);
+            
+            document.getElementById('contrast-res').innerText = ratio + ':1';
             document.getElementById('contrast-box').style.backgroundColor = hexBg;
             document.getElementById('contrast-box').style.color = hexText;
+
+            let grade = '';
+            if (contrast >= 7) grade = '✅ WCAG AAA Pass';
+            else if (contrast >= 4.5) grade = '✅ WCAG AA Pass';
+            else if (contrast >= 3) grade = '⚠️ Pass (Large Text Only)';
+            else grade = '❌ WCAG Fail';
+
+            document.getElementById('contrast-grade').innerText = grade;
         }
 
         function convertJsonToTs() {
