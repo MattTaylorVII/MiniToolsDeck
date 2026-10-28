@@ -1035,7 +1035,6 @@
                     <div class="form-group">
                         <label>Psychological Trigger</label>
                         <select id="hook-trigger">
-                            <!-- Populated by JS based on framework, but default to these -->
                             <option value="Curiosity Gap">Curiosity Gap</option>
                             <option value="Contrarian">Contrarian / Pattern-Interrupt</option>
                             <option value="Social Proof">Authority & Proof</option>
@@ -1927,7 +1926,7 @@
             }
         }
 
-        // === NEW UPGRADED VIRAL HOOK GENERATOR ===
+        // === UPGRADED VIRAL HOOK GENERATOR ===
         function generateViralHooks() {
             const topic = document.getElementById('hook-topic').value.trim() || 'this topic';
             const platform = document.getElementById('hook-platform').value;
@@ -2008,7 +2007,30 @@
                         { hook: `Struggling with ${topic}? It's not your fault.`, visual: 'Text overlay: "Not your fault."' },
                         { hook: `Tired of the same old results with ${topic}?`, visual: 'Visual: Stuck in a loop.' }
                     ],
-                    // ... other triggers for AIDA ...
+                    'Social Proof': [
+                        { hook: `Join the thousands who have mastered ${topic} with this simple method.`, visual: 'Visual: Crowd of happy people.' }
+                    ],
+                    'Storytelling': [
+                        { hook: `The journey to mastering ${topic} starts with one small step.`, visual: 'Visual: First step on a path.' }
+                    ],
+                    'Bold Claim': [
+                        { hook: `This is the most effective ${topic} strategy you'll ever learn.`, visual: 'Text overlay: "Most effective."' }
+                    ],
+                    'Question': [
+                        { hook: `Are you ready to transform your results with ${topic}?`, visual: 'Text overlay: "Are you ready?"' }
+                    ],
+                    'FOMO': [
+                        { hook: `Don't miss out on the ${topic} revolution.`, visual: 'Visual: Clock ticking.' }
+                    ],
+                    'Negation': [
+                        { hook: `The problem isn't ${topic}. It's the way you're approaching it.`, visual: 'Text overlay: "Wrong approach."' }
+                    ],
+                    'Specificity': [
+                        { hook: `Here are the 3 exact steps to master ${topic}.`, visual: 'Text overlay: "3 steps."' }
+                    ],
+                    'Confession': [
+                        { hook: `I used to struggle with ${topic} until I discovered this.`, visual: 'Text overlay: "My secret."' }
+                    ]
                 },
                 'pas': {
                     'Pain Point': [
@@ -2019,7 +2041,33 @@
                         { hook: `Why does ${topic} feel so hard? The answer will surprise you.`, visual: 'Text overlay: "The surprising reason."' },
                         { hook: `The hidden cause of your ${topic} struggles.`, visual: 'Visual: Magnifying glass over a problem.' }
                     ],
-                    // ... other triggers for PAS ...
+                    'Contrarian': [
+                        { hook: `The common advice for ${topic} is actually making it worse.`, visual: 'Text overlay: "Worse, not better."' }
+                    ],
+                    'Social Proof': [
+                        { hook: `See how others overcame their ${topic} challenges.`, visual: 'Visual: Testimonials.' }
+                    ],
+                    'Storytelling': [
+                        { hook: `The story of how I finally solved my ${topic} problem.`, visual: 'Text overlay: "My journey."' }
+                    ],
+                    'Bold Claim': [
+                        { hook: `This is the only ${topic} solution you'll ever need.`, visual: 'Text overlay: "The only one."' }
+                    ],
+                    'Question': [
+                        { hook: `What is really holding you back from mastering ${topic}?`, visual: 'Text overlay: "What holds you back?"' }
+                    ],
+                    'FOMO': [
+                        { hook: `The longer you wait, the harder ${topic} becomes.`, visual: 'Visual: Clock ticking down.' }
+                    ],
+                    'Negation': [
+                        { hook: `You don't have a ${topic} problem. You have a system problem.`, visual: 'Text overlay: "System problem."' }
+                    ],
+                    'Specificity': [
+                        { hook: `Fix your ${topic} in 24 hours with this exact plan.`, visual: 'Text overlay: "24 hours."' }
+                    ],
+                    'Confession': [
+                        { hook: `I wasted years on ${topic} before I learned this.`, visual: 'Text overlay: "Wasted years."' }
+                    ]
                 },
                 '4u': {
                     'Specificity': [
@@ -2030,7 +2078,30 @@
                         { hook: `The unconventional ${topic} strategy nobody talks about.`, visual: 'Text overlay: "Unconventional."' },
                         { hook: `Why the "best" ${topic} advice is actually ruining your results.`, visual: 'Visual: Cross out the word "best".' }
                     ],
-                    // ... other triggers for 4U ...
+                    'Curiosity Gap': [
+                        { hook: `What nobody tells you about ${topic}.`, visual: 'Text overlay: "The hidden truth."' }
+                    ],
+                    'Social Proof': [
+                        { hook: `How top 1% performers use ${topic} to get ahead.`, visual: 'Visual: Leaderboard.' }
+                    ],
+                    'Storytelling': [
+                        { hook: `The story of how ${topic} changed everything for me.`, visual: 'Text overlay: "My story."' }
+                    ],
+                    'Bold Claim': [
+                        { hook: `This one ${topic} hack will change your life.`, visual: 'Text overlay: "Life-changing hack."' }
+                    ],
+                    'Question': [
+                        { hook: `Are you making these common ${topic} mistakes?`, visual: 'Text overlay: "Common mistakes."' }
+                    ],
+                    'FOMO': [
+                        { hook: `Don't get left behind in ${topic}.`, visual: 'Visual: People moving forward.' }
+                    ],
+                    'Negation': [
+                        { hook: `Stop doing ${topic} the hard way.`, visual: 'Text overlay: "Stop the hard way."' }
+                    ],
+                    'Confession': [
+                        { hook: `I wish I knew this ${topic} secret sooner.`, visual: 'Text overlay: "The secret."' }
+                    ]
                 }
             };
 
@@ -2081,7 +2152,7 @@
             document.getElementById('viral-hooks-output').innerHTML = html;
         }
 
-        // === NEW UPGRADED AI PROMPT GENERATOR ===
+        // === UPGRADED AI PROMPT GENERATOR ===
         function generateAIPrompt() {
             const topic = document.getElementById('ai-topic').value.trim() || '[Product or Topic]';
             const audience = document.getElementById('ai-audience').value.trim() || '[Target Audience]';
@@ -2427,198 +2498,4 @@
 
         function checkContrast() {
             const hexText = document.getElementById('contrast-text').value;
-            const hexBg = document.getElementById('contrast-bg').value;
-            
-            const rgbText = hexToRgb(hexText);
-            const rgbBg = hexToRgb(hexBg);
-
-            const lumText = getLuminance(rgbText);
-            const lumBg = getLuminance(rgbBg);
-
-            const contrast = (Math.max(lumText, lumBg) + 0.05) / (Math.min(lumText, lumBg) + 0.05);
-            const ratio = contrast.toFixed(2);
-            
-            document.getElementById('contrast-res').innerText = ratio + ':1';
-            document.getElementById('contrast-box').style.backgroundColor = hexBg;
-            document.getElementById('contrast-box').style.color = hexText;
-
-            let grade = '';
-            if (contrast >= 7) grade = '✅ WCAG AAA Pass';
-            else if (contrast >= 4.5) grade = '✅ WCAG AA Pass';
-            else if (contrast >= 3) grade = '⚠️ Pass (Large Text Only)';
-            else grade = '❌ WCAG Fail';
-
-            document.getElementById('contrast-grade').innerText = grade;
-        }
-
-        function convertJsonToTs() {
-            const raw = document.getElementById('json-ts-input').value.trim();
-            if(!raw) return alert('Please paste JSON data.');
-            try {
-                const obj = JSON.parse(raw);
-                let ts = "export interface RootObject {\n";
-                for (let key in obj) {
-                    let type = typeof obj[key];
-                    if (type === 'number') type = 'number';
-                    else if (type === 'boolean') type = 'boolean';
-                    else if (Array.isArray(obj[key])) type = 'any[]';
-                    else if (type === 'object' && obj[key] !== null) type = 'Record<string, any>';
-                    else type = 'string';
-                    ts += `  ${key}: ${type};\n`;
-                }
-                ts += "}";
-                document.getElementById('json-ts-output').innerText = ts;
-            } catch(e) {
-                document.getElementById('json-ts-output').innerText = "Invalid JSON: " + e.message;
-            }
-        }
-
-        function optimizeSvg() {
-            let svg = document.getElementById('svg-input').value.trim();
-            if(!svg) return alert('Please paste SVG code.');
-            svg = svg.replace(/<!--[\s\S]*?-->/g, '').replace(/\s+/g, ' ').replace(/>\s+</g, '><').trim();
-            document.getElementById('svg-output').innerText = svg;
-        }
-
-        // Multi-Platform Social Hook Previewer Logic
-        let currentPlatform = 'x';
-
-        function switchPlatformPreview(platform, btnElement) {
-            currentPlatform = platform;
-            document.querySelectorAll('.platform-tab').forEach(t => t.classList.remove('active'));
-            btnElement.classList.add('active');
-            updateMultiPlatformPreview();
-        }
-
-        function updateMultiPlatformPreview() {
-            const text = document.getElementById('hook-input').value;
-            const previewContent = document.getElementById('mock-preview-content');
-            const charCounter = document.getElementById('mock-char-counter');
-            const handleEl = document.getElementById('mock-platform-handle');
-
-            if (!text.trim()) {
-                previewContent.innerHTML = '<span style="color: #64748b;">Start typing your hook above to preview...</span>';
-                charCounter.innerText = '0 chars';
-                return;
-            }
-
-            charCounter.innerText = `${text.length} chars`;
-
-            if (currentPlatform === 'x') {
-                handleEl.innerText = '@matttaylorvii • 1h';
-                if (text.length > 280) {
-                    previewContent.innerHTML = text.slice(0, 280) + `<span style="color: #ef4444; font-weight: bold;">${text.slice(280)}</span>`;
-                } else {
-                    previewContent.innerText = text;
-                }
-            } 
-            else if (currentPlatform === 'linkedin') {
-                handleEl.innerText = 'Matt Taylor • 2nd • Growth Marketer';
-                if (text.length > 210) {
-                    previewContent.innerHTML = text.slice(0, 210) + `<span style="color: #38bdf8; font-weight: 600; cursor: pointer;">...see more</span>`;
-                } else {
-                    previewContent.innerText = text;
-                }
-            } 
-            else if (currentPlatform === 'instagram' || currentPlatform === 'tiktok') {
-                handleEl.innerText = currentPlatform === 'instagram' ? 'matttaylor.growth' : '@matttaylor_vii';
-                let limit = currentPlatform === 'instagram' ? 125 : 150;
-                if (text.length > limit) {
-                    previewContent.innerHTML = text.slice(0, limit) + `<span style="color: #94a3b8; font-weight: 600;"> ... more</span>`;
-                } else {
-                    previewContent.innerText = text;
-                }
-            } 
-            else if (currentPlatform === 'facebook') {
-                handleEl.innerText = 'Matt Taylor • Public';
-                if (text.length > 200) {
-                    previewContent.innerHTML = text.slice(0, 200) + `<span style="color: #60a5fa; font-weight: 600;"> See More</span>`;
-                } else {
-                    previewContent.innerText = text;
-                }
-            } 
-            else if (currentPlatform === 'youtube') {
-                handleEl.innerText = 'Matt Taylor Official • 4.2K views';
-                if (text.length > 150) {
-                    previewContent.innerHTML = text.slice(0, 150) + `<span style="color: #94a3b8;">...</span>`;
-                } else {
-                    previewContent.innerText = text;
-                }
-            }
-        }
-
-        function extractPalette() {
-            const fileInput = document.getElementById('palette-file');
-            if(fileInput.files.length === 0) return;
-            const file = fileInput.files[0];
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = new Image();
-                img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    canvas.width = 50; canvas.height = 50;
-                    ctx.drawImage(img, 0, 0, 50, 50);
-                    const imgData = ctx.getImageData(0, 0, 50, 50).data;
-                    let colors = [];
-                    for(let i=0; i<imgData.length; i+= 100) {
-                        let r = imgData[i], g = imgData[i+1], b = imgData[i+2];
-                        let hex = "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-                        if(!colors.includes(hex) && colors.length < 5) colors.push(hex);
-                    }
-                    let html = "";
-                    colors.forEach(hex => {
-                        html += `<div style="background:${hex}; width:45px; height:45px; border-radius:6px; border:1px solid #fff; display:flex; align-items:flex-end; justify-content:center; font-size:9px; color:#fff; text-shadow:0 0 2px #000; padding-bottom:2px;">${hex}</div>`;
-                    });
-                    document.getElementById('palette-colors').innerHTML = html;
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function calcTokens() {
-            const text = document.getElementById('token-input').value;
-            const tokens = Math.ceil(text.length / 4);
-            const cost = (tokens / 1000000) * 5.00;
-            document.getElementById('res-tokens').innerText = tokens.toLocaleString();
-            document.getElementById('res-cost').innerText = '$' + cost.toFixed(5);
-        }
-
-        // Functions for Restored Tools
-        function calcEngagement() {
-            const f = parseFloat(document.getElementById('eng-followers').value) || 0;
-            const l = parseFloat(document.getElementById('eng-likes').value) || 0;
-            const c = parseFloat(document.getElementById('eng-comments').value) || 0;
-            if (f <= 0) {
-                document.getElementById('eng-result').innerText = "0.00%";
-                return;
-            }
-            const rate = ((l + c) / f) * 100;
-            document.getElementById('eng-result').innerText = rate.toFixed(2) + "%";
-        }
-
-        function inspectMetaTags() {
-            const html = document.getElementById('meta-input').value;
-            if(!html.trim()) return alert('Please paste HTML content.');
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const metas = doc.querySelectorAll('meta');
-            let res = "";
-            metas.forEach(m => {
-                const name = m.getAttribute('name') || m.getAttribute('property') || 'meta';
-                const content = m.getAttribute('content') || '';
-                if(content) res += `${name}: ${content}\n`;
-            });
-            document.getElementById('meta-output').innerText = res || "No meta tags found.";
-        }
-
-        function minifyHTML() {
-            let html = document.getElementById('html-input').value;
-            if(!html.trim()) return alert('Please paste HTML content.');
-            html = html.replace(/<!--[\s\S]*?-->/g, '').replace(/\s+/g, ' ').replace(/>\s+</g, '><').trim();
-            document.getElementById('html-output').innerText = html;
-        }
-    </script>
-</body>
-</html>
+            const hexBg = document.getElementById
