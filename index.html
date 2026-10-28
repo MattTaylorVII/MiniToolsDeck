@@ -320,6 +320,7 @@
             .tool-panel {
                 padding: 1.25rem;
                 border-radius: 10px;
+                scroll-margin-top: 130px; /* taller header on mobile (logo + buttons row) */
             }
 
             .tool-title {
@@ -396,6 +397,8 @@
             border-radius: 12px;
             padding: 2rem;
             box-shadow: var(--card-shadow);
+            /* Leave room for the sticky header when scrolling into view */
+            scroll-margin-top: 90px;
         }
 
         .tool-panel.active {
@@ -1607,10 +1610,10 @@
             const targetPanel = document.getElementById('tool-' + toolId);
             if(targetPanel) {
                 targetPanel.classList.add('active');
-                // Smooth scroll to the tool panel so the user lands on the form
+                // Smooth scroll to the tool panel (scroll-margin-top handles the sticky header offset)
                 setTimeout(() => {
                     targetPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 50);
+                }, 60);
             }
         }
 
