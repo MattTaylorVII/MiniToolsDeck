@@ -1022,6 +1022,32 @@
             font-size: 1.1rem;
         }
 
+        /* UPGRADED UTM BUILDER STYLES */
+        .utm-warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid #f59e0b;
+            color: #f59e0b;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            display: none;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        .utm-warning-box i { margin-top: 2px; }
+        
+        .utm-breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.4rem 0;
+            border-bottom: 1px dashed var(--border-color);
+            font-size: 0.85rem;
+        }
+        .utm-breakdown-row:last-child { border-bottom: none; }
+        .utm-breakdown-key { color: var(--text-muted); }
+        .utm-breakdown-val { color: var(--accent); font-family: monospace; font-weight: 600; }
+
         footer {
             background-color: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
@@ -1169,7 +1195,7 @@
             </a>
             <a href="#utm-builder" class="tab-btn" onclick="switchTool('utm', this)">
                 <i class="fa-solid fa-link"></i>
-                <span>Campaign Link Builder</span>
+                <span>UTM Campaign Studio</span>
             </a>
             <a href="#image-converter" class="tab-btn" onclick="switchTool('imgconv', this)">
                 <i class="fa-solid fa-image"></i>
@@ -1916,36 +1942,100 @@
             </div>
         </div>
 
+        <!-- UPGRADED UTM BUILDER -->
         <div id="tool-utm" class="tool-panel">
             <div class="tool-header">
-                <h2 class="tool-title"><i class="fa-solid fa-link" style="color:var(--accent)"></i> Campaign Link Builder</h2>
-                <p class="tool-desc">Build trackable campaign links so you can see exactly which ads and posts drive traffic and sales.</p>
+                <h2 class="tool-title"><i class="fa-solid fa-link" style="color:var(--accent)"></i> UTM Campaign Studio</h2>
+                <p class="tool-desc">Build trackable UTM links in seconds. Add source, medium, and campaign parameters with real-time validation, presets, and QR code generation. 100% client-side and private.</p>
             </div>
             <div class="grid-2">
+                <!-- Left: Form -->
                 <div>
-                    <div class="form-group">
-                        <label>Website URL *</label>
-                        <input type="text" id="utm-url" placeholder="https://yourwebsite.com/landing">
+                    <div class="form-group" style="background:var(--bg-secondary); padding:1rem; border-radius:8px; border:1px solid var(--border-color); margin-bottom:1.5rem;">
+                        <label>Smart Paste (Existing UTM Link)</label>
+                        <input type="text" id="utm-smart-paste" placeholder="Paste a full UTM link here to auto-fill..." oninput="parseSmartPaste()">
                     </div>
+
                     <div class="form-group">
-                        <label>Campaign Source (utm_source) *</label>
-                        <input type="text" id="utm-source" placeholder="e.g. newsletter, google, twitter">
+                        <label>Destination URL *</label>
+                        <input type="text" id="utm-url" placeholder="https://yourwebsite.com/landing" oninput="updateUTM()">
                     </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Source (utm_source) *</label>
+                            <input type="text" id="utm-source" placeholder="e.g. newsletter" oninput="updateUTM()">
+                            <div id="warn-source" class="utm-warning-box"><i class="fa-solid fa-triangle-exclamation"></i> <span></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Medium (utm_medium) *</label>
+                            <input type="text" id="utm-medium" placeholder="e.g. email" oninput="updateUTM()">
+                            <div id="warn-medium" class="utm-warning-box"><i class="fa-solid fa-triangle-exclamation"></i> <span></span></div>
+                        </div>
+                    </div>
+
                     <div class="form-group">
-                        <label>Campaign Medium (utm_medium)</label>
-                        <input type="text" id="utm-medium" placeholder="e.g. cpc, email, social">
+                        <label>Campaign Name (utm_campaign) *</label>
+                        <input type="text" id="utm-name" placeholder="e.g. spring_sale" oninput="updateUTM()">
+                        <div id="warn-name" class="utm-warning-box"><i class="fa-solid fa-triangle-exclamation"></i> <span></span></div>
                     </div>
+
+                    <!-- Presets -->
                     <div class="form-group">
-                        <label>Campaign Name (utm_campaign)</label>
-                        <input type="text" id="utm-name" placeholder="e.g. spring_sale, promo2026">
+                        <label>Quick Presets</label>
+                        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                            <button class="copy-btn" style="margin-top:0; padding:0.4rem 0.8rem; font-size:0.75rem;" onclick="applyUTMPreset('newsletter', 'email')">Newsletter</button>
+                            <button class="copy-btn" style="margin-top:0; padding:0.4rem 0.8rem; font-size:0.75rem;" onclick="applyUTMPreset('facebook', 'social')">Social</button>
+                            <button class="copy-btn" style="margin-top:0; padding:0.4rem 0.8rem; font-size:0.75rem;" onclick="applyUTMPreset('google', 'cpc')">Paid Ads</button>
+                        </div>
                     </div>
-                    <button class="btn-submit" onclick="buildUTM()">Build UTM Link</button>
+
+                    <details style="margin-top: 1.5rem; background:var(--bg-secondary); padding:1rem; border-radius:8px; border:1px solid var(--border-color);">
+                        <summary style="cursor: pointer; color: var(--accent); font-weight: 600; font-size: 0.85rem;">Show Advanced Parameters (GA4)</summary>
+                        <div class="grid-2" style="margin-top: 1rem;">
+                            <div class="form-group">
+                                <label>Term (utm_term)</label>
+                                <input type="text" id="utm-term" placeholder="e.g. running_shoes" oninput="updateUTM()">
+                            </div>
+                            <div class="form-group">
+                                <label>Content (utm_content)</label>
+                                <input type="text" id="utm-content" placeholder="e.g. text_link" oninput="updateUTM()">
+                            </div>
+                            <div class="form-group">
+                                <label>Campaign ID (utm_id)</label>
+                                <input type="text" id="utm-id" placeholder="e.g. abc123" oninput="updateUTM()">
+                            </div>
+                            <div class="form-group">
+                                <label>Source Platform</label>
+                                <input type="text" id="utm-source-platform" placeholder="e.g. google" oninput="updateUTM()">
+                            </div>
+                        </div>
+                    </details>
                 </div>
+
+                <!-- Right: Output -->
                 <div>
-                    <div class="result-box">
+                    <div class="result-box" style="align-items: flex-start; text-align: left; margin-top: 0;">
                         <div class="result-subtext">Generated Trackable Link</div>
-                        <div class="result-value" id="utm-res" style="font-size:0.95rem; line-height:1.4;">Enter URL & Source above</div>
-                        <button class="copy-btn" onclick="copyElementText('utm-res')"><i class="fa-regular fa-copy"></i> Copy Link</button>
+                        <div class="result-value" id="utm-res" style="font-size:0.95rem; line-height:1.4; word-break: break-all; margin-bottom: 0.75rem;">Enter URL & Source above</div>
+                        <button class="copy-btn" onclick="copyElementText('utm-res')"><i class="fa-regular fa-copy"></i> Copy Full Link</button>
+                    </div>
+
+                    <div class="result-box" style="margin-top: 1rem; padding: 1rem; align-items: flex-start; text-align: left;">
+                        <div class="result-subtext" style="margin-bottom: 0.5rem;">Parameter Breakdown</div>
+                        <div id="utm-breakdown" style="font-size: 0.85rem; width: 100%;">
+                            <em style="color: var(--text-muted);">Parameters will appear here...</em>
+                        </div>
+                    </div>
+
+                    <div class="result-box" style="margin-top: 1rem; display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div class="result-subtext">Download QR</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">Scan to visit</div>
+                        </div>
+                        <div id="utm-qr-container" style="background: white; padding: 0.5rem; border-radius: 6px; display: none;">
+                            <canvas id="utm-qr-canvas" style="width: 80px; height: 80px;"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2493,6 +2583,7 @@
             generatePasswordLogic(); // Init password gen
             updateQRCode(); // Init QR code
             validateJSON(); // Init JSON
+            updateUTM(); // Init UTM
         });
 
         function copyElementText(elementId) {
@@ -2516,6 +2607,137 @@
         function closeModal(id) { 
             const m = document.getElementById(id);
             if (m) m.style.display = 'none'; 
+        }
+
+        // === UPGRADED UTM BUILDER LOGIC ===
+        function updateUTM() {
+            let baseUrl = document.getElementById('utm-url').value.trim();
+            const source = document.getElementById('utm-source').value.trim();
+            const medium = document.getElementById('utm-medium').value.trim();
+            const name = document.getElementById('utm-name').value.trim();
+            const term = document.getElementById('utm-term').value.trim();
+            const content = document.getElementById('utm-content').value.trim();
+            const id = document.getElementById('utm-id').value.trim();
+            const sourcePlatform = document.getElementById('utm-source-platform').value.trim();
+
+            const resultEl = document.getElementById('utm-res');
+            const breakdownEl = document.getElementById('utm-breakdown');
+            const qrContainer = document.getElementById('utm-qr-container');
+
+            // Naming Coach Validation
+            validateUTMName('utm-source', 'warn-source');
+            validateUTMName('utm-medium', 'warn-medium');
+            validateUTMName('utm-name', 'warn-name');
+
+            if (!baseUrl || (!source && !medium && !name)) {
+                resultEl.innerText = "Enter URL and at least Source, Medium, or Name.";
+                breakdownEl.innerHTML = '<em style="color: var(--text-muted);">Parameters will appear here...</em>';
+                qrContainer.style.display = 'none';
+                return;
+            }
+
+            if (!baseUrl.startsWith('http')) baseUrl = 'https://' + baseUrl;
+
+            try {
+                const urlObj = new URL(baseUrl);
+                
+                // Build the breakdown list
+                let breakdownHtml = '';
+                const addParam = (key, val, label) => {
+                    if (val) {
+                        urlObj.searchParams.set(key, val);
+                        breakdownHtml += `<div class="utm-breakdown-row"><span class="utm-breakdown-key">${label}</span><span class="utm-breakdown-val">${val}</span></div>`;
+                    } else {
+                        urlObj.searchParams.delete(key);
+                    }
+                };
+
+                addParam('utm_source', source, 'Source');
+                addParam('utm_medium', medium, 'Medium');
+                addParam('utm_campaign', name, 'Campaign');
+                addParam('utm_term', term, 'Term');
+                addParam('utm_content', content, 'Content');
+                addParam('utm_id', id, 'ID');
+                addParam('utm_source_platform', sourcePlatform, 'Platform');
+
+                const finalUrl = urlObj.toString();
+                resultEl.innerText = finalUrl;
+                breakdownEl.innerHTML = breakdownHtml;
+
+                // Generate QR
+                if (typeof QRCode !== 'undefined') {
+                    qrContainer.style.display = 'block';
+                    QRCode.toCanvas(document.getElementById('utm-qr-canvas'), finalUrl, { width: 80, margin: 1 }, function (error) {
+                        if (error) console.error(error);
+                    });
+                }
+
+            } catch (e) {
+                resultEl.innerText = "Invalid URL format.";
+                breakdownEl.innerHTML = '';
+                qrContainer.style.display = 'none';
+            }
+        }
+
+        function validateUTMName(inputId, warnId) {
+            const val = document.getElementById(inputId).value;
+            const warn = document.getElementById(warnId);
+            const span = warn.querySelector('span');
+            
+            if (!val) {
+                warn.style.display = 'none';
+                return;
+            }
+
+            let msg = '';
+            if (val !== val.toLowerCase()) msg += 'Use lowercase. ';
+            if (/\s/.test(val)) msg += 'Replace spaces with underscores (_).';
+
+            if (msg) {
+                span.innerText = msg;
+                warn.style.display = 'flex';
+            } else {
+                warn.style.display = 'none';
+            }
+        }
+
+        function applyUTMPreset(source, medium) {
+            document.getElementById('utm-source').value = source;
+            document.getElementById('utm-medium').value = medium;
+            updateUTM();
+        }
+
+        function parseSmartPaste() {
+            const input = document.getElementById('utm-smart-paste').value.trim();
+            if (!input) return;
+
+            try {
+                const url = new URL(input);
+                const params = url.searchParams;
+                let found = false;
+
+                if (params.has('utm_source')) { document.getElementById('utm-source').value = params.get('utm_source'); found = true; }
+                if (params.has('utm_medium')) { document.getElementById('utm-medium').value = params.get('utm_medium'); found = true; }
+                if (params.has('utm_campaign')) { document.getElementById('utm-name').value = params.get('utm_campaign'); found = true; }
+                if (params.has('utm_term')) { document.getElementById('utm-term').value = params.get('utm_term'); found = true; }
+                if (params.has('utm_content')) { document.getElementById('utm-content').value = params.get('utm_content'); found = true; }
+                if (params.has('utm_id')) { document.getElementById('utm-id').value = params.get('utm_id'); found = true; }
+                if (params.has('utm_source_platform')) { document.getElementById('utm-source-platform').value = params.get('utm_source_platform'); found = true; }
+
+                // Set base URL without params
+                url.search = '';
+                document.getElementById('utm-url').value = url.toString();
+
+                if (found) {
+                    updateUTM();
+                    document.getElementById('utm-smart-paste').value = ''; // Clear after success
+                } else {
+                    alert('No UTM parameters found in this URL.');
+                }
+
+            } catch (e) {
+                // Ignore invalid URLs while typing
+            }
         }
 
         // === UPGRADED JSON FORMATTER LOGIC ===
@@ -3909,6 +4131,7 @@
             generatePasswordLogic();
             updateQRCode();
             validateJSON();
+            updateUTM();
         });
     </script>
 </body>
