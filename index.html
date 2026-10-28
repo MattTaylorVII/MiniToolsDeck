@@ -1444,22 +1444,32 @@
         <div id="tool-password" class="tool-panel">
             <div class="tool-header">
                 <h2 class="tool-title"><i class="fa-solid fa-key" style="color:var(--accent)"></i> Secure Password Generator</h2>
-                <p class="tool-desc">Create strong, unique passwords instantly — everything stays private in your browser.</p>
+                <p class="tool-desc">Create strong, unique passwords instantly — generated securely in your browser.</p>
             </div>
             <div class="grid-2">
                 <div>
                     <div class="form-group">
-                        <label>Password Length: <span id="pwd-len-val">16</span> characters</label>
-                        <input type="range" id="pwd-length" min="8" max="32" value="16" style="width:100%" oninput="document.getElementById('pwd-len-val').innerText = this.value">
+                        <label for="pwd-length">Password length: <strong><span id="pwd-len-val">16</span> characters</strong></label>
+                        <input type="range" id="pwd-length" min="8" max="64" value="16" style="width:100%" oninput="document.getElementById('pwd-len-val').innerText = this.value">
                     </div>
-                    <button class="btn-submit" onclick="genPassword()">Copy Secure Password ⚡</button>
+                    <div class="form-group" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem;">
+                        <label style="display:flex;align-items:center;gap:.5rem;font-weight:normal;"><input type="checkbox" id="pwd-uppercase" checked> Uppercase (A–Z)</label>
+                        <label style="display:flex;align-items:center;gap:.5rem;font-weight:normal;"><input type="checkbox" id="pwd-lowercase" checked> Lowercase (a–z)</label>
+                        <label style="display:flex;align-items:center;gap:.5rem;font-weight:normal;"><input type="checkbox" id="pwd-numbers" checked> Numbers (0–9)</label>
+                        <label style="display:flex;align-items:center;gap:.5rem;font-weight:normal;"><input type="checkbox" id="pwd-symbols" checked> Symbols (!@#…)</label>
+                        <label style="display:flex;align-items:center;gap:.5rem;font-weight:normal;grid-column:1/-1;"><input type="checkbox" id="pwd-ambiguous"> Avoid similar characters (O, 0, l, 1)</label>
+                    </div>
+                    <button class="btn-submit" onclick="genPassword()">Generate Password</button>
+                    <p class="result-subtext" id="pwd-status" role="status" style="margin-top:.75rem;">Choose your settings, then generate a password.</p>
                 </div>
                 <div>
-                    <div class="result-box">
-                        <div class="result-subtext">Generated Secure Password</div>
-                        <div class="result-value" id="pwd-res" style="font-size: 1.25rem;">Click Generate</div>
-                        <button class="copy-btn" onclick="copyElementText('pwd-res')"><i class="fa-regular fa-copy"></i> Copy Password</button>
+                    <div class="result-box" style="gap:.75rem;">
+                        <div class="result-subtext">Your password</div>
+                        <div class="result-value" id="pwd-res" aria-live="polite" style="font-size:1.15rem;overflow-wrap:anywhere;word-break:break-word;">Click Generate</div>
+                        <div class="result-subtext" id="pwd-strength">Strength estimate appears here</div>
+                        <button class="copy-btn" onclick="copyGeneratedPassword()"><i class="fa-regular fa-copy"></i> Copy Password</button>
                     </div>
+                    <p class="result-subtext" style="margin-top:.75rem;">Privacy: the password is generated in this page and is not uploaded or saved by MiniToolsDeck. Store it in a trusted password manager.</p>
                 </div>
             </div>
         </div>
@@ -2099,11 +2109,74 @@
         }
 
         // Tool Logic Functions
+        function secureRandomInt(max) {
+            if (!Number.isSafeInteger(max) || max < 1 || max > 256) throw new Error('Invalid random range');
+            const limit = Math.floor(256 / max) * max;
+            const byte = new Uint8Array(1);
+            let value;
+            do { window.crypto.getRandomValues(byte); value = byte[0]; } while (value >= limit);
+            return value % max;
+        }
+
         function genPassword() {
-            const len = parseInt(document.getElementById('pwd-length').value) || 16;
-            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
-            let p = ""; for(let i=0; i<len; i++) p += chars.charAt(Math.floor(Math.random() * chars.length));
-            document.getElementById('pwd-res').innerText = p;
+            const result = document.getElementById('pwd-res');
+            const status = document.getElementById('pwd-status');
+            const strength = document.getElementById('pwd-strength');
+            const len = Math.max(8, Math.min(64, parseInt(document.getElementById('pwd-length').value, 10) || 16));
+            const avoid = document.getElementById('pwd-ambiguous').checked;
+            const sets = [];
+            if (document.getElementById('pwd-uppercase').checked) sets.push(avoid ? 'ABCDEFGHJKLMNPQRSTUVWXYZ' : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+            if (document.getElementById('pwd-lowercase').checked) sets.push(avoid ? 'abcdefghijkmnopqrstuvwxyz' : 'abcdefghijklmnopqrstuvwxyz');
+            if (document.getElementById('pwd-numbers').checked) sets.push(avoid ? '23456789' : '0123456789');
+            if (document.getElementById('pwd-symbols').checked) sets.push('!@#$%^&*()-_=+[]{};:,.?');
+            if (!sets.length) {
+                result.textContent = 'Choose at least one character type';
+                status.textContent = 'Select uppercase, lowercase, numbers or symbols to continue.';
+                strength.textContent = 'Strength estimate unavailable';
+                return;
+            }
+            if (!window.crypto || typeof window.crypto.getRandomValues !== 'function') {
+                result.textContent = 'Secure generation unavailable';
+                status.textContent = 'This browser does not provide a secure random generator. Try an updated browser over HTTPS.';
+                strength.textContent = 'Strength estimate unavailable';
+                return;
+            }
+            try {
+                const all = sets.join('');
+                const chars = sets.map(set => set[secureRandomInt(set.length)]);
+                while (chars.length < len) chars.push(all[secureRandomInt(all.length)]);
+                for (let i = chars.length - 1; i > 0; i--) {
+                    const j = secureRandomInt(i + 1);
+                    [chars[i], chars[j]] = [chars[j], chars[i]];
+                }
+                result.textContent = chars.join('');
+                const entropy = Math.round(len * Math.log2(all.length));
+                const rating = entropy >= 100 ? 'Very strong' : entropy >= 70 ? 'Strong' : entropy >= 50 ? 'Moderate' : 'Consider a longer password';
+                strength.textContent = rating + ' · estimated ' + entropy + ' bits of randomness';
+                status.textContent = 'Password generated. Generate another any time for a new one.';
+            } catch (error) {
+                result.textContent = 'Could not generate password';
+                status.textContent = 'Please try again in a modern browser.';
+                strength.textContent = 'Strength estimate unavailable';
+            }
+        }
+
+        async function copyGeneratedPassword() {
+            const el = document.getElementById('pwd-res');
+            const value = el ? el.textContent.trim() : '';
+            if (!value || value === 'Click Generate' || value.startsWith('Choose your') || value.startsWith('Secure generation') || value.startsWith('Could not')) {
+                const status = document.getElementById('pwd-status');
+                if (status) status.textContent = 'Generate a password first.';
+                return;
+            }
+            try {
+                await navigator.clipboard.writeText(value);
+                const status = document.getElementById('pwd-status');
+                if (status) status.textContent = 'Password copied to clipboard.';
+            } catch (error) {
+                const status = document.getElementById('pwd-status');
+                if (status) status.textContent = 'Clipboard access was blocked. Select the password and copy it manually.';
+            }
         }
 
         function generateQRCode() {
