@@ -763,6 +763,109 @@
             text-transform: uppercase;
         }
 
+        /* UPGRADED PASSWORD GENERATOR STYLES */
+        .pw-mode-tabs {
+            display: flex;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            padding: 4px;
+            margin-bottom: 1.5rem;
+        }
+        .pw-mode-tab {
+            flex: 1;
+            padding: 0.6rem;
+            text-align: center;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            background: transparent;
+        }
+        .pw-mode-tab.active {
+            background: var(--bg-secondary);
+            color: var(--text-main);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .pw-output-box {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            transition: border-color 0.2s;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            word-break: break-all;
+        }
+        .pw-output-box:hover {
+            border-color: var(--accent);
+        }
+        .pw-output-text {
+            font-family: monospace;
+            font-size: 1.25rem;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+        .pw-copy-hint {
+            position: absolute;
+            bottom: 6px;
+            right: 10px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .pw-bulk-list {
+            text-align: left;
+            font-family: monospace;
+            font-size: 0.9rem;
+            max-height: 200px;
+            overflow-y: auto;
+            width: 100%;
+            padding: 0.5rem;
+            background: var(--bg-primary);
+            border-radius: 6px;
+            margin-top: 0.5rem;
+        }
+        .pw-bulk-list div {
+            padding: 4px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Strength Meter */
+        .strength-meter-container {
+            margin-top: 1rem;
+        }
+        .strength-bar-bg {
+            width: 100%;
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+        .strength-bar-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s, background-color 0.3s;
+        }
+        .strength-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
         footer {
             background-color: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
@@ -898,7 +1001,7 @@
             </a>
             <a href="#password-generator" class="tab-btn" onclick="switchTool('password', this)">
                 <i class="fa-solid fa-key"></i>
-                <span>Password Generator</span>
+                <span>Secure Password Gen</span>
             </a>
             <a href="#qr-code-generator" class="tab-btn" onclick="switchTool('qrcode', this)">
                 <i class="fa-solid fa-qrcode"></i>
@@ -1405,25 +1508,86 @@
             </div>
         </div>
 
+        <!-- UPGRADED PASSWORD GENERATOR -->
         <div id="tool-password" class="tool-panel">
             <div class="tool-header">
                 <h2 class="tool-title"><i class="fa-solid fa-key" style="color:var(--accent)"></i> Secure Password Generator</h2>
-                <p class="tool-desc">Create strong, unique passwords instantly — everything stays private in your browser.</p>
+                <p class="tool-desc">Create strong, random passwords and memorable passphrases instantly. Free, client-side generator — your data never leaves your device.</p>
             </div>
             <div class="grid-2">
+                <!-- Settings Column -->
                 <div>
-                    <div class="form-group">
-                        <label>Password Length: <span id="pwd-len-val">16</span> characters</label>
-                        <input type="range" id="pwd-length" min="8" max="32" value="16" style="width:100%" oninput="document.getElementById('pwd-len-val').innerText = this.value">
+                    <div class="pw-mode-tabs">
+                        <button class="pw-mode-tab active" onclick="switchPasswordMode('random', this)">Random Password</button>
+                        <button class="pw-mode-tab" onclick="switchPasswordMode('passphrase', this)">Passphrase</button>
                     </div>
-                    <button class="btn-submit" onclick="genPassword()">Copy Secure Password ⚡</button>
+
+                    <div id="pw-settings-random">
+                        <div class="form-group">
+                            <label style="display:flex; justify-content:space-between;">
+                                <span>Password Length</span>
+                                <span id="pwd-len-val" style="color:var(--accent);">16</span>
+                            </label>
+                            <input type="range" id="pwd-length" min="8" max="64" value="16" oninput="document.getElementById('pwd-len-val').innerText = this.value; generatePasswordLogic();">
+                        </div>
+                        <div class="form-group" style="display:flex; align-items:center; gap:0.5rem; margin-top:1rem;">
+                            <input type="checkbox" id="pwd-exclude-ambiguous" onchange="generatePasswordLogic()" style="width:16px; height:16px; accent-color:var(--accent);">
+                            <label for="pwd-exclude-ambiguous" style="margin:0; font-weight:400; font-size:0.85rem;">Exclude ambiguous characters (l, 1, I, O, 0)</label>
+                        </div>
+                    </div>
+
+                    <div id="pw-settings-passphrase" style="display:none;">
+                        <div class="form-group">
+                            <label style="display:flex; justify-content:space-between;">
+                                <span>Number of Words</span>
+                                <span id="pwd-words-val" style="color:var(--accent);">4</span>
+                            </label>
+                            <input type="range" id="pwd-words-count" min="3" max="8" value="4" oninput="document.getElementById('pwd-words-val').innerText = this.value; generatePasswordLogic();">
+                        </div>
+                        <div class="form-group">
+                            <label>Separator</label>
+                            <select id="pwd-separator" onchange="generatePasswordLogic()">
+                                <option value="-">Hyphen (-)</option>
+                                <option value=".">Period (.)</option>
+                                <option value="_">Underscore (_)</option>
+                                <option value=" ">Space</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top:1.5rem;">
+                        <label style="display:flex; justify-content:space-between;">
+                            <span>Bulk Generate</span>
+                            <span id="pwd-bulk-val" style="color:var(--accent);">1</span>
+                        </label>
+                        <input type="range" id="pwd-bulk" min="1" max="20" value="1" oninput="document.getElementById('pwd-bulk-val').innerText = this.value; generatePasswordLogic();">
+                    </div>
+
+                    <button class="btn-submit" onclick="generatePasswordLogic()">Generate New</button>
+
+                    <div style="text-align:center; margin-top:1rem; font-size:0.75rem; color:var(--text-muted);">
+                        <i class="fa-solid fa-shield-halved" style="color:var(--accent);"></i> 100% Client-Side. Nothing is sent to a server.
+                    </div>
                 </div>
+
+                <!-- Output Column -->
                 <div>
-                    <div class="result-box">
-                        <div class="result-subtext">Generated Secure Password</div>
-                        <div class="result-value" id="pwd-res" style="font-size: 1.25rem;">Click Generate</div>
-                        <button class="copy-btn" onclick="copyElementText('pwd-res')"><i class="fa-regular fa-copy"></i> Copy Password</button>
+                    <div class="pw-output-box" id="pw-output-container" onclick="copyGeneratedPassword()">
+                        <div class="pw-output-text" id="pwd-res">Click Generate</div>
+                        <div class="pw-copy-hint"><i class="fa-regular fa-copy"></i> Click to copy</div>
                     </div>
+
+                    <div class="strength-meter-container">
+                        <div class="strength-bar-bg">
+                            <div class="strength-bar-fill" id="strength-bar-fill"></div>
+                        </div>
+                        <div class="strength-text">
+                            <span id="strength-label">Waiting...</span>
+                            <span id="strength-time">--</span>
+                        </div>
+                    </div>
+
+                    <div id="pw-bulk-output" class="pw-bulk-list" style="display:none;"></div>
                 </div>
             </div>
         </div>
@@ -2040,6 +2204,7 @@
                 switchTool(targetId, matchingBtn);
             }
             checkContrast();
+            generatePasswordLogic(); // Init password gen
         });
 
         function copyElementText(elementId) {
@@ -2065,24 +2230,175 @@
             if (m) m.style.display = 'none'; 
         }
 
-        // Tool Logic Functions
-        function genPassword() {
-            const len = parseInt(document.getElementById('pwd-length').value) || 16;
-            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
-            let p = ""; for(let i=0; i<len; i++) p += chars.charAt(Math.floor(Math.random() * chars.length));
-            document.getElementById('pwd-res').innerText = p;
+        // === UPGRADED PASSWORD GENERATOR LOGIC ===
+        let pwMode = 'random';
+        const wordList = [
+            "apple", "brave", "crane", "dragon", "eagle", "frost", "ghost", "happy", "island", "jump",
+            "kite", "lemon", "moon", "night", "ocean", "piano", "queen", "river", "snake", "tiger",
+            "unity", "valley", "wolf", "xray", "yellow", "zebra", "amber", "blaze", "cloud", "dusk",
+            "ember", "flame", "glow", "haze", "ice", "jade", "knot", "lark", "mist", "noble",
+            "opal", "pearl", "quartz", "rain", "snow", "tide", "urban", "vine", "wave", "yarn",
+            "zone", "acorn", "badge", "cabin", "daisy", "earth", "fable", "giant", "habit", "ivory",
+            "jelly", "koala", "lunar", "magic", "nectar", "olive", "pilot", "quiet", "robin", "sonic",
+            "tulip", "ultra", "vivid", "wagon", "xenon", "yodel", "zesty", "angel", "bison", "coral",
+            "dwarf", "elfin", "fairy", "gnome", "hazel", "imp", "joker", "karma", "lucky", "mango"
+        ];
+
+        function switchPasswordMode(mode, btnElement) {
+            pwMode = mode;
+            document.querySelectorAll('.pw-mode-tab').forEach(t => t.classList.remove('active'));
+            btnElement.classList.add('active');
+            
+            document.getElementById('pw-settings-random').style.display = mode === 'random' ? 'block' : 'none';
+            document.getElementById('pw-settings-passphrase').style.display = mode === 'passphrase' ? 'block' : 'none';
+            
+            generatePasswordLogic();
         }
 
-        function generateQRCode() {
-            const val = document.getElementById('qr-input').value.trim();
-            if(!val) return alert('Enter URL or text');
-            const box = document.getElementById('qrcode-box'); 
-            box.innerHTML = "";
-            if (typeof QRCode === 'undefined') {
-                box.innerText = "QR Code library loading... please try again.";
+        // Secure random integer generation using Web Crypto API
+        function secureRandomInt(max) {
+            const array = new Uint32Array(1);
+            window.crypto.getRandomValues(array);
+            return array[0] % max;
+        }
+
+        function generatePasswordLogic() {
+            const bulkCount = parseInt(document.getElementById('pwd-bulk').value);
+            const outputBox = document.getElementById('pw-output-container');
+            const singleOutput = document.getElementById('pwd-res');
+            const bulkOutput = document.getElementById('pw-bulk-output');
+
+            let generatedPasswords = [];
+
+            if (pwMode === 'random') {
+                const length = parseInt(document.getElementById('pwd-length').value);
+                const excludeAmbiguous = document.getElementById('pwd-exclude-ambiguous').checked;
+                
+                let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?";
+                if (excludeAmbiguous) {
+                    chars = chars.replace(/[l1IO0o]/g, '');
+                }
+
+                for (let i = 0; i < bulkCount; i++) {
+                    let pw = "";
+                    for (let j = 0; j < length; j++) {
+                        pw += chars.charAt(secureRandomInt(chars.length));
+                    }
+                    generatedPasswords.push(pw);
+                }
+            } else {
+                const wordCount = parseInt(document.getElementById('pwd-words-count').value);
+                const separator = document.getElementById('pwd-separator').value;
+                
+                for (let i = 0; i < bulkCount; i++) {
+                    let words = [];
+                    for (let j = 0; j < wordCount; j++) {
+                        words.push(wordList[secureRandomInt(wordList.length)]);
+                    }
+                    // Capitalize first letter for readability
+                    let pw = words.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(separator);
+                    generatedPasswords.push(pw);
+                }
+            }
+
+            // Display Output
+            if (bulkCount === 1) {
+                outputBox.style.display = 'flex';
+                bulkOutput.style.display = 'none';
+                singleOutput.innerText = generatedPasswords[0];
+                
+                // Calculate strength
+                let entropyBits = 0;
+                if (pwMode === 'random') {
+                    const length = parseInt(document.getElementById('pwd-length').value);
+                    const excludeAmbiguous = document.getElementById('pwd-exclude-ambiguous').checked;
+                    let poolSize = 90; // approx
+                    if (excludeAmbiguous) poolSize = 85;
+                    entropyBits = length * Math.log2(poolSize);
+                } else {
+                    const wordCount = parseInt(document.getElementById('pwd-words-count').value);
+                    entropyBits = wordCount * Math.log2(wordList.length);
+                }
+                
+                updateStrengthMeter(entropyBits);
+            } else {
+                outputBox.style.display = 'none';
+                bulkOutput.style.display = 'block';
+                
+                let html = `<div style="display:flex; justify-content:space-between; margin-bottom:8px;"><strong>Generated Passwords:</strong> <button class="copy-btn" style="margin:0; padding:2px 8px; font-size:0.7rem;" onclick="copyAllPasswords()">Copy All</button></div>`;
+                generatedPasswords.forEach((pw, idx) => {
+                    html += `<div onclick="navigator.clipboard.writeText('${pw}'); alert('Copied!')" style="cursor:pointer;" title="Click to copy">${pw}</div>`;
+                });
+                bulkOutput.innerHTML = html;
+                updateStrengthMeter(0); // Hide strength for bulk
+            }
+
+            // Store for copy function
+            window.currentPasswords = generatedPasswords;
+        }
+
+        function updateStrengthMeter(entropyBits) {
+            const bar = document.getElementById('strength-bar-fill');
+            const label = document.getElementById('strength-label');
+            const timeLabel = document.getElementById('strength-time');
+
+            if (entropyBits === 0) {
+                bar.style.width = '0%';
+                label.innerText = 'Bulk Mode';
+                timeLabel.innerText = '--';
                 return;
             }
-            new QRCode(box, { text: val, width: 160, height: 160 });
+
+            // Entropy to visual scale (0-100%), 128 bits is considered very strong
+            let percent = Math.min((entropyBits / 128) * 100, 100);
+            bar.style.width = percent + '%';
+
+            if (entropyBits < 40) {
+                bar.style.backgroundColor = '#ef4444'; // Red
+                label.innerText = 'Weak';
+            } else if (entropyBits < 60) {
+                bar.style.backgroundColor = '#f59e0b'; // Amber
+                label.innerText = 'Moderate';
+            } else if (entropyBits < 80) {
+                bar.style.backgroundColor = '#10b981'; // Green
+                label.innerText = 'Strong';
+            } else {
+                bar.style.backgroundColor = '#059669'; // Darker Green
+                label.innerText = 'Very Strong';
+            }
+
+            // Estimate Crack Time
+            // Assuming 100 Trillion guesses per second (10^14)
+            const combinations = Math.pow(2, entropyBits);
+            const seconds = combinations / 1e14;
+            
+            let timeStr = "";
+            if (seconds < 1) timeStr = "Instantly";
+            else if (seconds < 60) timeStr = Math.round(seconds) + " seconds";
+            else if (seconds < 3600) timeStr = Math.round(seconds/60) + " minutes";
+            else if (seconds < 86400) timeStr = Math.round(seconds/3600) + " hours";
+            else if (seconds < 31536000) timeStr = Math.round(seconds/86400) + " days";
+            else if (seconds < 31536000 * 100) timeStr = Math.round(seconds/31536000) + " years";
+            else timeStr = "Centuries";
+            
+            timeLabel.innerText = `Crack time: ${timeStr}`;
+        }
+
+        function copyGeneratedPassword() {
+            if (window.currentPasswords && window.currentPasswords.length === 1) {
+                navigator.clipboard.writeText(window.currentPasswords[0]);
+                const hint = document.querySelector('.pw-copy-hint');
+                const originalText = hint.innerHTML;
+                hint.innerHTML = '<i class="fa-solid fa-check" style="color:#10b981;"></i> Copied!';
+                setTimeout(() => { hint.innerHTML = originalText; }, 2000);
+            }
+        }
+
+        function copyAllPasswords() {
+            if (window.currentPasswords && window.currentPasswords.length > 1) {
+                navigator.clipboard.writeText(window.currentPasswords.join('\n'));
+                alert('All passwords copied to clipboard!');
+            }
         }
 
         // === HELPER FOR SYLLABLES ===
