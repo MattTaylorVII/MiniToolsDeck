@@ -1366,59 +1366,49 @@
         <div id="tool-headline" class="tool-panel">
             <div class="tool-header">
                 <h2 class="tool-title"><i class="fa-solid fa-heading" style="color:var(--accent)"></i> Headline Analyzer</h2>
-                <p class="tool-desc">Score your headlines for emotional power, length, and click-through potential so more people click.</p>
+                <p class="tool-desc">Check headline length and get a few practical ways to sharpen it.</p>
             </div>
-            <div>
-                <div class="form-group">
-                    <label>Your Headline</label>
-                    <input type="text" id="headline-input" placeholder="e.g. 10 Proven Ways to Scale Your Business Fast" oninput="analyzeHeadline()">
-                </div>
-                <div class="form-group">
-                    <label>Headline Type / Platform</label>
-                    <select id="headline-platform" onchange="analyzeHeadline()">
-                        <option value="blog">Blog / SEO Title</option>
-                        <option value="youtube">YouTube Title</option>
-                        <option value="email">Email Subject Line</option>
-                        <option value="linkedin">LinkedIn</option>
-                        <option value="twitter">X (Twitter)</option>
-                        <option value="social">Social Media (General)</option>
-                        <option value="ad">Ad Headline</option>
-                    </select>
-                </div>
-
-                <div class="result-box" style="margin-top:1.25rem; align-items:flex-start; text-align:left;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:0.75rem;">
-                        <div class="result-subtext" style="margin:0;">Headline Quality Score</div>
-                        <div class="result-value" id="headline-score" style="font-size:1.8rem; margin:0;">0 / 100</div>
+            <div class="form-group">
+                <label for="headline-input">Your headline</label>
+                <input type="text" id="headline-input" maxlength="240" placeholder="e.g. 7 Simple Ways to Improve Your Website" oninput="analyzeHeadline()" aria-describedby="headline-note">
+                <div id="headline-note" style="font-size:0.8rem;color:var(--text-muted);margin-top:0.35rem;">Type or paste a headline to analyze it instantly.</div>
+            </div>
+            <div class="form-group">
+                <label for="headline-platform">Where will you use it?</label>
+                <select id="headline-platform" onchange="analyzeHeadline()">
+                    <option value="blog">Blog / SEO title</option>
+                    <option value="youtube">YouTube title</option>
+                    <option value="email">Email subject line</option>
+                    <option value="linkedin">LinkedIn</option>
+                    <option value="twitter">X post</option>
+                    <option value="social">Other social post</option>
+                    <option value="ad">Ad headline</option>
+                </select>
+            </div>
+            <div class="result-box" style="margin-top:1rem;align-items:stretch;text-align:left;">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;width:100%;">
+                    <div>
+                        <div class="result-subtext">Headline check</div>
+                        <div id="headline-score" class="result-value" style="font-size:1.65rem;margin-top:0.2rem;">—</div>
                     </div>
-                    
-                    <div id="headline-score-bar" style="width:100%; height:8px; background:var(--border-color); border-radius:4px; margin-bottom:1.25rem; overflow:hidden;">
-                        <div id="headline-score-fill" style="height:100%; width:0%; background:var(--accent); transition:width 0.4s ease;"></div>
-                    </div>
-
-                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap:0.75rem; width:100%; margin-bottom:1.25rem;">
-                        <div style="background:var(--bg-primary); padding:0.75rem; border-radius:8px; text-align:center;">
-                            <div class="result-subtext">Words</div>
-                            <div id="hl-words" style="font-weight:700; font-size:1.1rem;">0</div>
-                        </div>
-                        <div style="background:var(--bg-primary); padding:0.75rem; border-radius:8px; text-align:center;">
-                            <div class="result-subtext">Characters</div>
-                            <div id="hl-chars" style="font-weight:700; font-size:1.1rem;">0</div>
-                        </div>
-                        <div style="background:var(--bg-primary); padding:0.75rem; border-radius:8px; text-align:center;">
-                            <div class="result-subtext">Power Words</div>
-                            <div id="hl-power" style="font-weight:700; font-size:1.1rem;">0</div>
-                        </div>
-                    </div>
-
-                    <div class="result-subtext" style="margin-bottom:0.4rem;">Feedback & Suggestions</div>
-                    <div id="headline-feedback" style="font-size:0.9rem; line-height:1.6; color:var(--text-main); margin-bottom:1.5rem;">Enter a headline above to see suggestions.</div>
-
-                    <div class="result-subtext" style="margin-bottom:0.6rem;">Recommended Stronger Headlines</div>
-                    <div id="headline-recommendations" style="width:100%; font-size:0.9rem; color:var(--text-muted);">
-                        Type a headline to get 3 improved alternatives.
+                    <div style="text-align:right;font-size:0.82rem;color:var(--text-muted);">
+                        <div><strong id="hl-words">0</strong> words</div>
+                        <div><strong id="hl-chars">0</strong> characters</div>
                     </div>
                 </div>
+                <div id="headline-score-bar" style="width:100%;height:6px;background:var(--border-color);border-radius:4px;margin:0.8rem 0 1rem;overflow:hidden;">
+                    <div id="headline-score-fill" style="height:100%;width:0%;background:var(--accent);transition:width 0.25s ease;"></div>
+                </div>
+                <div class="result-subtext" style="margin-bottom:0.4rem;">One thing to improve</div>
+                <div id="headline-feedback" style="font-size:0.92rem;line-height:1.55;color:var(--text-main);">Your headline tips will appear here.</div>
+                <details style="width:100%;margin-top:1rem;">
+                    <summary style="cursor:pointer;font-weight:600;">Try 3 alternative headlines</summary>
+                    <div id="headline-recommendations" style="width:100%;font-size:0.9rem;color:var(--text-muted);margin-top:0.8rem;">Enter a headline to see alternatives.</div>
+                </details>
+                <details style="width:100%;margin-top:0.65rem;">
+                    <summary style="cursor:pointer;font-weight:600;">How is this checked?</summary>
+                    <p style="font-size:0.84rem;line-height:1.5;color:var(--text-muted);margin-top:0.6rem;">The score is a simple writing checklist based on length, word count and a few headline signals. It is not an SEO ranking factor and cannot predict clicks or performance.</p>
+                </details>
             </div>
         </div>
 
@@ -2790,218 +2780,114 @@
         }
 
         function analyzeHeadline() {
-            console.log("🔥 NEW SMART HEADLINE ENGINE ACTIVE"); // Verify this prints in your console!
-            
-            const t = document.getElementById('headline-input').value.trim();
-            const platform = document.getElementById('headline-platform') ? document.getElementById('headline-platform').value : 'blog';
-
+            const input = document.getElementById('headline-input');
+            const t = input ? input.value.trim() : '';
+            const platform = document.getElementById('headline-platform')?.value || 'blog';
+            const scoreEl = document.getElementById('headline-score');
+            const fill = document.getElementById('headline-score-fill');
+            const feedback = document.getElementById('headline-feedback');
+            const recEl = document.getElementById('headline-recommendations');
+            const wordEl = document.getElementById('hl-words');
+            const charEl = document.getElementById('hl-chars');
             if (!t) {
-                document.getElementById('headline-score').innerText = '0 / 100';
-                document.getElementById('headline-score-fill').style.width = '0%';
-                document.getElementById('headline-score-fill').style.background = 'var(--accent)';
-                document.getElementById('hl-words').innerText = '0';
-                document.getElementById('hl-chars').innerText = '0';
-                document.getElementById('hl-power').innerText = '0';
-                document.getElementById('headline-feedback').innerHTML = 'Enter a headline above to see suggestions.';
-                const rec = document.getElementById('headline-recommendations');
-                if (rec) rec.innerHTML = 'Type a headline to get 3 improved alternatives.';
+                scoreEl.textContent = '—';
+                fill.style.width = '0%';
+                fill.style.background = 'var(--accent)';
+                wordEl.textContent = '0';
+                charEl.textContent = '0';
+                feedback.textContent = 'Your headline tips will appear here.';
+                recEl.textContent = 'Enter a headline to see alternatives.';
                 return;
             }
 
-            const lower = t.toLowerCase();
-            const words = t.split(/\s+/).filter(w => w.length > 0);
+            const words = t.split(/\s+/).filter(Boolean);
             const wordCount = words.length;
-            const charCount = t.length;
-
+            const charCount = Array.from(t).length;
             const ideals = {
-                blog:     { minC: 40, maxC: 60, minW: 6, maxW: 12 },
-                youtube:  { minC: 40, maxC: 70, minW: 5, maxW: 12 },
-                email:    { minC: 30, maxC: 50, minW: 4, maxW: 9  },
-                linkedin: { minC: 40, maxC: 80, minW: 5, maxW: 14 },
-                twitter:  { minC: 20, maxC: 70, minW: 4, maxW: 12 },
-                social:   { minC: 30, maxC: 80, minW: 4, maxW: 12 },
-                ad:       { minC: 20, maxC: 40, minW: 3, maxW: 8  }
+                blog: {minC: 40, maxC: 60, minW: 6, maxW: 12},
+                youtube: {minC: 40, maxC: 70, minW: 5, maxW: 12},
+                email: {minC: 30, maxC: 50, minW: 4, maxW: 9},
+                linkedin: {minC: 40, maxC: 80, minW: 5, maxW: 14},
+                twitter: {minC: 20, maxC: 70, minW: 4, maxW: 12},
+                social: {minC: 30, maxC: 80, minW: 4, maxW: 12},
+                ad: {minC: 20, maxC: 40, minW: 3, maxW: 8}
             };
             const ideal = ideals[platform] || ideals.blog;
-
-            const powerWords = ['free','proven','secret','ultimate','fast','easy','new','amazing','essential','powerful','guaranteed','instant','simple','effective','best','top','complete','boost','grow','scale','double','triple','skyrocket','unlock','discover','revealed','limited','exclusive','now','today','instantly','shocking','surprising','incredible'];
-            const foundPower = powerWords.filter(w => lower.includes(w));
-            const powerCount = foundPower.length;
-
-            let score = 35;
-
-            if (charCount >= ideal.minC && charCount <= ideal.maxC) score += 18;
+            const lower = t.toLowerCase();
+            const powerWords = ['free','proven','secret','ultimate','fast','easy','new','essential','powerful','simple','effective','best','top','boost','grow','unlock','discover','exclusive','today'];
+            const foundPower = powerWords.filter(w => new RegExp('\\b' + w + '\\b', 'i').test(lower));
+            let score = 50;
+            if (charCount >= ideal.minC && charCount <= ideal.maxC) score += 20;
             else if (charCount >= ideal.minC - 10 && charCount <= ideal.maxC + 15) score += 8;
-            else score -= 8;
-
-            if (wordCount >= ideal.minW && wordCount <= ideal.maxW) score += 12;
-            else if (wordCount < ideal.minW) score -= 6;
-
-            score += Math.min(powerCount * 7, 21);
-            if (/\d/.test(t)) score += 12;
-            if (t.includes('?')) score += 8;
-            if (/^(how|why|what|when|which|\d+)/i.test(t)) score += 8;
-            if (/(you|your|love|hate|need|want)/i.test(t)) score += 6;
-
+            else score -= 10;
+            if (wordCount >= ideal.minW && wordCount <= ideal.maxW) score += 15;
+            else if (wordCount > ideal.maxW) score -= 8;
+            if (foundPower.length) score += 5;
+            if (/\d/.test(t)) score += 5;
+            if (/[?!]/.test(t)) score += 5;
             score = Math.max(0, Math.min(100, Math.round(score)));
 
-            document.getElementById('headline-score').innerText = score + ' / 100';
-            document.getElementById('headline-score-fill').style.width = score + '%';
-            const fill = document.getElementById('headline-score-fill');
-            if (score >= 80) fill.style.background = '#10b981';
-            else if (score >= 60) fill.style.background = '#f59e0b';
-            else fill.style.background = '#ef4444';
+            scoreEl.textContent = score + ' / 100';
+            fill.style.width = score + '%';
+            fill.style.background = score >= 75 ? '#10b981' : score >= 55 ? '#f59e0b' : '#ef4444';
+            wordEl.textContent = wordCount;
+            charEl.textContent = charCount;
 
-            document.getElementById('hl-words').innerText = wordCount;
-            document.getElementById('hl-chars').innerText = charCount;
-            document.getElementById('hl-power').innerText = powerCount;
+            let tip = '';
+            if (charCount < ideal.minC) tip = 'Consider adding a little more detail so the benefit is clearer.';
+            else if (charCount > ideal.maxC) tip = 'Try shortening it so the main idea is easier to scan.';
+            else if (wordCount > ideal.maxW) tip = 'Trim a few words and keep the most important promise.';
+            else if (!/\d/.test(t) && wordCount >= 4) tip = 'If it fits naturally, a specific number can make the promise more concrete.';
+            else if (!foundPower.length) tip = 'Make the benefit more specific; avoid adding “power words” unless they genuinely fit.';
+            else tip = 'This is a reasonable starting point. Make sure the wording is specific and accurate for your audience.';
+            feedback.textContent = tip;
 
-            let tips = [];
-            if (charCount < ideal.minC) tips.push(`A bit short for this platform. Aim for around ${ideal.minC}–${ideal.maxC} characters.`);
-            if (charCount > ideal.maxC + 10) tips.push(`This may get cut off. Ideal length is ~${ideal.minC}–${ideal.maxC} characters.`);
-            if (powerCount === 0) tips.push("Add power words like <strong>proven</strong>, <strong>easy</strong>, <strong>secret</strong> or <strong>ultimate</strong>.");
-            if (!/\d/.test(t)) tips.push("Adding a number (e.g. “7 Ways…”) often increases clicks.");
-            if (score >= 85) tips.push("🔥 Excellent headline — strong click potential!");
-            else if (score >= 70) tips.push("Solid headline. Small tweaks could push it higher.");
-            else if (tips.length === 0) tips.push("Decent start. Try adding power words or a number.");
-
-            document.getElementById('headline-feedback').innerHTML = tips.map(t => `• ${t}`).join('<br>');
-
-            // === SMART RECOMMENDATIONS ENGINE ===
-            
-            // 1. Extract the core subject by stripping common fluff words
-            const stopWords = ['why', 'is', 'the', 'a', 'an', 'how', 'to', 'best', 'top', 'great', 'good', 'you', 'your', 'should', 'use', 'using', 'are', 'what', 'this', 'that', 'it', 'in', 'on', 'for', 'my', 'do', 'does', 'can', 'will', 'just', 'about', 'from', 'with'];
-            const subjectWords = t.split(' ').filter(w => {
-                const cw = w.toLowerCase().replace(/[^a-z0-9]/g, '');
-                return cw !== '' && !stopWords.includes(cw);
-            });
-            let subject = subjectWords.join(' ');
-            if (subject.length < 2) subject = t.replace(/[.?!]$/, ''); // Fallback if input is all fluff
-            subject = subject.replace(/\b\w/g, l => l.toUpperCase()); // Capitalize properly
-
-            // 2. Define templates based on the 3 psychological angles, tailored by platform
-            let templates = {};
-
-            if (platform === 'email') {
-                templates = {
-                    value: [
-                        `The secret to getting the most out of ${subject}`,
-                        `How to get better results with ${subject}`,
-                        `3 reasons ${subject} actually works`
-                    ],
-                    curiosity: [
-                        `You're probably using ${subject} wrong`,
-                        `Stop doing this if you use ${subject}`,
-                        `What nobody tells you about ${subject}`
-                    ],
-                    action: [
-                        `Last chance: Upgrade your routine with ${subject}`,
-                        `Don't buy ${subject} until you read this`,
-                        `Your guide to finding the perfect ${subject}`
-                    ]
-                };
-            } else if (platform === 'youtube') {
-                templates = {
-                    value: [
-                        `Master ${subject} in 10 Minutes`,
-                        `${subject}: The Complete Beginner's Guide`,
-                        `How to actually get results with ${subject}`
-                    ],
-                    curiosity: [
-                        `I tried ${subject} so you don't have to`,
-                        `Why everyone is talking about ${subject}`,
-                        `The ${subject} advice nobody talks about`
-                    ],
-                    action: [
-                        `Stop doing ${subject} wrong! Watch this`,
-                        `Do this before you try ${subject}`,
-                        `The only ${subject} tutorial you need`
-                    ]
-                };
-            } else if (platform === 'ad') {
-                templates = {
-                    value: [
-                        `Get better results with ${subject} — starting today`,
-                        `The smarter way to ${subject}`,
-                        `${subject}: Proven to work`
-                    ],
-                    curiosity: [
-                        `Is ${subject} actually worth the hype?`,
-                        `The truth about ${subject} (and why it matters)`,
-                        `What most people get wrong about ${subject}`
-                    ],
-                    action: [
-                        `Claim your ${subject} today`,
-                        `Stop settling. Try ${subject} now.`,
-                        `Ready to transform your results with ${subject}?`
-                    ]
-                };
-            } else if (['twitter', 'linkedin', 'social'].includes(platform)) {
-                templates = {
-                    value: [
-                        `How to actually get results with ${subject}`,
-                        `3 things I wish I knew about ${subject}`,
-                        `The ultimate ${subject} breakdown`
-                    ],
-                    curiosity: [
-                        `You're probably doing ${subject} wrong`,
-                        `What nobody tells you about ${subject}`,
-                        `Stop doing this if you want ${subject} to work`
-                    ],
-                    action: [
-                        `Save this ${subject} guide for later`,
-                        `Don't start ${subject} until you read this`,
-                        `Your ultimate guide to ${subject} 👇`
-                    ]
-                };
-            } else {
-                // Blog / Default
-                templates = {
-                    value: [
-                        `The secret to ${subject} (that actually works)`,
-                        `How to master ${subject} in 2026`,
-                        `3 reasons ${subject} is worth the hype`,
-                        `${subject}: The complete guide for beginners`
-                    ],
-                    curiosity: [
-                        `You're probably doing ${subject} wrong`,
-                        `Stop doing this if you want ${subject} to work`,
-                        `What nobody tells you about ${subject}`,
-                        `Is ${subject} actually worth it?`
-                    ],
-                    action: [
-                        `Don't start ${subject} until you read this`,
-                        `Your ultimate guide to ${subject}`,
-                        `Ready to level up your ${subject}?`
-                    ]
-                };
-            }
-
-            // 3. Pick a random template from each angle to ensure variety
-            const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
-
-            const recommendations = [
-                { label: "📈 Value-Driven", text: pick(templates.value) },
-                { label: "🕵️‍♂️ Curiosity Gap", text: pick(templates.curiosity) },
-                { label: "⚡ Action / Urgency", text: pick(templates.action) }
+            const cleaned = t.replace(/[.!?]+$/, '').trim();
+            const subject = cleaned.replace(/^(how|why|what|the|a|an)\s+/i, '').trim() || cleaned;
+            const alternatives = [
+                `How to ${subject.charAt(0).toLowerCase() + subject.slice(1)}`,
+                `${subject}: A Simple Guide`,
+                `What to Know About ${subject}`
             ];
-
-            // 4. Render the UI output
-            let recHtml = '';
-            recommendations.forEach((h, i) => {
-                const id = `rec-headline-${i}`;
-                recHtml += `<div style="margin-bottom:0.8rem; padding:0.85rem; background:var(--bg-primary); border:1px solid var(--border-color); border-radius:8px;">
-                    <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600; margin-bottom:0.35rem; text-transform:uppercase; letter-spacing:0.05em;">${h.label}</div>
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.75rem;">
-                        <div id="${id}" style="flex:1; line-height:1.45; font-size:0.95rem;">${h.text}</div>
-                        <button class="copy-btn" style="padding:0.3rem 0.65rem; font-size:0.75rem; flex-shrink:0; margin-top:0;" onclick="navigator.clipboard.writeText(document.getElementById('${id}').innerText).then(()=>alert('Copied!'))">
-                            <i class="fa-regular fa-copy"></i>
-                        </button>
-                    </div>
-                </div>`;
+            recEl.replaceChildren();
+            alternatives.forEach((text, index) => {
+                const row = document.createElement('div');
+                row.style.cssText = 'display:flex;align-items:flex-start;gap:0.6rem;justify-content:space-between;padding:0.7rem 0;border-bottom:1px solid var(--border-color);';
+                const copy = document.createElement('span');
+                copy.style.flex = '1';
+                copy.textContent = text;
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'copy-btn';
+                button.style.cssText = 'padding:0.3rem 0.6rem;font-size:0.75rem;flex-shrink:0;margin:0;';
+                button.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i> Copy';
+                button.addEventListener('click', () => copyTextSafe(text, button));
+                row.append(copy, button);
+                recEl.appendChild(row);
             });
-            const recEl = document.getElementById('headline-recommendations');
-            if (recEl) recEl.innerHTML = recHtml;
+        }
+
+        async function copyTextSafe(text, button) {
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(text);
+                } else {
+                    const temp = document.createElement('textarea');
+                    temp.value = text;
+                    temp.style.position = 'fixed';
+                    temp.style.opacity = '0';
+                    document.body.appendChild(temp);
+                    temp.select();
+                    const ok = document.execCommand('copy');
+                    temp.remove();
+                    if (!ok) throw new Error('Copy unavailable');
+                }
+                const old = button.textContent;
+                button.textContent = 'Copied';
+                setTimeout(() => { button.textContent = old; }, 1200);
+            } catch (error) {
+                button.textContent = 'Select to copy';
+            }
         }
 
         function analyzeReadability() {
