@@ -1008,17 +1008,42 @@
                 <p class="tool-desc">Instantly count words, characters, and estimated reading time for blog posts, tweets, and captions.</p>
             </div>
             <div>
-                <textarea id="wordcount-input" placeholder="Paste or type your text here..." oninput="updateWordCount()"></textarea>
-                <div class="grid-2" style="margin-top:1rem;">
-                    <div class="result-box">
-                        <div class="result-subtext">Word Count</div>
-                        <div class="result-value" id="res-words">0</div>
-                        <button class="copy-btn" onclick="copyElementText('res-words')"><i class="fa-regular fa-copy"></i> Copy Count</button>
+                <div class="form-group">
+                    <textarea id="wordcount-input" placeholder="Paste or type your text here..." oninput="updateWordCount()" rows="6"></textarea>
+                </div>
+                <div style="display:flex; gap:0.75rem; margin-bottom:1rem; flex-wrap:wrap;">
+                    <button class="btn-submit" style="width:auto; margin-top:0; padding:0.6rem 1.2rem;" onclick="updateWordCount()">Analyze Text</button>
+                    <button class="copy-btn" style="padding:0.6rem 1.2rem;" onclick="document.getElementById('wordcount-input').value=''; updateWordCount();">Clear</button>
+                </div>
+
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap:0.75rem;">
+                    <div class="result-box" style="padding:1rem;">
+                        <div class="result-subtext">Words</div>
+                        <div class="result-value" id="res-words" style="font-size:1.6rem;">0</div>
                     </div>
-                    <div class="result-box">
-                        <div class="result-subtext">Character Count (with spaces)</div>
-                        <div class="result-value" id="res-chars">0</div>
-                        <button class="copy-btn" onclick="copyElementText('res-chars')"><i class="fa-regular fa-copy"></i> Copy Count</button>
+                    <div class="result-box" style="padding:1rem;">
+                        <div class="result-subtext">Characters</div>
+                        <div class="result-value" id="res-chars" style="font-size:1.6rem;">0</div>
+                    </div>
+                    <div class="result-box" style="padding:1rem;">
+                        <div class="result-subtext">Chars (no spaces)</div>
+                        <div class="result-value" id="res-chars-nospace" style="font-size:1.6rem;">0</div>
+                    </div>
+                    <div class="result-box" style="padding:1rem;">
+                        <div class="result-subtext">Sentences</div>
+                        <div class="result-value" id="res-sentences" style="font-size:1.6rem;">0</div>
+                    </div>
+                    <div class="result-box" style="padding:1rem;">
+                        <div class="result-subtext">Paragraphs</div>
+                        <div class="result-value" id="res-paragraphs" style="font-size:1.6rem;">0</div>
+                    </div>
+                    <div class="result-box" style="padding:1rem;">
+                        <div class="result-subtext">Reading Time</div>
+                        <div class="result-value" id="res-reading" style="font-size:1.6rem;">0 min</div>
+                    </div>
+                    <div class="result-box" style="padding:1rem;">
+                        <div class="result-subtext">Speaking Time</div>
+                        <div class="result-value" id="res-speaking" style="font-size:1.6rem;">0 min</div>
                     </div>
                 </div>
             </div>
@@ -1728,8 +1753,32 @@
 
         function updateWordCount() {
             const txt = document.getElementById('wordcount-input').value;
-            document.getElementById('res-words').innerText = txt.trim() === "" ? 0 : txt.trim().split(/\s+/).length;
-            document.getElementById('res-chars').innerText = txt.length;
+            const trimmed = txt.trim();
+
+            // Words
+            const words = trimmed === "" ? 0 : trimmed.split(/\s+/).filter(w => w.length > 0).length;
+
+            // Characters
+            const chars = txt.length;
+            const charsNoSpace = txt.replace(/\s/g, '').length;
+
+            // Sentences (simple but effective)
+            const sentences = trimmed === "" ? 0 : (trimmed.match(/[.!?]+/g) || []).length || (trimmed.length > 0 ? 1 : 0);
+
+            // Paragraphs
+            const paragraphs = trimmed === "" ? 0 : trimmed.split(/\n\s*\n/).filter(p => p.trim().length > 0).length || 1;
+
+            // Reading time (~200 wpm) and Speaking time (~130 wpm)
+            const readingMin = words === 0 ? 0 : Math.max(1, Math.ceil(words / 200));
+            const speakingMin = words === 0 ? 0 : Math.max(1, Math.ceil(words / 130));
+
+            document.getElementById('res-words').innerText = words;
+            document.getElementById('res-chars').innerText = chars;
+            document.getElementById('res-chars-nospace').innerText = charsNoSpace;
+            document.getElementById('res-sentences').innerText = sentences;
+            document.getElementById('res-paragraphs').innerText = paragraphs;
+            document.getElementById('res-reading').innerText = words === 0 ? '0 min' : readingMin + (readingMin === 1 ? ' min' : ' mins');
+            document.getElementById('res-speaking').innerText = words === 0 ? '0 min' : speakingMin + (speakingMin === 1 ? ' min' : ' mins');
         }
 
         function formatJSON() {
