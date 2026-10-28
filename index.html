@@ -2816,7 +2816,8 @@
             const lower = t.toLowerCase();
             const powerWords = ['free','proven','secret','ultimate','fast','easy','new','essential','powerful','simple','effective','best','top','boost','grow','unlock','discover','exclusive','today'];
             const foundPower = powerWords.filter(w => new RegExp('\\b' + w + '\\b', 'i').test(lower));
-            let score = 50;
+            // Keep this as a modest checklist score, not a prediction of performance.
+            let score = 40;
             if (charCount >= ideal.minC && charCount <= ideal.maxC) score += 20;
             else if (charCount >= ideal.minC - 10 && charCount <= ideal.maxC + 15) score += 8;
             else score -= 10;
@@ -2842,12 +2843,22 @@
             else tip = 'This is a reasonable starting point. Make sure the wording is specific and accurate for your audience.';
             feedback.textContent = tip;
 
+            // Build alternatives from a cleaned topic phrase rather than repeating the
+            // entire original headline inside templates (which created broken wording).
             const cleaned = t.replace(/[.!?]+$/, '').trim();
-            const subject = cleaned.replace(/^(how|why|what|the|a|an)\s+/i, '').trim() || cleaned;
+            let subject = cleaned
+                .replace(/^(?:how to|how|why|what to know about|what is|what are|a guide to|the ultimate guide to|the complete guide to)\s+/i, '')
+                .replace(/\s+(?:is|are|was|were)\s+(?:the\s+)?(?:best|greatest|perfect|amazing|important|essential|worth it|a must-have)\s*$/i, '')
+                .replace(/\s+(?:explained|review|reviews|guide|tips|benefits|ideas)\s*$/i, '')
+                .replace(/[:–—-]+\s*$/, '')
+                .trim();
+            if (!subject || subject.length < 2) subject = cleaned;
+            const titleCase = value => value.replace(/\b([a-z])/g, (match, letter, offset) => letter.toUpperCase());
+            const topic = titleCase(subject);
             const alternatives = [
-                `How to ${subject.charAt(0).toLowerCase() + subject.slice(1)}`,
-                `${subject}: A Simple Guide`,
-                `What to Know About ${subject}`
+                `${topic}: Benefits, Uses and What to Know`,
+                `What to Know Before Choosing ${topic}`,
+                `Is ${topic} Worth It? Key Things to Consider`
             ];
             recEl.replaceChildren();
             alternatives.forEach((text, index) => {
