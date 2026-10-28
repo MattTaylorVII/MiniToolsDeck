@@ -796,6 +796,53 @@
             font-size: 1.2rem;
             cursor: pointer;
         }
+    
+        /* Image Converter refresh */
+        .imgc-shell { max-width: 980px; margin: 0 auto; }
+        .imgc-dropzone { border: 2px dashed var(--border-color); border-radius: 18px; padding: 38px 20px; text-align: center; background: var(--bg-secondary); cursor: pointer; outline: none; transition: border-color .2s, background .2s, transform .2s; }
+        .imgc-dropzone:hover, .imgc-dropzone:focus-visible, .imgc-dropzone.is-dragging { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--bg-secondary)); }
+        .imgc-dropzone.is-dragging { transform: scale(1.005); }
+        .imgc-upload-icon { width: 58px; height: 58px; margin: 0 auto 14px; border-radius: 16px; display: grid; place-items: center; color: var(--accent); background: color-mix(in srgb, var(--accent) 13%, transparent); font-size: 1.6rem; }
+        .imgc-dropzone h3, .imgc-workspace-head h3 { font-size: 1.12rem; margin-bottom: 7px; color: var(--text-main); }
+        .imgc-dropzone p { color: var(--text-muted); margin-bottom: 10px; }
+        .imgc-browse { color: var(--accent); font-weight: 700; text-decoration: underline; }
+        .imgc-dropzone small, .imgc-settings small { display: block; color: var(--text-muted); font-size: .78rem; line-height: 1.5; }
+        .imgc-workspace { margin-top: 22px; }
+        .imgc-workspace-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .imgc-workspace-head p { color: var(--text-muted); font-size: .85rem; }
+        .imgc-text-btn { color: var(--text-muted); background: transparent; border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+        .imgc-file-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+        .imgc-file-card { min-width: 0; border: 1px solid var(--border-color); border-radius: 12px; padding: 12px; background: var(--bg-card); }
+        .imgc-preview-wrap { height: 150px; display: grid; place-items: center; overflow: hidden; border-radius: 8px; background: repeating-conic-gradient(#94a3b8 0% 25%, transparent 0% 50%) 50% / 16px 16px; margin-bottom: 10px; }
+        .imgc-preview-wrap img { display: block; max-width: 100%; max-height: 150px; object-fit: contain; }
+        .imgc-file-name { overflow-wrap: anywhere; font-size: .88rem; font-weight: 650; margin-bottom: 4px; }
+        .imgc-file-meta { font-size: .76rem; color: var(--text-muted); }
+        .imgc-file-result { display: block; margin-top: 9px; color: var(--accent); font-size: .82rem; overflow-wrap: anywhere; }
+        .imgc-file-result a { color: inherit; font-weight: 700; }
+        .imgc-settings { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 22px; padding: 18px; border: 1px solid var(--border-color); border-radius: 12px; }
+        .imgc-settings .form-group { margin-bottom: 0; }
+        .imgc-settings input[type="range"] { width: 100%; accent-color: var(--accent); }
+        .imgc-settings label { display: flex; justify-content: space-between; gap: 8px; }
+        .imgc-settings label strong { color: var(--accent); }
+        .imgc-color-row { display: flex; align-items: center; gap: 10px; font-size: .82rem; color: var(--text-muted); }
+        .imgc-color-row input { width: 42px; height: 36px; border: 1px solid var(--border-color); border-radius: 6px; background: transparent; }
+        .imgc-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+        .imgc-actions button { margin: 0; }
+        .imgc-secondary-btn { border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 16px; background: var(--bg-secondary); color: var(--text-main); font-weight: 650; cursor: pointer; }
+        .imgc-secondary-btn:hover, .imgc-text-btn:hover { border-color: var(--accent); }
+        .imgc-status { margin-top: 12px; font-size: .88rem; color: var(--text-muted); }
+        .imgc-privacy-note { display: flex; align-items: flex-start; gap: 10px; margin-top: 18px; padding: 14px 16px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 8%, var(--bg-secondary)); color: var(--text-muted); font-size: .84rem; line-height: 1.5; }
+        .imgc-privacy-note i { color: var(--accent); margin-top: 3px; }
+        .imgc-privacy-note strong { color: var(--text-main); }
+        .imgc-seo-content { max-width: 850px; margin: 34px auto 0; color: var(--text-muted); line-height: 1.75; }
+        .imgc-seo-content h3 { color: var(--text-main); font-size: 1.08rem; margin: 22px 0 8px; }
+        .imgc-seo-content p, .imgc-seo-content ul { margin-bottom: 12px; }
+        .imgc-seo-content ul { padding-left: 22px; }
+        .imgc-seo-content details { border-bottom: 1px solid var(--border-color); padding: 12px 0; }
+        .imgc-seo-content summary { color: var(--text-main); font-weight: 600; cursor: pointer; }
+        .imgc-seo-content details p { margin: 10px 0 0; }
+        @media (max-width: 640px) { .imgc-dropzone { padding: 28px 14px; } .imgc-settings { grid-template-columns: 1fr; padding: 14px; } .imgc-file-list { grid-template-columns: 1fr; } .imgc-actions { flex-direction: column; } .imgc-actions button { width: 100%; } }
+
     </style>
 </head>
 <body>
@@ -1395,33 +1442,66 @@
 
         <div id="tool-imgconv" class="tool-panel">
             <div class="tool-header">
-                <h2 class="tool-title"><i class="fa-solid fa-image" style="color:var(--accent)"></i> Image Converter</h2>
-                <p class="tool-desc">Convert images between PNG, JPG, and WebP formats instantly without uploading files.</p>
+                <h2 class="tool-title"><i class="fa-solid fa-image" style="color:var(--accent)"></i> Free Online Image Converter</h2>
+                <p class="tool-desc">Convert images to PNG, JPG, or WebP in seconds. Drag and drop your files, preview them, adjust image quality, and download the results — free, with no account and no file uploads.</p>
             </div>
-            <div class="grid-2">
-                <div>
-                    <div class="form-group">
-                        <label>Select Image File</label>
-                        <input type="file" id="img-conv-file" accept="image/*">
-                    </div>
-                    <div class="form-group">
-                        <label>Target Format</label>
-                        <select id="img-conv-target">
-                            <option value="image/png">PNG</option>
-                            <option value="image/jpeg">JPEG</option>
-                            <option value="image/webp">WebP</option>
-                        </select>
-                    </div>
-                    <button class="btn-submit" onclick="convertImageFormat()">Convert & Download Image</button>
+            <div class="imgc-shell">
+                <div id="imgc-dropzone" class="imgc-dropzone" role="button" tabindex="0" aria-label="Choose images or drag and drop them here">
+                    <div class="imgc-upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                    <h3>Drop your images here</h3>
+                    <p>or <span class="imgc-browse">browse files</span> from your device</p>
+                    <small>PNG, JPG, WebP, GIF, BMP and other browser-supported images · Multiple files supported</small>
+                    <input type="file" id="img-conv-file" accept="image/*" multiple hidden>
                 </div>
-                <div>
-                    <div class="result-box">
-                        <div class="result-subtext">Conversion Status</div>
-                        <div class="result-value" id="img-conv-res" style="font-size: 1.2rem;">Ready</div>
-                        <div class="result-subtext">Processed 100% locally on your device.</div>
+                <div id="imgc-workspace" class="imgc-workspace" hidden>
+                    <div class="imgc-workspace-head">
+                        <div><h3>Your images</h3><p id="imgc-file-count">0 files selected</p></div>
+                        <button type="button" class="imgc-text-btn" id="imgc-clear">Clear all</button>
                     </div>
+                    <div id="imgc-file-list" class="imgc-file-list" aria-live="polite"></div>
+                    <div class="imgc-settings">
+                        <div class="form-group">
+                            <label for="img-conv-target">Convert to</label>
+                            <select id="img-conv-target">
+                                <option value="image/webp">WebP — smaller web images</option>
+                                <option value="image/jpeg">JPG — widely compatible</option>
+                                <option value="image/png">PNG — supports transparency</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="imgc-quality-group">
+                            <label for="imgc-quality">Image quality <strong id="imgc-quality-value">85%</strong></label>
+                            <input type="range" id="imgc-quality" min="10" max="100" value="85" step="5">
+                            <small>Higher quality usually means a larger file. PNG is lossless and ignores this setting.</small>
+                        </div>
+                        <div class="form-group" id="imgc-background-group" hidden>
+                            <label for="imgc-background">Background for transparent images</label>
+                            <div class="imgc-color-row"><input type="color" id="imgc-background" value="#ffffff"><span>JPEG does not support transparency.</span></div>
+                        </div>
+                    </div>
+                    <div class="imgc-actions">
+                        <button type="button" class="btn-submit" id="imgc-convert"><i class="fa-solid fa-arrows-rotate"></i> Convert images</button>
+                        <button type="button" class="imgc-secondary-btn" id="imgc-download-all" hidden><i class="fa-solid fa-file-zipper"></i> Download all (.ZIP)</button>
+                    </div>
+                    <p id="img-conv-res" class="imgc-status" role="status" aria-live="polite">Ready to convert. Your files stay on this device.</p>
                 </div>
+                <div class="imgc-privacy-note"><i class="fa-solid fa-shield-halved"></i><span><strong>Private by design.</strong> Images are processed in your browser and are not uploaded to MiniToolsDeck.</span></div>
             </div>
+            <section class="imgc-seo-content">
+                <h3>Convert images online for free</h3>
+                <p>Use this free image converter to change image formats without installing software. Convert PNG to JPG for smaller, widely supported photos, JPG to PNG when you need a PNG file, or images to WebP for efficient website graphics. Add multiple images, choose an output format, adjust quality for JPG and WebP, and download your converted files.</p>
+                <h3>Which image format should you choose?</h3>
+                <ul>
+                    <li><strong>WebP:</strong> a strong default for website images, often offering smaller files at similar visual quality.</li>
+                    <li><strong>JPG/JPEG:</strong> ideal for photographs and broad compatibility, but it does not preserve transparency.</li>
+                    <li><strong>PNG:</strong> useful for graphics, screenshots, and transparent backgrounds; files may be larger.</li>
+                </ul>
+                <h3>Frequently asked questions</h3>
+                <details><summary>Are my images uploaded to a server?</summary><p>No. Conversion happens locally in your browser. Your selected image files are not sent to our conversion server.</p></details>
+                <details><summary>Can I convert more than one image at a time?</summary><p>Yes. Select or drop multiple images, choose an output format, and convert them together. You can download results individually or as a ZIP when available.</p></details>
+                <details><summary>Will converting an image reduce its quality?</summary><p>JPG and WebP can use lossy compression, depending on the quality setting. PNG output is lossless for the pixels rendered by your browser. Converting between formats does not restore quality already lost in the original.</p></details>
+                <details><summary>What happens to transparent backgrounds when converting to JPG?</summary><p>JPG does not support transparency, so transparent areas are filled with the background color you choose.</p></details>
+                <details><summary>Does this converter preserve animated GIFs?</summary><p>Browser canvas conversion generally exports a still frame rather than the full animation. Use a dedicated animation converter if you need to preserve every frame.</p></details>
+            </section>
         </div>
 
         <div id="tool-imgresize" class="tool-panel">
@@ -2166,30 +2246,141 @@
             reader.readAsDataURL(file);
         }
 
-        function convertImageFormat() {
-            const fileInput = document.getElementById('img-conv-file');
-            const targetFormat = document.getElementById('img-conv-target').value;
-            if(fileInput.files.length === 0) return alert('Please select an image file.');
-            const file = fileInput.files[0];
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = new Image();
-                img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = img.width; canvas.height = img.height;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0);
-                    const dataUrl = canvas.toDataURL(targetFormat, 0.9);
-                    const link = document.createElement('a');
-                    link.download = 'converted-image.' + targetFormat.split('/')[1];
-                    link.href = dataUrl;
-                    link.click();
-                    document.getElementById('img-conv-res').innerText = 'Success! Downloaded.';
-                };
-                img.src = e.target.result;
+        // Image Converter: local-only processing, multi-file queue and safe Blob downloads.
+        (() => {
+            const input = document.getElementById('img-conv-file');
+            const dropzone = document.getElementById('imgc-dropzone');
+            const workspace = document.getElementById('imgc-workspace');
+            const list = document.getElementById('imgc-file-list');
+            const status = document.getElementById('img-conv-res');
+            const target = document.getElementById('img-conv-target');
+            const quality = document.getElementById('imgc-quality');
+            const qualityValue = document.getElementById('imgc-quality-value');
+            const qualityGroup = document.getElementById('imgc-quality-group');
+            const backgroundGroup = document.getElementById('imgc-background-group');
+            const convertButton = document.getElementById('imgc-convert');
+            const zipButton = document.getElementById('imgc-download-all');
+            let files = [];
+            let results = [];
+            let previewUrls = [];
+
+            const formatInfo = {
+                'image/png': { ext: 'png', label: 'PNG' },
+                'image/jpeg': { ext: 'jpg', label: 'JPG' },
+                'image/webp': { ext: 'webp', label: 'WebP' }
             };
-            reader.readAsDataURL(file);
-        }
+            const formatBytes = bytes => bytes < 1024 ? `${bytes} B` : bytes < 1024 * 1024 ? `${(bytes / 1024).toFixed(1)} KB` : `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+            const safeBaseName = name => name.replace(/\.[^.]+$/, '').replace(/[\\/:*?"<>|]/g, '-').trim().slice(0, 120) || 'converted-image';
+            function revokeResults() {
+                results.forEach(item => { if (item.url) URL.revokeObjectURL(item.url); });
+                results = [];
+                zipButton.hidden = true;
+            }
+            function clearPreviews() { previewUrls.forEach(url => URL.revokeObjectURL(url)); previewUrls = []; }
+            function setStatus(message) { status.textContent = message; }
+            function addFiles(incoming) {
+                const valid = Array.from(incoming || []).filter(file => file.type.startsWith('image/') && file.type !== 'image/svg+xml');
+                const rejected = (incoming ? Array.from(incoming) : []).length - valid.length;
+                if (rejected) setStatus(`${rejected} unsupported file(s) skipped. Choose raster images such as PNG, JPG, WebP, GIF or BMP.`);
+                if (!valid.length) { if (!files.length) setStatus('Please choose a supported image file.'); return; }
+                const seen = new Set(files.map(file => `${file.name}|${file.size}|${file.lastModified}`));
+                valid.forEach(file => { const key = `${file.name}|${file.size}|${file.lastModified}`; if (!seen.has(key)) { files.push(file); seen.add(key); } });
+                revokeResults(); renderFiles();
+                if (!rejected) setStatus(`${files.length} image${files.length === 1 ? '' : 's'} ready. Choose a format and convert.`);
+            }
+            function renderFiles() {
+                clearPreviews(); list.replaceChildren();
+                dropzone.hidden = files.length > 0;
+                workspace.hidden = files.length === 0;
+                document.getElementById('imgc-file-count').textContent = `${files.length} file${files.length === 1 ? '' : 's'} selected`;
+                files.forEach((file, index) => {
+                    const card = document.createElement('article'); card.className = 'imgc-file-card';
+                    const previewWrap = document.createElement('div'); previewWrap.className = 'imgc-preview-wrap';
+                    const image = document.createElement('img'); image.alt = `Preview of ${file.name}`;
+                    const url = URL.createObjectURL(file); previewUrls.push(url); image.src = url;
+                    image.onerror = () => { image.remove(); previewWrap.textContent = 'Preview unavailable'; };
+                    previewWrap.appendChild(image);
+                    const name = document.createElement('div'); name.className = 'imgc-file-name'; name.textContent = file.name;
+                    const meta = document.createElement('div'); meta.className = 'imgc-file-meta'; meta.textContent = `${formatBytes(file.size)} · ${file.type || 'Image file'}`;
+                    const result = document.createElement('div'); result.className = 'imgc-file-result'; result.id = `imgc-result-${index}`;
+                    card.append(previewWrap, name, meta, result); list.appendChild(card);
+                });
+            }
+            function loadImage(file) {
+                return new Promise((resolve, reject) => {
+                    const url = URL.createObjectURL(file); const image = new Image();
+                    image.onload = () => { URL.revokeObjectURL(url); resolve(image); };
+                    image.onerror = () => { URL.revokeObjectURL(url); reject(new Error('This image could not be opened by your browser.')); };
+                    image.src = url;
+                });
+            }
+            function canvasBlob(canvas, mime, q) {
+                return new Promise((resolve, reject) => {
+                    try { canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('Your browser could not export this format. Try PNG, JPG or WebP.')), mime, q); }
+                    catch (error) { reject(error); }
+                });
+            }
+            async function convertOne(file, mime, q, background) {
+                const image = await loadImage(file);
+                const canvas = document.createElement('canvas');
+                canvas.width = image.naturalWidth || image.width; canvas.height = image.naturalHeight || image.height;
+                if (!canvas.width || !canvas.height || canvas.width * canvas.height > 100000000) throw new Error('Image dimensions are too large to process safely in this browser.');
+                const context = canvas.getContext('2d', { alpha: mime !== 'image/jpeg' });
+                if (!context) throw new Error('Canvas is unavailable in this browser.');
+                if (mime === 'image/jpeg') { context.fillStyle = background; context.fillRect(0, 0, canvas.width, canvas.height); }
+                context.drawImage(image, 0, 0);
+                const blob = await canvasBlob(canvas, mime, q);
+                canvas.width = 0; canvas.height = 0;
+                if (blob.type !== mime) throw new Error(`${formatInfo[mime].label} export is not supported by this browser. Try another output format.`);
+                return blob;
+            }
+            function downloadBlob(blob, filename) {
+                const url = URL.createObjectURL(blob); const link = document.createElement('a');
+                link.href = url; link.download = filename; document.body.appendChild(link); link.click(); link.remove();
+                setTimeout(() => URL.revokeObjectURL(url), 30000);
+            }
+            input.addEventListener('change', event => { addFiles(event.target.files); input.value = ''; });
+            dropzone.addEventListener('click', event => { if (!event.target.closest('input')) input.click(); });
+            dropzone.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); input.click(); } });
+            ['dragenter', 'dragover'].forEach(type => dropzone.addEventListener(type, event => { event.preventDefault(); dropzone.classList.add('is-dragging'); }));
+            ['dragleave', 'drop'].forEach(type => dropzone.addEventListener(type, event => { event.preventDefault(); dropzone.classList.remove('is-dragging'); }));
+            dropzone.addEventListener('drop', event => addFiles(event.dataTransfer.files));
+            quality.addEventListener('input', () => qualityValue.textContent = `${quality.value}%`);
+            target.addEventListener('change', () => { qualityGroup.hidden = target.value === 'image/png'; backgroundGroup.hidden = target.value !== 'image/jpeg'; revokeResults(); list.querySelectorAll('.imgc-file-result').forEach(el => el.replaceChildren()); setStatus('Output settings changed. Convert again to apply them.'); });
+            quality.addEventListener('change', () => { revokeResults(); list.querySelectorAll('.imgc-file-result').forEach(el => el.replaceChildren()); setStatus('Quality changed. Convert again to apply the new setting.'); });
+            document.getElementById('imgc-background').addEventListener('change', () => { revokeResults(); list.querySelectorAll('.imgc-file-result').forEach(el => el.replaceChildren()); setStatus('Background changed. Convert again to apply the new color.'); });
+            document.getElementById('imgc-clear').addEventListener('click', () => { files = []; revokeResults(); clearPreviews(); renderFiles(); setStatus('Ready to convert. Your files stay on this device.'); });
+            convertButton.addEventListener('click', async () => {
+                if (!files.length) { setStatus('Add at least one image first.'); return; }
+                revokeResults(); list.querySelectorAll('.imgc-file-result').forEach(el => el.textContent = '');
+                const mime = target.value; const q = Number(quality.value) / 100; const background = document.getElementById('imgc-background').value;
+                convertButton.disabled = true; convertButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Converting…';
+                let success = 0; const errors = [];
+                for (let i = 0; i < files.length; i++) {
+                    setStatus(`Converting ${i + 1} of ${files.length}: ${files[i].name}`);
+                    const resultEl = document.getElementById(`imgc-result-${i}`);
+                    try {
+                        const blob = await convertOne(files[i], mime, q, background);
+                        const filename = `${safeBaseName(files[i].name)}.${formatInfo[mime].ext}`;
+                        const url = URL.createObjectURL(blob); results.push({ blob, url, filename, originalSize: files[i].size });
+                        const link = document.createElement('a'); link.href = url; link.download = filename; link.textContent = `Download · ${formatBytes(blob.size)}`;
+                        const delta = files[i].size ? Math.round((1 - blob.size / files[i].size) * 100) : 0;
+                        const note = document.createElement('span'); note.textContent = ` · ${delta >= 0 ? `${delta}% smaller` : `${Math.abs(delta)}% larger`}`;
+                        resultEl.append(link, note); success++;
+                    } catch (error) { resultEl.textContent = `Could not convert: ${error.message || 'Unknown error'}`; errors.push(files[i].name); }
+                }
+                zipButton.hidden = results.length < 2 || typeof JSZip === 'undefined';
+                setStatus(`${success} of ${files.length} image${files.length === 1 ? '' : 's'} converted successfully.${errors.length ? ` ${errors.length} failed; see each file for details.` : ''}${success ? ' Download individual files below' + (zipButton.hidden ? '.' : ' or download them together as a ZIP.') : ''}`);
+                convertButton.disabled = false; convertButton.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Convert images';
+            });
+            zipButton.addEventListener('click', async () => {
+                if (!results.length || typeof JSZip === 'undefined') return;
+                zipButton.disabled = true; zipButton.textContent = 'Preparing ZIP…';
+                try { const zip = new JSZip(); results.forEach(item => zip.file(item.filename, item.blob)); const blob = await zip.generateAsync({ type: 'blob' }); downloadBlob(blob, 'minitoolsdeck-converted-images.zip'); setStatus('Your ZIP archive is ready and downloading.'); }
+                catch (error) { setStatus('Could not create the ZIP. Please download each converted image individually.'); }
+                finally { zipButton.disabled = false; zipButton.innerHTML = '<i class="fa-solid fa-file-zipper"></i> Download all (.ZIP)'; }
+            });
+        })();
 
         function resizeImage() {
             const fileInput = document.getElementById('img-resize-file');
@@ -2222,58 +2413,6 @@
             const img = document.getElementById('og-image').value;
             const code = `<meta property="og:title" content="${title}">\n<meta property="og:description" content="${desc}">\n<meta property="og:image" content="${img}">`;
             document.getElementById('og-output').innerText = code;
-        }
-
-        const aiPromptTemplates = {
-            'custom': {role:'', goal:'Blog article or outline', tone:'clear and professional', framework:'structured step-by-step instructions', length:'moderately detailed, with useful examples'},
-            'seo-blog': {role:'Experienced SEO content strategist and editor', goal:'Blog article or outline', tone:'clear and professional', framework:'expert role with clear objectives and constraints', length:'comprehensive and detailed, with examples where useful', format:'Use a descriptive title, search-intent-aligned headings, a useful introduction, scannable sections, and a concise conclusion. Avoid keyword stuffing.'},
-            'social': {role:'Social media strategist and platform-native copywriter', goal:'Social media post', tone:'bold, energetic and engaging', framework:'creative exploration with several distinct alternatives', length:'concise and direct', format:'Provide 3 distinct post options, each with a strong opening and a relevant call to action. Adapt formatting to the selected platform if specified.'},
-            'email': {role:'Email marketing specialist and conversion copywriter', goal:'Marketing email or newsletter', tone:'persuasive and confident', framework:'expert role with clear objectives and constraints', length:'moderately detailed, with useful examples', format:'Include 3 subject lines, preview text, email body and one clear call to action.'},
-            'ad': {role:'Performance marketing copywriter', goal:'Paid advertisement copy', tone:'persuasive and confident', framework:'problem, options, trade-offs and recommendation', length:'concise and direct', format:'Provide 3 ad variations with a hook, benefit, supporting message and CTA. Do not invent performance claims.'},
-            'youtube': {role:'YouTube scriptwriter and audience-retention editor', goal:'Video script', tone:'friendly and conversational', framework:'structured step-by-step instructions', length:'comprehensive and detailed, with examples where useful', format:'Include a hook, intro, structured main sections, suggested transitions and a closing CTA. Mark optional visual or B-roll suggestions clearly.'},
-            'product': {role:'E-commerce product copywriter', goal:'Product description', tone:'persuasive and confident', framework:'expert role with clear objectives and constraints', length:'moderately detailed, with useful examples', format:'Provide a benefit-led headline, concise description, key features and benefits, and a CTA. Never invent product specifications.'},
-            'business': {role:'Business strategist and practical planning advisor', goal:'Business plan or strategy', tone:'clear and professional', framework:'problem, options, trade-offs and recommendation', length:'comprehensive and detailed, with examples where useful', format:'Use sections for objective, assumptions, target market, strategy, resources, risks, milestones and measures of success. Flag missing information.'},
-            'research': {role:'Careful research analyst', goal:'Research summary', tone:'academic and evidence-focused', framework:'problem, options, trade-offs and recommendation', length:'comprehensive and detailed, with examples where useful', format:'Separate established facts, interpretations and uncertainties. Identify what needs verification and do not fabricate citations or sources.'},
-            'coding': {role:'Senior software developer and debugging partner', goal:'Code solution with explanation', tone:'technical and precise', framework:'a draft followed by a self-review and improvements', length:'comprehensive and detailed, with examples where useful', format:'Explain assumptions, provide the solution in a code block, describe how to use it, and mention relevant edge cases or tests. Do not claim code was executed unless it was.'},
-            'brainstorm': {role:'Creative strategist and idea facilitator', goal:'List of ideas and recommendations', tone:'witty and playful', framework:'creative exploration with several distinct alternatives', length:'comprehensive and detailed, with examples where useful', format:'Generate varied options, briefly explain the rationale for each, and finish by highlighting the strongest candidates and why.'}
-        };
-
-        function applyAIPromptTemplate() {
-            const key = document.getElementById('ai-template').value;
-            const t = aiPromptTemplates[key];
-            if (!t) return;
-            if (t.role) document.getElementById('ai-role').value = t.role;
-            if (t.goal) document.getElementById('ai-goal').value = t.goal;
-            if (t.tone) document.getElementById('ai-tone').value = t.tone;
-            if (t.framework) document.getElementById('ai-framework').value = t.framework;
-            if (t.length) document.getElementById('ai-length').value = t.length;
-            if (t.format) document.getElementById('ai-format').value = t.format;
-            const objectiveHints = {
-                'seo-blog':'Create a helpful, original article that answers the reader’s search intent.',
-                'social':'Create a useful, engaging post that encourages genuine interaction.',
-                'email':'Write an email that delivers value and encourages the reader to take the intended next step.',
-                'ad':'Develop clear ad copy that communicates the main benefit and encourages a relevant action.',
-                'youtube':'Write a well-paced video script that holds attention and delivers on its title.',
-                'product':'Write an accurate, benefit-led product description using only the supplied product facts.',
-                'business':'Create a practical business plan with clear actions, assumptions and measurable milestones.',
-                'research':'Summarise the topic accurately, distinguish evidence from interpretation and identify uncertainties.',
-                'coding':'Help solve the coding task, explain the approach and include relevant checks or tests.',
-                'brainstorm':'Generate original, varied ideas with a short explanation of the value of each idea.'
-            };
-            if (objectiveHints[key]) document.getElementById('ai-objective').value = objectiveHints[key];
-            setAIPromptStatus('Template applied. Customise the fields, then build your prompt.');
-        }
-
-        function setAIPromptStatus(message) {
-            const status = document.getElementById('ai-prompt-status');
-            if (status) status.textContent = message;
-        }
-
-        function updateAIPromptCount() {
-            const output = document.getElementById('ai-prompt-res');
-            const count = output && output.value.trim() ? output.value.trim().split(/\s+/).length : 0;
-            const label = document.getElementById('ai-prompt-count');
-            if (label) label.textContent = count + (count === 1 ? ' word' : ' words');
         }
 
         function generateAIPrompt(isRefresh) {
