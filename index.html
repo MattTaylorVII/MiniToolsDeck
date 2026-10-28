@@ -1097,20 +1097,39 @@
                 <h2 class="tool-title"><i class="fa-solid fa-globe" style="color:#06b6d4"></i> Website Icon Generator</h2>
                 <p class="tool-desc">Turn any logo into a complete set of favicons and Apple touch icons ready for your website.</p>
             </div>
-            <div class="grid-2">
-                <div>
-                    <div class="form-group">
-                        <label>Upload Logo (PNG / SVG)</label>
-                        <input type="file" id="favicon-file" accept="image/*">
-                    </div>
-                    <button class="btn-submit" onclick="generateFaviconBundle()">Download Complete Favicon Bundle</button>
+            <div>
+                <div class="form-group">
+                    <label>Upload Logo (PNG, JPG or SVG)</label>
+                    <input type="file" id="favicon-file" accept="image/*" onchange="previewFaviconSource(this)">
                 </div>
-                <div>
-                    <div class="result-box">
-                        <div class="result-subtext">Bundle Status</div>
-                        <div class="result-value" id="favicon-status" style="font-size: 1.2rem;">Ready</div>
-                        <div class="result-subtext">Includes .ico, PNG sizes, and HTML head snippet.</div>
+
+                <div id="favicon-preview-area" style="display:none; margin-bottom:1.25rem;">
+                    <div class="result-subtext" style="margin-bottom:0.5rem;">Preview</div>
+                    <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:flex-end;">
+                        <div style="text-align:center;">
+                            <img id="fav-preview-src" style="width:64px; height:64px; object-fit:contain; border-radius:8px; background:#fff; border:1px solid var(--border-color);">
+                            <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Original</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <img id="fav-preview-32" style="width:32px; height:32px; object-fit:contain; border-radius:4px; background:#fff; border:1px solid var(--border-color);">
+                            <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">32×32</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <img id="fav-preview-180" style="width:48px; height:48px; object-fit:contain; border-radius:8px; background:#fff; border:1px solid var(--border-color);">
+                            <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">180×180</div>
+                        </div>
                     </div>
+                </div>
+
+                <button class="btn-submit" onclick="generateFaviconBundle()">Download Complete Favicon Bundle</button>
+
+                <div class="result-box" style="margin-top:1.5rem; align-items:flex-start; text-align:left;">
+                    <div class="result-subtext">Status</div>
+                    <div class="result-value" id="favicon-status" style="font-size:1.1rem; margin-bottom:0.75rem;">Ready — upload a logo to begin</div>
+                    
+                    <div class="result-subtext" style="margin-bottom:0.4rem;">HTML Snippet (copy into &lt;head&gt;)</div>
+                    <pre id="favicon-snippet" style="width:100%; background:var(--bg-primary); padding:0.85rem; border-radius:8px; font-size:0.8rem; overflow-x:auto; color:var(--text-main); white-space:pre-wrap; margin:0 0 0.75rem 0;">Upload a logo and generate the bundle to get the HTML snippet.</pre>
+                    <button class="copy-btn" onclick="copyElementText('favicon-snippet')"><i class="fa-regular fa-copy"></i> Copy HTML Snippet</button>
                 </div>
             </div>
         </div>
@@ -1898,13 +1917,43 @@
             document.getElementById('viral-hooks-output').innerHTML = html;
         }
 
+        function previewFaviconSource(input) {
+            if (!input.files || !input.files[0]) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    document.getElementById('favicon-preview-area').style.display = 'block';
+                    document.getElementById('fav-preview-src').src = e.target.result;
+
+                    // Generate quick previews
+                    const makePreview = (size, targetId) => {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = size; canvas.height = size;
+                        const ctx = canvas.getContext('2d');
+                        ctx.clearRect(0,0,size,size);
+                        ctx.drawImage(img, 0, 0, size, size);
+                        document.getElementById(targetId).src = canvas.toDataURL('image/png');
+                    };
+                    makePreview(32, 'fav-preview-32');
+                    makePreview(180, 'fav-preview-180');
+                    document.getElementById('favicon-status').innerText = 'Logo loaded — ready to generate';
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
         function generateFaviconBundle() {
             if (typeof JSZip === 'undefined') {
                 alert('JSZip library is still loading. Please try again in a moment.');
                 return;
             }
             const fileInput = document.getElementById('favicon-file');
-            if(fileInput.files.length === 0) return alert('Please upload a logo image.');
+            if(fileInput.files.length === 0) return alert('Please upload a logo image first.');
+            
+            document.getElementById('favicon-status').innerText = 'Generating icons...';
+            
             const file = fileInput.files[0];
             const reader = new FileReader();
             reader.onload = function(e) {
@@ -1914,30 +1963,39 @@
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
 
-                    canvas.width = 16; canvas.height = 16;
-                    ctx.clearRect(0,0,16,16);
-                    ctx.drawImage(img, 0, 0, 16, 16);
-                    zip.file("favicon-16x16.png", canvas.toDataURL("image/png").split(',')[1], {base64: true});
+                    const sizes = [
+                        { name: 'favicon-16x16.png', size: 16 },
+                        { name: 'favicon-32x32.png', size: 32 },
+                        { name: 'favicon-48x48.png', size: 48 },
+                        { name: 'apple-touch-icon.png', size: 180 },
+                        { name: 'android-chrome-192x192.png', size: 192 },
+                        { name: 'android-chrome-512x512.png', size: 512 }
+                    ];
 
-                    canvas.width = 32; canvas.height = 32;
-                    ctx.clearRect(0,0,32,32);
-                    ctx.drawImage(img, 0, 0, 32, 32);
-                    zip.file("favicon-32x32.png", canvas.toDataURL("image/png").split(',')[1], {base64: true});
+                    sizes.forEach(({name, size}) => {
+                        canvas.width = size;
+                        canvas.height = size;
+                        ctx.clearRect(0, 0, size, size);
+                        ctx.drawImage(img, 0, 0, size, size);
+                        zip.file(name, canvas.toDataURL('image/png').split(',')[1], {base64: true});
+                    });
 
-                    canvas.width = 180; canvas.height = 180;
-                    ctx.clearRect(0,0,180,180);
-                    ctx.drawImage(img, 0, 0, 180, 180);
-                    zip.file("apple-touch-icon.png", canvas.toDataURL("image/png").split(',')[1], {base64: true});
+                    const snippet = `<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">`;
 
-                    const snippet = `<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">\n<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">\n<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">`;
-                    zip.file("head-snippet.txt", snippet);
+                    zip.file("html-snippet.txt", snippet);
+                    document.getElementById('favicon-snippet').textContent = snippet;
 
-                    zip.generateAsync({type:"blob"}).then(function(content) {
+                    zip.generateAsync({type:"blob"}).then(function(blob) {
                         const link = document.createElement('a');
-                        link.href = URL.createObjectURL(content);
+                        link.href = URL.createObjectURL(blob);
                         link.download = "favicon-bundle.zip";
                         link.click();
-                        document.getElementById('favicon-status').innerText = 'Success! ZIP Downloaded.';
+                        document.getElementById('favicon-status').innerText = '✅ Success! ZIP downloaded with 6 icon sizes.';
                     });
                 };
                 img.src = e.target.result;
