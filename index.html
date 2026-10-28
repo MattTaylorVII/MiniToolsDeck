@@ -652,6 +652,34 @@
         @media (max-width:900px) { .vh-layout { grid-template-columns:1fr; } }
         @media (max-width:540px) { .vh-controls,.vh-results { padding:.85rem; } .vh-results-head { flex-direction:column; } .vh-hook-card { padding:.8rem; } .vh-actions .btn-submit { flex-basis:100%; } }
 
+
+        /* WORD COUNTER UPGRADE */
+        .wc-layout { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:1rem; align-items:start; }
+        .wc-editor,.wc-results { min-width:0; border:1px solid var(--border-color); border-radius:14px; padding:1rem; background:var(--bg-secondary); }
+        .wc-editor-head,.wc-results-head { display:flex; justify-content:space-between; align-items:center; gap:.75rem; margin-bottom:.7rem; }
+        .wc-editor-head label,.wc-platform-box label { font-weight:700; color:var(--text-main); }
+        .wc-editor-head span,.wc-help { color:var(--text-muted); font-size:.78rem; }
+        #wordcount-input { width:100%; min-height:230px; resize:vertical; line-height:1.6; }
+        .wc-toolbar,.wc-case-tools { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.8rem; }
+        .wc-toolbar .btn-submit { width:auto; margin-top:0; padding:.6rem .9rem; }
+        .wc-case-tools { align-items:center; padding-top:.8rem; border-top:1px solid var(--border-color); }
+        .wc-case-tools > span { color:var(--text-muted); font-size:.82rem; margin-right:.2rem; }
+        .wc-case-tools .copy-btn { font-size:.75rem; padding:.45rem .6rem; }
+        .wc-results-head h3 { margin:0; font-size:1.05rem; }
+        .wc-stat-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.65rem; }
+        .wc-stat { padding:.8rem; min-width:0; }
+        .wc-stat .result-value { font-size:1.45rem; overflow-wrap:anywhere; }
+        .wc-platform-box { border:1px solid var(--border-color); border-radius:10px; padding:.85rem; margin-top:.9rem; }
+        .wc-platform-box select { display:block; width:100%; margin-top:.5rem; }
+        .wc-limit-row { display:flex; justify-content:space-between; gap:.5rem; flex-wrap:wrap; margin-top:.8rem; font-size:.8rem; }
+        .wc-limit-row strong { color:var(--text-main); }
+        .wc-progress { height:8px; overflow:hidden; border-radius:99px; background:var(--border-color); margin-top:.45rem; }
+        .wc-progress span { display:block; height:100%; width:0; border-radius:99px; background:var(--accent); transition:width .15s ease; }
+        .wc-progress.is-over span { background:#ef4444; }
+        .wc-seo-content { margin-top:1.4rem; }
+        @media (max-width:850px) { .wc-layout { grid-template-columns:1fr; } }
+        @media (max-width:480px) { .wc-editor,.wc-results { padding:.8rem; } .wc-stat-grid { gap:.5rem; } .wc-stat { padding:.65rem; } .wc-stat .result-value { font-size:1.25rem; } }
+
         /* SOCIAL PREVIEW CONTAINER STYLING */
         .social-preview-wrapper {
             background: #0f172a;
@@ -1256,48 +1284,52 @@
         <div id="tool-wordcount" class="tool-panel">
             <div class="tool-header">
                 <h2 class="tool-title"><i class="fa-solid fa-font" style="color:var(--accent)"></i> Live Word & Character Counter</h2>
-                <p class="tool-desc">Instantly count words, characters, and estimated reading time for blog posts, tweets, and captions.</p>
+                <p class="tool-desc">Count words, characters, sentences and paragraphs instantly. Check social post length, estimate reading time, and copy your results — free and private in your browser.</p>
             </div>
-            <div>
-                <div class="form-group">
-                    <textarea id="wordcount-input" placeholder="Paste or type your text here..." oninput="updateWordCount()" rows="6"></textarea>
-                </div>
-                <div style="display:flex; gap:0.75rem; margin-bottom:1rem; flex-wrap:wrap;">
-                    <button class="btn-submit" style="width:auto; margin-top:0; padding:0.6rem 1.2rem;" onclick="updateWordCount()">Analyze Text</button>
-                    <button class="copy-btn" style="padding:0.6rem 1.2rem;" onclick="document.getElementById('wordcount-input').value=''; updateWordCount();">Clear</button>
-                </div>
-
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap:0.75rem;">
-                    <div class="result-box" style="padding:1rem;">
-                        <div class="result-subtext">Words</div>
-                        <div class="result-value" id="res-words" style="font-size:1.6rem;">0</div>
+            <div class="wc-layout">
+                <section class="wc-editor">
+                    <div class="wc-editor-head"><label for="wordcount-input">Your text</label><span id="wc-live-status" aria-live="polite">Live counting is on</span></div>
+                    <div class="form-group"><textarea id="wordcount-input" placeholder="Paste or type your text here…" oninput="updateWordCount()" rows="10" maxlength="200000" aria-describedby="wc-input-help"></textarea></div>
+                    <div id="wc-input-help" class="wc-help">Up to 200,000 characters. Your text stays in this page and is not uploaded.</div>
+                    <div class="wc-toolbar">
+                        <button class="btn-submit" type="button" onclick="updateWordCount()">Analyze text</button>
+                        <button class="copy-btn" type="button" onclick="copyWordCountText()"><i class="fa-regular fa-copy"></i> Copy text</button>
+                        <button class="copy-btn" type="button" onclick="clearWordCount()">Clear</button>
                     </div>
-                    <div class="result-box" style="padding:1rem;">
-                        <div class="result-subtext">Characters</div>
-                        <div class="result-value" id="res-chars" style="font-size:1.6rem;">0</div>
+                    <div class="wc-case-tools"><span>Text case</span><button type="button" class="copy-btn" onclick="transformWordCountText('upper')">UPPERCASE</button><button type="button" class="copy-btn" onclick="transformWordCountText('lower')">lowercase</button><button type="button" class="copy-btn" onclick="transformWordCountText('title')">Title Case</button></div>
+                </section>
+                <section class="wc-results" aria-label="Text statistics">
+                    <div class="wc-results-head"><h3>Text statistics</h3><button type="button" class="copy-btn" onclick="copyWordCountStats()">Copy stats</button></div>
+                    <div class="wc-stat-grid">
+                        <div class="result-box wc-stat"><div class="result-subtext">Words</div><div class="result-value" id="res-words">0</div></div>
+                        <div class="result-box wc-stat"><div class="result-subtext">Characters</div><div class="result-value" id="res-chars">0</div></div>
+                        <div class="result-box wc-stat"><div class="result-subtext">Characters, no spaces</div><div class="result-value" id="res-chars-nospace">0</div></div>
+                        <div class="result-box wc-stat"><div class="result-subtext">Sentences</div><div class="result-value" id="res-sentences">0</div></div>
+                        <div class="result-box wc-stat"><div class="result-subtext">Paragraphs</div><div class="result-value" id="res-paragraphs">0</div></div>
+                        <div class="result-box wc-stat"><div class="result-subtext">Avg. words / sentence</div><div class="result-value" id="res-avg-sentence">0</div></div>
+                        <div class="result-box wc-stat"><div class="result-subtext">Reading time</div><div class="result-value" id="res-reading">0 min</div></div>
+                        <div class="result-box wc-stat"><div class="result-subtext">Speaking time</div><div class="result-value" id="res-speaking">0 min</div></div>
                     </div>
-                    <div class="result-box" style="padding:1rem;">
-                        <div class="result-subtext">Chars (no spaces)</div>
-                        <div class="result-value" id="res-chars-nospace" style="font-size:1.6rem;">0</div>
+                    <div class="wc-platform-box">
+                        <label for="wc-platform">Check a social platform character guide</label>
+                        <select id="wc-platform" onchange="updateWordCount()">
+                            <option value="x">X post (280 characters)</option><option value="instagram">Instagram caption (2,200 characters)</option><option value="linkedin">LinkedIn post (3,000 characters)</option><option value="youtube">YouTube description (5,000 characters)</option><option value="tiktok">TikTok caption (2,200 characters)</option><option value="facebook">Facebook post (63,206 characters, approximate)</option>
+                        </select>
+                        <div class="wc-limit-row"><span id="wc-limit-label">0 / 280 characters</span><strong id="wc-limit-remaining">280 remaining</strong></div>
+                        <div class="wc-progress" role="progressbar" aria-label="Platform character limit" aria-valuemin="0" aria-valuemax="280" aria-valuenow="0" id="wc-progress"><span id="wc-progress-fill"></span></div>
+                        <p id="wc-limit-note" class="wc-help">Platform limits can change and may vary by account or post type. Check the platform before publishing.</p>
                     </div>
-                    <div class="result-box" style="padding:1rem;">
-                        <div class="result-subtext">Sentences</div>
-                        <div class="result-value" id="res-sentences" style="font-size:1.6rem;">0</div>
-                    </div>
-                    <div class="result-box" style="padding:1rem;">
-                        <div class="result-subtext">Paragraphs</div>
-                        <div class="result-value" id="res-paragraphs" style="font-size:1.6rem;">0</div>
-                    </div>
-                    <div class="result-box" style="padding:1rem;">
-                        <div class="result-subtext">Reading Time</div>
-                        <div class="result-value" id="res-reading" style="font-size:1.6rem;">0 min</div>
-                    </div>
-                    <div class="result-box" style="padding:1rem;">
-                        <div class="result-subtext">Speaking Time</div>
-                        <div class="result-value" id="res-speaking" style="font-size:1.6rem;">0 min</div>
-                    </div>
-                </div>
+                </section>
             </div>
+            <section class="ai-seo-content wc-seo-content">
+                <h3>How to use the word counter</h3>
+                <p>Paste or type your draft to see live word and character counts. Use the platform guide to check a post length, estimate how long your text may take to read aloud, or copy the statistics for an editor or brief.</p>
+                <div class="grid-2"><div><h4>Words vs. characters</h4><p>Words are counted as groups of non-whitespace text. Characters include spaces and line breaks; the no-spaces count excludes all whitespace.</p></div><div><h4>Time estimates</h4><p>Reading time assumes about 200 words per minute and speaking time about 130. Actual times depend on language, formatting and delivery.</p></div></div>
+                <h3>Frequently asked questions</h3>
+                <details><summary>Does this word counter save or upload my text?</summary><p>No. The counter processes your text in this browser page and does not send it to a server.</p></details>
+                <details><summary>How accurate are reading and speaking times?</summary><p>They are estimates based on typical rates, rounded up to the next minute for non-empty text. Your actual pace may differ.</p></details>
+                <details><summary>Are the social media character limits guaranteed?</summary><p>No. Limits and counting rules can change or vary by account, region and post type. Use these values as a quick guide and confirm the current limit on the platform.</p></details>
+            </section>
         </div>
 
         <div id="tool-headline" class="tool-panel">
@@ -2090,33 +2122,86 @@
         }
 
         function updateWordCount() {
-            const txt = document.getElementById('wordcount-input').value;
+            const input = document.getElementById('wordcount-input');
+            if (!input) return;
+            const txt = input.value || '';
             const trimmed = txt.trim();
+            const words = trimmed ? (trimmed.match(/\S+/gu) || []).length : 0;
+            const chars = Array.from(txt).length;
+            const charsNoSpace = Array.from(txt.replace(/\s/gu, '')).length;
+            const sentenceMatches = trimmed.match(/[^.!?]+(?:[.!?]+|$)/gu) || [];
+            const sentences = trimmed ? Math.max(1, sentenceMatches.filter(part => part.trim()).length) : 0;
+            const paragraphs = trimmed ? trimmed.split(/\n[\t ]*\n+/u).filter(part => part.trim()).length : 0;
+            const average = sentences ? (words / sentences).toFixed(1) : '0';
+            const readingMin = words ? Math.max(1, Math.ceil(words / 200)) : 0;
+            const speakingMin = words ? Math.max(1, Math.ceil(words / 130)) : 0;
+            const setText = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
+            setText('res-words', words.toLocaleString());
+            setText('res-chars', chars.toLocaleString());
+            setText('res-chars-nospace', charsNoSpace.toLocaleString());
+            setText('res-sentences', sentences.toLocaleString());
+            setText('res-paragraphs', paragraphs.toLocaleString());
+            setText('res-avg-sentence', average);
+            setText('res-reading', readingMin ? readingMin + (readingMin === 1 ? ' min' : ' mins') : '0 min');
+            setText('res-speaking', speakingMin ? speakingMin + (speakingMin === 1 ? ' min' : ' mins') : '0 min');
+            setText('wc-live-status', words ? words.toLocaleString() + ' words · updating live' : 'Live counting is on');
 
-            // Words
-            const words = trimmed === "" ? 0 : trimmed.split(/\s+/).filter(w => w.length > 0).length;
+            const platform = document.getElementById('wc-platform');
+            const limits = { x: 280, instagram: 2200, linkedin: 3000, youtube: 5000, tiktok: 2200, facebook: 63206 };
+            const selected = platform ? platform.value : 'x';
+            const limit = limits[selected] || 280;
+            const used = chars;
+            const remaining = limit - used;
+            const pct = Math.min(100, limit ? (used / limit) * 100 : 0);
+            setText('wc-limit-label', used.toLocaleString() + ' / ' + limit.toLocaleString() + ' characters');
+            setText('wc-limit-remaining', remaining >= 0 ? remaining.toLocaleString() + ' remaining' : Math.abs(remaining).toLocaleString() + ' over limit');
+            const progress = document.getElementById('wc-progress');
+            const fill = document.getElementById('wc-progress-fill');
+            if (progress && fill) {
+                fill.style.width = pct + '%';
+                progress.classList.toggle('is-over', remaining < 0);
+                progress.setAttribute('aria-valuemax', String(limit));
+                progress.setAttribute('aria-valuenow', String(Math.min(used, limit)));
+                progress.setAttribute('aria-valuetext', remaining >= 0 ? remaining + ' characters remaining' : Math.abs(remaining) + ' characters over the guide');
+            }
+        }
 
-            // Characters
-            const chars = txt.length;
-            const charsNoSpace = txt.replace(/\s/g, '').length;
+        async function copyWordCountText() {
+            const input = document.getElementById('wordcount-input');
+            if (!input || !input.value) { alert('Enter some text to copy.'); return; }
+            try {
+                if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(input.value);
+                else { input.focus(); input.select(); if (!document.execCommand('copy')) throw new Error('Copy failed'); }
+                const status = document.getElementById('wc-live-status'); if (status) status.textContent = 'Text copied';
+            } catch (err) { alert('Copy was not available. Select the text and copy it manually.'); }
+        }
 
-            // Sentences (simple but effective)
-            const sentences = trimmed === "" ? 0 : (trimmed.match(/[.!?]+/g) || []).length || (trimmed.length > 0 ? 1 : 0);
+        async function copyWordCountStats() {
+            const input = document.getElementById('wordcount-input');
+            const txt = input ? input.value : '';
+            const get = id => (document.getElementById(id)?.textContent || '0').trim();
+            const stats = ['Word count: ' + get('res-words'), 'Characters: ' + get('res-chars'), 'Characters (no spaces): ' + get('res-chars-nospace'), 'Sentences: ' + get('res-sentences'), 'Paragraphs: ' + get('res-paragraphs'), 'Average words per sentence: ' + get('res-avg-sentence'), 'Estimated reading time: ' + get('res-reading'), 'Estimated speaking time: ' + get('res-speaking')].join('\n');
+            try {
+                if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(stats);
+                else { const ta = document.createElement('textarea'); ta.value = stats; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); const ok=document.execCommand('copy'); ta.remove(); if(!ok) throw new Error('Copy failed'); }
+                const status = document.getElementById('wc-live-status'); if (status) status.textContent = 'Statistics copied';
+            } catch (err) { alert('Copy was not available.'); }
+        }
 
-            // Paragraphs
-            const paragraphs = trimmed === "" ? 0 : trimmed.split(/\n\s*\n/).filter(p => p.trim().length > 0).length || 1;
+        function clearWordCount() {
+            const input = document.getElementById('wordcount-input');
+            if (input) input.value = '';
+            updateWordCount();
+            if (input) input.focus();
+        }
 
-            // Reading time (~200 wpm) and Speaking time (~130 wpm)
-            const readingMin = words === 0 ? 0 : Math.max(1, Math.ceil(words / 200));
-            const speakingMin = words === 0 ? 0 : Math.max(1, Math.ceil(words / 130));
-
-            document.getElementById('res-words').innerText = words;
-            document.getElementById('res-chars').innerText = chars;
-            document.getElementById('res-chars-nospace').innerText = charsNoSpace;
-            document.getElementById('res-sentences').innerText = sentences;
-            document.getElementById('res-paragraphs').innerText = paragraphs;
-            document.getElementById('res-reading').innerText = words === 0 ? '0 min' : readingMin + (readingMin === 1 ? ' min' : ' mins');
-            document.getElementById('res-speaking').innerText = words === 0 ? '0 min' : speakingMin + (speakingMin === 1 ? ' min' : ' mins');
+        function transformWordCountText(mode) {
+            const input = document.getElementById('wordcount-input');
+            if (!input || !input.value) return;
+            if (mode === 'upper') input.value = input.value.toLocaleUpperCase();
+            else if (mode === 'lower') input.value = input.value.toLocaleLowerCase();
+            else if (mode === 'title') input.value = input.value.toLocaleLowerCase().replace(/(^|[\s\-–—])([\p{L}\p{N}])/gu, (match, prefix, letter) => prefix + letter.toLocaleUpperCase());
+            updateWordCount();
         }
 
         function formatJSON() {
