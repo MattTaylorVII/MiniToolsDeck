@@ -339,6 +339,24 @@
                 padding: 0 1rem;
                 margin-top: 1.25rem;
             }
+
+            /* Fix Categories dropdown on mobile so it is fully visible and not clipped */
+            .header-container {
+                position: relative;
+            }
+
+            .menu-container {
+                position: static;
+            }
+
+            .dropdown-menu {
+                left: 0;
+                right: 0;
+                width: 100%;
+                max-width: none;
+                border-radius: 10px;
+                z-index: 300;
+            }
         }
 
         .tab-btn {
