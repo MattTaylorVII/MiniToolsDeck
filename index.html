@@ -40,6 +40,11 @@
             --accent-hover: #059669;
             --border-color: #334155;
             --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+            --json-key: #38bdf8;
+            --json-string: #a78bfa;
+            --json-number: #f59e0b;
+            --json-boolean: #ef4444;
+            --json-null: #94a3b8;
         }
 
         .light-theme {
@@ -52,6 +57,11 @@
             --accent-hover: #047857;
             --border-color: #e2e8f0;
             --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            --json-key: #0284c7;
+            --json-string: #7c3aed;
+            --json-number: #d97706;
+            --json-boolean: #dc2626;
+            --json-null: #64748b;
         }
 
         * {
@@ -898,6 +908,120 @@
             display: block;
         }
 
+        /* UPGRADED JSON FORMATTER STYLES */
+        .json-toolbar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .json-toolbar button {
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            color: var(--text-main);
+        }
+        .json-toolbar button:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .json-toolbar button.primary {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+        .json-toolbar button.primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .json-editor-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            height: 500px;
+        }
+        @media (max-width: 768px) {
+            .json-editor-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+        }
+
+        .json-pane {
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        .json-pane-header {
+            background: var(--bg-secondary);
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .json-pane textarea {
+            flex: 1;
+            border: none;
+            border-radius: 0;
+            resize: none;
+            font-family: monospace;
+            font-size: 0.9rem;
+            padding: 1rem;
+            background: var(--bg-primary);
+            color: var(--text-main);
+            white-space: pre;
+            overflow: auto;
+        }
+        .json-pane textarea:focus {
+            outline: none;
+        }
+        .json-output-pane {
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+            overflow: auto;
+            white-space: pre;
+            color: var(--text-main);
+        }
+        
+        /* Syntax Highlighting */
+        .json-key { color: var(--json-key); font-weight: 600; }
+        .json-string { color: var(--json-string); }
+        .json-number { color: var(--json-number); }
+        .json-boolean { color: var(--json-boolean); font-weight: 600; }
+        .json-null { color: var(--json-null); font-style: italic; }
+
+        .json-error {
+            background: #ef4444;
+            color: #fff;
+            padding: 0.75rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .json-error i {
+            font-size: 1.1rem;
+        }
+
         footer {
             background-color: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
@@ -1041,7 +1165,7 @@
             </a>
             <a href="#json-formatter" class="tab-btn" onclick="switchTool('jsonformat', this)">
                 <i class="fa-solid fa-code"></i>
-                <span>JSON Beautifier</span>
+                <span>JSON Formatter</span>
             </a>
             <a href="#utm-builder" class="tab-btn" onclick="switchTool('utm', this)">
                 <i class="fa-solid fa-link"></i>
@@ -1748,18 +1872,46 @@
             </div>
         </div>
 
+        <!-- UPGRADED JSON FORMATTER -->
         <div id="tool-jsonformat" class="tool-panel">
             <div class="tool-header">
-                <h2 class="tool-title"><i class="fa-solid fa-code" style="color:var(--accent)"></i> JSON Beautifier & Validator</h2>
-                <p class="tool-desc">Clean up messy JSON, make it readable, and check for errors — all in your browser.</p>
+                <h2 class="tool-title"><i class="fa-solid fa-code" style="color:var(--accent)"></i> JSON Formatter & Validator</h2>
+                <p class="tool-desc">Instantly beautify, minify, and validate JSON with syntax highlighting and error detection. 100% client-side, secure, and private.</p>
             </div>
             <div>
-                <textarea id="json-input" placeholder='Paste unformatted JSON here... e.g. {"name":"MiniToolsDeck","active":true}'></textarea>
-                <button class="btn-submit" onclick="formatJSON()">Prettify & Format JSON</button>
-                <div class="result-box" style="align-items: flex-start; text-align: left;">
-                    <div class="result-subtext">Formatted Output</div>
-                    <pre id="json-output" style="width:100%; white-space: pre-wrap; font-family: monospace; font-size:0.85rem; color: var(--accent); margin-top:0.5rem;"></pre>
-                    <button class="copy-btn" onclick="copyElementText('json-output')"><i class="fa-regular fa-copy"></i> Copy Clean JSON</button>
+                <!-- Toolbar -->
+                <div class="json-toolbar">
+                    <button class="primary" onclick="processJSON('beautify')"><i class="fa-solid fa-wand-magic-sparkles"></i> Beautify</button>
+                    <button onclick="processJSON('minify')"><i class="fa-solid fa-compress"></i> Minify</button>
+                    <button onclick="clearJSON()"><i class="fa-solid fa-trash"></i> Clear</button>
+                    <button onclick="downloadJSON()" style="margin-left:auto;"><i class="fa-solid fa-download"></i> Download .json</button>
+                </div>
+
+                <!-- Error Banner -->
+                <div id="json-error" class="json-error">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span id="json-error-msg">Invalid JSON</span>
+                </div>
+
+                <!-- Editor Split Screen -->
+                <div class="json-editor-container">
+                    <!-- Input Pane -->
+                    <div class="json-pane">
+                        <div class="json-pane-header">
+                            <span>Input JSON</span>
+                            <span id="json-input-size">0 B</span>
+                        </div>
+                        <textarea id="json-input" placeholder='Paste raw JSON here... e.g. {"name":"MiniToolsDeck","active":true}' oninput="validateJSON()" spellcheck="false"></textarea>
+                    </div>
+
+                    <!-- Output Pane -->
+                    <div class="json-pane">
+                        <div class="json-pane-header">
+                            <span>Formatted Output</span>
+                            <span id="json-output-size">0 B</span>
+                        </div>
+                        <div class="json-output-pane" id="json-output">// Formatted JSON will appear here</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2340,6 +2492,7 @@
             checkContrast();
             generatePasswordLogic(); // Init password gen
             updateQRCode(); // Init QR code
+            validateJSON(); // Init JSON
         });
 
         function copyElementText(elementId) {
@@ -2363,6 +2516,122 @@
         function closeModal(id) { 
             const m = document.getElementById(id);
             if (m) m.style.display = 'none'; 
+        }
+
+        // === UPGRADED JSON FORMATTER LOGIC ===
+        function syntaxHighlight(json) {
+            if (typeof json != 'string') {
+                 json = JSON.stringify(json, undefined, 2);
+            }
+            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                let cls = 'json-number';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'json-key';
+                    } else {
+                        cls = 'json-string';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'json-boolean';
+                } else if (/null/.test(match)) {
+                    cls = 'json-null';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+        }
+
+        function updateByteSizes(inputStr, outputStr) {
+            const inputBytes = new Blob([inputStr]).size;
+            const outputBytes = new Blob([outputStr]).size;
+            
+            const formatBytes = (bytes) => {
+                if (bytes === 0) return '0 B';
+                const k = 1024;
+                const sizes = ['B', 'KB', 'MB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            };
+
+            document.getElementById('json-input-size').innerText = formatBytes(inputBytes);
+            document.getElementById('json-output-size').innerText = formatBytes(outputBytes);
+        }
+
+        function validateJSON() {
+            const input = document.getElementById('json-input').value.trim();
+            const errorDiv = document.getElementById('json-error');
+            const errorMsg = document.getElementById('json-error-msg');
+            const outputDiv = document.getElementById('json-output');
+
+            if (!input) {
+                errorDiv.style.display = 'none';
+                outputDiv.innerHTML = '// Formatted JSON will appear here';
+                updateByteSizes('', '');
+                return;
+            }
+
+            try {
+                const parsed = JSON.parse(input);
+                errorDiv.style.display = 'none';
+                
+                // Store the parsed object globally for formatting functions
+                window.currentJSONObj = parsed;
+                
+                const formatted = JSON.stringify(parsed, null, 2);
+                outputDiv.innerHTML = syntaxHighlight(formatted);
+                updateByteSizes(input, formatted);
+                
+            } catch (e) {
+                errorDiv.style.display = 'flex';
+                errorMsg.innerText = e.message;
+                outputDiv.innerHTML = '<span style="color: #ef4444;">// Fix the error to see formatted output</span>';
+                window.currentJSONObj = null;
+                updateByteSizes(input, '');
+            }
+        }
+
+        function processJSON(action) {
+            const input = document.getElementById('json-input').value.trim();
+            if (!input) return;
+            
+            try {
+                const parsed = JSON.parse(input);
+                const errorDiv = document.getElementById('json-error');
+                const outputDiv = document.getElementById('json-output');
+                errorDiv.style.display = 'none';
+                
+                let formatted;
+                if (action === 'beautify') {
+                    formatted = JSON.stringify(parsed, null, 2);
+                } else if (action === 'minify') {
+                    formatted = JSON.stringify(parsed);
+                }
+                
+                outputDiv.innerHTML = syntaxHighlight(formatted);
+                updateByteSizes(input, formatted);
+                
+            } catch (e) {
+                // Validation function will handle the error display
+                validateJSON();
+            }
+        }
+
+        function clearJSON() {
+            document.getElementById('json-input').value = '';
+            validateJSON();
+        }
+
+        function downloadJSON() {
+            if (!window.currentJSONObj) return alert('Please enter valid JSON first.');
+            
+            const formatted = JSON.stringify(window.currentJSONObj, null, 2);
+            const blob = new Blob([formatted], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'data.json';
+            a.click();
+            URL.revokeObjectURL(url);
         }
 
         // === UPGRADED QR CODE GENERATOR LOGIC ===
@@ -3639,6 +3908,7 @@
             updateFaviconPreview();
             generatePasswordLogic();
             updateQRCode();
+            validateJSON();
         });
     </script>
 </body>
