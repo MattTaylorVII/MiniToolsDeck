@@ -1,0 +1,59 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b1220"><title>Signal Audit | MiniToolsDeck</title><meta name="description" content="Audit campaign CSV data for missing values, duplicates, invalid metrics and tracking gaps. Transparent, browser-only marketing data quality analysis."><link rel="canonical" href="https://minitoolsdeck.vercel.app/signal-audit/"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"><link rel="stylesheet" href="/assets/premium-unified.css">
+<style>
+:root{--bg:#0b1220;--panel:#142238;--line:#2c3f55;--text:#f1f7fc;--muted:#a7b8ca;--teal:#40e0ca}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#13384a 0%,transparent 45%),var(--bg);color:var(--text);font:14px/1.55 Inter,sans-serif}
+h1,h2,h3,.brand{font-family:Manrope,Inter,sans-serif}main{max-width:1220px;margin:auto;padding:34px 24px 75px}h1{font-size:clamp(30px,4vw,49px);letter-spacing:-1.7px;line-height:1.15;margin:8px 0 12px}h2{font-size:19px;margin:0 0 12px}h3{font-size:14px;margin:12px 0 6px}
+.eyebrow{color:var(--teal);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}.intro{max-width:820px;color:var(--muted);font-size:15px;margin:0 0 24px}
+.layout{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:18px;align-items:start}.card{min-width:0;background:linear-gradient(150deg,#142238,#101b2b);border:1px solid var(--line);border-radius:17px;padding:21px;margin-bottom:17px}
+.sub{font-size:12px;color:var(--muted);margin:0 0 14px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.fieldgroup{min-width:0;margin:0 0 11px}label{display:block;font-weight:700;font-size:12px;margin-bottom:5px;color:#d4e2ef}
+input,textarea,select{font:inherit;color:#f4f8ff;background:#0b192a;border:1px solid #395069;border-radius:9px;padding:10px;width:100%;min-width:0}textarea{resize:vertical;min-height:65px}input:focus,textarea:focus,select:focus{outline:2px solid var(--teal);outline-offset:1px}
+.btn{border:1px solid #39556c;background:#21374d;color:#f1f7fc;padding:10px 13px;border-radius:9px;font:700 12px Inter;cursor:pointer}.btn.primary{background:var(--teal);border-color:var(--teal);color:#08262c}.btn:hover{filter:brightness(1.1)}.actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.pill{display:inline-block;border:1px solid #3c6570;border-radius:20px;padding:4px 9px;color:var(--teal);font-size:11px;font-weight:700}
+.score{font:800 36px Manrope;letter-spacing:-1px}.meter{background:#24394e;height:10px;border-radius:20px;overflow:hidden;margin:8px 0 15px}.meter>div{height:100%;width:0;background:linear-gradient(90deg,#fb7185,#f9c76a,#40e0ca)}
+.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.stat{padding:12px;border:1px solid #31475d;border-radius:11px;background:#0b1a2c}.stat strong{font:800 21px Manrope;display:block}.stat span{font-size:11px;color:var(--muted)}
+.issue{padding:12px 0;border-bottom:1px solid #2b4055}.issue:last-child{border:0}.issue strong{font-size:13px}.issue p{font-size:12px;color:var(--muted);margin:5px 0}.issue .pill{margin-left:7px}.empty{padding:20px;border:1px dashed #4a5e72;border-radius:10px;color:var(--muted);font-size:12px}
+.privacy{background:#103032;border:1px solid #27635c;color:#bcebe4;padding:13px 16px;border-radius:11px;margin-top:10px;font-size:12px}
+.small{font-size:11px;color:var(--muted)}.toggle{display:flex;align-items:center;gap:9px;margin:10px 0}.toggle input{width:auto;accent-color:#40e0ca}
+body.light-theme{--bg:#f8fafc;--panel:#fff;--line:#d6e2ed;--text:#14263a;--muted:#52677b;--teal:#078777;background:#f8fafc;color:var(--text)}
+body.light-theme .card{background:#fff}body.light-theme input,body.light-theme textarea,body.light-theme select{background:#f8fafc;color:#14263a;border-color:#bac9d8}body.light-theme label{color:#30445a}body.light-theme .stat{background:#f1f5f9}body.light-theme .btn:not(.primary){background:#e9f1f7;color:#14263a}body.light-theme .privacy{background:#e6f7f1;color:#145c4b}
+@media(max-width:900px){.layout{grid-template-columns:1fr}}@media(max-width:580px){main{padding:25px 15px 55px}.card{padding:15px}.row{grid-template-columns:1fr}.statgrid{gap:6px}.stat{padding:8px}.stat strong{font-size:18px}}
+@media print{header,.actions,.privacy,.intro,.eyebrow,.editcol{display:none!important}.layout{display:block}.card{break-inside:avoid;background:#fff;color:#111;border:1px solid #ddd}.issue p,.sub,.small{color:#444}body{background:white;color:black}}
+
+.csv-zone{border:1px dashed #456078;background:#102237;border-radius:13px;padding:22px;text-align:center;cursor:pointer}
+.csv-zone:hover{border-color:#40e0ca}.csv-zone i{font-size:25px;color:#40e0ca;display:block;margin-bottom:9px}
+.mapping{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.mapping label{font-size:11px}.mapping select{font-size:12px}
+.chart-row{display:grid;grid-template-columns:95px 1fr 42px;gap:9px;align-items:center;margin:12px 0;font-size:12px}
+.bar{height:9px;background:#253b50;border-radius:20px;overflow:hidden}.bar>div{height:100%;background:#40e0ca}
+.issue-list{max-height:400px;overflow:auto}.issue{overflow-wrap:anywhere}.issue code{color:#a9ebdd;font-size:11px}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px}
+@media(max-width:580px){.mapping{grid-template-columns:1fr}.chart-row{grid-template-columns:80px 1fr 35px}}
+</style><body class="mtd-algorithm"><header><div class="header-container"><a class="brand" href="/"><div class="brand-icon"><i class="fa-solid fa-layer-group"></i></div><span>MiniTools<span class="brand-accent">Deck</span></span></a><div class="header-actions"><a aria-label="Home" class="mtd-home-button" href="/" title="Home"><i aria-hidden="true" class="fa-solid fa-house"></i></a><button aria-label="Toggle Light/Dark Theme" class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme" type="button"><i class="fa-solid fa-moon"></i></button><a class="mtd-back" href="/#toolGrid">← Back to All Tools</a></div></div></header><main>
+<div class="eyebrow">Creator Business Intelligence · Private by Design</div>
+<h1>Signal Audit</h1>
+<p class="intro">Find data-quality problems before trusting campaign performance. Import a CSV, map its columns, and inspect missing values, duplicate records, invalid metrics and tracking coverage—all locally in your browser.</p>
+<div class="layout"><div class="editcol">
+<section class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h2>Campaign Data</h2><span class="pill">Local-only analysis</span></div>
+<p class="sub">Upload a CSV with campaign, date, channel, impressions, clicks, spend, conversions or UTM fields. No account or API key required.</p>
+<div id="drop" class="csv-zone" tabindex="0" role="button" aria-label="Upload CSV file"><i class="fa-solid fa-file-csv"></i><strong>Drop Your CSV Here</strong><div class="small">or click to browse · CSV up to 10 MB</div></div>
+<input type="file" id="file" accept=".csv,text/csv" hidden>
+<div class="actions"><button class="btn primary" id="example">Load Example</button><button class="btn" id="reset">Clear</button></div>
+<div id="dataset" class="small" role="status">No dataset loaded.</div></section>
+<section class="card"><h2>Column Mapping</h2><p class="sub">Match your CSV headers to the metrics below. Leave fields as “Not mapped” if unavailable; missing fields are disclosed, not fabricated.</p>
+<div class="mapping" id="mapping"></div>
+<div class="toggle"><input type="checkbox" id="strict" checked><label for="strict" style="margin:0">Check tracking fields for missing values</label></div>
+<div class="actions"><button class="btn primary" id="analyse">Run Signal Audit</button></div>
+</section>
+<section class="card"><h2>What This Audit Checks</h2><p class="sub">Completeness, numeric validity, negative values, impossible metric relationships, duplicate rows, date parsing, and tracking coverage. Anomaly checks are indicators, not proof of bots, fraud or attribution failure.</p></section>
+</div><div>
+<section class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h2>Signal Reliability Dashboard</h2><span class="pill" id="status">Awaiting data</span></div>
+<div class="empty" id="empty">Load a CSV or example dataset, confirm the column mapping, then run the audit.</div>
+<div id="results" hidden><div class="score"><span id="score">—</span><span style="font-size:13px;color:var(--muted)"> / 100 · Data Quality Index</span></div><div class="meter"><div id="meter"></div></div>
+<div class="statgrid"><div class="stat"><strong id="rows">0</strong><span>Records</span></div><div class="stat"><strong id="flags">0</strong><span>Flagged Checks</span></div><div class="stat"><strong id="columns">0</strong><span>Mapped Fields</span></div></div>
+<h3 style="margin-top:20px">Quality Dimensions</h3><div id="dimensions"></div>
+<h3>Findings &amp; Recommended Checks</h3><div id="issues" class="issue-list"></div>
+<div class="actions"><button class="btn primary" id="downloadJson">Download JSON Report</button><button class="btn" id="downloadCsv">Download Findings CSV</button><button class="btn" id="print">Print Report</button></div></div></section>
+<section class="card"><h2>Methodology &amp; Limitations</h2><p class="sub">The index is a transparent heuristic, not a prediction or independently validated reliability rating. It begins at 100 and deducts up to 25 points per dimension based on affected-record rates. Unmapped fields are not tested and are shown as unassessed; the score is based only on available checks.</p><p class="sub">No identity resolution, bot detection, causal attribution, conversion lift or revenue impact is inferred from these records. Investigate findings against source systems before changing budgets.</p></section>
+</div></div>
+<div class="privacy"><i class="fa-solid fa-lock"></i> Your campaign file stays in this browser tab. Processing and exports happen on your device; nothing is sent to MiniToolsDeck.</div>
+</main><script src="/signal-audit/app.js" defer></script></body></html>
