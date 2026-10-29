@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Secure Password Generator — Free Online Tool | MiniToolsDeck</title><meta content="Generate strong random passwords and memorable passphrases. Free, browser-based tool with no signup required." name="description"/><meta content="index,follow" name="robots"/><link href="https://minitoolsdeck.vercel.app/secure-password-generator/" rel="canonical"/>
+<meta content="website" property="og:type"/><meta content="MiniToolsDeck" property="og:site_name"/><meta content="Secure Password Generator — Free Online Tool | MiniToolsDeck" property="og:title"/><meta content="Generate strong random passwords and memorable passphrases. Free, browser-based tool with no signup required." property="og:description"/><meta content="https://minitoolsdeck.vercel.app/secure-password-generator/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><meta content="Secure Password Generator — Free Online Tool | MiniToolsDeck" name="twitter:title"/><meta content="Generate strong random passwords and memorable passphrases. Free, browser-based tool with no signup required." name="twitter:description"/>
+<meta content="#0f172a" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='60' fill='%2310b981'/%3E%3Cpath d='M128 160h256v32H128zm0 64h256v32H128zm0 64h192v32H128z' fill='white'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="/assets/styles.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Secure Password Generator", "url": "https://minitoolsdeck.vercel.app/secure-password-generator/", "description": "Generate strong random passwords and memorable passphrases.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script><link href="/assets/design-system.css" rel="stylesheet"/><link href="/assets/premium-unified.css" rel="stylesheet"/></head><body class="mtd-premium-page"><header>
+<div class="header-container">
+<a class="brand" href="/">
+<div class="brand-icon">
+<i class="fa-solid fa-layer-group"></i>
+</div>
+<span>MiniTools<span class="brand-accent">Deck</span></span>
+</a>
+<div class="header-actions">
+
+
+<button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme">
+<i class="fa-solid fa-moon"></i>
+</button>
+<a class="mtd-back" href="/">← Back to All Tools</a></div>
+</div>
+</header><main><div class="site-breadcrumb"><a href="/">All Tools</a> / Secure Password Generator</div><section class="seo-intro"><h1>Secure Password Generator</h1><p>Generate strong random passwords and memorable passphrases.</p></section><div class="tool-panel" id="tool-password">
+<div class="tool-header">
+<h2 class="tool-title"><i class="fa-solid fa-key" style="color:var(--accent)"></i> Secure Password Generator</h2>
+<p class="tool-desc">Create strong, unique passwords instantly — generated securely in your browser.</p>
+</div>
+<div class="grid-2">
+<div>
+<div class="form-group">
+<label for="pwd-mode">Generation style</label>
+<select id="pwd-mode" onchange="togglePasswordMode()" style="width:100%;">
+<option value="password">Random password</option>
+<option value="passphrase">Memorable passphrase</option>
+</select>
+<p class="result-subtext" style="margin-top:.4rem;">Random passwords maximise character variety; passphrases are easier to remember.</p>
+</div>
+<div class="form-group" id="pwd-length-group">
+<label for="pwd-length">Password length: <strong><span id="pwd-len-val">16</span> characters</strong></label>
+<input id="pwd-length" max="64" min="8" oninput="document.getElementById('pwd-len-val').innerText = this.value" style="width:100%" type="range" value="16"/>
+</div>
+<div class="form-group" hidden="" id="pwd-words-group">
+<label for="pwd-word-count">Words in passphrase</label>
+<select id="pwd-word-count" style="width:100%;"><option value="4">4 words</option><option selected="" value="5">5 words</option><option value="6">6 words</option><option value="7">7 words</option><option value="8">8 words</option></select>
+<label style="display:flex;align-items:center;gap:.5rem;font-weight:normal;margin-top:.65rem;"><input checked="" id="pwd-word-separator" type="checkbox"/> Separate words with hyphens</label>
+</div>
+<div class="form-group" id="pwd-char-options" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem;">
+<label style="display:flex;align-items:center;gap:.5rem;font-weight:normal;"><input checked="" id="pwd-uppercase" type="checkbox"/> Uppercase (A–Z)</label>
+<label style="display:flex;align-items:center;gap:.5rem;font-weight:normal;"><input checked="" id="pwd-lowercase" type="checkbox"/> Lowercase (a–z)</label>
+<label style="display:flex;align-items:center;gap:.5rem;font-weight:normal;"><input checked="" id="pwd-numbers" type="checkbox"/> Numbers (0–9)</label>
+<label style="display:flex;align-items:center;gap:.5rem;font-weight:normal;"><input checked="" id="pwd-symbols" type="checkbox"/> Symbols (!@#…)</label>
+<label style="display:flex;align-items:center;gap:.5rem;font-weight:normal;grid-column:1/-1;"><input id="pwd-ambiguous" type="checkbox"/> Avoid similar characters (O, 0, l, 1)</label>
+</div>
+<button class="btn-submit" onclick="genPassword()">Generate Password</button>
+<p class="result-subtext" id="pwd-status" role="status" style="margin-top:.75rem;">Choose your settings, then generate a password.</p>
+</div>
+<div>
+<div class="result-box" style="gap:.75rem;">
+<div class="result-subtext">Your password</div>
+<div aria-live="polite" class="result-value" id="pwd-res" style="font-size:1.15rem;overflow-wrap:anywhere;word-break:break-word;">Click Generate</div>
+<div class="result-subtext" id="pwd-strength">Strength estimate appears here</div>
+<button class="copy-btn" onclick="copyGeneratedPassword()"><i class="fa-regular fa-copy"></i> Copy Password</button>
+</div>
+<p class="result-subtext" style="margin-top:.75rem;">Privacy: the password is generated in this page and is not uploaded or saved by MiniToolsDeck. Store it in a trusted password manager.</p>
+</div>
+</div>
+</div><section aria-label="Guide" class="seo-guide"><h2>How To Use Secure Password Generator</h2><p>Select a password style and length, then generate and copy your result.</p><h3>Frequently Asked Question</h3><p><strong>Are generated passwords sent to a server?</strong></p><p>The generator runs in your browser; save passwords securely in a password manager.</p></section><section class="related-tools"><h2>Related Free Tools</h2><ul><li><a href="/smart-qr-code-generator/">Smart QR Code Generator</a></li><li><a href="/smart-image-resizer/">Smart Image Resizer</a></li><li><a href="/color-contrast-checker/">Color Contrast Checker</a></li></ul></section></main><footer>
+<div class="footer-links">
+<button onclick="openModal('modal-privacy')" type="button">Privacy Policy</button>
+<button onclick="openModal('modal-terms')" type="button">Terms of Service</button>
+<button onclick="openModal('modal-about')" type="button">About &amp; Contact</button>
+</div>
+<p>© 2026 MiniToolsDeck. All rights reserved. Built for modern creators &amp; growth marketers.</p>
+</footer><div aria-label="Privacy Policy" aria-modal="true" class="modal-overlay" id="modal-privacy" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Privacy Policy" class="modal-close" onclick="closeModal('modal-privacy')" type="button">×</button>
+<h3>Privacy Policy</h3>
+<br/>
+<p>MiniToolsDeck operates with a client-first privacy architecture. All utility calculations, image conversions, and data formatting occur directly inside your browser. We do not store or transmit user files to external servers.</p>
+</div>
+</div><div aria-label="Terms of Service" aria-modal="true" class="modal-overlay" id="modal-terms" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Terms of Service" class="modal-close" onclick="closeModal('modal-terms')" type="button">×</button>
+<h3>Terms of Service</h3>
+<br/>
+<p>MiniToolsDeck provides web utilities "as is" without warranties of any kind.</p>
+</div>
+</div><div aria-label="About &amp; Contact" aria-modal="true" class="modal-overlay" id="modal-about" role="dialog">
+<div class="modal-content">
+<button aria-label="Close About &amp; Contact" class="modal-close" onclick="closeModal('modal-about')" type="button">×</button>
+<h3>About &amp;Amp Contact</h3>
+<br/>
+<p>MiniToolsDeck is the modern creator and growth stack—a suite of lightning-fast browser utilities built for digital marketers, developers, and content professionals.</p>
+<br/>
+<p>For inquiries, email: <strong>contact@minitoolsdeck.com</strong></p>
+</div>
+</div><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script defer="" src="/assets/tools.js"></script></body></html>

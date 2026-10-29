@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SEO Meta Tag &amp; Search Preview Studio | MiniToolsDeck</title><meta content="Audit a page’s SEO metadata, search preview and social-sharing tags. Free, browser-based tool with no signup required." name="description"/><meta content="index,follow" name="robots"/><link href="https://minitoolsdeck.vercel.app/seo-meta-tag-checker/" rel="canonical"/>
+<meta content="website" property="og:type"/><meta content="MiniToolsDeck" property="og:site_name"/><meta content="SEO Meta Tag Checker — Free Online Tool | MiniToolsDeck" property="og:title"/><meta content="Audit a page’s SEO metadata, search preview and social-sharing tags. Free, browser-based tool with no signup required." property="og:description"/><meta content="https://minitoolsdeck.vercel.app/seo-meta-tag-checker/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><meta content="SEO Meta Tag Checker — Free Online Tool | MiniToolsDeck" name="twitter:title"/><meta content="Audit a page’s SEO metadata, search preview and social-sharing tags. Free, browser-based tool with no signup required." name="twitter:description"/>
+<meta content="#0f172a" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='60' fill='%2310b981'/%3E%3Cpath d='M128 160h256v32H128zm0 64h256v32H128zm0 64h192v32H128z' fill='white'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="/assets/styles.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "SEO Meta Tag Checker", "url": "https://minitoolsdeck.vercel.app/seo-meta-tag-checker/", "description": "Audit a page’s SEO metadata, search preview and social-sharing tags.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script><link href="/assets/design-system.css" rel="stylesheet"/><link href="/assets/premium-unified.css" rel="stylesheet"/></head><body class="mtd-premium-page"><header>
+<div class="header-container">
+<a class="brand" href="/">
+<div class="brand-icon">
+<i class="fa-solid fa-layer-group"></i>
+</div>
+<span>MiniTools<span class="brand-accent">Deck</span></span>
+</a>
+<div class="header-actions">
+
+
+<button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme">
+<i class="fa-solid fa-moon"></i>
+</button>
+<a class="mtd-back" href="/">← Back to All Tools</a></div>
+</div>
+</header><main><div class="site-breadcrumb"><a href="/">All Tools</a> / SEO Meta Tag &amp; Search Preview Studio</div><section class="seo-intro"><h1>SEO Meta Tag &amp; Search Preview Studio</h1><p>Audit a page’s SEO metadata, search preview and social-sharing tags.</p></section><div class="tool-panel" id="tool-metainspect">
+<div class="tool-header"><h2 class="tool-title"><i class="fa-solid fa-tag" style="color:var(--accent)"></i> SEO Meta Tag Checker</h2><p class="tool-desc">Audit page titles, SEO descriptions, indexing directives, canonical URLs, Open Graph and X cards. Preview search and social appearances and export a clear report.</p></div>
+<div class="meta-layout">
+<div>
+<div class="form-group"><label for="meta-url">Page URL <span class="meta-muted">(optional)</span></label><input autocomplete="url" id="meta-url" placeholder="https://example.com/page" type="url"/><small class="meta-muted">Used to resolve relative image and canonical links. Fetching a URL is optional and may be blocked by the website's CORS settings.</small></div>
+<button class="copy-btn" onclick="metaFetchURL()" type="button"><i class="fa-solid fa-globe"></i> Try fetching URL</button>
+<div class="form-group" style="margin-top:1rem"><label for="meta-input">HTML source</label><textarea id="meta-input" placeholder="Paste the full HTML document or just the &lt;head&gt; section here..." rows="11" spellcheck="false"></textarea></div>
+<div class="meta-button-row"><button class="btn-submit" onclick="inspectMetaTags()" type="button"><i class="fa-solid fa-magnifying-glass-chart"></i> Analyze Meta Tags</button><button class="copy-btn" onclick="metaLoadExample()" type="button">Load example</button><button class="copy-btn" onclick="metaReset()" type="button">Clear</button></div>
+<p class="meta-muted" id="meta-status" role="status">Analysis happens in your browser. Paste HTML to get started.</p>
+</div>
+<div class="meta-empty" id="meta-empty"><i class="fa-solid fa-list-check"></i><strong>Ready to inspect</strong><span>Analyze HTML to reveal SEO issues, metadata previews and actionable improvements.</span></div>
+<div id="meta-results" style="display:none">
+<div class="meta-summary"><div><span class="meta-muted">Audit score</span><strong id="meta-score">—</strong><small id="meta-score-label"></small></div><div><span class="meta-muted">Checks passed</span><strong id="meta-passed">—</strong><small id="meta-check-count"></small></div></div>
+<h3 class="meta-section-title">SEO &amp;Amp Sharing Checks</h3><div class="meta-checks" id="meta-checks"></div>
+<h3 class="meta-section-title">Google-Style Search Preview</h3><div class="meta-serp"><div class="meta-serp-url" id="meta-serp-url"></div><div class="meta-serp-title" id="meta-serp-title"></div><div class="meta-serp-desc" id="meta-serp-desc"></div></div>
+<h3 class="meta-section-title">Social Share Preview</h3><div class="meta-social"><div class="meta-social-image" id="meta-social-image">No Open Graph image</div><div class="meta-social-body"><small id="meta-social-domain"></small><strong id="meta-social-title"></strong><span id="meta-social-desc"></span></div></div>
+<h3 class="meta-section-title">Detected Metadata</h3><div class="meta-tag-list" id="meta-tags"></div>
+<div class="meta-button-row" style="margin-top:1rem"><button class="copy-btn" onclick="metaCopyReport()" type="button"><i class="fa-regular fa-copy"></i> Copy report</button><button class="copy-btn" onclick="metaExport('csv')" type="button">Export CSV</button><button class="copy-btn" onclick="metaExport('json')" type="button">Export JSON</button></div>
+</div>
+</div>
+</div><h2 style="margin:32px 0 12px;font-size:1.35rem">Search Result Preview</h2><div class="tool-panel" id="tool-serp" style="margin-top:24px">
+<div class="tool-header">
+<h2 class="tool-title"><i class="fa-solid fa-magnifying-glass" style="color:var(--accent)"></i> Google Search Result Previewer</h2>
+<p class="tool-desc">Preview and refine your search snippet, check title and description length, and generate ready-to-use SEO meta tags.</p>
+</div>
+<div class="grid-2 serp-tool-layout">
+<div class="serp-editor">
+<div class="form-group">
+<label for="serp-url-input">Page URL</label>
+<input id="serp-url-input" oninput="updateSERP()" placeholder="https://example.com/page" type="url"/>
+<small class="serp-help">Used to display the breadcrumb-style URL in the preview.</small>
+</div>
+<div class="form-group">
+<label for="serp-title-input">SEO title <span class="serp-counter">· <span id="serp-title-len">0</span> characters</span></label>
+<input id="serp-title-input" maxlength="300" oninput="updateSERP()" placeholder="e.g. Free Online Tools for Creators | MiniToolsDeck" type="text"/>
+<div class="serp-meter-row"><span id="serp-title-guidance">Aim for a clear, concise title.</span><span id="serp-title-pixels">0 px estimated</span></div>
+<div class="serp-meter"><span id="serp-title-meter"></span></div>
+</div>
+<div class="form-group">
+<label for="serp-desc-input">Meta description <span class="serp-counter">· <span id="serp-desc-len">0</span> characters</span></label>
+<textarea id="serp-desc-input" maxlength="500" oninput="updateSERP()" placeholder="Summarise the page clearly and give searchers a reason to visit." rows="4"></textarea>
+<div class="serp-meter-row"><span id="serp-desc-guidance">Aim for a useful, specific summary.</span><span id="serp-desc-pixels">0 px estimated</span></div>
+<div class="serp-meter"><span id="serp-desc-meter"></span></div>
+</div>
+<details class="serp-advanced">
+<summary>Advanced options</summary>
+<div class="form-group" style="margin-top:1rem;">
+<label for="serp-site-name">Site or brand name</label>
+<input id="serp-site-name" oninput="updateSERP()" placeholder="e.g. MiniToolsDeck" type="text"/>
+</div>
+<div class="form-group">
+<label for="serp-title-suffix">Title separator</label>
+<select id="serp-title-suffix" onchange="updateSERP()"><option value="|">| Vertical bar</option><option value="–">– En dash</option><option value="-">- Hyphen</option><option value=":">: Colon</option></select>
+</div>
+</details>
+<div style="display:flex;gap:.65rem;flex-wrap:wrap;margin-top:1rem;">
+<button class="btn-submit" onclick="generateSERPMeta()" type="button"><i class="fa-solid fa-code"></i> Generate meta tags</button>
+<button class="copy-btn" onclick="resetSERP()" type="button">Reset</button>
+</div>
+</div>
+<div class="serp-preview-column">
+<div class="serp-preview-heading"><strong>Search result preview</strong><span class="serp-preview-note">Illustrative, not an exact Google rendering</span></div>
+<div class="serp-card" id="serp-preview-card">
+<div class="serp-brand-row"><span class="serp-favicon">G</span><div class="serp-brand-text"><div id="serp-prev-domain">example.com</div><div class="serp-url" id="serp-prev-url">https://example.com/your-page</div></div></div>
+<div class="serp-title" id="serp-prev-title">Your SEO title will appear here</div>
+<div class="serp-desc" id="serp-prev-desc">Your meta description preview will appear here. Write a useful summary that matches the page content.</div>
+</div>
+<div aria-live="polite" class="serp-result-hint" id="serp-overall-hint" role="status">Add your title, description and page URL to preview your result.</div>
+<div class="serp-output-wrap" hidden="" id="serp-output-wrap">
+<div class="serp-output-head"><strong>Generated HTML</strong><button class="copy-btn" onclick="copySERPMeta()" type="button">Copy tags</button><button class="copy-btn" onclick="downloadSERPMeta()" type="button">Download</button></div>
+<pre class="serp-meta-output" id="serp-meta-output"></pre>
+</div>
+<p class="serp-disclaimer">Google may rewrite titles and snippets or truncate them based on the query, device and page content. Pixel estimates are approximate.</p>
+</div>
+</div>
+</div><section aria-label="Guide" class="seo-guide"><h2>How To Use SEO Meta Tag Checker</h2><p>Paste HTML or try fetching a URL, then review the checklist and preview results.</p><h3>Frequently Asked Question</h3><p><strong>Can every website be fetched automatically?</strong></p><p>No. Browser cross-origin restrictions may require you to paste the page HTML.</p></section><section class="related-tools"><h2>Related Free Tools</h2><ul><li><a href="/smart-html-compressor/">Smart HTML Compressor</a></li><li><a href="/smart-headline-analyzer/">Smart Headline Analyzer</a></li><li><a href="/batch-image-converter/">Batch Image Converter</a></li></ul></section></main><footer>
+<div class="footer-links">
+<button onclick="openModal('modal-privacy')" type="button">Privacy Policy</button>
+<button onclick="openModal('modal-terms')" type="button">Terms of Service</button>
+<button onclick="openModal('modal-about')" type="button">About &amp; Contact</button>
+</div>
+<p>© 2026 MiniToolsDeck. All rights reserved. Built for modern creators &amp; growth marketers.</p>
+</footer><div aria-label="Privacy Policy" aria-modal="true" class="modal-overlay" id="modal-privacy" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Privacy Policy" class="modal-close" onclick="closeModal('modal-privacy')" type="button">×</button>
+<h3>Privacy Policy</h3>
+<br/>
+<p>MiniToolsDeck operates with a client-first privacy architecture. All utility calculations, image conversions, and data formatting occur directly inside your browser. We do not store or transmit user files to external servers.</p>
+</div>
+</div><div aria-label="Terms of Service" aria-modal="true" class="modal-overlay" id="modal-terms" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Terms of Service" class="modal-close" onclick="closeModal('modal-terms')" type="button">×</button>
+<h3>Terms of Service</h3>
+<br/>
+<p>MiniToolsDeck provides web utilities "as is" without warranties of any kind.</p>
+</div>
+</div><div aria-label="About &amp; Contact" aria-modal="true" class="modal-overlay" id="modal-about" role="dialog">
+<div class="modal-content">
+<button aria-label="Close About &amp; Contact" class="modal-close" onclick="closeModal('modal-about')" type="button">×</button>
+<h3>About &amp;Amp Contact</h3>
+<br/>
+<p>MiniToolsDeck is the modern creator and growth stack—a suite of lightning-fast browser utilities built for digital marketers, developers, and content professionals.</p>
+<br/>
+<p>For inquiries, email: <strong>contact@minitoolsdeck.com</strong></p>
+</div>
+</div><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script defer="" src="/assets/tools.js"></script></body></html>

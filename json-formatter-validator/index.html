@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JSON Formatter &amp; Validator — Free Online Tool | MiniToolsDeck</title><meta content="Format, inspect and validate JSON so data is easier to read and troubleshoot. Free, browser-based tool with no signup required." name="description"/><meta content="index,follow" name="robots"/><link href="https://minitoolsdeck.vercel.app/json-formatter-validator/" rel="canonical"/>
+<meta content="website" property="og:type"/><meta content="MiniToolsDeck" property="og:site_name"/><meta content="JSON Formatter &amp; Validator — Free Online Tool | MiniToolsDeck" property="og:title"/><meta content="Format, inspect and validate JSON so data is easier to read and troubleshoot. Free, browser-based tool with no signup required." property="og:description"/><meta content="https://minitoolsdeck.vercel.app/json-formatter-validator/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><meta content="JSON Formatter &amp; Validator — Free Online Tool | MiniToolsDeck" name="twitter:title"/><meta content="Format, inspect and validate JSON so data is easier to read and troubleshoot. Free, browser-based tool with no signup required." name="twitter:description"/>
+<meta content="#0f172a" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='60' fill='%2310b981'/%3E%3Cpath d='M128 160h256v32H128zm0 64h256v32H128zm0 64h192v32H128z' fill='white'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="/assets/styles.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "JSON Formatter & Validator", "url": "https://minitoolsdeck.vercel.app/json-formatter-validator/", "description": "Format, inspect and validate JSON so data is easier to read and troubleshoot.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script><link href="/assets/design-system.css" rel="stylesheet"/><link href="/assets/premium-unified.css" rel="stylesheet"/></head><body class="mtd-premium-page"><header>
+<div class="header-container">
+<a class="brand" href="/">
+<div class="brand-icon">
+<i class="fa-solid fa-layer-group"></i>
+</div>
+<span>MiniTools<span class="brand-accent">Deck</span></span>
+</a>
+<div class="header-actions">
+
+
+<button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme">
+<i class="fa-solid fa-moon"></i>
+</button>
+<a class="mtd-back" href="/">← Back to All Tools</a></div>
+</div>
+</header><main><div class="site-breadcrumb"><a href="/">All Tools</a> / JSON Formatter &amp; Validator</div><section class="seo-intro"><h1>SEO Meta Tag &amp; Search Preview Studio</h1><p>Format, inspect and validate JSON so data is easier to read and troubleshoot.</p></section><div class="tool-panel" id="tool-jsonformat">
+<div class="tool-header">
+<h2 class="tool-title"><i class="fa-solid fa-code" style="color:var(--accent)"></i> JSON Formatter &amp; Validator</h2>
+<p class="tool-desc">Format, minify, validate and inspect JSON. Everything runs locally in your browser.</p>
+</div>
+<div class="form-group">
+<label for="json-input">JSON input</label>
+<textarea autocapitalize="off" autocomplete="off" id="json-input" placeholder='Paste JSON here… e.g. {"name":"MiniToolsDeck","active":true}' spellcheck="false" style="min-height:190px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;"></textarea>
+<div style="display:flex;justify-content:space-between;gap:.75rem;flex-wrap:wrap;margin-top:.4rem;">
+<span class="result-subtext" id="json-input-stats">0 characters · 0 KB</span>
+<span class="result-subtext">Tip: JSON requires double quotes around property names and strings.</span>
+</div>
+</div>
+<details style="margin:.75rem 0 1rem;">
+<summary style="cursor:pointer;font-weight:600;padding:.35rem 0;">Formatting options</summary>
+<div class="grid-2" style="margin-top:.75rem;">
+<div class="form-group">
+<label for="json-indent">Indentation</label>
+<select id="json-indent"><option value="2">2 spaces (recommended)</option><option value="4">4 spaces</option><option value="tab">Tab</option></select>
+</div>
+<div class="form-group" style="display:flex;align-items:center;gap:.55rem;">
+<input id="json-sort-keys" style="width:auto;min-height:auto;" type="checkbox"/>
+<label for="json-sort-keys" style="margin:0;">Sort object keys alphabetically</label>
+</div>
+</div>
+</details>
+<div style="display:flex;gap:.55rem;flex-wrap:wrap;margin-bottom:1rem;">
+<button class="btn-submit" onclick="formatJSON()" type="button"><i class="fa-solid fa-wand-magic-sparkles"></i> Format &amp; Validate</button>
+<button class="copy-btn" onclick="minifyJSON()" type="button"><i class="fa-solid fa-compress"></i> Minify</button>
+<button class="copy-btn" onclick="loadJSONSample()" type="button">Load sample</button>
+<button class="copy-btn" onclick="clearJSONTool()" type="button"><i class="fa-solid fa-rotate-left"></i> Clear</button>
+</div>
+<div aria-live="polite" class="result-subtext" id="json-status" role="status" style="margin:.5rem 0 .8rem;">Paste JSON to begin.</div>
+<div class="result-box" style="align-items:stretch;text-align:left;gap:.65rem;">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;">
+<strong>Output</strong><span class="result-subtext" id="json-output-stats">No output yet</span>
+</div>
+<pre aria-label="Formatted JSON output" id="json-output" style="width:100%;max-height:420px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85rem;color:var(--accent);margin:0;" tabindex="0"></pre>
+<div style="display:flex;gap:.55rem;flex-wrap:wrap;">
+<button class="copy-btn" disabled="" id="json-copy-btn" onclick="copyJSONOutput()" type="button"><i class="fa-regular fa-copy"></i> Copy output</button>
+<button class="copy-btn" disabled="" id="json-download-btn" onclick="downloadJSONOutput()" type="button"><i class="fa-solid fa-download"></i> Download .json</button>
+</div>
+</div>
+<p class="result-subtext" style="margin-top:.8rem;">Privacy: your JSON is processed in this browser and is not uploaded by this tool.</p>
+</div><section aria-label="Guide" class="seo-guide"><h2>How To Use JSON Formatter &amp;Amp Validator</h2><p>Paste JSON, run the formatter and review any parsing errors before exporting.</p><h3>Frequently Asked Question</h3><p><strong>Does formatting change JSON values?</strong></p><p>Formatting should preserve parsed data values; optional sorting can change key order.</p></section><section class="related-tools"><h2>Related Free Tools</h2><ul><li><a href="/utm-campaign-link-builder/">UTM Campaign Link Builder</a></li><li><a href="/google-search-result-previewer/">Google Search Result Previewer</a></li><li><a href="/svg-cleaner-optimizer/">SVG Cleaner &amp; Optimizer</a></li></ul></section></main><footer>
+<div class="footer-links">
+<button onclick="openModal('modal-privacy')" type="button">Privacy Policy</button>
+<button onclick="openModal('modal-terms')" type="button">Terms of Service</button>
+<button onclick="openModal('modal-about')" type="button">About &amp; Contact</button>
+</div>
+<p>© 2026 MiniToolsDeck. All rights reserved. Built for modern creators &amp; growth marketers.</p>
+</footer><div aria-label="Privacy Policy" aria-modal="true" class="modal-overlay" id="modal-privacy" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Privacy Policy" class="modal-close" onclick="closeModal('modal-privacy')" type="button">×</button>
+<h3>Privacy Policy</h3>
+<br/>
+<p>MiniToolsDeck operates with a client-first privacy architecture. All utility calculations, image conversions, and data formatting occur directly inside your browser. We do not store or transmit user files to external servers.</p>
+</div>
+</div><div aria-label="Terms of Service" aria-modal="true" class="modal-overlay" id="modal-terms" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Terms of Service" class="modal-close" onclick="closeModal('modal-terms')" type="button">×</button>
+<h3>Terms of Service</h3>
+<br/>
+<p>MiniToolsDeck provides web utilities "as is" without warranties of any kind.</p>
+</div>
+</div><div aria-label="About &amp; Contact" aria-modal="true" class="modal-overlay" id="modal-about" role="dialog">
+<div class="modal-content">
+<button aria-label="Close About &amp; Contact" class="modal-close" onclick="closeModal('modal-about')" type="button">×</button>
+<h3>About &amp;Amp Contact</h3>
+<br/>
+<p>MiniToolsDeck is the modern creator and growth stack—a suite of lightning-fast browser utilities built for digital marketers, developers, and content professionals.</p>
+<br/>
+<p>For inquiries, email: <strong>contact@minitoolsdeck.com</strong></p>
+</div>
+</div><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script defer="" src="/assets/tools.js"></script></body></html>

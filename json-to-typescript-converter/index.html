@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JSON to TypeScript Converter — Free Online Tool | MiniToolsDeck</title><meta content="Turn example JSON data into TypeScript type definitions. Free, browser-based tool with no signup required." name="description"/><meta content="index,follow" name="robots"/><link href="https://minitoolsdeck.vercel.app/json-to-typescript-converter/" rel="canonical"/>
+<meta content="website" property="og:type"/><meta content="MiniToolsDeck" property="og:site_name"/><meta content="JSON to TypeScript Converter — Free Online Tool | MiniToolsDeck" property="og:title"/><meta content="Turn example JSON data into TypeScript type definitions. Free, browser-based tool with no signup required." property="og:description"/><meta content="https://minitoolsdeck.vercel.app/json-to-typescript-converter/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><meta content="JSON to TypeScript Converter — Free Online Tool | MiniToolsDeck" name="twitter:title"/><meta content="Turn example JSON data into TypeScript type definitions. Free, browser-based tool with no signup required." name="twitter:description"/>
+<meta content="#0f172a" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='60' fill='%2310b981'/%3E%3Cpath d='M128 160h256v32H128zm0 64h256v32H128zm0 64h192v32H128z' fill='white'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="/assets/styles.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "JSON to TypeScript Converter", "url": "https://minitoolsdeck.vercel.app/json-to-typescript-converter/", "description": "Turn example JSON data into TypeScript type definitions.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script><link href="/assets/design-system.css" rel="stylesheet"/><link href="/assets/premium-unified.css" rel="stylesheet"/></head><body class="mtd-premium-page"><header>
+<div class="header-container">
+<a class="brand" href="/">
+<div class="brand-icon">
+<i class="fa-solid fa-layer-group"></i>
+</div>
+<span>MiniTools<span class="brand-accent">Deck</span></span>
+</a>
+<div class="header-actions">
+
+
+<button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme">
+<i class="fa-solid fa-moon"></i>
+</button>
+<a class="mtd-back" href="/">← Back to All Tools</a></div>
+</div>
+</header><main><div class="site-breadcrumb"><a href="/">All Tools</a> / JSON to TypeScript Converter</div><section class="seo-intro"><h1>JSON To TypeScript Converter</h1><p>Turn example JSON data into TypeScript type definitions.</p></section><div class="tool-panel" id="tool-jsonts">
+<div class="tool-header">
+<h2 class="tool-title"><i class="fa-solid fa-file-code" style="color:var(--accent)"></i> JSON to TypeScript Converter</h2>
+<p class="tool-desc">Generate accurate TypeScript types from JSON, including nested objects, arrays, unions and nullable fields.</p>
+</div>
+<div class="grid-2" style="align-items:start;">
+<div class="form-group">
+<label for="json-ts-input">JSON input</label>
+<textarea id="json-ts-input" oninput="updateJsonTsStats()" placeholder='Paste JSON here... e.g. {"id": 1, "profile": {"name": "Creator"}}' rows="14"></textarea>
+<div class="result-subtext" id="json-ts-stats">0 characters · 0 lines</div>
+<div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.7rem;">
+<button class="copy-btn" onclick="loadJsonTsSample()"><i class="fa-solid fa-flask"></i> Try sample</button>
+<button class="copy-btn" onclick="clearJsonTs()"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+</div>
+<details style="margin-top:1rem;">
+<summary style="cursor:pointer;font-weight:600;">Generation options</summary>
+<div class="form-group" style="margin-top:.8rem;">
+<label for="json-ts-root">Root type name</label>
+<input id="json-ts-root" oninput="convertJsonToTs(false)" placeholder="Root" type="text" value="Root"/>
+</div>
+<div class="form-group">
+<label for="json-ts-style">Output style</label>
+<select id="json-ts-style" onchange="convertJsonToTs(false)"><option value="interface">Interfaces</option><option value="type">Type aliases</option></select>
+</div>
+<label style="display:flex;align-items:center;gap:.5rem;margin:.6rem 0;"><input id="json-ts-optional" onchange="convertJsonToTs(false)" type="checkbox"/> Make properties optional</label>
+<label style="display:flex;align-items:center;gap:.5rem;margin:.6rem 0;"><input id="json-ts-readonly" onchange="convertJsonToTs(false)" type="checkbox"/> Add readonly modifiers</label>
+<label style="display:flex;align-items:center;gap:.5rem;margin:.6rem 0;"><input checked="" id="json-ts-export" onchange="convertJsonToTs(false)" type="checkbox"/> Add export keyword</label>
+</details>
+<button class="btn-submit" onclick="convertJsonToTs()"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate TypeScript</button>
+<div id="json-ts-error" role="status" style="font-size:.85rem;margin-top:.5rem;color:#dc2626;"></div>
+</div>
+<div class="form-group">
+<label for="json-ts-output">TypeScript output</label>
+<pre id="json-ts-output" style="min-height:320px;width:100%;box-sizing:border-box;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85rem;padding:1rem;border:1px solid var(--border-color, #444);border-radius:10px;background:var(--input-bg, rgba(127,127,127,.08));color:var(--text-color, inherit);margin:0;">// Generated TypeScript will appear here</pre>
+<div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.7rem;">
+<button class="copy-btn" onclick="copyJsonTsOutput()"><i class="fa-regular fa-copy"></i> Copy TypeScript</button>
+<button class="copy-btn" onclick="downloadJsonTs()"><i class="fa-solid fa-download"></i> Download .ts</button>
+</div>
+<p class="result-subtext" style="margin-top:.75rem;">Runs locally in your browser. Types are inferred from the sample you provide; combine representative API responses for more reliable unions and optional fields.</p>
+</div>
+</div>
+</div><section aria-label="Guide" class="seo-guide"><h2>How To Use JSON To TypeScript Converter</h2><p>Paste valid JSON, choose the type options and copy or download the output.</p><h3>Frequently Asked Question</h3><p><strong>Will the generated types cover every possible API response?</strong></p><p>They reflect the example data supplied; review optional and nullable fields manually.</p></section><section class="related-tools"><h2>Related Free Tools</h2><ul><li><a href="/svg-cleaner-optimizer/">SVG Cleaner &amp; Optimizer</a></li><li><a href="/social-media-engagement-calculator/">Social Media Engagement Calculator</a></li><li><a href="/smart-headline-analyzer/">Smart Headline Analyzer</a></li></ul></section></main><footer>
+<div class="footer-links">
+<button onclick="openModal('modal-privacy')" type="button">Privacy Policy</button>
+<button onclick="openModal('modal-terms')" type="button">Terms of Service</button>
+<button onclick="openModal('modal-about')" type="button">About &amp; Contact</button>
+</div>
+<p>© 2026 MiniToolsDeck. All rights reserved. Built for modern creators &amp; growth marketers.</p>
+</footer><div aria-label="Privacy Policy" aria-modal="true" class="modal-overlay" id="modal-privacy" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Privacy Policy" class="modal-close" onclick="closeModal('modal-privacy')" type="button">×</button>
+<h3>Privacy Policy</h3>
+<br/>
+<p>MiniToolsDeck operates with a client-first privacy architecture. All utility calculations, image conversions, and data formatting occur directly inside your browser. We do not store or transmit user files to external servers.</p>
+</div>
+</div><div aria-label="Terms of Service" aria-modal="true" class="modal-overlay" id="modal-terms" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Terms of Service" class="modal-close" onclick="closeModal('modal-terms')" type="button">×</button>
+<h3>Terms of Service</h3>
+<br/>
+<p>MiniToolsDeck provides web utilities "as is" without warranties of any kind.</p>
+</div>
+</div><div aria-label="About &amp; Contact" aria-modal="true" class="modal-overlay" id="modal-about" role="dialog">
+<div class="modal-content">
+<button aria-label="Close About &amp; Contact" class="modal-close" onclick="closeModal('modal-about')" type="button">×</button>
+<h3>About &amp;Amp Contact</h3>
+<br/>
+<p>MiniToolsDeck is the modern creator and growth stack—a suite of lightning-fast browser utilities built for digital marketers, developers, and content professionals.</p>
+<br/>
+<p>For inquiries, email: <strong>contact@minitoolsdeck.com</strong></p>
+</div>
+</div><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script defer="" src="/assets/tools.js"></script></body></html>

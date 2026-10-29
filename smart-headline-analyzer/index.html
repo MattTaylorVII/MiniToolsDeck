@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Headline Analyzer — Free Online Tool | MiniToolsDeck</title><meta content="Review a headline and get actionable suggestions to improve its clarity and appeal. Free, browser-based tool with no signup required." name="description"/><meta content="index,follow" name="robots"/><link href="https://minitoolsdeck.vercel.app/smart-headline-analyzer/" rel="canonical"/>
+<meta content="website" property="og:type"/><meta content="MiniToolsDeck" property="og:site_name"/><meta content="Smart Headline Analyzer — Free Online Tool | MiniToolsDeck" property="og:title"/><meta content="Review a headline and get actionable suggestions to improve its clarity and appeal. Free, browser-based tool with no signup required." property="og:description"/><meta content="https://minitoolsdeck.vercel.app/smart-headline-analyzer/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><meta content="Smart Headline Analyzer — Free Online Tool | MiniToolsDeck" name="twitter:title"/><meta content="Review a headline and get actionable suggestions to improve its clarity and appeal. Free, browser-based tool with no signup required." name="twitter:description"/>
+<meta content="#0f172a" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='60' fill='%2310b981'/%3E%3Cpath d='M128 160h256v32H128zm0 64h256v32H128zm0 64h192v32H128z' fill='white'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="/assets/styles.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Smart Headline Analyzer", "url": "https://minitoolsdeck.vercel.app/smart-headline-analyzer/", "description": "Review a headline and get actionable suggestions to improve its clarity and appeal.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script><link href="/assets/design-system.css" rel="stylesheet"/><link href="/assets/premium-unified.css" rel="stylesheet"/></head><body class="mtd-premium-page"><header>
+<div class="header-container">
+<a class="brand" href="/">
+<div class="brand-icon">
+<i class="fa-solid fa-layer-group"></i>
+</div>
+<span>MiniTools<span class="brand-accent">Deck</span></span>
+</a>
+<div class="header-actions">
+
+
+<button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme">
+<i class="fa-solid fa-moon"></i>
+</button>
+<a class="mtd-back" href="/">← Back to All Tools</a></div>
+</div>
+</header><main><div class="site-breadcrumb"><a href="/">All Tools</a> / Smart Headline Analyzer</div><section class="seo-intro"><h1>Smart Headline Analyzer</h1><p>Review a headline and get actionable suggestions to improve its clarity and appeal.</p></section><div class="tool-panel" id="tool-headline">
+<div class="tool-header">
+<h2 class="tool-title"><i class="fa-solid fa-heading" style="color:var(--accent)"></i> Smart Headline Analyzer</h2>
+<p class="tool-desc">Check headline length and get a few practical ways to sharpen it.</p>
+</div>
+<div class="form-group">
+<label for="headline-input">Your headline</label>
+<input aria-describedby="headline-note" id="headline-input" maxlength="240" oninput="analyzeHeadline()" placeholder="e.g. 7 Simple Ways to Improve Your Website" type="text"/>
+<div id="headline-note" style="font-size:0.8rem;color:var(--text-muted);margin-top:0.35rem;">Type or paste a headline to analyze it instantly.</div>
+</div>
+<div class="form-group">
+<label for="headline-platform">Where will you use it?</label>
+<select id="headline-platform" onchange="analyzeHeadline()">
+<option value="blog">Blog / SEO title</option>
+<option value="youtube">YouTube title</option>
+<option value="email">Email subject line</option>
+<option value="linkedin">LinkedIn</option>
+<option value="twitter">X post</option>
+<option value="social">Other social post</option>
+<option value="ad">Ad headline</option>
+</select>
+</div>
+<div class="result-box" style="margin-top:1rem;align-items:stretch;text-align:left;">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;width:100%;">
+<div>
+<div class="result-subtext">Headline check</div>
+<div class="result-value" id="headline-score" style="font-size:1.65rem;margin-top:0.2rem;">—</div>
+</div>
+<div style="text-align:right;font-size:0.82rem;color:var(--text-muted);">
+<div><strong id="hl-words">0</strong> words</div>
+<div><strong id="hl-chars">0</strong> characters</div>
+</div>
+</div>
+<div id="headline-score-bar" style="width:100%;height:6px;background:var(--border-color);border-radius:4px;margin:0.8rem 0 1rem;overflow:hidden;">
+<div id="headline-score-fill" style="height:100%;width:0%;background:var(--accent);transition:width 0.25s ease;"></div>
+</div>
+<div class="result-subtext" style="margin-bottom:0.4rem;">One thing to improve</div>
+<div id="headline-feedback" style="font-size:0.92rem;line-height:1.55;color:var(--text-main);">Your headline tips will appear here.</div>
+<details style="width:100%;margin-top:1rem;">
+<summary style="cursor:pointer;font-weight:600;">Try 3 alternative headlines</summary>
+<div id="headline-recommendations" style="width:100%;font-size:0.9rem;color:var(--text-muted);margin-top:0.8rem;">Enter a headline to see alternatives.</div>
+</details>
+<details style="width:100%;margin-top:0.65rem;">
+<summary style="cursor:pointer;font-weight:600;">How is this checked?</summary>
+<p style="font-size:0.84rem;line-height:1.5;color:var(--text-muted);margin-top:0.6rem;">The score is a simple writing checklist based on length, word count and a few headline signals. It is not an SEO ranking factor and cannot predict clicks or performance.</p>
+</details>
+</div>
+</div><section aria-label="Guide" class="seo-guide"><h2>How To Use Smart Headline Analyzer</h2><p>Enter a headline, review the analysis and consider the suggested alternatives.</p><h3>Frequently Asked Question</h3><p><strong>Does a higher score guarantee more clicks?</strong></p><p>No. The score is a writing aid, not a prediction of real-world performance.</p></section><section class="related-tools"><h2>Related Free Tools</h2><ul><li><a href="/favicon-website-icon-generator/">Favicon &amp; Website Icon Generator</a></li><li><a href="/utm-campaign-link-builder/">UTM Campaign Link Builder</a></li><li><a href="/keyword-density-analyzer/">Keyword Density Analyzer</a></li></ul></section></main><footer>
+<div class="footer-links">
+<button onclick="openModal('modal-privacy')" type="button">Privacy Policy</button>
+<button onclick="openModal('modal-terms')" type="button">Terms of Service</button>
+<button onclick="openModal('modal-about')" type="button">About &amp; Contact</button>
+</div>
+<p>© 2026 MiniToolsDeck. All rights reserved. Built for modern creators &amp; growth marketers.</p>
+</footer><div aria-label="Privacy Policy" aria-modal="true" class="modal-overlay" id="modal-privacy" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Privacy Policy" class="modal-close" onclick="closeModal('modal-privacy')" type="button">×</button>
+<h3>Privacy Policy</h3>
+<br/>
+<p>MiniToolsDeck operates with a client-first privacy architecture. All utility calculations, image conversions, and data formatting occur directly inside your browser. We do not store or transmit user files to external servers.</p>
+</div>
+</div><div aria-label="Terms of Service" aria-modal="true" class="modal-overlay" id="modal-terms" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Terms of Service" class="modal-close" onclick="closeModal('modal-terms')" type="button">×</button>
+<h3>Terms of Service</h3>
+<br/>
+<p>MiniToolsDeck provides web utilities "as is" without warranties of any kind.</p>
+</div>
+</div><div aria-label="About &amp; Contact" aria-modal="true" class="modal-overlay" id="modal-about" role="dialog">
+<div class="modal-content">
+<button aria-label="Close About &amp; Contact" class="modal-close" onclick="closeModal('modal-about')" type="button">×</button>
+<h3>About &amp;Amp Contact</h3>
+<br/>
+<p>MiniToolsDeck is the modern creator and growth stack—a suite of lightning-fast browser utilities built for digital marketers, developers, and content professionals.</p>
+<br/>
+<p>For inquiries, email: <strong>contact@minitoolsdeck.com</strong></p>
+</div>
+</div><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script defer="" src="/assets/tools.js"></script></body></html>

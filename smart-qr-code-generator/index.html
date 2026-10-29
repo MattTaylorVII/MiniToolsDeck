@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart QR Code Generator — Free Online Tool | MiniToolsDeck</title><meta content="Make scannable QR codes for links, contact details and other supported formats. Free, browser-based tool with no signup required." name="description"/><meta content="index,follow" name="robots"/><link href="https://minitoolsdeck.vercel.app/smart-qr-code-generator/" rel="canonical"/>
+<meta content="website" property="og:type"/><meta content="MiniToolsDeck" property="og:site_name"/><meta content="Smart QR Code Generator — Free Online Tool | MiniToolsDeck" property="og:title"/><meta content="Make scannable QR codes for links, contact details and other supported formats. Free, browser-based tool with no signup required." property="og:description"/><meta content="https://minitoolsdeck.vercel.app/smart-qr-code-generator/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><meta content="Smart QR Code Generator — Free Online Tool | MiniToolsDeck" name="twitter:title"/><meta content="Make scannable QR codes for links, contact details and other supported formats. Free, browser-based tool with no signup required." name="twitter:description"/>
+<meta content="#0f172a" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='60' fill='%2310b981'/%3E%3Cpath d='M128 160h256v32H128zm0 64h256v32H128zm0 64h192v32H128z' fill='white'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="/assets/styles.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Smart QR Code Generator", "url": "https://minitoolsdeck.vercel.app/smart-qr-code-generator/", "description": "Make scannable QR codes for links, contact details and other supported formats.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script><link href="/assets/design-system.css" rel="stylesheet"/><link href="/assets/premium-unified.css" rel="stylesheet"/></head><body class="mtd-premium-page"><header>
+<div class="header-container">
+<a class="brand" href="/">
+<div class="brand-icon">
+<i class="fa-solid fa-layer-group"></i>
+</div>
+<span>MiniTools<span class="brand-accent">Deck</span></span>
+</a>
+<div class="header-actions">
+
+
+<button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme">
+<i class="fa-solid fa-moon"></i>
+</button>
+<a class="mtd-back" href="/">← Back to All Tools</a></div>
+</div>
+</header><main><div class="site-breadcrumb"><a href="/">All Tools</a> / Smart QR Code Generator</div><section class="seo-intro"><h1>Smart QR Code Generator</h1><p>Make scannable QR codes for links, contact details and other supported formats.</p></section><div class="tool-panel" id="tool-qrcode">
+<div class="tool-header">
+<h2 class="tool-title"><i class="fa-solid fa-qrcode" style="color:var(--accent)"></i> Smart QR Code Generator</h2>
+<p class="tool-desc">Create a scan-ready QR code for links, Wi-Fi, contact details and more — with your logo if you like.</p>
+</div>
+<div class="grid-2">
+<div>
+<div class="form-group">
+<label for="qr-type">What is your QR code for?</label>
+<select id="qr-type" onchange="updateQrTypeFields()" style="width:100%;">
+<option value="url">Website or link</option><option value="text">Plain text</option><option value="wifi">Wi-Fi access</option><option value="email">Email</option><option value="phone">Phone number</option><option value="sms">Text message (SMS)</option>
+</select>
+</div>
+<div id="qr-dynamic-fields">
+<div class="form-group"><label for="qr-input">Website URL</label><input id="qr-input" maxlength="2000" oninput="updateQrCharCount()" placeholder="https://example.com" style="width:100%;" type="url"/></div>
+</div>
+<div class="result-subtext" id="qr-char-count" style="text-align:right;margin-top:-.35rem;margin-bottom:.7rem;">0 / 2,000 characters</div>
+<div class="form-group">
+<label for="qr-size">Download size</label>
+<select id="qr-size" onchange="if(document.getElementById('qr-input').value.trim()) generateQRCode();" style="width:100%;"><option value="256">256 × 256 px — everyday use</option><option selected="" value="384">384 × 384 px — recommended</option><option value="512">512 × 512 px — high resolution</option></select>
+</div>
+<div class="form-group">
+<label>Logo in the centre <span style="font-weight:normal;color:var(--text-muted);">(optional)</span></label>
+<div aria-label="Choose or drop a logo" class="imgc-dropzone" id="qr-logo-dropzone" role="button" style="padding:18px 12px;" tabindex="0">
+<input accept="image/png,image/jpeg,image/webp" hidden="" id="qr-logo-file" type="file"/>
+<div id="qr-logo-empty"><i class="fa-solid fa-cloud-arrow-up imgc-upload-icon" style="font-size:1.5rem;"></i><h3 style="margin:.35rem 0;">Drop Your Logo Here</h3><p style="margin:.25rem 0;">or click to browse · PNG, JPG or WebP</p><small>Transparent PNG works best.</small></div>
+<div hidden="" id="qr-logo-selected"><img alt="Logo preview" id="qr-logo-preview" style="max-width:76px;max-height:76px;object-fit:contain;background:#fff;border-radius:8px;padding:5px;"/><p id="qr-logo-name" style="margin:.4rem 0;"></p><button class="copy-btn" onclick="event.stopPropagation();clearQrLogo();" type="button">Remove logo</button></div>
+</div>
+<small style="display:block;color:var(--text-muted);margin-top:.35rem;">A logo can make scanning harder. Keep it small and test before printing.</small>
+</div>
+<button class="btn-submit" onclick="generateQRCode()">Generate QR Code</button>
+<p aria-live="polite" class="result-subtext" id="qr-status" role="status" style="margin-top:.65rem;"></p>
+</div>
+<div>
+<div class="result-box" style="gap:.75rem;">
+<div id="qrcode-box" style="padding:1rem;background:#fff;border-radius:8px;min-height:190px;width:100%;display:flex;align-items:center;justify-content:center;overflow:auto;"><span class="result-subtext" style="color:#64748b;">Your QR code will appear here.</span></div>
+<div style="display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;"><button class="copy-btn" disabled="" id="qr-download-btn" onclick="downloadQRCode()"><i class="fa-solid fa-download"></i> Download PNG</button><button class="copy-btn" onclick="clearQRCode()"><i class="fa-solid fa-rotate-left"></i> Reset</button></div>
+</div>
+</div>
+</div>
+<p class="result-subtext" style="margin-top:.8rem;">Tip: Dark codes on a light background scan best. Your QR content and logo are processed in your browser.</p>
+</div><section aria-label="Guide" class="seo-guide"><h2>How To Use Smart QR Code Generator</h2><p>Choose the QR code type, enter the information and download the image.</p><h3>Frequently Asked Question</h3><p><strong>Can I add a logo to a QR code?</strong></p><p>The tool supports a logo option; always scan-test the result before printing.</p></section><section class="related-tools"><h2>Related Free Tools</h2><ul><li><a href="/json-formatter-validator/">JSON Formatter &amp; Validator</a></li><li><a href="/social-media-meta-tag-generator/">Social Media Meta Tag Generator</a></li><li><a href="/json-to-typescript-converter/">JSON to TypeScript Converter</a></li></ul></section></main><footer>
+<div class="footer-links">
+<button onclick="openModal('modal-privacy')" type="button">Privacy Policy</button>
+<button onclick="openModal('modal-terms')" type="button">Terms of Service</button>
+<button onclick="openModal('modal-about')" type="button">About &amp; Contact</button>
+</div>
+<p>© 2026 MiniToolsDeck. All rights reserved. Built for modern creators &amp; growth marketers.</p>
+</footer><div aria-label="Privacy Policy" aria-modal="true" class="modal-overlay" id="modal-privacy" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Privacy Policy" class="modal-close" onclick="closeModal('modal-privacy')" type="button">×</button>
+<h3>Privacy Policy</h3>
+<br/>
+<p>MiniToolsDeck operates with a client-first privacy architecture. All utility calculations, image conversions, and data formatting occur directly inside your browser. We do not store or transmit user files to external servers.</p>
+</div>
+</div><div aria-label="Terms of Service" aria-modal="true" class="modal-overlay" id="modal-terms" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Terms of Service" class="modal-close" onclick="closeModal('modal-terms')" type="button">×</button>
+<h3>Terms of Service</h3>
+<br/>
+<p>MiniToolsDeck provides web utilities "as is" without warranties of any kind.</p>
+</div>
+</div><div aria-label="About &amp; Contact" aria-modal="true" class="modal-overlay" id="modal-about" role="dialog">
+<div class="modal-content">
+<button aria-label="Close About &amp; Contact" class="modal-close" onclick="closeModal('modal-about')" type="button">×</button>
+<h3>About &amp;Amp Contact</h3>
+<br/>
+<p>MiniToolsDeck is the modern creator and growth stack—a suite of lightning-fast browser utilities built for digital marketers, developers, and content professionals.</p>
+<br/>
+<p>For inquiries, email: <strong>contact@minitoolsdeck.com</strong></p>
+</div>
+</div><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script defer="" src="/assets/tools.js"></script></body></html>

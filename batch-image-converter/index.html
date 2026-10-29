@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Batch Image Converter — Free Online Tool | MiniToolsDeck</title><meta content="Convert multiple images between common file formats in one workflow. Free, browser-based tool with no signup required." name="description"/><meta content="index,follow" name="robots"/><link href="https://minitoolsdeck.vercel.app/batch-image-converter/" rel="canonical"/>
+<meta content="website" property="og:type"/><meta content="MiniToolsDeck" property="og:site_name"/><meta content="Batch Image Converter — Free Online Tool | MiniToolsDeck" property="og:title"/><meta content="Convert multiple images between common file formats in one workflow. Free, browser-based tool with no signup required." property="og:description"/><meta content="https://minitoolsdeck.vercel.app/batch-image-converter/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><meta content="Batch Image Converter — Free Online Tool | MiniToolsDeck" name="twitter:title"/><meta content="Convert multiple images between common file formats in one workflow. Free, browser-based tool with no signup required." name="twitter:description"/>
+<meta content="#0f172a" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='60' fill='%2310b981'/%3E%3Cpath d='M128 160h256v32H128zm0 64h256v32H128zm0 64h192v32H128z' fill='white'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="/assets/styles.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Batch Image Converter", "url": "https://minitoolsdeck.vercel.app/batch-image-converter/", "description": "Convert multiple images between common file formats in one workflow.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script><link href="/assets/design-system.css" rel="stylesheet"/><link href="/assets/premium-unified.css" rel="stylesheet"/></head><body class="mtd-premium-page"><header>
+<div class="header-container">
+<a class="brand" href="/">
+<div class="brand-icon">
+<i class="fa-solid fa-layer-group"></i>
+</div>
+<span>MiniTools<span class="brand-accent">Deck</span></span>
+</a>
+<div class="header-actions">
+
+
+<button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme">
+<i class="fa-solid fa-moon"></i>
+</button>
+<a class="mtd-back" href="/">← Back to All Tools</a></div>
+</div>
+</header><main><div class="site-breadcrumb"><a href="/">All Tools</a> / Batch Image Converter</div><section class="seo-intro"><h1>Batch Image Converter</h1><p>Convert multiple images between common file formats in one workflow.</p></section><div class="tool-panel" id="tool-imgconv">
+<div class="tool-header">
+<h2 class="tool-title"><i class="fa-solid fa-image" style="color:var(--accent)"></i> Batch Image Converter</h2>
+<p class="tool-desc">Convert images to PNG, JPG, or WebP in seconds. Drag and drop your files, preview them, adjust image quality, and download the results — free, with no account and no file uploads.</p>
+</div>
+<div class="imgc-shell">
+<div aria-label="Choose images or drag and drop them here" class="imgc-dropzone" id="imgc-dropzone" role="button" tabindex="0">
+<div class="imgc-upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+<h3>Drop Your Images Here</h3>
+<p>or <span class="imgc-browse">browse files</span> from your device</p>
+<small>PNG, JPG, WebP, GIF, BMP and other browser-supported images · Multiple files supported</small>
+<input accept="image/*" hidden="" id="img-conv-file" multiple="" type="file"/>
+</div>
+<div class="imgc-workspace" hidden="" id="imgc-workspace">
+<div class="imgc-workspace-head">
+<div><h3>Your Images</h3><p id="imgc-file-count">0 files selected</p></div>
+<button class="imgc-text-btn" id="imgc-clear" type="button">Clear all</button>
+</div>
+<div aria-live="polite" class="imgc-file-list" id="imgc-file-list"></div>
+<div class="imgc-settings">
+<div class="form-group">
+<label for="img-conv-target">Convert to</label>
+<select id="img-conv-target">
+<option value="image/webp">WebP — smaller web images</option>
+<option value="image/jpeg">JPG — widely compatible</option>
+<option value="image/png">PNG — supports transparency</option>
+</select>
+</div>
+<div class="form-group" id="imgc-quality-group">
+<label for="imgc-quality">Image quality <strong id="imgc-quality-value">85%</strong></label>
+<input id="imgc-quality" max="100" min="10" step="5" type="range" value="85"/>
+<small>Higher quality usually means a larger file. PNG is lossless and ignores this setting.</small>
+</div>
+<div class="form-group" hidden="" id="imgc-background-group">
+<label for="imgc-background">Background for transparent images</label>
+<div class="imgc-color-row"><input id="imgc-background" type="color" value="#ffffff"/><span>JPEG does not support transparency.</span></div>
+</div>
+<details class="simple-advanced" style="grid-column:1/-1;">
+<summary>Resize before converting <span>Optional · preserves proportions</span></summary>
+<div class="grid-2" style="margin-top:.8rem;">
+<div class="form-group"><label for="imgc-max-width">Maximum width (px)</label><input id="imgc-max-width" max="12000" min="1" placeholder="Original width" type="number"/></div>
+<div class="form-group"><label for="imgc-max-height">Maximum height (px)</label><input id="imgc-max-height" max="12000" min="1" placeholder="Original height" type="number"/></div>
+</div>
+<small>Leave both blank to keep original dimensions. If you enter one limit, the other dimension is scaled automatically. Images are never enlarged.</small>
+</details>
+</div>
+<div class="imgc-actions">
+<button class="btn-submit" id="imgc-convert" type="button"><i class="fa-solid fa-arrows-rotate"></i> Convert images</button>
+<button class="imgc-secondary-btn" hidden="" id="imgc-download-all" type="button"><i class="fa-solid fa-file-zipper"></i> Download all (.ZIP)</button>
+</div>
+<p aria-live="polite" class="imgc-status" id="img-conv-res" role="status">Ready to convert. Your files stay on this device.</p>
+</div>
+<div class="imgc-privacy-note"><i class="fa-solid fa-shield-halved"></i><span><strong>Private by design.</strong> Images are processed in your browser and are not uploaded to MiniToolsDeck.</span></div>
+</div>
+<section class="imgc-seo-content">
+<p>Convert multiple images in your browser without uploading them. Choose WebP for efficient web images, JPG for photos, or PNG when transparency matters.</p>
+<details><summary>Are my images uploaded?</summary><p>No. Conversion happens locally in your browser.</p></details>
+<details><summary>Will animation or transparency be preserved?</summary><p>JPG does not support transparency, and browser-based conversion may export only a still frame from an animated GIF.</p></details>
+</section>
+</div><section aria-label="Guide" class="seo-guide"><h2>How To Use Batch Image Converter</h2><p>Add your images, select the target format and quality, then download the results.</p><h3>Frequently Asked Question</h3><p><strong>Can I convert several images together?</strong></p><p>Yes. The batch workflow supports multiple files and ZIP downloads.</p></section><section class="related-tools"><h2>Related Free Tools</h2><ul><li><a href="/smart-image-resizer/">Smart Image Resizer</a></li><li><a href="/keyword-density-analyzer/">Keyword Density Analyzer</a></li><li><a href="/image-color-palette-extractor/">Image Color Palette Extractor</a></li></ul></section></main><footer>
+<div class="footer-links">
+<button onclick="openModal('modal-privacy')" type="button">Privacy Policy</button>
+<button onclick="openModal('modal-terms')" type="button">Terms of Service</button>
+<button onclick="openModal('modal-about')" type="button">About &amp; Contact</button>
+</div>
+<p>© 2026 MiniToolsDeck. All rights reserved. Built for modern creators &amp; growth marketers.</p>
+</footer><div aria-label="Privacy Policy" aria-modal="true" class="modal-overlay" id="modal-privacy" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Privacy Policy" class="modal-close" onclick="closeModal('modal-privacy')" type="button">×</button>
+<h3>Privacy Policy</h3>
+<br/>
+<p>MiniToolsDeck operates with a client-first privacy architecture. All utility calculations, image conversions, and data formatting occur directly inside your browser. We do not store or transmit user files to external servers.</p>
+</div>
+</div><div aria-label="Terms of Service" aria-modal="true" class="modal-overlay" id="modal-terms" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Terms of Service" class="modal-close" onclick="closeModal('modal-terms')" type="button">×</button>
+<h3>Terms of Service</h3>
+<br/>
+<p>MiniToolsDeck provides web utilities "as is" without warranties of any kind.</p>
+</div>
+</div><div aria-label="About &amp; Contact" aria-modal="true" class="modal-overlay" id="modal-about" role="dialog">
+<div class="modal-content">
+<button aria-label="Close About &amp; Contact" class="modal-close" onclick="closeModal('modal-about')" type="button">×</button>
+<h3>About &amp;Amp Contact</h3>
+<br/>
+<p>MiniToolsDeck is the modern creator and growth stack—a suite of lightning-fast browser utilities built for digital marketers, developers, and content professionals.</p>
+<br/>
+<p>For inquiries, email: <strong>contact@minitoolsdeck.com</strong></p>
+</div>
+</div><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script defer="" src="/assets/tools.js"></script></body></html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SVG Cleaner &amp; Optimizer — Free Online Tool | MiniToolsDeck</title><meta content="Clean up SVG markup and reduce unnecessary code in vector assets. Free, browser-based tool with no signup required." name="description"/><meta content="index,follow" name="robots"/><link href="https://minitoolsdeck.vercel.app/svg-cleaner-optimizer/" rel="canonical"/>
+<meta content="website" property="og:type"/><meta content="MiniToolsDeck" property="og:site_name"/><meta content="SVG Cleaner &amp; Optimizer — Free Online Tool | MiniToolsDeck" property="og:title"/><meta content="Clean up SVG markup and reduce unnecessary code in vector assets. Free, browser-based tool with no signup required." property="og:description"/><meta content="https://minitoolsdeck.vercel.app/svg-cleaner-optimizer/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><meta content="SVG Cleaner &amp; Optimizer — Free Online Tool | MiniToolsDeck" name="twitter:title"/><meta content="Clean up SVG markup and reduce unnecessary code in vector assets. Free, browser-based tool with no signup required." name="twitter:description"/>
+<meta content="#0f172a" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='60' fill='%2310b981'/%3E%3Cpath d='M128 160h256v32H128zm0 64h256v32H128zm0 64h192v32H128z' fill='white'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="/assets/styles.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "SVG Cleaner & Optimizer", "url": "https://minitoolsdeck.vercel.app/svg-cleaner-optimizer/", "description": "Clean up SVG markup and reduce unnecessary code in vector assets.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script><link href="/assets/design-system.css" rel="stylesheet"/><link href="/assets/premium-unified.css" rel="stylesheet"/></head><body class="mtd-premium-page"><header>
+<div class="header-container">
+<a class="brand" href="/">
+<div class="brand-icon">
+<i class="fa-solid fa-layer-group"></i>
+</div>
+<span>MiniTools<span class="brand-accent">Deck</span></span>
+</a>
+<div class="header-actions">
+
+
+<button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme">
+<i class="fa-solid fa-moon"></i>
+</button>
+<a class="mtd-back" href="/">← Back to All Tools</a></div>
+</div>
+</header><main><div class="site-breadcrumb"><a href="/">All Tools</a> / SVG Cleaner &amp; Optimizer</div><section class="seo-intro"><h1>SEO Meta Tag &amp; Search Preview Studio</h1><p>Clean up SVG markup and reduce unnecessary code in vector assets.</p></section><div class="tool-panel" id="tool-svgopt">
+<div class="tool-header">
+<h2 class="tool-title"><i class="fa-solid fa-pen-clip" style="color:var(--accent)"></i> SVG Cleaner &amp; Optimizer</h2>
+<p class="tool-desc">Clean SVG markup, remove optional editor metadata and comments, compare file size, and export a tidier SVG without blindly rewriting path geometry.</p>
+</div>
+<div class="form-group">
+<label for="svg-file">Add an SVG file</label>
+<input accept=".svg,image/svg+xml" hidden="" id="svg-file" onchange="loadSvgFile(event)" type="file"/>
+<div aria-label="Drop an SVG file here or browse to select one" id="svg-dropzone" onclick="document.getElementById('svg-file').click()" ondragenter="handleSvgDrag(event, true)" ondragleave="handleSvgDrag(event, false)" ondragover="handleSvgDrag(event, true)" ondrop="handleSvgDrop(event)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();document.getElementById('svg-file').click();}" role="button" style="width:100%;box-sizing:border-box;padding:1.5rem 1rem;border:2px dashed var(--border-color, #666);border-radius:14px;text-align:center;cursor:pointer;transition:border-color .15s,background .15s;background:rgba(127,127,127,.04);" tabindex="0">
+<i class="fa-solid fa-cloud-arrow-up" style="font-size:1.8rem;color:var(--accent);margin-bottom:.6rem;"></i>
+<strong style="display:block;">Drag and drop your SVG here</strong>
+<span class="result-subtext" style="display:block;margin-top:.35rem;">Up to 5 MB · or click to browse</span>
+<span class="result-subtext" id="svg-dropzone-file" style="display:block;margin-top:.5rem;"></span>
+</div>
+<small class="result-subtext" style="display:block;margin-top:.55rem;">Prefer to paste SVG code? Use the editor below. Everything stays in your browser.</small>
+</div>
+<div class="form-group">
+<label for="svg-input">SVG source</label>
+<textarea id="svg-input" oninput="updateSvgInputStats()" placeholder="Paste your complete &lt;svg ...&gt;...&lt;/svg&gt; markup here..." style="min-height:190px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85rem;"></textarea>
+<div class="result-subtext" id="svg-input-stats" style="margin-top:.4rem;">0 characters · 0 bytes</div>
+</div>
+<div class="form-group" style="padding:1rem;border:1px solid var(--border-color, #444);border-radius:12px;">
+<strong style="display:block;margin-bottom:.65rem;">Cleaning options</strong>
+<label style="display:flex;gap:.55rem;align-items:flex-start;margin:.45rem 0;"><input checked="" id="svg-remove-comments" style="width:auto;margin-top:.25rem;" type="checkbox"/> <span>Remove XML comments</span></label>
+<label style="display:flex;gap:.55rem;align-items:flex-start;margin:.45rem 0;"><input checked="" id="svg-remove-metadata" style="width:auto;margin-top:.25rem;" type="checkbox"/> <span>Remove editor-specific metadata and attributes (Inkscape/Sodipodi)</span></label>
+<label style="display:flex;gap:.55rem;align-items:flex-start;margin:.45rem 0;"><input id="svg-remove-title-desc" style="width:auto;margin-top:.25rem;" type="checkbox"/> <span>Remove title and description elements <small>(may reduce accessibility; off by default)</small></span></label>
+<label style="display:flex;gap:.55rem;align-items:flex-start;margin:.45rem 0;"><input checked="" id="svg-minify-whitespace" style="width:auto;margin-top:.25rem;" type="checkbox"/> <span>Minify whitespace between XML elements</span></label>
+</div>
+<div style="display:flex;gap:.55rem;flex-wrap:wrap;margin:.8rem 0 1rem;">
+<button class="btn-submit" onclick="optimizeSvg()"><i class="fa-solid fa-wand-magic-sparkles"></i> Clean &amp; Optimize</button>
+<button class="copy-btn" onclick="loadSvgSample()">Try sample</button>
+<button class="copy-btn" onclick="resetSvgTool()">Reset</button>
+</div>
+<div id="svg-status" role="status" style="font-size:.9rem;margin:.5rem 0 1rem;color:var(--text-color,inherit);"></div>
+<div id="svg-results" style="display:none;">
+<div class="grid-2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.75rem;margin-bottom:1rem;">
+<div class="result-box"><div class="result-subtext">Original size</div><div class="result-value" id="svg-original-size">—</div></div>
+<div class="result-box"><div class="result-subtext">Optimized size</div><div class="result-value" id="svg-optimized-size">—</div></div>
+<div class="result-box"><div class="result-subtext">Size change</div><div class="result-value" id="svg-savings">—</div></div>
+</div>
+<div class="form-group">
+<label>Preview</label>
+<div style="min-height:130px;display:flex;align-items:center;justify-content:center;padding:1rem;border:1px dashed var(--border-color, #555);border-radius:12px;background-color:rgba(127,127,127,.05);background-image:linear-gradient(45deg,rgba(127,127,127,.12) 25%,transparent 25%),linear-gradient(-45deg,rgba(127,127,127,.12) 25%,transparent 25%),linear-gradient(45deg,transparent 75%,rgba(127,127,127,.12) 75%),linear-gradient(-45deg,transparent 75%,rgba(127,127,127,.12) 75%);background-size:18px 18px;background-position:0 0,0 9px,9px -9px,-9px 0;">
+<img alt="Preview of cleaned SVG" id="svg-preview" style="display:block;max-width:100%;max-height:260px;object-fit:contain;"/>
+</div>
+</div>
+<div class="form-group">
+<label for="svg-output">Cleaned SVG markup</label>
+<textarea id="svg-output" readonly="" style="min-height:190px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85rem;"></textarea>
+<div style="display:flex;gap:.55rem;flex-wrap:wrap;margin-top:.7rem;">
+<button class="copy-btn" onclick="copySvgOutput()"><i class="fa-regular fa-copy"></i> Copy SVG</button>
+<button class="copy-btn" onclick="downloadSvgOutput()"><i class="fa-solid fa-download"></i> Download .svg</button>
+</div>
+</div>
+</div>
+<p class="result-subtext" style="margin-top:.8rem;">This is a conservative cleaner, not a full SVGO replacement. Always check the preview and keep your original file. Removing title/description can affect accessibility.</p>
+</div><section aria-label="Guide" class="seo-guide"><h2>How To Use SVG Cleaner &amp;Amp Optimizer</h2><p>Paste or upload an SVG, adjust cleanup settings and review the preview before exporting.</p><h3>Frequently Asked Question</h3><p><strong>Should I check the optimized SVG?</strong></p><p>Yes. Compare the preview and behaviour with the original, especially for complex artwork.</p></section><section class="related-tools"><h2>Related Free Tools</h2><ul><li><a href="/social-media-post-previewer/">Social Media Post Previewer</a></li><li><a href="/seo-meta-tag-checker/">SEO Meta Tag Checker</a></li><li><a href="/favicon-website-icon-generator/">Favicon &amp; Website Icon Generator</a></li></ul></section></main><footer>
+<div class="footer-links">
+<button onclick="openModal('modal-privacy')" type="button">Privacy Policy</button>
+<button onclick="openModal('modal-terms')" type="button">Terms of Service</button>
+<button onclick="openModal('modal-about')" type="button">About &amp; Contact</button>
+</div>
+<p>© 2026 MiniToolsDeck. All rights reserved. Built for modern creators &amp; growth marketers.</p>
+</footer><div aria-label="Privacy Policy" aria-modal="true" class="modal-overlay" id="modal-privacy" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Privacy Policy" class="modal-close" onclick="closeModal('modal-privacy')" type="button">×</button>
+<h3>Privacy Policy</h3>
+<br/>
+<p>MiniToolsDeck operates with a client-first privacy architecture. All utility calculations, image conversions, and data formatting occur directly inside your browser. We do not store or transmit user files to external servers.</p>
+</div>
+</div><div aria-label="Terms of Service" aria-modal="true" class="modal-overlay" id="modal-terms" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Terms of Service" class="modal-close" onclick="closeModal('modal-terms')" type="button">×</button>
+<h3>Terms of Service</h3>
+<br/>
+<p>MiniToolsDeck provides web utilities "as is" without warranties of any kind.</p>
+</div>
+</div><div aria-label="About &amp; Contact" aria-modal="true" class="modal-overlay" id="modal-about" role="dialog">
+<div class="modal-content">
+<button aria-label="Close About &amp; Contact" class="modal-close" onclick="closeModal('modal-about')" type="button">×</button>
+<h3>About &amp;Amp Contact</h3>
+<br/>
+<p>MiniToolsDeck is the modern creator and growth stack—a suite of lightning-fast browser utilities built for digital marketers, developers, and content professionals.</p>
+<br/>
+<p>For inquiries, email: <strong>contact@minitoolsdeck.com</strong></p>
+</div>
+</div><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script defer="" src="/assets/tools.js"></script></body></html>

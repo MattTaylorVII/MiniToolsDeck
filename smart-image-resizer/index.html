@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Image Resizer — Free Online Tool | MiniToolsDeck</title><meta content="Resize and crop images for websites, social platforms and design projects. Free, browser-based tool with no signup required." name="description"/><meta content="index,follow" name="robots"/><link href="https://minitoolsdeck.vercel.app/smart-image-resizer/" rel="canonical"/>
+<meta content="website" property="og:type"/><meta content="MiniToolsDeck" property="og:site_name"/><meta content="Smart Image Resizer — Free Online Tool | MiniToolsDeck" property="og:title"/><meta content="Resize and crop images for websites, social platforms and design projects. Free, browser-based tool with no signup required." property="og:description"/><meta content="https://minitoolsdeck.vercel.app/smart-image-resizer/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><meta content="Smart Image Resizer — Free Online Tool | MiniToolsDeck" name="twitter:title"/><meta content="Resize and crop images for websites, social platforms and design projects. Free, browser-based tool with no signup required." name="twitter:description"/>
+<meta content="#0f172a" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='60' fill='%2310b981'/%3E%3Cpath d='M128 160h256v32H128zm0 64h256v32H128zm0 64h192v32H128z' fill='white'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="/assets/styles.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Smart Image Resizer", "url": "https://minitoolsdeck.vercel.app/smart-image-resizer/", "description": "Resize and crop images for websites, social platforms and design projects.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script><link href="/assets/design-system.css" rel="stylesheet"/><link href="/assets/premium-unified.css" rel="stylesheet"/></head><body class="mtd-premium-page"><header>
+<div class="header-container">
+<a class="brand" href="/">
+<div class="brand-icon">
+<i class="fa-solid fa-layer-group"></i>
+</div>
+<span>MiniTools<span class="brand-accent">Deck</span></span>
+</a>
+<div class="header-actions">
+
+
+<button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme">
+<i class="fa-solid fa-moon"></i>
+</button>
+<a class="mtd-back" href="/">← Back to All Tools</a></div>
+</div>
+</header><main><div class="site-breadcrumb"><a href="/">All Tools</a> / Smart Image Resizer</div><section class="seo-intro"><h1>Smart Image Resizer</h1><p>Resize and crop images for websites, social platforms and design projects.</p></section><div class="tool-panel" id="tool-imgresize">
+<div class="tool-header">
+<h2 class="tool-title"><i class="fa-solid fa-crop" style="color:var(--accent)"></i> Smart Image Resizer</h2>
+<p class="tool-desc">Resize, crop and prepare images for social media, websites and ads. Batch processing stays on your device.</p>
+</div>
+<div class="imgc-shell">
+<div aria-label="Choose images or drag and drop them here" class="imgc-dropzone" id="ir-dropzone" role="button" tabindex="0">
+<div class="imgc-upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+<h3>Drop Images Here</h3><p>or <span class="imgc-browse">browse files</span> from your device</p>
+<small>JPG, PNG, WebP, GIF and other browser-supported images · Multiple files supported</small>
+<input accept="image/*" hidden="" id="ir-files" multiple="" type="file"/>
+</div>
+<div class="imgc-workspace" hidden="" id="ir-workspace">
+<div class="imgc-workspace-head"><div><h3>Images To Resize</h3><p id="ir-count">0 images selected</p></div><button class="imgc-text-btn" id="ir-clear" type="button">Clear all</button></div>
+<div class="imgc-file-list" id="ir-file-list"></div>
+<div class="imgc-settings">
+<div class="form-group"><label for="ir-preset">Size preset</label><select id="ir-preset"><option value="custom">Custom dimensions</option><option value="instagram-square">Instagram square · 1080 × 1080</option><option value="instagram-portrait">Instagram portrait · 1080 × 1350</option><option value="instagram-story">Story / Reel / TikTok · 1080 × 1920</option><option value="youtube-thumbnail">YouTube thumbnail · 1280 × 720</option><option value="youtube-banner">YouTube banner · 2560 × 1440</option><option value="facebook-cover">Facebook cover · 1640 × 624</option><option value="linkedin-post">LinkedIn post · 1200 × 627</option><option value="og-image">Website / Open Graph · 1200 × 630</option><option value="hd">HD · 1920 × 1080</option><option value="4k">4K · 3840 × 2160</option></select></div>
+<div class="form-group"><label for="ir-mode">Resize behaviour</label><select id="ir-mode"><option value="contain">Fit inside — keep whole image</option><option value="cover">Fill frame — crop edges</option><option value="stretch">Stretch — ignore proportions</option></select><small>Fit adds empty space where needed; Fill crops to the target ratio.</small></div>
+<div class="form-group"><label for="ir-width">Width (px)</label><input id="ir-width" inputmode="numeric" max="12000" min="1" type="number" value="1080"/></div>
+<div class="form-group"><label for="ir-height">Height (px)</label><input id="ir-height" inputmode="numeric" max="12000" min="1" type="number" value="1080"/></div>
+<div class="form-group"><label for="ir-lock">Keep proportions</label><select id="ir-lock"><option value="yes">On — update other dimension</option><option value="no">Off — edit dimensions separately</option></select><small>When enabled, changing width or height uses the first image's aspect ratio.</small></div>
+<div class="form-group"><label for="ir-format">Export format</label><select id="ir-format"><option value="image/webp">WebP — smaller files</option><option value="image/jpeg">JPG — widely compatible</option><option value="image/png">PNG — transparency</option></select></div>
+<div class="form-group" id="ir-quality-group"><label for="ir-quality">Quality <strong id="ir-quality-value">90%</strong></label><input id="ir-quality" max="100" min="10" step="5" type="range" value="90"/><small>Applies to JPG and WebP. PNG is lossless.</small></div>
+<div class="form-group"><label for="ir-background">Canvas background</label><div class="imgc-color-row"><input id="ir-background" type="color" value="#ffffff"/><span>Used for fit mode and formats without transparency.</span></div></div>
+</div>
+<div class="imgc-actions"><button class="btn-submit" id="ir-run" type="button"><i class="fa-solid fa-crop-simple"></i> Resize images</button><button class="imgc-secondary-btn" hidden="" id="ir-zip" type="button"><i class="fa-solid fa-file-zipper"></i> Download all (.ZIP)</button></div>
+<p aria-live="polite" class="imgc-status" id="ir-status" role="status">Ready. Choose a size and resize your images.</p>
+<div aria-live="polite" class="imgc-file-list" id="ir-results"></div>
+</div>
+<div class="imgc-privacy-note"><i class="fa-solid fa-shield-halved"></i><span><strong>Private by design.</strong> Images are resized in your browser and are not uploaded to MiniToolsDeck.</span></div>
+</div>
+<section class="imgc-seo-content"><p>Resize one image or a batch to exact pixel dimensions. Use presets for common social and web formats, preserve proportions, crop to a frame, and export to WebP, JPG or PNG.</p><details><summary>Which resize mode should I use?</summary><p><strong>Fit inside</strong> shows the whole image without distortion; <strong>Fill frame</strong> crops the edges to fill the requested dimensions; <strong>Stretch</strong> forces the exact dimensions and may distort the image.</p></details><details><summary>Are my images uploaded?</summary><p>No. Resizing happens locally in your browser.</p></details></section>
+</div><h2 style="margin:32px 0 12px;font-size:1.35rem">Aspect Ratio Calculator</h2><div class="tool-panel" id="tool-aspectratio" style="margin-top:24px">
+<div class="tool-header">
+<h2 class="tool-title"><i class="fa-solid fa-expand" style="color:var(--accent)"></i> Image Aspect Ratio Calculator</h2>
+<p class="tool-desc">Plan exact image sizes for social posts, video, banners and websites. Keep proportions intact and get ready-to-use dimensions in seconds.</p>
+</div>
+<div class="grid-2">
+<div>
+<div class="form-group">
+<label for="ar-preset">Quick size preset</label>
+<select id="ar-preset" onchange="applyAspectPreset()">
+<option value="custom">Custom dimensions</option>
+<option value="ig-square">Instagram — Square post (1080 × 1080)</option>
+<option value="ig-portrait">Instagram — Portrait post (1080 × 1350)</option>
+<option value="ig-story">Instagram / TikTok / Reels Story (1080 × 1920)</option>
+<option value="yt-thumb">YouTube thumbnail (1280 × 720)</option>
+<option value="yt-banner">YouTube banner canvas (2560 × 1440)</option>
+<option value="fb-cover">Facebook cover (1640 × 624)</option>
+<option value="linkedin">LinkedIn post (1200 × 627)</option>
+<option value="og-image">Social share image (1200 × 630)</option>
+<option value="hd">HD video (1920 × 1080)</option>
+<option value="4k">4K video (3840 × 2160)</option>
+</select>
+<small>Presets are common working sizes; check the platform’s current specifications before publishing.</small>
+</div>
+<div class="form-group">
+<label>Original dimensions (pixels)</label>
+<div style="display:flex; gap:0.5rem; align-items:center;">
+<input aria-label="Original width in pixels" id="ar-orig-w" max="100000" min="1" oninput="updateAspectStudio('source')" type="number" value="1920"/>
+<span aria-hidden="true">×</span>
+<input aria-label="Original height in pixels" id="ar-orig-h" max="100000" min="1" oninput="updateAspectStudio('source')" type="number" value="1080"/>
+</div>
+</div>
+<div class="form-group">
+<label>Target dimensions (pixels)</label>
+<div style="display:flex; gap:0.5rem; align-items:center;">
+<input aria-label="Target width in pixels" id="ar-new-w" max="100000" min="1" oninput="updateAspectStudio('width')" type="number" value="1280"/>
+<span aria-hidden="true">×</span>
+<input aria-label="Target height in pixels" id="ar-new-h" max="100000" min="1" oninput="updateAspectStudio('height')" type="number" value="720"/>
+</div>
+<div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.5rem;">
+<button aria-pressed="true" class="copy-btn" id="ar-lock-btn" onclick="setAspectLock(true)" type="button">🔒 Keep ratio</button>
+<button aria-pressed="false" class="copy-btn" id="ar-unlock-btn" onclick="setAspectLock(false)" type="button">Unlock dimensions</button>
+</div>
+</div>
+<div class="form-group">
+<label for="ar-fit-mode">Sizing strategy</label>
+<select id="ar-fit-mode" onchange="updateAspectStudio('mode')">
+<option value="contain">Fit inside target — no cropping</option>
+<option value="cover">Fill target — crop may be needed</option>
+</select>
+<small id="ar-fit-note">Fit scales the full image inside the target box and may leave unused space.</small>
+</div>
+</div>
+<div>
+<div class="result-box" style="align-items:stretch; text-align:left; gap:0.65rem;">
+<div class="result-subtext">Your dimensions</div>
+<div class="result-value" id="ar-res-dims" style="font-size:1.55rem; text-align:center;">1280 × 720 px</div>
+<div class="result-subtext" id="ar-ratio-str" style="text-align:center;">Aspect ratio: 16:9</div>
+<div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0.65rem;">
+<div style="padding:0.7rem; border:1px solid var(--border-color); border-radius:8px;"><div class="result-subtext">Scale</div><strong id="ar-scale">66.7%</strong></div>
+<div style="padding:0.7rem; border:1px solid var(--border-color); border-radius:8px;"><div class="result-subtext">Pixel count</div><strong id="ar-pixels">0.92 MP</strong></div>
+</div>
+<div aria-live="polite" id="ar-status" role="status" style="font-size:0.88rem;">Target keeps the original proportions.</div>
+<div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+<button class="copy-btn" onclick="copyAspectDimensions()" type="button"><i class="fa-regular fa-copy"></i> Copy dimensions</button>
+<button class="copy-btn" onclick="copyAspectRatio()" type="button"><i class="fa-regular fa-copy"></i> Copy ratio</button>
+<button class="copy-btn" onclick="resetAspectStudio()" type="button">Reset</button>
+</div>
+</div>
+<div style="margin-top:1rem; padding:1rem; border:1px solid var(--border-color); border-radius:10px;">
+<strong style="display:block; margin-bottom:0.5rem;">Aspect ratio guide</strong>
+<div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+<button class="copy-btn" onclick="setAspectRatio(1,1)" type="button">1:1 Square</button>
+<button class="copy-btn" onclick="setAspectRatio(4,5)" type="button">4:5 Portrait</button>
+<button class="copy-btn" onclick="setAspectRatio(9,16)" type="button">9:16 Vertical</button>
+<button class="copy-btn" onclick="setAspectRatio(4,3)" type="button">4:3 Classic</button>
+<button class="copy-btn" onclick="setAspectRatio(16,9)" type="button">16:9 Widescreen</button>
+<button class="copy-btn" onclick="setAspectRatio(21,9)" type="button">21:9 Ultra-wide</button>
+</div>
+</div>
+</div>
+</div>
+<p style="margin-top:1rem; font-size:0.85rem; color:var(--text-muted, #777);">This tool calculates dimensions only; it does not crop or resize an actual image file. Use Image Resizer to process and export images.</p>
+</div><section aria-label="Guide" class="seo-guide"><h2>How To Use Smart Image Resizer</h2><p>Upload images, select dimensions or a preset, and export the resized versions.</p><h3>Frequently Asked Question</h3><p><strong>Will resizing always improve quality?</strong></p><p>No. Enlarging a small image can reduce sharpness; review the exported result.</p></section><section class="related-tools"><h2>Related Free Tools</h2><ul><li><a href="/social-media-meta-tag-generator/">Social Media Meta Tag Generator</a></li><li><a href="/smart-readability-checker/">Smart Readability Checker</a></li><li><a href="/ai-api-cost-estimator/">AI API Cost Estimator</a></li></ul></section></main><footer>
+<div class="footer-links">
+<button onclick="openModal('modal-privacy')" type="button">Privacy Policy</button>
+<button onclick="openModal('modal-terms')" type="button">Terms of Service</button>
+<button onclick="openModal('modal-about')" type="button">About &amp; Contact</button>
+</div>
+<p>© 2026 MiniToolsDeck. All rights reserved. Built for modern creators &amp; growth marketers.</p>
+</footer><div aria-label="Privacy Policy" aria-modal="true" class="modal-overlay" id="modal-privacy" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Privacy Policy" class="modal-close" onclick="closeModal('modal-privacy')" type="button">×</button>
+<h3>Privacy Policy</h3>
+<br/>
+<p>MiniToolsDeck operates with a client-first privacy architecture. All utility calculations, image conversions, and data formatting occur directly inside your browser. We do not store or transmit user files to external servers.</p>
+</div>
+</div><div aria-label="Terms of Service" aria-modal="true" class="modal-overlay" id="modal-terms" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Terms of Service" class="modal-close" onclick="closeModal('modal-terms')" type="button">×</button>
+<h3>Terms of Service</h3>
+<br/>
+<p>MiniToolsDeck provides web utilities "as is" without warranties of any kind.</p>
+</div>
+</div><div aria-label="About &amp; Contact" aria-modal="true" class="modal-overlay" id="modal-about" role="dialog">
+<div class="modal-content">
+<button aria-label="Close About &amp; Contact" class="modal-close" onclick="closeModal('modal-about')" type="button">×</button>
+<h3>About &amp;Amp Contact</h3>
+<br/>
+<p>MiniToolsDeck is the modern creator and growth stack—a suite of lightning-fast browser utilities built for digital marketers, developers, and content professionals.</p>
+<br/>
+<p>For inquiries, email: <strong>contact@minitoolsdeck.com</strong></p>
+</div>
+</div><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script defer="" src="/assets/tools.js"></script></body></html>

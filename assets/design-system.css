@@ -1,0 +1,6 @@
+/* MiniToolsDeck design system: Inter for UI, Manrope for headings */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap');
+:root{--mtd-font-body:'Inter',sans-serif;--mtd-font-heading:'Manrope',sans-serif}
+body,button,input,textarea,select,label,p,li{font-family:var(--mtd-font-body)!important}
+h1,h2,h3,h4,h5,h6,.tool-title,.section-title,.kpi strong{font-family:var(--mtd-font-heading)!important}
+select{padding-right:34px!important;background-position:right 14px center!important}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Keyword Density Analyzer — Free Online Tool | MiniToolsDeck</title><meta content="Inspect repeated keywords and phrases within a piece of text. Free, browser-based tool with no signup required." name="description"/><meta content="index,follow" name="robots"/><link href="https://minitoolsdeck.vercel.app/keyword-density-analyzer/" rel="canonical"/>
+<meta content="website" property="og:type"/><meta content="MiniToolsDeck" property="og:site_name"/><meta content="Keyword Density Analyzer — Free Online Tool | MiniToolsDeck" property="og:title"/><meta content="Inspect repeated keywords and phrases within a piece of text. Free, browser-based tool with no signup required." property="og:description"/><meta content="https://minitoolsdeck.vercel.app/keyword-density-analyzer/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><meta content="Keyword Density Analyzer — Free Online Tool | MiniToolsDeck" name="twitter:title"/><meta content="Inspect repeated keywords and phrases within a piece of text. Free, browser-based tool with no signup required." name="twitter:description"/>
+<meta content="#0f172a" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='60' fill='%2310b981'/%3E%3Cpath d='M128 160h256v32H128zm0 64h256v32H128zm0 64h192v32H128z' fill='white'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="/assets/styles.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Keyword Density Analyzer", "url": "https://minitoolsdeck.vercel.app/keyword-density-analyzer/", "description": "Inspect repeated keywords and phrases within a piece of text.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script><link href="/assets/design-system.css" rel="stylesheet"/><link href="/assets/premium-unified.css" rel="stylesheet"/></head><body class="mtd-premium-page"><header>
+<div class="header-container">
+<a class="brand" href="/">
+<div class="brand-icon">
+<i class="fa-solid fa-layer-group"></i>
+</div>
+<span>MiniTools<span class="brand-accent">Deck</span></span>
+</a>
+<div class="header-actions">
+
+
+<button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme">
+<i class="fa-solid fa-moon"></i>
+</button>
+<a class="mtd-back" href="/">← Back to All Tools</a></div>
+</div>
+</header><main><div class="site-breadcrumb"><a href="/">All Tools</a> / Keyword Density Analyzer</div><section class="seo-intro"><h1>Keyword Density Analyzer</h1><p>Inspect repeated keywords and phrases within a piece of text.</p></section><div class="tool-panel" id="tool-keyword">
+<div class="tool-header">
+<h2 class="tool-title"><i class="fa-solid fa-chart-simple" style="color:var(--accent)"></i> Keyword Density Analyzer</h2>
+<p class="tool-desc">Audit keywords and phrases in your content, spot repetition, and review the terms that deserve attention.</p>
+</div>
+<div class="grid-2" style="align-items:start; gap:1.25rem;">
+<div>
+<div class="form-group">
+<label for="keyword-input">Content to analyze</label>
+<textarea id="keyword-input" oninput="updateKeywordInputStats()" placeholder="Paste your article, landing page copy, product description or other text here..." rows="11" style="width:100%; min-height:220px;"></textarea>
+<div id="keyword-input-stats" style="display:flex;gap:1rem;flex-wrap:wrap;font-size:.82rem;color:var(--text-muted,#777);margin-top:.35rem;"><span>0 words</span><span>0 characters</span></div>
+</div>
+<div class="form-group">
+<label for="keyword-targets">Target keywords or phrases <span style="font-weight:normal;color:var(--text-muted,#777);">(optional, comma-separated)</span></label>
+<input id="keyword-targets" placeholder="e.g. project management, free tools, content strategy" style="width:100%;" type="text"/>
+</div>
+<details style="margin:.75rem 0 1rem;">
+<summary style="cursor:pointer;font-weight:600;padding:.35rem 0;">Analysis options</summary>
+<div class="grid-2" style="margin-top:.75rem;">
+<div class="form-group">
+<label for="keyword-ngram">Phrase length</label>
+<select id="keyword-ngram" style="width:100%;"><option value="1">Single words</option><option selected="" value="2">Up to 2 words</option><option value="3">Up to 3 words</option></select>
+</div>
+<div class="form-group">
+<label for="keyword-min-count">Minimum occurrences</label>
+<select id="keyword-min-count" style="width:100%;"><option value="1">1 or more</option><option selected="" value="2">2 or more</option><option value="3">3 or more</option></select>
+</div>
+</div>
+<label style="display:flex;gap:.5rem;align-items:center;margin:.4rem 0;"><input checked="" id="keyword-ignore-stop" style="width:auto;" type="checkbox"/> Exclude common words (the, and, for...)</label>
+<label style="display:flex;gap:.5rem;align-items:center;margin:.4rem 0;"><input id="keyword-include-single" style="width:auto;" type="checkbox"/> Include one-letter words</label>
+</details>
+<div style="display:flex;gap:.6rem;flex-wrap:wrap;">
+<button class="btn-submit" onclick="analyzeKeywords()" type="button">Analyze content</button>
+<button class="copy-btn" onclick="loadKeywordSample()" type="button">Try sample</button>
+<button class="copy-btn" onclick="resetKeywordAnalyzer()" type="button">Reset</button>
+</div>
+<p style="font-size:.82rem;color:var(--text-muted,#777);margin-top:.8rem;">Private by design: analysis runs locally in your browser. Density is a descriptive metric, not a Google ranking score or a recommended target percentage.</p>
+</div>
+<div>
+<div class="grid-2" style="gap:.65rem;">
+<div class="result-box"><div class="result-subtext">Words</div><div class="result-value" id="keyword-total-words">—</div></div>
+<div class="result-box"><div class="result-subtext">Unique words</div><div class="result-value" id="keyword-unique-words">—</div></div>
+<div class="result-box"><div class="result-subtext">Sentences</div><div class="result-value" id="keyword-sentences">—</div></div>
+<div class="result-box"><div class="result-subtext">Reading time</div><div class="result-value" id="keyword-reading-time">—</div></div>
+</div>
+<div class="result-box" style="align-items:stretch;text-align:left;margin-top:1rem;">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:.75rem;flex-wrap:wrap;">
+<div class="result-subtext">Target keyword report</div>
+<button class="copy-btn" onclick="copyKeywordReport()" type="button">Copy report</button>
+</div>
+<div id="keyword-target-report" style="margin-top:.65rem;font-size:.9rem;color:var(--text-muted,#777);">Add content and optional target phrases, then analyze.</div>
+</div>
+<div class="result-box" style="align-items:stretch;text-align:left;margin-top:1rem;">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:.75rem;flex-wrap:wrap;">
+<div class="result-subtext">Most frequent words and phrases</div>
+<button class="copy-btn" onclick="downloadKeywordCSV()" type="button">Export CSV</button>
+</div>
+<div id="keyword-list" style="width:100%;margin-top:.65rem;font-size:.9rem;overflow-x:auto;">Your frequency table will appear here.</div>
+</div>
+</div>
+</div>
+</div><section aria-label="Guide" class="seo-guide"><h2>How To Use Keyword Density Analyzer</h2><p>Paste your content and review the keyword frequency and density results.</p><h3>Frequently Asked Question</h3><p><strong>Is there an ideal keyword density?</strong></p><p>No fixed percentage guarantees rankings. Prioritise natural, helpful writing.</p></section><section class="related-tools"><h2>Related Free Tools</h2><ul><li><a href="/smart-readability-checker/">Smart Readability Checker</a></li><li><a href="/social-media-post-previewer/">Social Media Post Previewer</a></li><li><a href="/ai-prompt-generator/">AI Prompt Generator</a></li></ul></section></main><footer>
+<div class="footer-links">
+<button onclick="openModal('modal-privacy')" type="button">Privacy Policy</button>
+<button onclick="openModal('modal-terms')" type="button">Terms of Service</button>
+<button onclick="openModal('modal-about')" type="button">About &amp; Contact</button>
+</div>
+<p>© 2026 MiniToolsDeck. All rights reserved. Built for modern creators &amp; growth marketers.</p>
+</footer><div aria-label="Privacy Policy" aria-modal="true" class="modal-overlay" id="modal-privacy" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Privacy Policy" class="modal-close" onclick="closeModal('modal-privacy')" type="button">×</button>
+<h3>Privacy Policy</h3>
+<br/>
+<p>MiniToolsDeck operates with a client-first privacy architecture. All utility calculations, image conversions, and data formatting occur directly inside your browser. We do not store or transmit user files to external servers.</p>
+</div>
+</div><div aria-label="Terms of Service" aria-modal="true" class="modal-overlay" id="modal-terms" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Terms of Service" class="modal-close" onclick="closeModal('modal-terms')" type="button">×</button>
+<h3>Terms of Service</h3>
+<br/>
+<p>MiniToolsDeck provides web utilities "as is" without warranties of any kind.</p>
+</div>
+</div><div aria-label="About &amp; Contact" aria-modal="true" class="modal-overlay" id="modal-about" role="dialog">
+<div class="modal-content">
+<button aria-label="Close About &amp; Contact" class="modal-close" onclick="closeModal('modal-about')" type="button">×</button>
+<h3>About &amp;Amp Contact</h3>
+<br/>
+<p>MiniToolsDeck is the modern creator and growth stack—a suite of lightning-fast browser utilities built for digital marketers, developers, and content professionals.</p>
+<br/>
+<p>For inquiries, email: <strong>contact@minitoolsdeck.com</strong></p>
+</div>
+</div><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script defer="" src="/assets/tools.js"></script></body></html>

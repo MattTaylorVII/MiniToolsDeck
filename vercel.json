@@ -1,0 +1,29 @@
+{
+  "redirects": [
+    {
+      "source": "/viral-social-media-hook-generator/",
+      "destination": "/ai-prompt-generator/",
+      "permanent": true
+    },
+    {
+      "source": "/smart-word-character-counter/",
+      "destination": "/smart-readability-checker/",
+      "permanent": true
+    },
+    {
+      "source": "/google-search-result-previewer/",
+      "destination": "/seo-meta-tag-checker/",
+      "permanent": true
+    },
+    {
+      "source": "/image-aspect-ratio-calculator/",
+      "destination": "/smart-image-resizer/",
+      "permanent": true
+    },
+    {
+      "source": "/social-media-engagement-calculator/",
+      "destination": "/algorithm-exposure-score/",
+      "permanent": true
+    }
+  ]
+}

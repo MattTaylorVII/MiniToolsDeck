@@ -1,0 +1,45 @@
+/* MiniToolsDeck unified premium UI — shared by all pages */
+:root{--mtd-content-width:1200px;--mtd-heading:'Manrope',sans-serif;--mtd-body:'Inter',sans-serif}
+html{scroll-padding-top:115px}body{overflow-x:hidden;font-family:var(--mtd-body)!important}
+body :is(h1,h2,h3,h4,h5,h6,.tool-title,.section-title,.kpi strong){font-family:var(--mtd-heading)!important;letter-spacing:-.035em}
+body :is(button,input,select,textarea,p,small,label,li){font-family:var(--mtd-body)!important}
+/* Same exact brand and header geometry on home and tool pages */
+body>header{position:relative!important;top:auto!important;padding:0!important;background:#0b1220!important;border-bottom:1px solid #2c3c50!important;z-index:100}
+body.light-theme>header{background:#fff!important;border-color:#dce5ee!important}
+body>header .header-container{max-width:var(--mtd-content-width)!important;width:calc(100% - 48px)!important;margin:0 auto!important;min-height:112px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+body>header .brand{display:inline-flex!important;align-items:center!important;gap:18px!important;font-family:var(--mtd-heading)!important;font-size:clamp(24px,3vw,42px)!important;font-weight:800!important;letter-spacing:-.045em!important;color:var(--text-main)!important;white-space:nowrap;line-height:1.1}
+body>header .brand-icon{width:72px!important;height:72px!important;border-radius:17px!important;font-size:30px!important;flex-shrink:0;background:linear-gradient(135deg,#1dbb91,#22b4ca)!important;color:#fff!important}
+body>header .brand-accent{color:var(--accent)!important}
+body>header .header-actions{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:14px!important;min-width:0}
+body>header .theme-toggle{display:flex!important;align-items:center;justify-content:center;min-height:43px;min-width:44px;border-radius:11px!important;font-size:17px!important}
+body>header .mtd-back{font-size:14px;font-weight:700;color:var(--accent);text-decoration:none;white-space:nowrap;padding:10px 0;display:inline-flex;align-items:center;gap:6px}
+body>header .mtd-back:hover{text-decoration:underline}
+body>header .menu-container,body>header .bookmark-btn{display:none!important}
+/* Premium hero, dashboard and cards for legacy tools */
+body.mtd-premium-page{background:radial-gradient(ellipse at 90% 0%,rgba(22,83,104,.23),transparent 55%),var(--bg-primary);color:var(--text-main)}
+body.mtd-premium-page main{max-width:var(--mtd-content-width)!important;width:calc(100% - 48px)!important;margin:0 auto 64px!important;padding:0!important;flex:1}
+body.mtd-premium-page .site-breadcrumb{margin:28px 0 10px!important;font-size:14px!important}
+body.mtd-premium-page .seo-intro{margin:0 0 30px!important;max-width:none!important;background:transparent!important;border:0!important;border-radius:0!important;padding:28px 0 12px!important;box-shadow:none!important}
+body.mtd-premium-page .seo-intro:before{content:'PREMIUM BROWSER TOOLS · PRIVATE BY DESIGN';display:block;color:#40e0ca;font-size:12px;font-weight:800;letter-spacing:.15em;margin-bottom:16px}
+body.light-theme.mtd-premium-page .seo-intro:before{color:#059669}
+body.mtd-premium-page .seo-intro h1{font-size:clamp(34px,5vw,64px)!important;line-height:1.12!important;letter-spacing:-.045em!important;margin:0 0 16px!important;overflow-wrap:anywhere}
+body.mtd-premium-page .seo-intro p{font-size:clamp(16px,1.6vw,20px)!important;line-height:1.65!important;color:var(--text-muted)!important;max-width:850px}
+body.mtd-premium-page .tool-panel{display:block!important;max-width:none!important;padding:clamp(20px,3vw,36px)!important;border-radius:22px!important;background:linear-gradient(150deg,#15243a,#101d2f)!important;border:1px solid #30455e!important;box-shadow:0 18px 48px rgba(0,0,0,.14)!important;margin:0 0 24px!important}
+body.light-theme.mtd-premium-page .tool-panel{background:linear-gradient(150deg,#fff,#f8fafc)!important;border-color:#dce5ee!important}
+body.mtd-premium-page .tool-title{font-size:clamp(23px,2.8vw,32px)!important;font-weight:800!important}
+body.mtd-premium-page .tool-desc{color:var(--text-muted)!important;font-size:15px!important;line-height:1.7!important}
+body.mtd-premium-page :is(.seo-guide,.related-tools){border-radius:18px!important;border:1px solid var(--border-color)!important;background:var(--bg-secondary)!important;padding:clamp(18px,2.5vw,28px)!important}
+body.mtd-premium-page :is(input,textarea,select){max-width:100%;border-radius:10px!important}
+body.mtd-premium-page select{padding-right:38px!important}
+body.mtd-premium-page button{border-radius:10px}
+body.mtd-premium-page :is(.card,.result-card,.stat-card,.preview-card){border-radius:15px}
+body.mtd-premium-page :is(.grid-2,.tool-grid){min-width:0}
+body.mtd-premium-page main *{min-width:0}
+body.mtd-premium-page :is(pre,code){overflow-wrap:anywhere}
+/* The Algorithm page retains its own card styling; only header becomes shared */
+body.mtd-algorithm>header .header-container{max-width:var(--mtd-content-width)!important}
+body.mtd-algorithm main{max-width:var(--mtd-content-width)!important;width:calc(100% - 48px)!important;margin-left:auto!important;margin-right:auto!important}
+body.mtd-algorithm .mtd-back{color:var(--teal)}
+@media(max-width:700px){body>header .header-container{width:calc(100% - 32px)!important;min-height:88px;gap:10px}body>header .brand{font-size:clamp(19px,4.6vw,28px)!important;gap:9px!important}body>header .brand-icon{width:46px!important;height:46px!important;border-radius:12px!important;font-size:20px!important}body>header .header-actions{gap:8px!important}body>header .mtd-back{font-size:12px;white-space:normal;text-align:right;line-height:1.2}body>header .theme-toggle{min-width:38px;min-height:38px;padding:8px!important}body.mtd-premium-page main,body.mtd-algorithm main{width:calc(100% - 32px)!important}body.mtd-premium-page .seo-intro{padding-top:16px!important}body.mtd-premium-page .tool-panel{padding:18px!important}}
+@media(max-width:420px){body>header .brand{font-size:18px!important}body>header .brand-icon{width:38px!important;height:38px!important;font-size:17px!important}body>header .mtd-back{font-size:11px}body>header .header-container{width:calc(100% - 24px)!important}body.mtd-premium-page main,body.mtd-algorithm main{width:calc(100% - 24px)!important}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important}}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Brand Color Intelligence Studio | MiniToolsDeck</title><meta content="Extract a practical colour palette from photos, logos and other images. Free, browser-based tool with no signup required." name="description"/><meta content="index,follow" name="robots"/><link href="https://minitoolsdeck.vercel.app/image-color-palette-extractor/" rel="canonical"/>
+<meta content="website" property="og:type"/><meta content="MiniToolsDeck" property="og:site_name"/><meta content="Image Color Palette Extractor — Free Online Tool | MiniToolsDeck" property="og:title"/><meta content="Extract a practical colour palette from photos, logos and other images. Free, browser-based tool with no signup required." property="og:description"/><meta content="https://minitoolsdeck.vercel.app/image-color-palette-extractor/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><meta content="Image Color Palette Extractor — Free Online Tool | MiniToolsDeck" name="twitter:title"/><meta content="Extract a practical colour palette from photos, logos and other images. Free, browser-based tool with no signup required." name="twitter:description"/>
+<meta content="#0f172a" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='60' fill='%2310b981'/%3E%3Cpath d='M128 160h256v32H128zm0 64h256v32H128zm0 64h192v32H128z' fill='white'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="/assets/styles.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Image Color Palette Extractor", "url": "https://minitoolsdeck.vercel.app/image-color-palette-extractor/", "description": "Extract a practical colour palette from photos, logos and other images.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script><link href="/assets/design-system.css" rel="stylesheet"/><link href="/assets/premium-unified.css" rel="stylesheet"/></head><body class="mtd-premium-page"><header>
+<div class="header-container">
+<a class="brand" href="/">
+<div class="brand-icon">
+<i class="fa-solid fa-layer-group"></i>
+</div>
+<span>MiniTools<span class="brand-accent">Deck</span></span>
+</a>
+<div class="header-actions">
+
+
+<button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme">
+<i class="fa-solid fa-moon"></i>
+</button>
+<a class="mtd-back" href="/">← Back to All Tools</a></div>
+</div>
+</header><main><div class="site-breadcrumb"><a href="/">All Tools</a> / Image Color Palette Extractor</div><section class="seo-intro"><h1>Brand Color Intelligence Studio</h1><p>Extract, evaluate and apply a cohesive brand palette with accessibility checks and exportable design tokens.</p></section><div class="tool-panel" id="tool-palette">
+<div class="tool-header">
+<h2 class="tool-title">Brand Color Intelligence Studio</h2>
+<p class="tool-desc">Turn any image into a usable design palette. Drag in a photo, refine the colors, and export ready-to-use codes.</p>
+</div>
+<div class="grid-2">
+<div>
+<div aria-label="Drop an image or choose a file" class="palette-drop" id="palette-drop" onclick="document.getElementById('palette-file').click()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();document.getElementById('palette-file').click();}" role="button" tabindex="0">
+<i class="fa-solid fa-cloud-arrow-up" style="font-size:1.7rem;color:var(--accent)"></i>
+<strong>Drop an image here</strong>
+<span>or click to choose · JPG, PNG, WebP, GIF · up to 15 MB</span>
+<input accept="image/jpeg,image/png,image/webp,image/gif" hidden="" id="palette-file" onchange="extractPalette()" type="file"/>
+</div>
+<div class="result-subtext" id="palette-status" role="status" style="margin:0.7rem 0">Your image stays in your browser.</div>
+<div id="palette-image-wrap" style="display:none;position:relative">
+<img alt="Image being analysed" id="palette-image" style="display:block;width:100%;max-height:290px;object-fit:contain;border-radius:12px;background:var(--bg-secondary)"/>
+<div class="result-subtext" style="margin-top:0.4rem">Click a point on the image to sample its exact color.</div>
+</div>
+<details style="margin-top:1rem">
+<summary style="cursor:pointer;font-weight:700">Palette settings</summary>
+<div class="grid-2" style="margin-top:1rem">
+<div class="form-group"><label for="palette-count">Number of colors</label><select id="palette-count" onchange="paletteRecalculate()"><option value="4">4</option><option selected="" value="5">5</option><option value="6">6</option><option value="8">8</option><option value="10">10</option></select></div>
+<div class="form-group"><label for="palette-method">Extraction style</label><select id="palette-method" onchange="paletteRecalculate()"><option value="dominant">Dominant colors</option><option value="vibrant">Vibrant colors</option><option value="balanced">Balanced mix</option></select></div>
+</div>
+<label style="display:flex;gap:0.5rem;align-items:center;margin-top:0.5rem"><input checked="" id="palette-merge" onchange="paletteRecalculate()" style="width:auto" type="checkbox"/> Merge near-identical shades</label>
+</details>
+</div>
+<div>
+<div class="result-box" style="align-items:stretch;text-align:left">
+<div class="result-subtext">Extracted palette <span id="palette-count-label"></span></div>
+<div class="palette-color-list" id="palette-colors"><span class="result-subtext">Add an image to extract its colors.</span></div>
+<div id="palette-actions" style="display:none;margin-top:1rem;gap:0.5rem;flex-wrap:wrap">
+<button class="copy-btn" onclick="paletteCopyAll()" type="button"><i class="fa-regular fa-copy"></i> Copy HEX</button>
+<button class="copy-btn" onclick="paletteExport('css')" type="button">CSS</button>
+<button class="copy-btn" onclick="paletteExport('json')" type="button">JSON</button>
+<button class="copy-btn" onclick="paletteExport('svg')" type="button">SVG swatches</button>
+<button class="copy-btn" onclick="paletteReset()" type="button">Reset</button>
+</div>
+<div class="result-subtext" id="palette-sampled" style="margin-top:0.75rem"></div>
+</div>
+</div>
+</div>
+</div><section class="tool-panel" id="brand-color-lab" style="margin-top:24px;padding:24px"><h2 style="margin-top:0">Brand Palette Intelligence</h2><p>Evaluate brand contrast, compare combinations, and export reusable CSS design tokens. Your palette stays on this device.</p><div style="display:flex;flex-wrap:wrap;gap:14px;align-items:end"><label>Primary brand color <input id="brand-primary" style="display:block;width:110px;height:46px" type="color" value="#14b8a6"/></label><label>Background <input id="brand-background" style="display:block;width:110px;height:46px" type="color" value="#0f172a"/></label><label>Accent <input id="brand-accent" style="display:block;width:110px;height:46px" type="color" value="#60a5fa"/></label></div><div id="brand-preview" style="padding:22px;border-radius:12px;margin:18px 0"><strong style="font-size:24px">Your brand, clearly.</strong><p style="margin:10px 0">Preview your palette in a realistic interface.</p><button id="brand-preview-button" style="border:0;border-radius:8px;padding:10px 18px;font-weight:700" type="button">Get started</button></div><div aria-live="polite" id="brand-audit"></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px"><button class="btn-primary" id="brand-export-css" type="button">Download CSS tokens</button><button class="btn-secondary" id="brand-export-json" type="button">Download JSON tokens</button></div><p style="font-size:12px;opacity:.7">Contrast checks use WCAG relative luminance. They evaluate these selected pairs, not the accessibility of an entire website.</p></section><section aria-label="Guide" class="seo-guide"><h2>How To Use Image Color Palette Extractor</h2><p>Upload an image, choose an extraction style and copy or export the resulting colours.</p><h3>Frequently Asked Question</h3><p><strong>Can I sample a specific colour?</strong></p><p>Yes. Click the image preview to sample an individual colour.</p></section><section class="related-tools"><h2>Related Free Tools</h2><ul><li><a href="/ai-api-cost-estimator/">AI API Cost Estimator</a></li><li><a href="/ai-prompt-generator/">AI Prompt Generator</a></li><li><a href="/smart-qr-code-generator/">Smart QR Code Generator</a></li></ul></section></main><footer>
+<div class="footer-links">
+<button onclick="openModal('modal-privacy')" type="button">Privacy Policy</button>
+<button onclick="openModal('modal-terms')" type="button">Terms of Service</button>
+<button onclick="openModal('modal-about')" type="button">About &amp; Contact</button>
+</div>
+<p>© 2026 MiniToolsDeck. All rights reserved. Built for modern creators &amp; growth marketers.</p>
+</footer><div aria-label="Privacy Policy" aria-modal="true" class="modal-overlay" id="modal-privacy" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Privacy Policy" class="modal-close" onclick="closeModal('modal-privacy')" type="button">×</button>
+<h3>Privacy Policy</h3>
+<br/>
+<p>MiniToolsDeck operates with a client-first privacy architecture. All utility calculations, image conversions, and data formatting occur directly inside your browser. We do not store or transmit user files to external servers.</p>
+</div>
+</div><div aria-label="Terms of Service" aria-modal="true" class="modal-overlay" id="modal-terms" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Terms of Service" class="modal-close" onclick="closeModal('modal-terms')" type="button">×</button>
+<h3>Terms of Service</h3>
+<br/>
+<p>MiniToolsDeck provides web utilities "as is" without warranties of any kind.</p>
+</div>
+</div><div aria-label="About &amp; Contact" aria-modal="true" class="modal-overlay" id="modal-about" role="dialog">
+<div class="modal-content">
+<button aria-label="Close About &amp; Contact" class="modal-close" onclick="closeModal('modal-about')" type="button">×</button>
+<h3>About &amp;Amp Contact</h3>
+<br/>
+<p>MiniToolsDeck is the modern creator and growth stack—a suite of lightning-fast browser utilities built for digital marketers, developers, and content professionals.</p>
+<br/>
+<p>For inquiries, email: <strong>contact@minitoolsdeck.com</strong></p>
+</div>
+</div><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script defer="" src="/assets/tools.js"></script><script>(function(){const $=id=>document.getElementById(id),ids=['brand-primary','brand-background','brand-accent'];function rgb(hex){return [1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255)}function lum(h){let v=rgb(h).map(x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4);return v[0]*.2126+v[1]*.7152+v[2]*.0722}function contrast(a,b){let x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}function update(){let [p,b,a]=ids.map(i=>$(i).value),r1=contrast(p,b),r2=contrast(a,b);$('brand-preview').style.background=b;$('brand-preview').style.color=p;$('brand-preview-button').style.background=a;$('brand-preview-button').style.color=contrast('#ffffff',a)>=contrast('#000000',a)?'#ffffff':'#000000';$('brand-audit').textContent='Primary on background: '+r1.toFixed(2)+':1 ('+(r1>=4.5?'AA normal text':r1>=3?'AA large text only':'Below AA text thresholds')+'). Accent on background: '+r2.toFixed(2)+':1 ('+(r2>=4.5?'AA normal text':r2>=3?'AA large text only':'Below AA text thresholds')+').';}function dl(ext,mime,data){let u=URL.createObjectURL(new Blob([data],{type:mime})),a=document.createElement('a');a.href=u;a.download='minitoolsdeck-brand-tokens.'+ext;a.click();setTimeout(()=>URL.revokeObjectURL(u),500)}ids.forEach(i=>$(i).addEventListener('input',update));$('brand-export-css').onclick=()=>dl('css','text/css',':root {\n'+ids.map(i=>'  --'+i.replace('brand-','brand-')+': '+$(i).value+';').join('\n')+'\n}');$('brand-export-json').onclick=()=>dl('json','application/json',JSON.stringify(Object.fromEntries(ids.map(i=>[i,$(i).value])),null,2));update()})();</script></body></html>

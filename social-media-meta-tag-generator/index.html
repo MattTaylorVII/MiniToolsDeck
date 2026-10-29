@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Social Media Meta Tag Generator — Free Online Tool | MiniToolsDeck</title><meta content="Create Open Graph and social preview metadata for your web pages. Free, browser-based tool with no signup required." name="description"/><meta content="index,follow" name="robots"/><link href="https://minitoolsdeck.vercel.app/social-media-meta-tag-generator/" rel="canonical"/>
+<meta content="website" property="og:type"/><meta content="MiniToolsDeck" property="og:site_name"/><meta content="Social Media Meta Tag Generator — Free Online Tool | MiniToolsDeck" property="og:title"/><meta content="Create Open Graph and social preview metadata for your web pages. Free, browser-based tool with no signup required." property="og:description"/><meta content="https://minitoolsdeck.vercel.app/social-media-meta-tag-generator/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><meta content="Social Media Meta Tag Generator — Free Online Tool | MiniToolsDeck" name="twitter:title"/><meta content="Create Open Graph and social preview metadata for your web pages. Free, browser-based tool with no signup required." name="twitter:description"/>
+<meta content="#0f172a" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='60' fill='%2310b981'/%3E%3Cpath d='M128 160h256v32H128zm0 64h256v32H128zm0 64h192v32H128z' fill='white'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="/assets/styles.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Social Media Meta Tag Generator", "url": "https://minitoolsdeck.vercel.app/social-media-meta-tag-generator/", "description": "Create Open Graph and social preview metadata for your web pages.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script><link href="/assets/design-system.css" rel="stylesheet"/><link href="/assets/premium-unified.css" rel="stylesheet"/></head><body class="mtd-premium-page"><header>
+<div class="header-container">
+<a class="brand" href="/">
+<div class="brand-icon">
+<i class="fa-solid fa-layer-group"></i>
+</div>
+<span>MiniTools<span class="brand-accent">Deck</span></span>
+</a>
+<div class="header-actions">
+
+
+<button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme">
+<i class="fa-solid fa-moon"></i>
+</button>
+<a class="mtd-back" href="/">← Back to All Tools</a></div>
+</div>
+</header><main><div class="site-breadcrumb"><a href="/">All Tools</a> / Social Media Meta Tag Generator</div><section class="seo-intro"><h1>Social Media Meta Tag Generator</h1><p>Create Open Graph and social preview metadata for your web pages.</p></section><div class="tool-panel" id="tool-oggen">
+<div class="tool-header">
+<h2 class="tool-title"><i class="fa-solid fa-share-nodes" style="color:var(--accent)"></i> Social Media Meta Tag Generator</h2>
+<p class="tool-desc">Build share-ready Open Graph and X Card tags, preview the result, and copy clean HTML into your page’s <code>&lt;head&gt;</code>.</p>
+</div>
+<div class="grid-2" style="align-items:start;">
+<div>
+<div class="form-group"><label for="og-page-url">Page URL <span style="color:var(--text-muted)">(recommended)</span></label><input id="og-page-url" oninput="updateOGPreview()" placeholder="https://example.com/page" type="url"/><small class="og-field-help">Enter the final public page URL, including https://. This is shown as the destination domain in the share preview.</small></div>
+<div class="form-group"><label for="og-title">Share title <span style="color:var(--text-muted)">· required</span></label><input id="og-title" maxlength="200" oninput="updateOGPreview()" placeholder="A clear, compelling page title" type="text"/><small><span id="og-title-count">0</span> characters</small></div>
+<div class="form-group"><label for="og-desc">Share description</label><textarea id="og-desc" maxlength="500" oninput="updateOGPreview()" placeholder="Explain what people will find when they open this link." rows="3"></textarea><small><span id="og-desc-count">0</span> characters</small></div>
+<div class="form-group"><label for="og-image">Preview image URL <span style="color:var(--text-muted)">· absolute URL</span></label><input id="og-image" oninput="updateOGPreview()" placeholder="https://example.com/social-preview.jpg" type="url"/><small class="og-field-help">Use an image URL that social platforms can access publicly. A 1200 × 630 image is a good starting point.</small></div>
+<details style="margin:0 0 1rem;"><summary style="cursor:pointer;font-weight:600;padding:.5rem 0;">More metadata options</summary>
+<div class="form-group"><label for="og-site-name">Site / brand name</label><input id="og-site-name" oninput="updateOGPreview()" placeholder="Your brand" type="text"/></div>
+<div class="form-group"><label for="og-image-alt">Image alt text</label><input id="og-image-alt" oninput="updateOGPreview()" placeholder="Describe the preview image" type="text"/></div>
+<div class="form-group"><label for="og-type">Page type</label><select id="og-type" onchange="updateOGPreview()"><option value="website">Website / landing page</option><option value="article">Article / blog post</option><option value="product">Product page</option><option value="profile">Profile</option></select></div>
+<div class="form-group"><label for="og-locale">Locale</label><select id="og-locale" onchange="updateOGPreview()"><option value="en_US">English (US)</option><option value="en_GB">English (UK)</option><option value="en_ZA">English (South Africa)</option><option value="en_AU">English (Australia)</option><option value="fr_FR">French</option><option value="de_DE">German</option><option value="es_ES">Spanish</option></select></div>
+<div class="form-group"><label for="og-x-card">X card format</label><select id="og-x-card" onchange="updateOGPreview()"><option value="summary_large_image">Large image card</option><option value="summary">Compact summary card</option></select></div>
+</details>
+<div style="display:flex;gap:.65rem;flex-wrap:wrap;"><button class="btn-submit" onclick="generateOGTags()" type="button"><i class="fa-solid fa-code"></i> Generate tags</button><button class="copy-btn" onclick="resetOGBuilder()" type="button">Reset</button></div>
+<div aria-live="polite" id="og-status" role="status" style="margin-top:.75rem;font-size:.9rem;color:var(--text-muted);"></div>
+</div>
+<div>
+<div class="result-box" style="align-items:stretch;text-align:left;margin-bottom:1rem;">
+<div class="result-subtext">Live share preview</div>
+<div id="og-preview-card" style="margin-top:.65rem;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--surface);">
+<div id="og-preview-image-wrap" style="height:190px;display:flex;align-items:center;justify-content:center;background:var(--surface-alt);color:var(--text-muted);text-align:center;padding:1rem;">Add a public preview image URL to see it here</div>
+<div style="padding:.9rem;"><div id="og-preview-domain" style="font-size:.75rem;text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted);">YOURDOMAIN.COM</div><div id="og-preview-title" style="font-weight:700;margin:.3rem 0;overflow-wrap:anywhere;">Your share title</div><div id="og-preview-desc" style="font-size:.88rem;color:var(--text-muted);overflow-wrap:anywhere;">Your page description will appear here.</div></div>
+</div>
+<small style="margin-top:.6rem;color:var(--text-muted);">Illustrative preview only. Each platform may crop or display cards differently.</small>
+</div>
+<div class="result-box" style="align-items:stretch;text-align:left;">
+<div class="result-subtext">HTML meta tags</div>
+<pre id="og-output" style="width:100%;white-space:pre-wrap;overflow-wrap:anywhere;font-family:monospace;font-size:.82rem;color:var(--accent);margin-top:.5rem;max-height:360px;overflow:auto;"></pre>
+<div style="display:flex;gap:.5rem;flex-wrap:wrap;"><button class="copy-btn" disabled="" id="og-copy-btn" onclick="copyOGTags()" type="button"><i class="fa-regular fa-copy"></i> Copy HTML</button><button class="copy-btn" disabled="" id="og-download-btn" onclick="downloadOGTags()" type="button"><i class="fa-solid fa-download"></i> Download .html</button></div>
+</div>
+</div>
+</div>
+<div class="imgc-privacy-note" style="margin-top:1rem;"><i class="fa-solid fa-circle-info"></i><span>Tags are generated locally. Add them to the page’s <code>&lt;head&gt;</code>. Social platforms generally need a publicly reachable page and image to fetch a preview; this tool cannot force a platform to refresh its cache.</span></div>
+</div><section aria-label="Guide" class="seo-guide"><h2>How To Use Social Media Meta Tag Generator</h2><p>Enter page information, inspect the previews and copy the generated tags.</p><h3>Frequently Asked Question</h3><p><strong>Where should the generated tags go?</strong></p><p>Place them in the head section of the relevant HTML page.</p></section><section class="related-tools"><h2>Related Free Tools</h2><ul><li><a href="/google-search-result-previewer/">Google Search Result Previewer</a></li><li><a href="/color-contrast-checker/">Color Contrast Checker</a></li><li><a href="/social-media-engagement-calculator/">Social Media Engagement Calculator</a></li></ul></section></main><footer>
+<div class="footer-links">
+<button onclick="openModal('modal-privacy')" type="button">Privacy Policy</button>
+<button onclick="openModal('modal-terms')" type="button">Terms of Service</button>
+<button onclick="openModal('modal-about')" type="button">About &amp; Contact</button>
+</div>
+<p>© 2026 MiniToolsDeck. All rights reserved. Built for modern creators &amp; growth marketers.</p>
+</footer><div aria-label="Privacy Policy" aria-modal="true" class="modal-overlay" id="modal-privacy" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Privacy Policy" class="modal-close" onclick="closeModal('modal-privacy')" type="button">×</button>
+<h3>Privacy Policy</h3>
+<br/>
+<p>MiniToolsDeck operates with a client-first privacy architecture. All utility calculations, image conversions, and data formatting occur directly inside your browser. We do not store or transmit user files to external servers.</p>
+</div>
+</div><div aria-label="Terms of Service" aria-modal="true" class="modal-overlay" id="modal-terms" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Terms of Service" class="modal-close" onclick="closeModal('modal-terms')" type="button">×</button>
+<h3>Terms of Service</h3>
+<br/>
+<p>MiniToolsDeck provides web utilities "as is" without warranties of any kind.</p>
+</div>
+</div><div aria-label="About &amp; Contact" aria-modal="true" class="modal-overlay" id="modal-about" role="dialog">
+<div class="modal-content">
+<button aria-label="Close About &amp; Contact" class="modal-close" onclick="closeModal('modal-about')" type="button">×</button>
+<h3>About &amp;Amp Contact</h3>
+<br/>
+<p>MiniToolsDeck is the modern creator and growth stack—a suite of lightning-fast browser utilities built for digital marketers, developers, and content professionals.</p>
+<br/>
+<p>For inquiries, email: <strong>contact@minitoolsdeck.com</strong></p>
+</div>
+</div><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script defer="" src="/assets/tools.js"></script></body></html>

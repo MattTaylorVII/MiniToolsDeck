@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Creative Prompt &amp; Hook Studio | MiniToolsDeck</title><meta content="Create structured prompts for AI assistants using templates and custom instructions. Free, browser-based tool with no signup required." name="description"/><meta content="index,follow" name="robots"/><link href="https://minitoolsdeck.vercel.app/ai-prompt-generator/" rel="canonical"/>
+<meta content="website" property="og:type"/><meta content="MiniToolsDeck" property="og:site_name"/><meta content="AI Prompt Generator — Free Online Tool | MiniToolsDeck" property="og:title"/><meta content="Create structured prompts for AI assistants using templates and custom instructions. Free, browser-based tool with no signup required." property="og:description"/><meta content="https://minitoolsdeck.vercel.app/ai-prompt-generator/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><meta content="AI Prompt Generator — Free Online Tool | MiniToolsDeck" name="twitter:title"/><meta content="Create structured prompts for AI assistants using templates and custom instructions. Free, browser-based tool with no signup required." name="twitter:description"/>
+<meta content="#0f172a" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='60' fill='%2310b981'/%3E%3Cpath d='M128 160h256v32H128zm0 64h256v32H128zm0 64h192v32H128z' fill='white'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="/assets/styles.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "AI Prompt Generator", "url": "https://minitoolsdeck.vercel.app/ai-prompt-generator/", "description": "Create structured prompts for AI assistants using templates and custom instructions.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script><link href="/assets/design-system.css" rel="stylesheet"/><link href="/assets/premium-unified.css" rel="stylesheet"/></head><body class="mtd-premium-page"><header>
+<div class="header-container">
+<a class="brand" href="/">
+<div class="brand-icon">
+<i class="fa-solid fa-layer-group"></i>
+</div>
+<span>MiniTools<span class="brand-accent">Deck</span></span>
+</a>
+<div class="header-actions">
+
+
+<button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme">
+<i class="fa-solid fa-moon"></i>
+</button>
+<a class="mtd-back" href="/">← Back to All Tools</a></div>
+</div>
+</header><main><div class="site-breadcrumb"><a href="/">All Tools</a> / Creative Prompt &amp; Hook Studio</div><section class="seo-intro"><h1>SEO Meta Tag &amp; Search Preview Studio</h1><p>Create structured prompts for AI assistants using templates and custom instructions.</p></section><div class="tool-panel active" id="tool-aiprompt">
+<div class="tool-header">
+<h2 class="tool-title"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent)"></i> AI Prompt Generator</h2>
+<p class="tool-desc">Build clear, detailed prompts for ChatGPT, Claude, Gemini and other AI assistants. Choose a template, customise the instructions, then copy or download your prompt. No account or API key required.</p>
+</div>
+<div class="ai-prompt-layout">
+<section aria-label="Prompt settings" class="ai-prompt-form">
+<div class="form-group">
+<label for="ai-template">Start with a template</label>
+<select id="ai-template" onchange="applyAIPromptTemplate()">
+<option value="custom">Custom prompt</option>
+<option value="seo-blog">SEO blog article</option>
+<option value="social">Social media post</option>
+<option value="email">Marketing email</option>
+<option value="ad">Paid ad copy</option>
+<option value="youtube">YouTube video script</option>
+<option value="product">Product description</option>
+<option value="business">Business plan</option>
+<option value="research">Research and summary</option>
+<option value="coding">Coding and debugging</option>
+<option value="brainstorm">Creative brainstorming</option>
+</select>
+<p class="ai-field-help">Templates prefill suggested settings. You can change anything before generating.</p>
+</div>
+<div class="form-group">
+<label for="ai-topic">Topic, product or project <span class="ai-required">Required</span></label>
+<input autocomplete="off" id="ai-topic" maxlength="180" placeholder="e.g. A productivity app for small businesses" type="text"/>
+</div>
+<div class="form-group">
+<label for="ai-objective">What do you want the AI to do? <span class="ai-required">Required</span></label>
+<textarea id="ai-objective" maxlength="1200" placeholder="Describe the result you want, the problem to solve, or the task to complete." rows="3"></textarea>
+</div>
+<details class="simple-advanced ai-advanced">
+<summary>More options <span>Optional refinements</span></summary>
+<div class="grid-2">
+<div class="form-group">
+<label for="ai-audience">Target audience</label>
+<input id="ai-audience" maxlength="300" placeholder="e.g. First-time business owners" type="text"/>
+</div>
+<div class="form-group">
+<label for="ai-role">AI role or expertise</label>
+<input id="ai-role" maxlength="180" placeholder="e.g. Senior SEO strategist" type="text"/>
+</div>
+</div>
+<div class="grid-2">
+<div class="form-group">
+<label for="ai-goal">Output type</label>
+<select id="ai-goal">
+<option value="Blog article or outline">Blog article / outline</option>
+<option value="Social media post">Social media post</option>
+<option value="Marketing email or newsletter">Email / newsletter</option>
+<option value="Paid advertisement copy">Ad copy</option>
+<option value="Landing page copy">Landing page copy</option>
+<option value="Product description">Product description</option>
+<option value="Video script">Video script</option>
+<option value="Business plan or strategy">Business plan / strategy</option>
+<option value="Research summary">Research summary</option>
+<option value="Code solution with explanation">Code / debugging</option>
+<option value="Step-by-step guide">Step-by-step guide</option>
+<option value="List of ideas and recommendations">Ideas / recommendations</option>
+<option value="Custom format specified in the instructions">Other / custom</option>
+</select>
+</div>
+<div class="form-group">
+<label for="ai-tone">Tone of voice</label>
+<select id="ai-tone">
+<option value="clear and professional">Professional</option>
+<option value="friendly and conversational">Friendly</option>
+<option value="persuasive and confident">Persuasive</option>
+<option value="bold, energetic and engaging">Bold and energetic</option>
+<option value="warm and empathetic">Warm and empathetic</option>
+<option value="witty and playful">Witty and playful</option>
+<option value="academic and evidence-focused">Academic</option>
+<option value="simple and accessible for beginners">Simple and beginner-friendly</option>
+<option value="technical and precise">Technical</option>
+<option value="adapted to the audience and context">Choose the best fit</option>
+</select>
+</div>
+</div>
+<div class="grid-2">
+<div class="form-group">
+<label for="ai-framework">Prompt approach</label>
+<select id="ai-framework">
+<option value="structured step-by-step instructions">Step-by-step</option>
+<option value="expert role with clear objectives and constraints">Expert role</option>
+<option value="problem, options, trade-offs and recommendation">Problem-solving</option>
+<option value="creative exploration with several distinct alternatives">Creative exploration</option>
+<option value="a draft followed by a self-review and improvements">Draft and self-review</option>
+</select>
+</div>
+<div class="form-group">
+<label for="ai-length">Level of detail</label>
+<select id="ai-length">
+<option value="concise and direct">Concise</option>
+<option value="moderately detailed, with useful examples">Balanced</option>
+<option value="comprehensive and detailed, with examples where useful">Detailed</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label for="ai-context">Background or context <span class="ai-optional">Optional</span></label>
+<textarea id="ai-context" maxlength="1800" placeholder="Add relevant details, brand information, existing work, resources or limitations." rows="3"></textarea>
+</div>
+<div class="form-group">
+<label for="ai-requirements">Requirements and things to avoid <span class="ai-optional">Optional</span></label>
+<textarea id="ai-requirements" maxlength="1200" placeholder="e.g. Use British English, include 3 options, avoid jargon, do not invent statistics." rows="3"></textarea>
+</div>
+<div class="form-group">
+<label for="ai-format">Preferred output structure</label>
+<select id="ai-format">
+<option value="Use clear headings and logical sections; use bullets or numbered steps when they improve readability.">Headings and bullets</option>
+<option value="Return a numbered step-by-step plan.">Numbered steps</option>
+<option value="Return a table when comparing multiple items, followed by a brief summary.">Table and summary</option>
+<option value="Return the final answer only, with no preamble.">Answer only</option>
+<option value="Use the format best suited to the task and explain any important assumptions.">Best format for the task</option>
+</select>
+</div>
+</details>
+<button class="btn-submit" onclick="generateAIPrompt()" type="button"><i class="fa-solid fa-wand-magic-sparkles"></i> Build My Prompt</button>
+<p class="ai-privacy-note"><i class="fa-solid fa-shield-halved"></i> Your entries are processed in this page. This tool assembles a prompt; it does not send it to an AI service.</p>
+</section>
+<section aria-label="Generated prompt" class="ai-prompt-output">
+<div class="ai-output-heading">
+<div>
+<span class="ai-output-kicker">YOUR PROMPT</span>
+<h3>Ready To Use</h3>
+</div>
+<span class="ai-output-badge"><i class="fa-solid fa-check-circle"></i> Editable</span>
+</div>
+<p class="ai-field-help">Review and edit the prompt below before using it in your preferred AI assistant.</p>
+<textarea aria-label="Generated prompt text" class="ai-prompt-result" id="ai-prompt-res" placeholder="Your structured prompt will appear here after you complete the required fields and select Build My Prompt." rows="19"></textarea>
+<div class="ai-output-meta"><span id="ai-prompt-count">0 words</span><span aria-live="polite" id="ai-prompt-status" role="status">Ready when you are</span></div>
+<div class="ai-output-actions">
+<button class="copy-btn" onclick="copyAIPrompt()" type="button"><i class="fa-regular fa-copy"></i> Copy prompt</button>
+<button class="copy-btn" onclick="downloadAIPrompt()" type="button"><i class="fa-solid fa-download"></i> Download .txt</button>
+<button class="copy-btn" onclick="generateAIPrompt(true)" type="button"><i class="fa-solid fa-arrows-rotate"></i> Refresh</button>
+<button class="copy-btn" onclick="clearAIPrompt()" type="button"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+</div>
+<div class="ai-prompt-tip"><i class="fa-regular fa-lightbulb"></i><div><strong>Pro tip</strong><p>The more specific your objective and context, the more useful your prompt is likely to be. Avoid including passwords, private customer information or other sensitive data.</p></div></div>
+</section>
+</div>
+<section class="ai-seo-content">
+<p><strong>Tip:</strong> Describe the task clearly and include only the context that matters. Review the generated prompt before using it.</p>
+<details><summary>Does this tool generate AI answers?</summary><p>No. It builds a prompt for you to use with your preferred AI assistant; it does not run an AI model.</p></details>
+<details><summary>Are my entries sent to an AI service?</summary><p>No. The prompt is assembled in your browser. Privacy terms may differ once you paste it into another service.</p></details>
+</section>
+</div><h2 style="margin:32px 0 12px;font-size:1.35rem">Social Hook Generator</h2><div class="tool-panel" id="tool-viralhook" style="margin-top:24px">
+<div class="tool-header">
+<h2 class="tool-title"><i class="fa-solid fa-fire" style="color:#f59e0b"></i> Viral Social Media Hook Generator</h2>
+<p class="tool-desc">Create stronger opening lines tailored to your platform, audience, message and tone. Generate, edit and copy hooks for free — right in your browser.</p>
+</div>
+<div class="vh-layout">
+<section aria-label="Hook settings" class="vh-controls">
+<div class="form-group">
+<label for="hook-topic">Topic, niche or product <span class="vh-required">*</span></label>
+<input autocomplete="off" id="hook-topic" maxlength="180" placeholder="e.g. simple meal prep for busy parents" type="text"/>
+<small class="vh-help">Be specific: a clear topic usually produces more useful hooks.</small>
+</div>
+<div class="grid-2">
+<div class="form-group">
+<label for="hook-platform">Platform</label>
+<select id="hook-platform">
+<option value="X">X (Twitter)</option><option value="LinkedIn">LinkedIn</option><option value="TikTok">TikTok</option><option value="Instagram">Instagram</option><option value="Facebook">Facebook</option><option value="YouTube">YouTube</option>
+</select>
+</div>
+<div class="form-group">
+<label for="hook-framework">Hook style</label>
+<select id="hook-framework">
+<option value="Curiosity Gap">Curiosity gap</option><option value="Contrarian">Contrarian take</option><option value="Social Proof">Social proof</option><option value="Pain Point">Pain point</option><option value="Storytelling">Storytelling</option><option value="Bold Claim">Bold claim</option><option value="Question">Question</option><option value="How-To">How-to / practical tip</option><option value="FOMO">Timely / urgency</option>
+</select>
+</div>
+</div>
+<details class="simple-advanced vh-advanced">
+<summary>More options <span>Optional refinements</span></summary>
+<div class="grid-2">
+<div class="form-group">
+<label for="hook-audience">Target audience</label>
+<input id="hook-audience" maxlength="120" placeholder="e.g. first-time business owners" type="text"/>
+</div>
+<div class="form-group">
+<label for="hook-tone">Tone of voice</label>
+<select id="hook-tone"><option value="Conversational">Conversational</option><option value="Bold and direct">Bold and direct</option><option value="Witty and playful">Witty and playful</option><option value="Helpful and educational">Helpful and educational</option><option value="Inspiring">Inspiring</option><option value="Professional">Professional</option><option value="Empathetic">Empathetic</option></select>
+</div>
+<div class="form-group">
+<label for="hook-goal">Primary goal</label>
+<select id="hook-goal"><option value="engagement">Start a conversation</option><option value="saves">Earn saves and shares</option><option value="clicks">Encourage clicks</option><option value="leads">Attract potential customers</option><option value="views">Keep people watching</option><option value="sales">Support a sale</option></select>
+</div>
+<div class="form-group">
+<label for="hook-length">Hook length</label>
+<select id="hook-length"><option value="short">Short and punchy</option><option selected="" value="medium">Balanced</option><option value="long">Story-led / longer</option></select>
+</div>
+</div>
+<div class="form-group">
+<label for="hook-context">Key detail or point of difference <span class="vh-optional">(optional)</span></label>
+<textarea id="hook-context" maxlength="500" placeholder="e.g. takes 15 minutes, uses budget ingredients, no special equipment" rows="3"></textarea>
+</div>
+<div class="form-group">
+<label for="hook-cta">Call to action <span class="vh-optional">(optional)</span></label>
+<input id="hook-cta" maxlength="120" placeholder="e.g. Save this for your next grocery shop" type="text"/>
+</div>
+</details>
+<div class="vh-actions">
+<button class="btn-submit" onclick="generateViralHooks()" type="button"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate 3 hook ideas</button>
+<button class="copy-btn" onclick="clearViralHooks()" type="button"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+</div>
+<p class="vh-privacy"><i class="fa-solid fa-shield-halved"></i> Private by design: your entries are processed locally and are not sent to an AI service.</p>
+</section>
+<section aria-label="Generated hook ideas" class="vh-results">
+<div class="vh-results-head"><div><h3>Hook Ideas</h3><p aria-live="polite" id="viral-hooks-status">Your three ideas will appear here.</p></div><button class="copy-btn" disabled="" id="viral-copy-all" onclick="copyAllViralHooks()" type="button"><i class="fa-regular fa-copy"></i> Copy all</button></div>
+<div class="vh-hook-list" id="viral-hooks-output"><div class="vh-empty"><i class="fa-solid fa-bolt"></i><strong>Ready when you are</strong><span>Add a topic and generate three different opening angles. You can edit each result before copying it.</span></div></div>
+<div class="vh-tip"><strong>Quick tip</strong><p>Hooks earn attention; the content that follows must deliver on the promise. Avoid fake statistics, invented results and urgency you cannot substantiate.</p></div>
+</section>
+</div>
+<section class="ai-seo-content vh-seo-content">
+<p>A hook is the opening that gives people a reason to keep reading or watching. Make it specific, honest and relevant to your audience.</p>
+<details><summary>Does this generator use AI?</summary><p>No. It uses editable templates in your browser and does not call an AI model.</p></details>
+<details><summary>Will these hooks guarantee viral reach?</summary><p>No. Results depend on the content, audience, timing and distribution.</p></details>
+</section>
+</div><section aria-label="Guide" class="seo-guide"><h2>How To Use AI Prompt Generator</h2><p>Choose a prompt template, enter your goal and constraints, then review and copy the generated prompt.</p><h3>Frequently Asked Question</h3><p><strong>Does this tool contact an AI model?</strong></p><p>No. It assembles prompts locally; paste the result into the AI assistant of your choice.</p></section><section class="related-tools"><h2>Related Free Tools</h2><ul><li><a href="/viral-social-media-hook-generator/">Viral Social Media Hook Generator</a></li><li><a href="/secure-password-generator/">Secure Password Generator</a></li><li><a href="/social-media-meta-tag-generator/">Social Media Meta Tag Generator</a></li></ul></section></main><footer>
+<div class="footer-links">
+<button onclick="openModal('modal-privacy')" type="button">Privacy Policy</button>
+<button onclick="openModal('modal-terms')" type="button">Terms of Service</button>
+<button onclick="openModal('modal-about')" type="button">About &amp; Contact</button>
+</div>
+<p>© 2026 MiniToolsDeck. All rights reserved. Built for modern creators &amp; growth marketers.</p>
+</footer><div aria-label="Privacy Policy" aria-modal="true" class="modal-overlay" id="modal-privacy" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Privacy Policy" class="modal-close" onclick="closeModal('modal-privacy')" type="button">×</button>
+<h3>Privacy Policy</h3>
+<br/>
+<p>MiniToolsDeck operates with a client-first privacy architecture. All utility calculations, image conversions, and data formatting occur directly inside your browser. We do not store or transmit user files to external servers.</p>
+</div>
+</div><div aria-label="Terms of Service" aria-modal="true" class="modal-overlay" id="modal-terms" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Terms of Service" class="modal-close" onclick="closeModal('modal-terms')" type="button">×</button>
+<h3>Terms of Service</h3>
+<br/>
+<p>MiniToolsDeck provides web utilities "as is" without warranties of any kind.</p>
+</div>
+</div><div aria-label="About &amp; Contact" aria-modal="true" class="modal-overlay" id="modal-about" role="dialog">
+<div class="modal-content">
+<button aria-label="Close About &amp; Contact" class="modal-close" onclick="closeModal('modal-about')" type="button">×</button>
+<h3>About &amp;Amp Contact</h3>
+<br/>
+<p>MiniToolsDeck is the modern creator and growth stack—a suite of lightning-fast browser utilities built for digital marketers, developers, and content professionals.</p>
+<br/>
+<p>For inquiries, email: <strong>contact@minitoolsdeck.com</strong></p>
+</div>
+</div><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script defer="" src="/assets/tools.js"></script></body></html>
