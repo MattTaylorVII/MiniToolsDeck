@@ -64,3 +64,100 @@ body>header .mtd-back{color:#40e0ca!important}
  body>header .brand{font-size:17px!important}
  body>header .brand-icon{width:34px!important;height:34px!important;font-size:15px!important}
 }
+
+/* PREMIUM WORKSPACE V2 — Algorithm Exposure Score density benchmark.
+   Scoped to older tool pages; the flagship dashboard is not altered. */
+body.mtd-premium-page .seo-intro{padding:20px 0 4px!important;margin-bottom:20px!important}
+body.mtd-premium-page .seo-intro:before{margin-bottom:12px!important;font-size:11px!important}
+body.mtd-premium-page .seo-intro h1{font-size:clamp(30px,3.3vw,48px)!important;line-height:1.12!important;max-width:100%!important;margin-bottom:10px!important;letter-spacing:-.04em!important}
+body.mtd-premium-page .seo-intro p{font-size:clamp(14px,1.1vw,16px)!important;line-height:1.6!important;max-width:850px!important}
+body.mtd-premium-page .site-breadcrumb{margin:16px 0 8px!important;font-size:13px!important}
+body.mtd-premium-page .tool-panel{padding:clamp(18px,2vw,28px)!important;border-radius:18px!important;margin-bottom:20px!important}
+body.mtd-premium-page .tool-title{font-size:clamp(21px,2vw,26px)!important;line-height:1.25!important;letter-spacing:-.03em!important}
+body.mtd-premium-page .tool-desc{font-size:14px!important;line-height:1.55!important;margin-bottom:16px!important}
+body.mtd-premium-page .tool-header{margin-bottom:18px!important}
+body.mtd-premium-page .tool-panel :is(h3,h4){font-size:clamp(16px,1.5vw,19px)!important;line-height:1.35!important}
+body.mtd-premium-page .tool-panel :is(label,.result-subtext,small){font-size:13px!important;line-height:1.5!important}
+body.mtd-premium-page .tool-panel :is(input,select,textarea,button){font-size:14px!important}
+body.mtd-premium-page .tool-panel :is(input,select){min-height:40px}
+body.mtd-premium-page .tool-panel .grid-2{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important;align-items:start!important}
+body.mtd-premium-page .tool-panel .grid-2>*{min-width:0!important}
+body.mtd-premium-page :is(.related-tools){padding:18px 22px!important;margin:16px 0!important}
+body.mtd-premium-page .related-tools h2{font-size:18px!important;margin-bottom:10px!important}
+body.mtd-premium-page .related-tools ul{display:flex!important;flex-wrap:wrap!important;gap:8px!important}
+body.mtd-premium-page .related-tools li{margin:0!important}
+body.mtd-premium-page .related-tools a{font-size:13px!important}
+/* Favicon: real two-column workspace with upload on the left and results on right. */
+body.mtd-premium-page #tool-favicongen .favicon-shell{max-width:none!important;margin:0!important;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:16px 22px!important;align-items:start!important}
+body.mtd-premium-page #tool-favicongen .favicon-dropzone{grid-column:1!important;grid-row:1 / span 2!important;min-height:280px!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
+body.mtd-premium-page #tool-favicongen .favicon-privacy{grid-column:1!important;grid-row:3!important}
+body.mtd-premium-page #tool-favicongen #favicon-preview-area{grid-column:2!important;grid-row:1!important}
+body.mtd-premium-page #tool-favicongen .favicon-shell>.btn-submit{grid-column:2!important;grid-row:2!important;justify-self:start!important}
+body.mtd-premium-page #tool-favicongen .favicon-shell>.result-box{grid-column:2!important;grid-row:3 / span 2!important;margin:0!important}
+body.mtd-premium-page #tool-favicongen .favicon-shell>*{min-width:0!important}
+/* Keep genuine side-by-side tools two-column; avoid artificially forcing single-input workflows. */
+body.mtd-premium-page :is(.meta-layout,.ai-prompt-layout){gap:18px!important}
+body.mtd-premium-page .imgc-shell{max-width:none!important}
+@media(max-width:800px){
+ body.mtd-premium-page .tool-panel .grid-2{grid-template-columns:minmax(0,1fr)!important}
+ body.mtd-premium-page #tool-favicongen .favicon-shell{grid-template-columns:minmax(0,1fr)!important;display:block!important}
+ body.mtd-premium-page #tool-favicongen .favicon-shell>*{margin-bottom:14px!important}
+ body.mtd-premium-page .seo-intro h1{font-size:clamp(28px,6vw,38px)!important}
+}
+
+/* Review pass: five targeted usability fixes */
+body.mtd-premium-page #tool-favicongen .favicon-shell{
+ display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+ grid-template-rows:auto auto auto!important;gap:16px 22px!important;align-items:start!important
+}
+body.mtd-premium-page #tool-favicongen .favicon-dropzone{
+ grid-column:1!important;grid-row:1 / span 2!important;min-height:270px!important
+}
+body.mtd-premium-page #tool-favicongen #favicon-preview-area{
+ grid-column:2!important;grid-row:1!important;min-height:0!important
+}
+body.mtd-premium-page #tool-favicongen .favicon-shell>.btn-submit{
+ grid-column:2!important;grid-row:2!important;justify-self:stretch!important;
+ width:100%!important;margin:0!important
+}
+body.mtd-premium-page #tool-favicongen .favicon-shell>.result-box{
+ grid-column:2!important;grid-row:3!important
+}
+body.mtd-premium-page #tool-favicongen .favicon-privacy{
+ grid-column:1!important;grid-row:3!important;margin:0!important
+}
+body.mtd-premium-page #tool-socialhook .platform-tabs{
+ display:flex!important;flex-wrap:wrap!important;overflow:visible!important;
+ gap:10px!important;align-items:center!important;padding:3px!important
+}
+body.mtd-premium-page #tool-socialhook .platform-tab{
+ display:inline-flex!important;justify-content:center!important;align-items:center!important;
+ gap:8px!important;padding:9px 14px!important;min-height:40px!important;
+ font-family:Inter,sans-serif!important;font-size:13px!important;line-height:1.2!important
+}
+body.mtd-premium-page #tool-socialhook .platform-tab i{
+ font-size:16px!important;line-height:1!important;flex:none!important
+}
+body.mtd-premium-page #brand-color-lab #brand-export-css,
+body.mtd-premium-page #brand-color-lab #brand-export-json{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ border-radius:10px!important;padding:11px 17px!important;min-height:42px!important;
+ font-family:Inter,sans-serif!important;font-size:13px!important;font-weight:700!important;
+ cursor:pointer!important;text-decoration:none!important;box-shadow:none!important;
+ transition:background .2s ease,transform .2s ease!important
+}
+body.mtd-premium-page #brand-color-lab #brand-export-css{
+ background:#2dd4bf!important;border:1px solid #2dd4bf!important;color:#09212b!important
+}
+body.mtd-premium-page #brand-color-lab #brand-export-json{
+ background:#20354c!important;border:1px solid #46617b!important;color:#f8fafc!important
+}
+body.light-theme.mtd-premium-page #brand-color-lab #brand-export-json{
+ background:#f1f5f9!important;border-color:#94a3b8!important;color:#0f172a!important
+}
+body.mtd-premium-page #brand-color-lab #brand-export-css:hover,
+body.mtd-premium-page #brand-color-lab #brand-export-json:hover{transform:translateY(-1px)!important}
+@media(max-width:800px){
+ body.mtd-premium-page #tool-favicongen .favicon-shell{display:flex!important;flex-direction:column!important}
+ body.mtd-premium-page #tool-favicongen .favicon-shell>*{width:100%!important}
+}
