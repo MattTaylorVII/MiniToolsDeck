@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 
 <html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>AI API Cost Estimator — Free Online Tool | MiniToolsDeck</title><meta content="Estimate AI API spending using token volumes and editable pricing assumptions. Free, browser-based tool with no signup required." name="description"/><meta content="index,follow" name="robots"/><link href="https://minitoolsdeck.vercel.app/ai-api-cost-estimator/" rel="canonical"/>
-<meta content="website" property="og:type"/><meta content="MiniToolsDeck" property="og:site_name"/><meta content="AI API Cost Estimator — Free Online Tool | MiniToolsDeck" property="og:title"/><meta content="Estimate AI API spending using token volumes and editable pricing assumptions. Free, browser-based tool with no signup required." property="og:description"/><meta content="https://minitoolsdeck.vercel.app/ai-api-cost-estimator/" property="og:url"/>
-<meta content="summary" name="twitter:card"/><meta content="AI API Cost Estimator — Free Online Tool | MiniToolsDeck" name="twitter:title"/><meta content="Estimate AI API spending using token volumes and editable pricing assumptions. Free, browser-based tool with no signup required." name="twitter:description"/>
-<meta content="#0f172a" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='60' fill='%2310b981'/%3E%3Cpath d='M128 160h256v32H128zm0 64h256v32H128zm0 64h192v32H128z' fill='white'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<title>AI API Cost Estimator | MiniToolsDeck</title><meta content="Estimate AI API costs with input and output tokens, cached requests, usage volume and editable model pricing. Free, private calculator from MiniToolsDeck." name="description"/><meta content="index,follow" name="robots"/><link href="https://minitoolsdeck.vercel.app/ai-api-cost-estimator/" rel="canonical"/>
+<meta content="website" property="og:type"/><meta content="MiniToolsDeck" property="og:site_name"/><meta content="AI API Cost Estimator | MiniToolsDeck" property="og:title"/><meta content="Estimate AI API costs with input and output tokens, cached requests, usage volume and editable model pricing. Free, private calculator from MiniToolsDeck." property="og:description"/><meta content="https://minitoolsdeck.vercel.app/ai-api-cost-estimator/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><meta content="AI API Cost Estimator | MiniToolsDeck" name="twitter:title"/><meta content="Estimate AI API costs with input and output tokens, cached requests, usage volume and editable model pricing. Free, private calculator from MiniToolsDeck." name="twitter:description"/>
+<meta content="#0f172a" name="theme-color"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="/assets/styles.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "AI API Cost Estimator", "url": "https://minitoolsdeck.vercel.app/ai-api-cost-estimator/", "description": "Estimate AI API spending using token volumes and editable pricing assumptions.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script><link href="/assets/design-system.css" rel="stylesheet"/><link href="/assets/premium-unified.css" rel="stylesheet"/></head><body class="mtd-premium-page"><header>
+<link href="/assets/styles.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "AI API Cost Estimator", "url": "https://minitoolsdeck.vercel.app/ai-api-cost-estimator/", "description": "Estimate AI API spending using token volumes and editable pricing assumptions.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script><link href="/assets/design-system.css" rel="stylesheet"/><link href="/assets/premium-unified.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet"/><style>
+/* Tool 20 — AI API Cost Studio, scoped premium layout */
+.mtd-ai-cost-premium main{max-width:1210px;margin-inline:auto}
+.mtd-ai-cost-premium .seo-intro{padding:8px 0 18px!important;margin:0 0 5px!important}
+.mtd-ai-cost-premium .seo-intro h1{font-family:Manrope,Inter,sans-serif!important;font-size:clamp(30px,3.3vw,45px)!important;letter-spacing:-.035em!important;line-height:1.16!important;margin:0 0 9px!important}
+.mtd-ai-cost-premium .seo-intro p{font-size:14px!important;line-height:1.6!important;max-width:690px!important;margin:0!important}
+.mtd-ai-cost-premium .tool-panel{padding:clamp(15px,2.3vw,26px)!important;border-radius:18px!important}
+.mtd-ai-cost-premium .tool-header{margin-bottom:18px!important}
+.mtd-ai-cost-premium .tool-title{font-family:Manrope,Inter,sans-serif!important;font-size:19px!important;letter-spacing:-.025em!important;margin-bottom:6px!important}
+.mtd-ai-cost-premium .tool-desc{font-size:12.5px!important;line-height:1.6!important;margin:0!important}
+.mtd-ai-cost-premium .ai-cost-workspace{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:14px!important;align-items:stretch!important}
+.mtd-ai-cost-premium .ai-cost-input-panel,.mtd-ai-cost-premium .ai-cost-output-panel{min-width:0!important;padding:clamp(14px,1.6vw,20px)!important;border:1px solid #34465c!important;border-radius:14px!important;background:rgba(6,18,33,.32)!important}
+.mtd-ai-cost-premium .ai-cost-kicker{font-size:10px!important;font-weight:800!important;letter-spacing:.14em!important;color:#45d9c7!important;margin-bottom:16px!important}
+.mtd-ai-cost-premium .form-group label{font-size:11.5px!important;font-weight:700!important;line-height:1.4!important}
+.mtd-ai-cost-premium .ai-cost-input-panel .grid-2{gap:10px!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.mtd-ai-cost-premium .ai-cost-input-panel input,.mtd-ai-cost-premium .ai-cost-input-panel select{width:100%!important;min-width:0!important;box-sizing:border-box!important;border-radius:9px!important;min-height:38px!important;font-size:11.5px!important}
+.mtd-ai-cost-premium #token-input{min-height:155px!important;line-height:1.6!important;font-size:12px!important;border-radius:10px!important;padding:12px!important;resize:vertical!important}
+.mtd-ai-cost-premium .result-subtext{font-size:10.5px!important;line-height:1.55!important}
+.mtd-ai-cost-premium #ai-cost-advanced{border:1px solid #34465c!important;border-radius:10px!important;padding:12px 14px!important;margin-top:13px!important;background:rgba(10,31,46,.32)!important}
+.mtd-ai-cost-premium #ai-cost-advanced summary{font-size:11.5px!important;font-weight:750!important}
+.mtd-ai-cost-premium .btn-submit,.mtd-ai-cost-premium .copy-btn{width:auto!important;min-height:35px!important;padding:8px 12px!important;font-family:Inter,system-ui,sans-serif!important;font-size:11.5px!important;font-weight:700!important;letter-spacing:0!important;line-height:1.25!important;border-radius:9px!important;box-shadow:none!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:7px!important}
+.mtd-ai-cost-premium .btn-submit{background:#36cdb8!important;color:#071b27!important;border:1px solid #36cdb8!important}
+.mtd-ai-cost-premium .copy-btn{background:#192c42!important;border:1px solid #3d5369!important;color:#e4f1f5!important}
+.mtd-ai-cost-premium .copy-btn:hover{border-color:#45d9c7!important;background:#203b4e!important}
+.mtd-ai-cost-premium .ai-cost-output-panel>.result-box{margin:0!important;padding:0!important;border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important;border-radius:0!important}
+.mtd-ai-cost-premium .ai-total-label{font-size:11px!important;font-weight:750!important;letter-spacing:.02em!important}
+.mtd-ai-cost-premium #res-cost{font-family:Manrope,Inter,sans-serif!important;font-size:clamp(32px,3.6vw,47px)!important;font-weight:800!important;letter-spacing:-.04em!important;line-height:1.2!important;color:#52e0cb!important;overflow-wrap:anywhere!important}
+.mtd-ai-cost-premium .ai-cost-stats{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+.mtd-ai-cost-premium .ai-cost-stats>div{min-width:0!important;border:1px solid #34465c!important;border-radius:10px!important;background:rgba(10,31,46,.42)!important;padding:13px!important;display:grid!important;gap:7px!important}
+.mtd-ai-cost-premium .ai-cost-stats span{font-size:10px!important;line-height:1.4!important;color:#a5b8c7!important}
+.mtd-ai-cost-premium .ai-cost-stats strong{font-family:Manrope,Inter,sans-serif!important;font-size:16px!important;font-weight:800!important;overflow-wrap:anywhere!important}
+.mtd-ai-cost-premium .ai-cost-bar{margin-top:6px!important;height:10px!important;border-radius:99px!important;overflow:hidden!important;background:#263a4b!important}
+.mtd-ai-cost-premium .ai-cost-output-panel>p{margin-top:14px!important}
+.mtd-ai-cost-premium .related-tools{margin-top:20px!important}
+@media(max-width:780px){.mtd-ai-cost-premium .ai-cost-workspace{grid-template-columns:1fr!important}.mtd-ai-cost-premium .tool-panel{padding:14px!important}.mtd-ai-cost-premium .seo-intro h1{font-size:30px!important}}
+@media(max-width:440px){.mtd-ai-cost-premium .ai-cost-input-panel .grid-2{grid-template-columns:1fr!important}}
+</style><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/><link rel="icon" type="image/svg+xml" href="/favicon.svg"/><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/><link href="/assets/official-brand.css" rel="stylesheet"/></head><body class="mtd-premium-page"><header>
 <div class="header-container">
 <a class="brand" href="/">
 <div class="brand-icon">
@@ -23,13 +59,13 @@
 </header><main><div class="site-breadcrumb"><a href="/">All Tools</a> / AI API Cost Estimator</div><section class="seo-intro"><h1>AI API Cost Estimator</h1><p>Estimate AI API spending using token volumes and editable pricing assumptions.</p></section><div class="tool-panel" id="tool-aitoken">
 <div class="tool-header">
 <h2 class="tool-title"><i class="fa-solid fa-microchip" style="color:var(--accent)"></i> AI API Cost Estimator</h2>
-<p class="tool-desc">Plan realistic AI API spending: prompt tokens, output tokens, cached input, request volume, and model pricing.</p>
+<p class="tool-desc">Model input, output, caching and request volume in one private, adjustable cost workspace.</p>
 </div>
-<div class="grid-2">
-<div>
+<div class="grid-2 ai-cost-workspace">
+<div class="ai-cost-input-panel"><div class="ai-cost-kicker">01 / USAGE & PRICING</div>
 <div class="form-group"><label for="token-input">Your prompt / input text</label><textarea id="token-input" oninput="calcTokens()" placeholder="Paste your prompt, system instructions, or context…" style="min-height:145px"></textarea><div class="result-subtext" id="ai-text-info" style="margin-top:6px">0 characters · 0 words</div></div>
 <div class="grid-2">
-<div class="form-group"><label for="ai-model">Example model pricing</label><select id="ai-model" onchange="aiSetModel()"><option value="gpt4o">OpenAI GPT-4o (example)</option><option value="gpt4omini">OpenAI GPT-4o mini (example)</option><option value="claude35">Anthropic Claude Sonnet (example)</option><option value="gemini25">Google Gemini Flash (example)</option><option value="custom">Custom pricing</option></select></div>
+<div class="form-group"><label for="ai-model">Pricing preset</label><select id="ai-model" onchange="aiSetModel()"><option value="gpt4o">OpenAI GPT-4o (example)</option><option value="gpt4omini">OpenAI GPT-4o mini (example)</option><option value="claude35">Anthropic Claude Sonnet (example)</option><option value="gemini25">Google Gemini Flash (example)</option><option value="custom">Custom pricing</option></select></div>
 <div class="form-group"><label for="ai-token-method">Token estimate</label><select id="ai-token-method" onchange="calcTokens()"><option value="chars">Characters ÷ 4 (English approx.)</option><option value="words">Words × 1.33 (English approx.)</option><option value="manual">Enter tokens manually</option></select></div>
 </div>
 <div class="grid-2">
@@ -51,9 +87,9 @@
 </details>
 <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:15px"><button class="btn-submit" onclick="aiLoadExample()" style="width:auto" type="button">Try example</button><button class="copy-btn" onclick="aiReset()" type="button">Reset</button></div>
 </div>
-<div>
+<div class="ai-cost-output-panel"><div class="ai-cost-kicker">02 / ESTIMATED SPEND</div>
 <div class="result-box" style="align-items:stretch;text-align:left;gap:12px">
-<div class="result-subtext">Estimated total API spend (USD)</div>
+<div class="result-subtext ai-total-label">Estimated total API spend (USD)</div>
 <div class="result-value" id="res-cost" style="font-size:2rem">$0.00</div>
 <div class="ai-cost-stats">
 <div><span>Input tokens / request</span><strong id="res-tokens">0</strong></div>

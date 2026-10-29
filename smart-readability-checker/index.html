@@ -1,12 +1,67 @@
 <!DOCTYPE html>
 
 <html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Writing Intelligence Analyzer | MiniToolsDeck</title><meta content="Assess reading difficulty and identify sentences that may need simplifying. Free, browser-based tool with no signup required." name="description"/><meta content="index,follow" name="robots"/><link href="https://minitoolsdeck.vercel.app/smart-readability-checker/" rel="canonical"/>
-<meta content="website" property="og:type"/><meta content="MiniToolsDeck" property="og:site_name"/><meta content="Smart Readability Checker — Free Online Tool | MiniToolsDeck" property="og:title"/><meta content="Assess reading difficulty and identify sentences that may need simplifying. Free, browser-based tool with no signup required." property="og:description"/><meta content="https://minitoolsdeck.vercel.app/smart-readability-checker/" property="og:url"/>
-<meta content="summary" name="twitter:card"/><meta content="Smart Readability Checker — Free Online Tool | MiniToolsDeck" name="twitter:title"/><meta content="Assess reading difficulty and identify sentences that may need simplifying. Free, browser-based tool with no signup required." name="twitter:description"/>
-<meta content="#0f172a" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='60' fill='%2310b981'/%3E%3Cpath d='M128 160h256v32H128zm0 64h256v32H128zm0 64h192v32H128z' fill='white'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<title>Writing Intelligence Analyzer | MiniToolsDeck</title><meta content="Check readability, word count and sentence complexity in one workspace. Improve clarity with MiniToolsDeck’s free Writing Intelligence Analyzer." name="description"/><meta content="index,follow" name="robots"/><link href="https://minitoolsdeck.vercel.app/smart-readability-checker/" rel="canonical"/>
+<meta content="website" property="og:type"/><meta content="MiniToolsDeck" property="og:site_name"/><meta content="Writing Intelligence Analyzer | MiniToolsDeck" property="og:title"/><meta content="Check readability, word count and sentence complexity in one workspace. Improve clarity with MiniToolsDeck’s free Writing Intelligence Analyzer." property="og:description"/><meta content="https://minitoolsdeck.vercel.app/smart-readability-checker/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><meta content="Writing Intelligence Analyzer | MiniToolsDeck" name="twitter:title"/><meta content="Check readability, word count and sentence complexity in one workspace. Improve clarity with MiniToolsDeck’s free Writing Intelligence Analyzer." name="twitter:description"/>
+<meta content="#0f172a" name="theme-color"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="/assets/styles.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Smart Readability Checker", "url": "https://minitoolsdeck.vercel.app/smart-readability-checker/", "description": "Assess reading difficulty and identify sentences that may need simplifying.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script><link href="/assets/design-system.css" rel="stylesheet"/><link href="/assets/premium-unified.css" rel="stylesheet"/></head><body class="mtd-premium-page"><header>
+<link href="/assets/styles.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Smart Readability Checker", "url": "https://minitoolsdeck.vercel.app/smart-readability-checker/", "description": "Assess reading difficulty and identify sentences that may need simplifying.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script><link href="/assets/design-system.css" rel="stylesheet"/><link href="/assets/premium-unified.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet"/><style>
+/* Tool #12 — Writing Intelligence + Word Counter: premium scoped refinement */
+.mtd-readability-premium main{max-width:1210px;margin-inline:auto}
+.mtd-readability-premium .seo-intro{padding:8px 0 18px!important;margin:0 0 5px!important}
+.mtd-readability-premium .seo-intro h1{font-family:Manrope,Inter,sans-serif!important;font-size:clamp(30px,3.3vw,45px)!important;line-height:1.16!important;letter-spacing:-.035em!important;margin:0 0 9px!important}
+.mtd-readability-premium .seo-intro p{font-size:14px!important;line-height:1.6!important;max-width:690px!important;margin:0!important}
+.mtd-readability-premium .tool-panel{padding:clamp(15px,2.3vw,26px)!important;border-radius:18px!important}
+.mtd-readability-premium .tool-header{margin:0 0 17px!important}
+.mtd-readability-premium .tool-title{font-family:Manrope,Inter,sans-serif!important;font-size:19px!important;letter-spacing:-.025em!important;margin:0 0 5px!important}
+.mtd-readability-premium .tool-desc{font-size:12.5px!important;line-height:1.55!important;margin:0!important}
+.mtd-readability-premium .mtd-readability-workspace{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:14px!important;align-items:stretch!important}
+.mtd-readability-premium .mtd-readability-editor,.mtd-readability-premium .mtd-readability-analysis{min-width:0!important;padding:clamp(14px,1.6vw,20px)!important;border:1px solid #34465c!important;border-radius:14px!important;background:rgba(6,18,33,.32)!important}
+.mtd-readability-premium .mtd-readability-eyebrow{font-size:10px!important;font-weight:800!important;letter-spacing:.14em!important;color:#45d9c7!important;margin:0 0 16px!important}
+.mtd-readability-premium .mtd-readability-editor label{font-size:12px!important;font-weight:700!important}
+.mtd-readability-premium #readability-live-stats{font-size:10.5px!important}
+.mtd-readability-premium #readability-input{font-family:Inter,system-ui,sans-serif!important;font-size:12.5px!important;line-height:1.65!important;min-height:300px!important;max-height:650px!important;resize:vertical!important;border-radius:10px!important;padding:13px!important}
+.mtd-readability-premium .btn-submit,.mtd-readability-premium .copy-btn{width:auto!important;min-height:35px!important;padding:8px 12px!important;font-family:Inter,system-ui,sans-serif!important;font-size:11.5px!important;font-weight:700!important;line-height:1.25!important;letter-spacing:0!important;border-radius:9px!important;box-shadow:none!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:7px!important}
+.mtd-readability-premium .btn-submit{background:#36cdb8!important;color:#071b27!important;border:1px solid #36cdb8!important}
+.mtd-readability-premium .btn-submit:hover{background:#65e5d4!important}
+.mtd-readability-premium .copy-btn{background:#192c42!important;border:1px solid #3d5369!important;color:#e4f1f5!important}
+.mtd-readability-premium .copy-btn:hover{border-color:#45d9c7!important;background:#203b4e!important}
+.mtd-readability-premium .mtd-readability-placeholder{display:flex;min-height:300px;align-items:center;justify-content:center;text-align:center;color:#91a6ba;font-size:12px;line-height:1.7;padding:30px}
+.mtd-readability-premium .mtd-readability-analysis:has(#readability-results:not([style*="display:none"])) .mtd-readability-placeholder{display:none}
+.mtd-readability-premium #readability-results{margin:0!important}
+.mtd-readability-premium #readability-results .grid-2{gap:10px!important;margin:0 0 10px!important}
+.mtd-readability-premium #readability-results .result-box{min-width:0!important;min-height:0!important;margin:0!important;padding:12px!important;border:1px solid #34465c!important;border-radius:10px!important;background:rgba(10,31,46,.42)!important;box-shadow:none!important}
+.mtd-readability-premium #readability-results>.result-box{margin-top:10px!important}
+.mtd-readability-premium #readability-results .result-subtext{font-size:10.5px!important;line-height:1.4!important}
+.mtd-readability-premium #readability-results .result-value{font-family:Manrope,Inter,sans-serif!important;font-size:24px!important;line-height:1.3!important}
+.mtd-readability-premium #readability-results .result-box div[style*="font-size"]{font-size:11px!important;line-height:1.5!important}
+.mtd-readability-premium #readability-results>p{font-size:10.5px!important;line-height:1.5!important;margin-top:12px!important}
+.mtd-readability-premium #readability-diagnostics,.mtd-readability-premium #readability-long-sentences{font-size:11.5px!important;line-height:1.6!important;overflow-wrap:anywhere}
+.mtd-readability-premium main>h2{font-family:Manrope,Inter,sans-serif!important;font-size:18px!important;letter-spacing:-.02em!important;margin:24px 0 10px!important}
+.mtd-readability-premium #tool-wordcount{margin-top:0!important}
+.mtd-readability-premium #tool-wordcount .wc-layout{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:14px!important;align-items:stretch!important}
+.mtd-readability-premium #tool-wordcount .wc-editor,.mtd-readability-premium #tool-wordcount .wc-results{min-width:0!important;border:1px solid #34465c!important;border-radius:14px!important;padding:clamp(14px,1.6vw,20px)!important;background:rgba(6,18,33,.32)!important;box-shadow:none!important}
+.mtd-readability-premium #tool-wordcount .wc-editor-head,.mtd-readability-premium #tool-wordcount .wc-results-head{margin:0 0 12px!important}
+.mtd-readability-premium #tool-wordcount .wc-editor-head label,.mtd-readability-premium #tool-wordcount .wc-results-head h3{font-family:Manrope,Inter,sans-serif!important;font-size:13px!important;font-weight:750!important}
+.mtd-readability-premium #tool-wordcount .wc-editor-head span{font-size:10.5px!important}
+.mtd-readability-premium #wordcount-input{font-family:Inter,system-ui,sans-serif!important;font-size:12.5px!important;line-height:1.65!important;min-height:260px!important;resize:vertical!important;border-radius:10px!important;padding:13px!important}
+.mtd-readability-premium #tool-wordcount .wc-help{font-size:10.5px!important;line-height:1.5!important}
+.mtd-readability-premium #tool-wordcount .wc-toolbar{gap:7px!important;margin:12px 0!important}
+.mtd-readability-premium #tool-wordcount .wc-stat-grid{gap:9px!important}
+.mtd-readability-premium #tool-wordcount .wc-stat{padding:12px!important;border:1px solid #34465c!important;border-radius:10px!important;background:rgba(10,31,46,.42)!important;box-shadow:none!important;min-width:0!important}
+.mtd-readability-premium #tool-wordcount .wc-stat .result-value{font-family:Manrope,Inter,sans-serif!important;font-size:21px!important;line-height:1.25!important}
+.mtd-readability-premium #tool-wordcount .wc-stat .result-subtext{font-size:10.5px!important;line-height:1.4!important}
+.mtd-readability-premium #tool-wordcount .simple-advanced{border:1px solid #34465c!important;border-radius:10px!important;padding:10px 12px!important;margin:10px 0!important;background:rgba(10,31,46,.32)!important}
+.mtd-readability-premium #tool-wordcount .simple-advanced summary{font-size:11.5px!important;font-weight:700!important}
+.mtd-readability-premium #tool-wordcount .simple-advanced summary span{font-size:10.5px!important}
+.mtd-readability-premium #tool-wordcount .wc-platform-box label{font-size:11.5px!important}
+.mtd-readability-premium #tool-wordcount select{font-family:Inter,system-ui,sans-serif!important;font-size:12px!important;min-height:39px!important;padding:8px 11px!important;border-radius:9px!important}
+.mtd-readability-premium .related-tools{margin-top:20px!important;padding:16px 20px!important}
+.mtd-readability-premium .related-tools h2{font-size:15px!important}
+.mtd-readability-premium button:focus-visible,.mtd-readability-premium textarea:focus-visible,.mtd-readability-premium select:focus-visible{outline:2px solid #45ddcb!important;outline-offset:2px!important}
+@media(max-width:780px){.mtd-readability-premium .mtd-readability-workspace,.mtd-readability-premium #tool-wordcount .wc-layout{grid-template-columns:1fr!important}.mtd-readability-premium .tool-panel{padding:14px!important}.mtd-readability-premium .seo-intro h1{font-size:30px!important}.mtd-readability-premium #readability-input{min-height:230px!important}}
+</style><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/><link rel="icon" type="image/svg+xml" href="/favicon.svg"/><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/><link href="/assets/official-brand.css" rel="stylesheet"/></head><body class="mtd-premium-page mtd-readability-premium"><header>
 <div class="header-container">
 <a class="brand" href="/">
 <div class="brand-icon">
@@ -25,7 +80,7 @@
 <h2 class="tool-title"><i class="fa-solid fa-book-open" style="color:var(--accent)"></i> Smart Readability Checker</h2>
 <p class="tool-desc">Measure reading difficulty, spot dense passages and get practical edits to make content clearer.</p>
 </div>
-<div>
+<div class="mtd-readability-workspace"><div class="mtd-readability-editor"><div class="mtd-readability-eyebrow">01 / YOUR WRITING</div>
 <div style="display:flex;justify-content:space-between;gap:.75rem;align-items:center;flex-wrap:wrap;margin-bottom:.5rem;">
 <label for="readability-input">Your text</label>
 <span id="readability-live-stats" style="font-size:.82rem;color:var(--text-muted);">0 words · 0 characters</span>
@@ -36,7 +91,7 @@
 <button class="copy-btn" onclick="loadReadabilitySample()" type="button">Try sample</button>
 <button class="copy-btn" onclick="resetReadability()" type="button">Reset</button>
 </div>
-<div id="readability-results" style="display:none;margin-top:1.25rem;">
+</div><div class="mtd-readability-analysis"><div class="mtd-readability-eyebrow">02 / WRITING ANALYSIS</div><div class="mtd-readability-placeholder" id="readability-empty">Run an analysis to see readability scores, writing diagnostics and sentences to simplify.</div><div id="readability-results" style="display:none;margin-top:1.25rem;">
 <div class="grid-2" style="gap:1rem;">
 <div class="result-box"><div class="result-subtext">Flesch Reading Ease</div><div class="result-value" id="readability-score">--</div><div id="readability-interpretation" style="font-size:.85rem;margin-top:.35rem;"></div></div>
 <div class="result-box"><div class="result-subtext">Flesch–Kincaid Grade</div><div class="result-value" id="readability-grade" style="font-size:1.4rem;">--</div><div style="font-size:.85rem;margin-top:.35rem;">Approximate US school grade</div></div>
@@ -56,7 +111,7 @@
 <p style="font-size:.78rem;color:var(--text-muted);margin-top:.75rem;">Scores are estimates based on English-language formulas and syllable heuristics. They do not measure accuracy, tone, inclusivity or actual comprehension; treat them as editing signals, not a verdict.</p>
 </div>
 </div>
-</div><h2 style="margin:32px 0 12px;font-size:1.35rem">Word &amp; Character Insights</h2><div class="tool-panel" id="tool-wordcount" style="margin-top:24px">
+</div></div><h2 style="margin:32px 0 12px;font-size:1.35rem">Word &amp; Character Insights</h2><div class="tool-panel" id="tool-wordcount" style="margin-top:24px">
 <div class="tool-header">
 <h2 class="tool-title"><i class="fa-solid fa-font" style="color:var(--accent)"></i> Smart Word &amp; Character Counter</h2>
 <p class="tool-desc">Count words, characters, sentences and paragraphs instantly. Check social post length, estimate reading time, and copy your results — free and private in your browser.</p>

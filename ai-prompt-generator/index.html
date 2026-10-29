@@ -1,12 +1,53 @@
 <!DOCTYPE html>
 
 <html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Creative Prompt &amp; Hook Studio | MiniToolsDeck</title><meta content="Create structured prompts for AI assistants using templates and custom instructions. Free, browser-based tool with no signup required." name="description"/><meta content="index,follow" name="robots"/><link href="https://minitoolsdeck.vercel.app/ai-prompt-generator/" rel="canonical"/>
-<meta content="website" property="og:type"/><meta content="MiniToolsDeck" property="og:site_name"/><meta content="AI Prompt Generator — Free Online Tool | MiniToolsDeck" property="og:title"/><meta content="Create structured prompts for AI assistants using templates and custom instructions. Free, browser-based tool with no signup required." property="og:description"/><meta content="https://minitoolsdeck.vercel.app/ai-prompt-generator/" property="og:url"/>
-<meta content="summary" name="twitter:card"/><meta content="AI Prompt Generator — Free Online Tool | MiniToolsDeck" name="twitter:title"/><meta content="Create structured prompts for AI assistants using templates and custom instructions. Free, browser-based tool with no signup required." name="twitter:description"/>
-<meta content="#0f172a" name="theme-color"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='60' fill='%2310b981'/%3E%3Cpath d='M128 160h256v32H128zm0 64h256v32H128zm0 64h192v32H128z' fill='white'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<title>Creative Prompt & Hook Studio | MiniToolsDeck</title><meta content="Build structured AI prompts and engaging hooks with MiniToolsDeck’s free Creative Prompt &amp; Hook Studio. Customize instructions and refine ideas quickly." name="description"/><meta content="index,follow" name="robots"/><link href="https://minitoolsdeck.vercel.app/ai-prompt-generator/" rel="canonical"/>
+<meta content="website" property="og:type"/><meta content="MiniToolsDeck" property="og:site_name"/><meta content="Creative Prompt &amp; Hook Studio | MiniToolsDeck" property="og:title"/><meta content="Build structured AI prompts and engaging hooks with MiniToolsDeck’s free Creative Prompt &amp; Hook Studio. Customize instructions and refine ideas quickly." property="og:description"/><meta content="https://minitoolsdeck.vercel.app/ai-prompt-generator/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><meta content="Creative Prompt &amp; Hook Studio | MiniToolsDeck" name="twitter:title"/><meta content="Build structured AI prompts and engaging hooks with MiniToolsDeck’s free Creative Prompt &amp; Hook Studio. Customize instructions and refine ideas quickly." name="twitter:description"/>
+<meta content="#0f172a" name="theme-color"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="/assets/styles.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "AI Prompt Generator", "url": "https://minitoolsdeck.vercel.app/ai-prompt-generator/", "description": "Create structured prompts for AI assistants using templates and custom instructions.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script><link href="/assets/design-system.css" rel="stylesheet"/><link href="/assets/premium-unified.css" rel="stylesheet"/></head><body class="mtd-premium-page"><header>
+<link href="/assets/styles.css" rel="stylesheet"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "AI Prompt Generator", "url": "https://minitoolsdeck.vercel.app/ai-prompt-generator/", "description": "Create structured prompts for AI assistants using templates and custom instructions.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script><link href="/assets/design-system.css" rel="stylesheet"/><link href="/assets/premium-unified.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet"/><style>
+/* MiniToolsDeck — Prompt & Hook Studio: flagship-level visual refinement */
+body.mtd-premium-page.mtd-studio {font-family:Inter,system-ui,sans-serif}
+.mtd-studio main{max-width:1210px;margin-inline:auto}
+.mtd-studio .site-breadcrumb{font-size:12px;margin-bottom:0}
+.mtd-studio .seo-intro{padding:8px 0 18px!important;margin:0 0 4px!important}
+.mtd-studio .seo-intro h1{font-family:Manrope,Inter,sans-serif!important;font-size:clamp(30px,3.3vw,45px)!important;line-height:1.16!important;letter-spacing:-.035em!important;margin:0 0 9px!important}
+.mtd-studio .seo-intro p{font-size:14px!important;line-height:1.65!important;max-width:690px!important;color:var(--text-muted)!important;margin:0!important}
+.mtd-studio .tool-panel{padding:clamp(15px,2.3vw,26px)!important;border-radius:18px!important;margin-bottom:18px!important}
+.mtd-studio .tool-header{margin:0 0 16px!important}
+.mtd-studio .tool-title{font-family:Manrope,Inter,sans-serif!important;font-size:19px!important;letter-spacing:-.025em!important;margin:0 0 5px!important}
+.mtd-studio .tool-desc{font-size:12.5px!important;line-height:1.55!important;max-width:780px!important;margin:0!important}
+.mtd-studio .ai-prompt-layout,.mtd-studio .vh-layout{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:14px!important;align-items:start!important}
+.mtd-studio .ai-prompt-form,.mtd-studio .ai-prompt-output,.mtd-studio .vh-controls,.mtd-studio .vh-results{min-width:0!important;background:rgba(6,18,33,.32)!important;border:1px solid #34465c!important;border-radius:14px!important;padding:clamp(14px,1.6vw,19px)!important}
+.mtd-studio .form-group{margin-bottom:12px!important}
+.mtd-studio .form-group label{font-size:12px!important;font-weight:650!important;margin-bottom:6px!important;line-height:1.35!important}
+.mtd-studio input:not([type=checkbox]),.mtd-studio select,.mtd-studio textarea{font-family:Inter,system-ui,sans-serif!important;font-size:12.5px!important;line-height:1.5!important;border-radius:9px!important;min-height:39px!important;padding:9px 11px!important}
+.mtd-studio textarea{resize:vertical!important}
+.mtd-studio #ai-objective{min-height:88px!important}
+.mtd-studio .ai-prompt-result{min-height:310px!important;max-height:620px!important;font-size:12.5px!important;line-height:1.65!important}
+.mtd-studio .ai-field-help,.mtd-studio .ai-privacy-note,.mtd-studio .vh-privacy,.mtd-studio .ai-prompt-tip,.mtd-studio .vh-tip{font-size:11.5px!important;line-height:1.5!important}
+.mtd-studio .ai-output-heading h3,.mtd-studio .vh-results-head h3{font-family:Manrope,Inter,sans-serif!important;font-size:17px!important}
+.mtd-studio .btn-submit,.mtd-studio .copy-btn,.mtd-studio .vh-actions button,.mtd-studio .ai-output-actions button,.mtd-studio .vh-results-head button{width:auto!important;min-height:36px!important;padding:9px 14px!important;margin:0!important;font-family:Inter,system-ui,sans-serif!important;font-size:12px!important;font-weight:700!important;line-height:1.25!important;border-radius:9px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;box-shadow:none!important;letter-spacing:0!important;white-space:normal!important}
+.mtd-studio .btn-submit{background:#36cdb8!important;color:#071b27!important;border:1px solid #36cdb8!important}
+.mtd-studio .btn-submit:hover{background:#65e5d4!important;transform:translateY(-1px)}
+.mtd-studio .copy-btn{background:#192c42!important;border:1px solid #3d5369!important;color:#e4f1f5!important}
+.mtd-studio .copy-btn:hover{border-color:#44d8c8!important;background:#203b4e!important}
+.mtd-studio button:focus-visible,.mtd-studio input:focus-visible,.mtd-studio select:focus-visible,.mtd-studio textarea:focus-visible{outline:2px solid #45ddcb!important;outline-offset:2px!important}
+.mtd-studio .ai-output-actions,.mtd-studio .vh-actions{display:flex!important;flex-wrap:wrap!important;gap:7px!important;margin-top:12px!important;align-items:center!important}
+.mtd-studio .ai-output-meta{font-size:11px!important}
+.mtd-studio .simple-advanced{margin:10px 0 14px!important}
+.mtd-studio .simple-advanced summary{font-size:12px!important;padding:10px 12px!important}
+.mtd-studio .ai-prompt-tip,.mtd-studio .vh-tip{margin-top:14px!important;padding:11px 12px!important;border-radius:10px!important}
+.mtd-studio .vh-hook-list{min-height:180px!important}
+.mtd-studio .vh-empty{padding:26px 12px!important}
+.mtd-studio .mtd-section-divider{display:flex;align-items:center;gap:14px;margin:23px 0 12px;color:#45d9c7;font-size:11px;font-weight:800;letter-spacing:.14em}
+.mtd-studio .mtd-section-divider:after{content:"";height:1px;flex:1;background:#34465c}
+.mtd-studio .related-tools{padding:16px 20px!important;margin-top:22px!important}
+.mtd-studio .related-tools h2{font-size:15px!important}
+@media(max-width:760px){.mtd-studio .ai-prompt-layout,.mtd-studio .vh-layout{grid-template-columns:1fr!important}.mtd-studio .tool-panel{padding:14px!important}.mtd-studio .seo-intro h1{font-size:30px!important}.mtd-studio .ai-prompt-result{min-height:220px!important}}
+@media(prefers-reduced-motion:reduce){.mtd-studio .btn-submit:hover{transform:none}}
+</style><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/><link rel="icon" type="image/svg+xml" href="/favicon.svg"/><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/><link href="/assets/official-brand.css" rel="stylesheet"/></head><body class="mtd-premium-page mtd-studio"><header>
 <div class="header-container">
 <a class="brand" href="/">
 <div class="brand-icon">
@@ -161,7 +202,7 @@
 <div class="ai-prompt-tip"><i class="fa-regular fa-lightbulb"></i><div><strong>Pro tip</strong><p>The more specific your objective and context, the more useful your prompt is likely to be. Avoid including passwords, private customer information or other sensitive data.</p></div></div>
 </section>
 </div>
-</div><h2 style="margin:32px 0 12px;font-size:1.35rem">Social Hook Generator</h2><div class="tool-panel" id="tool-viralhook" style="margin-top:24px">
+</div><div class="mtd-section-divider"><span>02 / SOCIAL HOOK GENERATOR</span></div><div class="tool-panel" id="tool-viralhook" style="margin-top:24px">
 <div class="tool-header">
 <h2 class="tool-title"><i class="fa-solid fa-fire" style="color:#f59e0b"></i> Viral Social Media Hook Generator</h2>
 <p class="tool-desc">Create stronger opening lines tailored to your platform, audience, message and tone. Generate, edit and copy hooks for free — right in your browser.</p>

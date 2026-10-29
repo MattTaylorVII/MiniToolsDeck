@@ -40,7 +40,7 @@
         function switchTool(toolId) { if(toolRoutes[toolId]) window.location.href = toolRoutes[toolId]; }
         window.addEventListener('load', () => {
             try { if(document.getElementById('contrast-fg')) checkContrast(); } catch(e) { console.warn('Contrast initialization:',e); }
-            try { if(document.getElementById('social-avatar-dropzone')) initSocialHookAvatarDropzone(); } catch(e) { console.warn('Social avatar initialization:',e); }
+            try { if(document.getElementById('hook-avatar-dropzone')) initSocialHookAvatarDropzone(); } catch(e) { console.warn('Social avatar initialization:',e); }
             try { if(document.getElementById('tool-socialhook')) updateMultiPlatformPreview(); } catch(e) { console.warn('Social preview initialization:',e); }
         });
 
@@ -1342,7 +1342,72 @@
             document.getElementById('serp-output-wrap').hidden = true;
             document.getElementById('serp-meta-output').textContent = '';
             updateSERP();
+            clearSERPLogo();
         }
+
+
+        // Search preview logo: client-side only, shared by drag/drop and file picker.
+        let serpLogoObjectUrl = null;
+        function clearSERPLogo() {
+            if (serpLogoObjectUrl) { URL.revokeObjectURL(serpLogoObjectUrl); serpLogoObjectUrl = null; }
+            const image = document.getElementById('serp-favicon-image');
+            if (!image) return;
+            image.removeAttribute('src');
+            image.hidden = true;
+            document.getElementById('serp-favicon-fallback').hidden = false;
+            document.getElementById('serp-logo-file').value = '';
+            document.getElementById('serp-logo-uploaded').textContent = '';
+            document.getElementById('serp-logo-uploaded').hidden = true;
+            document.getElementById('serp-logo-remove').hidden = true;
+            document.getElementById('serp-logo-status').textContent = 'Your logo appears beside the website name in the search preview.';
+        }
+        function loadSERPLogo(file) {
+            const status = document.getElementById('serp-logo-status');
+            if (!file) return;
+            const allowed = ['image/png','image/jpeg','image/webp','image/svg+xml'];
+            const type = (file.type || '').toLowerCase();
+            if (!allowed.includes(type)) { status.textContent = 'Please choose a PNG, JPG, WebP or SVG image.'; return; }
+            if (file.size > 5 * 1024 * 1024) { status.textContent = 'Logo must be 5 MB or smaller.'; return; }
+            if (file.size === 0) { status.textContent = 'That file is empty. Choose another image.'; return; }
+            const candidate = URL.createObjectURL(file);
+            const probe = new Image();
+            probe.onload = () => {
+                if (serpLogoObjectUrl) URL.revokeObjectURL(serpLogoObjectUrl);
+                serpLogoObjectUrl = candidate;
+                const image = document.getElementById('serp-favicon-image');
+                image.src = candidate;
+                image.hidden = false;
+                document.getElementById('serp-favicon-fallback').hidden = true;
+                document.getElementById('serp-logo-uploaded').textContent = '✓ Added';
+                document.getElementById('serp-logo-uploaded').hidden = false;
+                document.getElementById('serp-logo-remove').hidden = false;
+                status.textContent = 'Logo added to your live search preview. Kept in this browser only.';
+            };
+            probe.onerror = () => { URL.revokeObjectURL(candidate); status.textContent = 'Could not read that image. Try another file.'; };
+            probe.src = candidate;
+        }
+        function initSERPLogoUpload() {
+            const zone = document.getElementById('serp-logo-dropzone');
+            const input = document.getElementById('serp-logo-file');
+            const remove = document.getElementById('serp-logo-remove');
+            if (!zone || !input || !remove || zone.dataset.initialized) return;
+            zone.dataset.initialized = 'true';
+            zone.addEventListener('click', () => input.click());
+            zone.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); input.click(); }
+            });
+            input.addEventListener('change', () => { if (input.files && input.files[0]) loadSERPLogo(input.files[0]); });
+            zone.addEventListener('dragenter', event => { event.preventDefault(); zone.classList.add('is-dragging'); });
+            zone.addEventListener('dragover', event => { event.preventDefault(); event.dataTransfer.dropEffect = 'copy'; zone.classList.add('is-dragging'); });
+            zone.addEventListener('dragleave', event => { event.preventDefault(); if (!zone.contains(event.relatedTarget)) zone.classList.remove('is-dragging'); });
+            zone.addEventListener('drop', event => {
+                event.preventDefault(); zone.classList.remove('is-dragging');
+                if (event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0]) loadSERPLogo(event.dataTransfer.files[0]);
+            });
+            remove.addEventListener('click', clearSERPLogo);
+        }
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initSERPLogoUpload);
+        else initSERPLogoUpload();
 
         let aspectRatioLocked = true;
         let aspectStudioLastEdited = 'width';
