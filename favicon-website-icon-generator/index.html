@@ -15,7 +15,7 @@
 <span>MiniTools<span class="brand-accent">Deck</span></span>
 </a>
 <div class="header-actions">
-<button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme">
+<a aria-label="Home" class="mtd-home-button" href="/" title="Home"><i aria-hidden="true" class="fa-solid fa-house"></i></a><button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme">
 <i class="fa-solid fa-moon"></i>
 </button>
 <a class="mtd-back" href="/#toolGrid">← Back to All Tools</a></div>
@@ -25,17 +25,14 @@
 <h2 class="tool-title"><i class="fa-solid fa-globe" style="color:#06b6d4"></i> Favicon &amp; Website Icon Generator</h2>
 <p class="tool-desc">Turn any logo into a complete set of favicons and Apple touch icons ready for your website.</p>
 </div>
-<div class="favicon-shell">
-<div aria-label="Choose a logo or drag and drop it here" class="imgc-dropzone favicon-dropzone" id="favicon-dropzone" role="button" tabindex="0">
+<div class="favicon-shell"><div class="favicon-workspace-left"><div aria-label="Choose a logo or drag and drop it here" class="imgc-dropzone favicon-dropzone" id="favicon-dropzone" role="button" tabindex="0">
 <div class="imgc-upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
 <h3>Drop Your Logo Here</h3>
 <p>or <span class="imgc-browse">browse files</span> from your device</p>
 <small>PNG, JPG, WebP or SVG · Choose one logo</small>
 <input accept="image/png,image/jpeg,image/webp,image/svg+xml,.png,.jpg,.jpeg,.webp,.svg" aria-label="Choose logo file" id="favicon-file" type="file"/>
 <div class="favicon-file-name" hidden="" id="favicon-file-name"></div>
-</div>
-<p class="favicon-privacy"><i class="fa-solid fa-shield-halved"></i> Your logo is processed in your browser and is not uploaded.</p>
-<div id="favicon-preview-area" style="display:none; margin-bottom:1.25rem;">
+</div><p class="favicon-privacy"><i class="fa-solid fa-shield-halved"></i> Your logo is processed in your browser and is not uploaded.</p></div><div class="favicon-workspace-right"><div id="favicon-preview-area" style="display:none; margin-bottom:1.25rem;">
 <div class="result-subtext" style="margin-bottom:0.5rem;">Preview</div>
 <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:flex-end;">
 <div style="text-align:center;">
@@ -51,16 +48,13 @@
 <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">180×180</div>
 </div>
 </div>
-</div>
-<button class="btn-submit" onclick="generateFaviconBundle()">Download Complete Favicon Bundle</button>
-<div class="result-box" style="margin-top:1.5rem; align-items:flex-start; text-align:left;">
+</div><button class="btn-submit" onclick="generateFaviconBundle()">Download Complete Favicon Bundle</button><div class="result-box" style="margin-top:1.5rem; align-items:flex-start; text-align:left;">
 <div class="result-subtext">Status</div>
 <div class="result-value" id="favicon-status" style="font-size:1.1rem; margin-bottom:0.75rem;">Ready — upload a logo to begin</div>
 <div class="result-subtext" style="margin-bottom:0.4rem;">HTML Snippet (copy into &lt;head&gt;)</div>
 <pre id="favicon-snippet" style="width:100%; background:var(--bg-primary); padding:0.85rem; border-radius:8px; font-size:0.8rem; overflow-x:auto; color:var(--text-main); white-space:pre-wrap; margin:0 0 0.75rem 0;">Upload a logo and generate the bundle to get the HTML snippet.</pre>
 <button class="copy-btn" onclick="copyElementText('favicon-snippet')"><i class="fa-regular fa-copy"></i> Copy HTML Snippet</button>
-</div>
-</div>
+</div></div></div>
 </div><section class="related-tools"><h2>Related Free Tools</h2><ul><li><a href="/secure-password-generator/">Secure Password Generator</a></li><li><a href="/batch-image-converter/">Batch Image Converter</a></li><li><a href="/smart-readability-checker/">Smart Readability Checker</a></li></ul></section></main><footer>
 <div class="footer-links">
 <button onclick="openModal('modal-privacy')" type="button">Privacy Policy</button>

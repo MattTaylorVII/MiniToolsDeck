@@ -161,3 +161,20 @@ body.mtd-premium-page #brand-color-lab #brand-export-json:hover{transform:transl
  body.mtd-premium-page #tool-favicongen .favicon-shell{display:flex!important;flex-direction:column!important}
  body.mtd-premium-page #tool-favicongen .favicon-shell>*{width:100%!important}
 }
+
+/* Compact favicon workflow and shared Home icon */
+body>header .header-actions{display:flex!important;align-items:center!important;gap:12px!important;flex-wrap:nowrap!important}
+body>header .mtd-home-button{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:44px!important;height:44px!important;min-width:44px!important;border:1px solid #34465c!important;border-radius:12px!important;background:transparent!important;color:#f8fafc!important;text-decoration:none!important;font-size:17px!important;transition:background .2s,border-color .2s!important}
+body>header .mtd-home-button:hover{background:rgba(45,212,191,.12)!important;border-color:#2dd4bf!important;color:#2dd4bf!important}
+body.light-theme>header .mtd-home-button{color:#0f172a!important;border-color:#cbd5e1!important}
+body.mtd-premium-page #tool-favicongen .favicon-shell{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:18px!important;align-items:start!important}
+body.mtd-premium-page #tool-favicongen .favicon-workspace-left,
+body.mtd-premium-page #tool-favicongen .favicon-workspace-right{display:flex!important;flex-direction:column!important;min-width:0!important;gap:14px!important}
+body.mtd-premium-page #tool-favicongen .favicon-dropzone{width:100%!important;min-height:255px!important;padding:28px 18px!important;margin:0!important}
+body.mtd-premium-page #tool-favicongen .favicon-privacy{margin:0!important;font-size:13px!important;line-height:1.5!important}
+body.mtd-premium-page #tool-favicongen .favicon-workspace-right>.btn-submit{width:100%!important;margin:0!important;min-height:48px!important}
+body.mtd-premium-page #tool-favicongen .favicon-workspace-right>.result-box{width:100%!important;margin:0!important;padding:20px!important;min-height:0!important}
+body.mtd-premium-page #tool-favicongen #favicon-preview-area{margin:0!important}
+body.mtd-premium-page #tool-favicongen .tool-header{margin-bottom:16px!important}
+@media(max-width:800px){body.mtd-premium-page #tool-favicongen .favicon-shell{grid-template-columns:minmax(0,1fr)!important}}
+@media(max-width:550px){body>header .header-actions{gap:7px!important}body>header .mtd-home-button{width:36px!important;height:36px!important;min-width:36px!important;font-size:14px!important}}
