@@ -972,7 +972,40 @@ body.light-theme .studio-layout .vector-preview-toolbar button[aria-pressed="tru
 .studio-layout .stage:has(.drop.motion-show) .meta{display:none!important}
 .studio-layout .stage:has(.drop.motion-show) #replace-current,.studio-layout .stage:has(.drop.motion-show) #remove-current,.studio-layout .stage:has(.drop.motion-show) #p13-export,.studio-layout .stage:has(.drop.motion-show) #studio-zoom-bar{display:none!important}
 
-</style><style id="mtd-phase17-a11y">.mtd-phase17-skip{position:fixed;left:12px;top:12px;z-index:99999;transform:translateY(-150%);padding:12px 18px;background:#0f403e;color:#fff;border:2px solid #36dccb;border-radius:10px;font:700 14px Inter,sans-serif}.mtd-phase17-skip:focus{transform:none}.studio-layout :is(a,button,input,select,textarea,[role="button"]):focus-visible{outline:2px solid #38e4d2;outline-offset:3px}</style></head><body class="mtd-algorithm"><a class="mtd-phase17-skip" href="#main-content">Skip to Main Content</a><header><div class="header-container"><a class="brand" href="/"><div class="brand-icon"><i class="fa-solid fa-layer-group"></i></div><span>MiniTools<span class="brand-accent">Deck</span></span></a><div class="header-actions"><a aria-label="Home" class="mtd-home-button" href="/" title="Home"><i aria-hidden="true" class="fa-solid fa-house"></i></a><button aria-label="Toggle Light/Dark Theme" class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme" type="button"><i class="fa-solid fa-moon"></i></button><a class="mtd-back" href="/#toolGrid">← Back to All Tools</a></div></div></header><main id="main-content" tabindex="-1" class=""><div class="eyebrow">Creator Business Intelligence · Private by Design</div><h1>Smart Image Studio</h1><p class="intro">Crop, resize, adjust, watermark, add text, sample colours, create PDFs, compress and convert your images in one easy-to-use workspace. Upload once, make your edits and export. Images stay in your browser.</p><div class="studio-layout"><aside class="pane side"><h2>Studio Tools</h2><nav aria-label="Image editing tools"><button class="tool active" data-tool="resize"><i aria-hidden="true" class="fa-solid fa-crop-simple"></i><span>Crop &amp; Resize</span></button><button class="tool" data-tool="convert"><i aria-hidden="true" class="fa-solid fa-repeat"></i><span>Convert &amp; Compress</span></button><button class="tool" data-tool="adjust"><i aria-hidden="true" class="fa-solid fa-sliders"></i><span>Adjust &amp; Enhance</span></button><button class="tool" data-tool="effects"><i aria-hidden="true" class="fa-solid fa-wand-magic-sparkles"></i><span>Filters &amp; Detail</span></button><button class="tool" data-tool="watermark"><i class="fa-solid fa-stamp" aria-hidden="true"></i><span>Watermark</span></button><button class="tool" data-tool="color"><i aria-hidden="true" class="fa-solid fa-eye-dropper"></i><span>Color Picker &amp; Palette</span></button><button class="tool" data-tool="meme"><i aria-hidden="true" class="fa-solid fa-comment-dots"></i><span>Meme &amp; Text</span></button><button class="tool" data-tool="rotate"><i aria-hidden="true" class="fa-solid fa-rotate"></i><span>Rotate &amp; Flip</span></button><button class="tool" data-tool="smart"><i aria-hidden="true" class="fa-solid fa-gem"></i><span>Smart Finishing</span></button><button class="tool" data-tool="retouch"><i class="fa-solid fa-paintbrush" aria-hidden="true"></i><span>Precision Retouch</span></button><button class="tool" data-tool="campaign"><i class="fa-solid fa-layer-group" aria-hidden="true"></i><span>Campaign Creative</span></button><button class="tool" data-tool="vector"><i class="fa-solid fa-bezier-curve" aria-hidden="true"></i><span>Vector Trace & SVG</span></button><button class="tool" data-tool="motion"><i class="fa-solid fa-film" aria-hidden="true"></i><span>Motion & GIF Studio</span></button><button class="tool" data-tool="pdf"><i aria-hidden="true" class="fa-solid fa-file-pdf"></i><span>Image to PDF</span></button><button class="tool" data-tool="batch"><i aria-hidden="true" class="fa-solid fa-images"></i><span>Batch Processing</span></button></nav><div class="p13-session" id="p13-session" aria-label="Project workspace">
+</style><style id="mtd-phase17-a11y">.mtd-phase17-skip{position:fixed;left:12px;top:12px;z-index:99999;transform:translateY(-150%);padding:12px 18px;background:#0f403e;color:#fff;border:2px solid #36dccb;border-radius:10px;font:700 14px Inter,sans-serif}.mtd-phase17-skip:focus{transform:none}.studio-layout :is(a,button,input,select,textarea,[role="button"]):focus-visible{outline:2px solid #38e4d2;outline-offset:3px}</style><link rel="stylesheet" href="/assets/tool-privacy-footer.css"/><style id="aspect-ratio-calculator-styles">
+/* Phase 17.3 — Full Aspect Ratio Calculator inside Crop & Resize */
+.studio-layout .ar-studio{margin:15px 0;border:1px solid var(--line,#344e63);border-radius:13px;padding:12px 13px;background:rgba(24,63,77,.12)}
+.studio-layout .ar-studio>summary{cursor:pointer;list-style:initial;line-height:1.4;color:var(--text,#eff6fc);font-size:13px;font-weight:800;padding:3px 0}
+.studio-layout .ar-studio>summary::marker{color:var(--teal,#40e0ca)}
+.studio-layout .ar-studio[open]>summary{margin-bottom:12px;color:var(--teal,#40e0ca)}
+.studio-layout .ar-intro{font-size:12px;color:var(--muted,#a7b8c9);line-height:1.55;margin:0 0 11px}
+.studio-layout .ar-row{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:8px}
+.studio-layout .ar-row input{min-width:0;width:100%}
+.studio-layout .ar-studio .field{margin:10px 0}
+.studio-layout .ar-studio .field label{margin-bottom:5px;display:block}
+.studio-layout .ar-small-actions{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}
+.studio-layout .ar-small-actions button,.studio-layout .ar-quick button{font-size:11px;line-height:1.3;border:1px solid #395970;background:#1b3448;color:#e9f4ff;padding:8px 9px;border-radius:8px;cursor:pointer;min-width:0}
+.studio-layout .ar-small-actions button:hover,.studio-layout .ar-quick button:hover{border-color:var(--teal,#40e0ca)}
+.studio-layout .ar-small-actions button[aria-pressed="true"]{border-color:var(--teal,#40e0ca);background:#184a4b}
+.studio-layout .ar-quick{display:flex;flex-wrap:wrap;gap:5px;margin:9px 0 12px}
+.studio-layout .ar-result{background:rgba(8,30,43,.57);border:1px solid #39566a;border-radius:10px;padding:11px;margin:12px 0}
+.studio-layout .ar-result-main{text-align:center;font-size:22px;font-weight:800;line-height:1.4;color:var(--text,#fff)}
+.studio-layout .ar-result-ratio{text-align:center;color:var(--teal,#40e0ca);font-size:13px;font-weight:700;margin-top:4px}
+.studio-layout .ar-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:12px}
+.studio-layout .ar-stat{padding:8px;border-radius:8px;border:1px solid #375169;min-width:0}
+.studio-layout .ar-stat span{display:block;font-size:10px;color:var(--muted,#a5b7c8);margin-bottom:4px}
+.studio-layout .ar-stat strong{font-size:12px;color:var(--text,#fff);overflow-wrap:anywhere}
+.studio-layout .ar-hint{font-size:11px;line-height:1.55;color:var(--muted,#b6c4d2);margin:8px 0}
+.studio-layout .ar-status{min-height:23px;font-size:11px;line-height:1.55;color:var(--teal,#40e0ca);margin:8px 0}
+.studio-layout .ar-error{color:#f6b2ad!important}
+.studio-layout #ar-use{display:block;width:100%;margin-top:12px}
+body.light-theme .studio-layout .ar-studio{background:#eef8f9}
+body.light-theme .studio-layout .ar-small-actions button,body.light-theme .studio-layout .ar-quick button{background:#edf5f7;color:#193143;border-color:#c5d5db}
+body.light-theme .studio-layout .ar-small-actions button[aria-pressed="true"]{background:#cef0e9;border-color:#10a99f}
+body.light-theme .studio-layout .ar-result{background:#fff;border-color:#cadae0}
+body.light-theme .studio-layout .ar-stat{border-color:#cadae0}
+@media(max-width:480px){.studio-layout .ar-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.studio-layout .ar-result-main{font-size:19px}}
+</style></head><body id="top" class="mtd-algorithm"><a class="mtd-phase17-skip" href="#main-content">Skip to Main Content</a><header><div class="header-container"><a class="brand" href="/"><div class="brand-icon"><i class="fa-solid fa-layer-group"></i></div><span>MiniTools<span class="brand-accent">Deck</span></span></a><div class="header-actions"><a aria-label="Home" class="mtd-home-button" href="/" title="Home"><i aria-hidden="true" class="fa-solid fa-house"></i></a><button aria-label="Toggle Light/Dark Theme" class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme" type="button"><i class="fa-solid fa-moon"></i></button><a class="mtd-back" href="/#toolGrid">← Back to All Tools</a></div></div></header><main id="main-content" tabindex="-1" class=""><div class="eyebrow">Creator Business Intelligence · Private by Design</div><h1>Smart Image Studio</h1><p class="intro">Crop, resize, adjust, watermark, add text, sample colours, create PDFs, compress and convert your images in one easy-to-use workspace. Upload once, make your edits and export. Images stay in your browser.</p><div class="studio-layout"><aside class="pane side"><h2>Studio Tools</h2><nav aria-label="Image editing tools"><button class="tool active" data-tool="resize"><i aria-hidden="true" class="fa-solid fa-crop-simple"></i><span>Crop &amp; Resize</span></button><button class="tool" data-tool="convert"><i aria-hidden="true" class="fa-solid fa-repeat"></i><span>Convert &amp; Compress</span></button><button class="tool" data-tool="adjust"><i aria-hidden="true" class="fa-solid fa-sliders"></i><span>Adjust &amp; Enhance</span></button><button class="tool" data-tool="effects"><i aria-hidden="true" class="fa-solid fa-wand-magic-sparkles"></i><span>Filters &amp; Detail</span></button><button class="tool" data-tool="watermark"><i class="fa-solid fa-stamp" aria-hidden="true"></i><span>Watermark</span></button><button class="tool" data-tool="color"><i aria-hidden="true" class="fa-solid fa-eye-dropper"></i><span>Color Picker &amp; Palette</span></button><button class="tool" data-tool="meme"><i aria-hidden="true" class="fa-solid fa-comment-dots"></i><span>Meme &amp; Text</span></button><button class="tool" data-tool="rotate"><i aria-hidden="true" class="fa-solid fa-rotate"></i><span>Rotate &amp; Flip</span></button><button class="tool" data-tool="smart"><i aria-hidden="true" class="fa-solid fa-gem"></i><span>Smart Finishing</span></button><button class="tool" data-tool="retouch"><i class="fa-solid fa-paintbrush" aria-hidden="true"></i><span>Precision Retouch</span></button><button class="tool" data-tool="campaign"><i class="fa-solid fa-layer-group" aria-hidden="true"></i><span>Campaign Creative</span></button><button class="tool" data-tool="vector"><i class="fa-solid fa-bezier-curve" aria-hidden="true"></i><span>Vector Trace & SVG</span></button><button class="tool" data-tool="motion"><i class="fa-solid fa-film" aria-hidden="true"></i><span>Motion & GIF Studio</span></button><button class="tool" data-tool="pdf"><i aria-hidden="true" class="fa-solid fa-file-pdf"></i><span>Image to PDF</span></button><button class="tool" data-tool="batch"><i aria-hidden="true" class="fa-solid fa-images"></i><span>Batch Processing</span></button></nav><div class="p13-session" id="p13-session" aria-label="Project workspace">
   <div class="p13-kicker"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> YOUR WORKSPACE</div>
   <p id="p13-summary" aria-live="polite">Add images to begin</p>
   <div class="p13-session-actions"><button class="btn" type="button" id="p13-save" disabled><i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Save Project</button><button class="btn" type="button" id="p13-open"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> Open Project</button></div>
@@ -1017,7 +1050,31 @@ body.light-theme .studio-layout .vector-preview-toolbar button[aria-pressed="tru
   <summary><i class="fa-solid fa-arrow-down-to-bracket" aria-hidden="true"></i> Export <span class="p13-export-note">Single image · batch ZIP · PDF</span></summary>
   <div class="p13-export-popup"><h3>Export Center</h3><div class="p13-export-grid"><button type="button" class="btn" id="p13-export-image" disabled>Export Image</button><button type="button" class="btn" id="p13-export-batch" disabled>Export Selected ZIP</button><button type="button" class="btn" id="p13-export-pdf">Create PDF</button></div>
   <p class="p13-small" id="p13-export-info">Exports use your settings in Convert & Compress and Batch Processing. Apply any live previews first.</p></div>
-</details></section><aside class="pane settings"><div class="eyebrow">EDIT CONTROLS</div><h2 id="paneltitle">Crop &amp; Resize</h2><p id="paneldesc">Set dimensions, preserve aspect ratio or crop to a custom area.</p><div id="resizepanel"><div class="two"><div class="field"><label for="width">Width (px)</label><input id="width" max="12000" min="1" type="number" value="1200"/></div><div class="field"><label for="height">Height (px)</label><input id="height" max="12000" min="1" type="number" value="800"/></div></div><label class="check"><input checked="" id="lock" type="checkbox"/><span>Lock aspect ratio</span></label><div class="field"><label for="preset">Size preset</label><select id="preset"><option value="">Custom</option><option value="1080x1080">Square · 1080 × 1080</option><option value="1080x1920">Story · 1080 × 1920</option><option value="1920x1080">Landscape · 1920 × 1080</option><option value="1200x630">Social preview · 1200 × 630</option></select></div><div class="field"><label for="crop">Crop selection</label><select id="crop"><option value="none">No crop</option><option value="1">1:1 Square</option><option value="0.8">4:5 Portrait</option><option value="1.25">5:4 Landscape</option><option value="1.5">3:2 Landscape</option><option value="0.6666666667">2:3 Portrait</option><option value="1.7777777778">16:9 Landscape</option><option value="0.5625">9:16 Portrait</option><option value="1.3333333333">4:3 Landscape</option><option value="free">Manual crop — drag on image</option></select></div><div class="hidden" id="cropfields"><div class="crop-hint">Move the selection by dragging its center. Use any corner to resize it; exact pixel coordinates are available below.</div><details class="studio-details" id="precisiondetails"><summary>Precise crop coordinates</summary><div class="two"><div class="field"><label for="cropx">X position (px)</label><input id="cropx" type="number" min="0" step="1" value="0"></div><div class="field"><label for="cropy">Y position (px)</label><input id="cropy" type="number" min="0" step="1" value="0"></div><div class="field"><label for="cropw">Crop width (px)</label><input id="cropw" type="number" min="1" step="1" value="1"></div><div class="field"><label for="croph">Crop height (px)</label><input id="croph" type="number" min="1" step="1" value="1"></div></div><div class="small" id="cropinfo" aria-live="polite"></div></details></div><label class="check hidden" id="croporiginalrow"><input id="croporiginal" type="checkbox"/><span>Export crop at its original pixel size (ignore width and height above)</span></label><details class="studio-details"><summary>Advanced resize options</summary><div class="field"><label for="resizemode">Fit mode</label><select id="resizemode"><option value="stretch">Stretch to dimensions</option><option value="contain">Fit inside dimensions</option><option value="cover">Fill dimensions (center crop)</option></select></div><div class="field hidden" id="fillrow"><label for="fillcolor">Canvas background (Fit mode)</label><input id="fillcolor" type="color" value="#ffffff" aria-label="Canvas background color"/></div><div class="field"><label for="scalepercent">Resize dimensions by percentage</label><select id="scalepercent"><option value="">Select percentage</option><option value="25">25% of current image</option><option value="50">50% of current image</option><option value="75">75% of current image</option><option value="100">100% of current image</option><option value="150">150% of current image</option><option value="200">200% of current image</option></select></div><p class="small">Fit retains the entire image with optional padding. Fill crops its edges. Stretch can alter proportions.</p></details><div class="small" id="resizestatus" aria-live="polite"></div><button class="btn" id="applyresize" style="width:100%">Apply resize / crop</button></div><div class="hidden" id="convertpanel"><div class="field"><label for="format">Output format</label><select id="format"><option value="image/png">PNG</option><option value="image/jpeg">JPEG</option><option selected="" value="image/webp">WebP</option></select></div><div class="field"><label for="quality">Quality: <span id="qualityvalue">85%</span></label><input id="quality" max="100" min="10" type="range" value="85"/></div><div class="field"><label for="cpreset">Compression preset</label><select id="cpreset"><option value="custom">Custom</option><option value="95">Maximum quality</option><option selected value="85">Balanced</option><option value="65">Smaller file</option><option value="40">Maximum compression</option></select></div><details class="studio-details"><summary>Target file size (advanced)</summary><div class="field"><label for="ctarget">Maximum size in KB (JPEG / WebP)</label><input id="ctarget" type="number" min="1" max="204800" placeholder="e.g. 200"></div><p class="small">Uses a quality search to get as close as possible without exceeding the target. If the target is too small at minimum quality, the best available result is exported with a warning. Pixels are not resized automatically.</p></details><button type="button" class="btn" id="cpreview" style="width:100%">Estimate export size</button><div id="cresult" class="compress-result" aria-live="polite"></div><p>JPEG and WebP support adjustable quality. PNG stays lossless; target size and quality are ignored.</p></div><div class="hidden" id="adjustpanel">
+</details></section><aside class="pane settings"><div class="eyebrow">EDIT CONTROLS</div><h2 id="paneltitle">Crop &amp; Resize</h2><p id="paneldesc">Set dimensions, preserve aspect ratio or crop to a custom area.</p><div id="resizepanel"><div class="two"><div class="field"><label for="width">Width (px)</label><input id="width" max="12000" min="1" type="number" value="1200"/></div><div class="field"><label for="height">Height (px)</label><input id="height" max="12000" min="1" type="number" value="800"/></div></div><label class="check"><input checked="" id="lock" type="checkbox"/><span>Lock aspect ratio</span></label><div class="field"><label for="preset">Size preset</label><select id="preset"><option value="">Custom</option><option value="1080x1080">Square · 1080 × 1080</option><option value="1080x1920">Story · 1080 × 1920</option><option value="1920x1080">Landscape · 1920 × 1080</option><option value="1200x630">Social preview · 1200 × 630</option></select></div><div class="field"><label for="crop">Crop selection</label><select id="crop"><option value="none">No crop</option><option value="1">1:1 Square</option><option value="0.8">4:5 Portrait</option><option value="1.25">5:4 Landscape</option><option value="1.5">3:2 Landscape</option><option value="0.6666666667">2:3 Portrait</option><option value="1.7777777778">16:9 Landscape</option><option value="0.5625">9:16 Portrait</option><option value="1.3333333333">4:3 Landscape</option><option value="free">Manual crop — drag on image</option></select></div><div class="hidden" id="cropfields"><div class="crop-hint">Move the selection by dragging its center. Use any corner to resize it; exact pixel coordinates are available below.</div><details class="studio-details" id="precisiondetails"><summary>Precise crop coordinates</summary><div class="two"><div class="field"><label for="cropx">X position (px)</label><input id="cropx" type="number" min="0" step="1" value="0"></div><div class="field"><label for="cropy">Y position (px)</label><input id="cropy" type="number" min="0" step="1" value="0"></div><div class="field"><label for="cropw">Crop width (px)</label><input id="cropw" type="number" min="1" step="1" value="1"></div><div class="field"><label for="croph">Crop height (px)</label><input id="croph" type="number" min="1" step="1" value="1"></div></div><div class="small" id="cropinfo" aria-live="polite"></div></details></div><label class="check hidden" id="croporiginalrow"><input id="croporiginal" type="checkbox"/><span>Export crop at its original pixel size (ignore width and height above)</span></label><details class="studio-details"><summary>Advanced resize options</summary><div class="field"><label for="resizemode">Fit mode</label><select id="resizemode"><option value="stretch">Stretch to dimensions</option><option value="contain">Fit inside dimensions</option><option value="cover">Fill dimensions (center crop)</option></select></div><div class="field hidden" id="fillrow"><label for="fillcolor">Canvas background (Fit mode)</label><input id="fillcolor" type="color" value="#ffffff" aria-label="Canvas background color"/></div><div class="field"><label for="scalepercent">Resize dimensions by percentage</label><select id="scalepercent"><option value="">Select percentage</option><option value="25">25% of current image</option><option value="50">50% of current image</option><option value="75">75% of current image</option><option value="100">100% of current image</option><option value="150">150% of current image</option><option value="200">200% of current image</option></select></div><p class="small">Fit retains the entire image with optional padding. Fill crops its edges. Stretch can alter proportions.</p></details><div class="small" id="resizestatus" aria-live="polite"></div><button class="btn" id="applyresize" style="width:100%">Apply resize / crop</button><details class="ar-studio" id="aspect-ratio-calculator-studio">
+ <summary><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> Aspect Ratio Calculator</summary>
+ <p class="ar-intro">Calculate image sizes without uploading, or use the current image. Calculations never modify your image.</p>
+ <button type="button" id="ar-current" class="btn" style="width:100%">Use Current Image Dimensions</button>
+ <div class="field"><label for="ar-source-w">Original Dimensions (px)</label>
+  <div class="ar-row"><input type="number" min="1" max="100000" step="1" id="ar-source-w" value="1920" aria-label="Original width in pixels"/><span aria-hidden="true">×</span><input type="number" min="1" max="100000" step="1" id="ar-source-h" value="1080" aria-label="Original height in pixels"/></div>
+ </div>
+ <div class="field"><label for="ar-size-preset">Quick Size Preset</label><select id="ar-size-preset">
+  <option value="">Custom Dimensions</option><option value="1080x1080">Instagram Square · 1080 × 1080</option><option value="1080x1350">Instagram Portrait · 1080 × 1350</option><option value="1080x1920">Story / Reel / TikTok · 1080 × 1920</option><option value="1280x720">YouTube Thumbnail · 1280 × 720</option><option value="2560x1440">YouTube Banner · 2560 × 1440</option><option value="1640x624">Facebook Cover · 1640 × 624</option><option value="1200x627">LinkedIn Post · 1200 × 627</option><option value="1200x630">Social Share / OG · 1200 × 630</option><option value="1920x1080">Full HD · 1920 × 1080</option><option value="3840x2160">4K · 3840 × 2160</option>
+ </select></div>
+ <div class="field"><label for="ar-target-w">Target Dimensions (px)</label>
+  <div class="ar-row"><input type="number" min="1" max="100000" step="1" id="ar-target-w" value="1280" aria-label="Target width in pixels"/><span aria-hidden="true">×</span><input type="number" min="1" max="100000" step="1" id="ar-target-h" value="720" aria-label="Target height in pixels"/></div>
+ </div>
+ <div class="ar-small-actions" role="group" aria-label="Aspect ratio lock"><button type="button" id="ar-lock" aria-pressed="true"><i class="fa-solid fa-lock" aria-hidden="true"></i> Keep Source Ratio</button><button type="button" id="ar-unlock" aria-pressed="false"><i class="fa-solid fa-lock-open" aria-hidden="true"></i> Unlock</button></div>
+ <div class="ar-hint">Ratio shortcuts — preserve target width and calculate height.</div>
+ <div class="ar-quick" role="group" aria-label="Aspect ratio presets"><button type="button" data-ar-ratio="1/1">1:1</button><button type="button" data-ar-ratio="4/5">4:5</button><button type="button" data-ar-ratio="9/16">9:16</button><button type="button" data-ar-ratio="4/3">4:3</button><button type="button" data-ar-ratio="16/9">16:9</button><button type="button" data-ar-ratio="21/9">21:9</button></div>
+ <div class="field"><label for="ar-mode">Sizing Strategy</label><select id="ar-mode"><option value="contain">Fit Whole Image (No Crop)</option><option value="cover">Fill Frame (May Crop)</option><option value="stretch">Stretch (Changes Proportions)</option></select></div>
+ <div class="ar-result" aria-live="polite"><div class="ar-result-main" id="ar-result-dims">1280 × 720 px</div><div class="ar-result-ratio" id="ar-result-ratio">Aspect Ratio · 16:9</div>
+  <div class="ar-stats"><div class="ar-stat"><span>Original Ratio</span><strong id="ar-result-source">16:9</strong></div><div class="ar-stat"><span>Size Change</span><strong id="ar-result-scale">66.7%</strong></div><div class="ar-stat"><span>Pixels</span><strong id="ar-result-pixels">0.92 MP</strong></div><div class="ar-stat"><span>Crop / Padding</span><strong id="ar-result-fit">None</strong></div></div>
+  <p class="ar-hint" id="ar-result-explain">Your target preserves the original proportions.</p>
+ </div>
+ <div class="ar-small-actions"><button type="button" id="ar-copy-dims">Copy Dimensions</button><button type="button" id="ar-copy-ratio">Copy Ratio</button><button type="button" id="ar-reset">Reset Calculator</button></div>
+ <div id="ar-status" class="ar-status" role="status" aria-live="polite"></div>
+ <button type="button" id="ar-use" class="btn">Use These Dimensions in Crop & Resize</button>
+</details></div><div class="hidden" id="convertpanel"><div class="field"><label for="format">Output format</label><select id="format"><option value="image/png">PNG</option><option value="image/jpeg">JPEG</option><option selected="" value="image/webp">WebP</option></select></div><div class="field"><label for="quality">Quality: <span id="qualityvalue">85%</span></label><input id="quality" max="100" min="10" type="range" value="85"/></div><div class="field"><label for="cpreset">Compression preset</label><select id="cpreset"><option value="custom">Custom</option><option value="95">Maximum quality</option><option selected value="85">Balanced</option><option value="65">Smaller file</option><option value="40">Maximum compression</option></select></div><details class="studio-details"><summary>Target file size (advanced)</summary><div class="field"><label for="ctarget">Maximum size in KB (JPEG / WebP)</label><input id="ctarget" type="number" min="1" max="204800" placeholder="e.g. 200"></div><p class="small">Uses a quality search to get as close as possible without exceeding the target. If the target is too small at minimum quality, the best available result is exported with a warning. Pixels are not resized automatically.</p></details><button type="button" class="btn" id="cpreview" style="width:100%">Estimate export size</button><div id="cresult" class="compress-result" aria-live="polite"></div><p>JPEG and WebP support adjustable quality. PNG stays lossless; target size and quality are ignored.</p></div><div class="hidden" id="adjustpanel">
  <div class="adjust-bar"><label for="adjpreset">Look</label><select id="adjpreset" aria-label="Adjustment preset"><option value="custom">Custom</option><option value="natural" selected>Natural · original</option><option value="balanced">Balanced</option><option value="vivid">Vivid</option><option value="portrait">Portrait</option><option value="warm">Warm glow</option><option value="cool">Cool clean</option><option value="matte">Soft matte</option></select></div>
  <div class="adjust-actions"><button class="btn" type="button" id="adjauto">Auto tone</button><button class="btn" type="button" id="adjreset">Reset sliders</button><button class="btn" type="button" id="adjbefore" title="Press and hold to compare with original">Hold for before</button></div>
  <div class="adjust-live" id="adjlive" role="status" aria-live="polite">Upload an image to start. Changes preview before you apply them.</div>
@@ -1417,7 +1474,32 @@ body.light-theme .studio-layout .vector-preview-toolbar button[aria-pressed="tru
  <div class="rotate-preview-box"><div class="rotate-preview-title"><strong>Live preview</strong><span id="rotdimensions" aria-live="polite">Add an image to preview</span></div><canvas id="rotpreview" width="330" height="180" role="img" aria-label="Rotation preview"></canvas></div>
  <button type="button" class="btn primary" id="applyangle" style="width:100%">Apply precise rotation</button>
  <p class="small rotate-footnote">Quick rotations and flips apply instantly. Precise rotation changes are previewed until you apply them. Every edit supports Undo.</p>
- </div><hr style="border:0;border-top:1px solid var(--edge);margin:24px 0"/><button class="btn primary" disabled="" id="export" style="width:100%">↓ Export image</button><p class="notice">Export uses the selected format and quality. No image is uploaded to a server.</p></aside></div><div class="privacy studio-privacy">🔒 Images stay in your browser. Editing and exports happen locally; no image is uploaded to a server.</div></main>
+ </div><hr style="border:0;border-top:1px solid var(--edge);margin:24px 0"/><button class="btn primary" disabled="" id="export" style="width:100%">↓ Export image</button><p class="notice">Export uses the selected format and quality. No image is uploaded to a server.</p></aside></div><div class="mtd-tool-privacy" role="note"><svg class="mtd-privacy-symbol" aria-hidden="true" width="17" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="10" width="14" height="11" rx="2" fill="currentColor"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg><span>Images, edits, project files and exports are processed in your browser. Your artwork is not uploaded to MiniToolsDeck.</span></div></main>
+<footer class="mtd-signature-footer" id="site-footer" aria-label="Site footer"><div class="mtd-footer-top"><div class="mtd-footer-brand-block"><a class="mtd-footer-brand" href="/" aria-label="MiniToolsDeck home"><span class="brand-icon"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></span><span>MiniTools<span class="brand-accent">Deck</span></span></a><p class="mtd-footer-tagline">THE CREATOR COMMAND CENTER</p><p class="mtd-footer-description">Powerful tools. Smarter workflows. All in one place.</p></div><nav class="mtd-footer-explore" aria-label="Explore MiniToolsDeck"><strong>Explore</strong><a href="/#toolGrid">All Tools</a><a href="#top" class="mtd-footer-back-to-top">Back to Top</a></nav></div><div class="mtd-footer-bottom"><p>© 2026 MiniToolsDeck. All rights reserved.</p><div class="footer-links"><button type="button" data-mtd-open="modal-privacy">Privacy Policy</button><button type="button" data-mtd-open="modal-terms">Terms of Service</button><button type="button" data-mtd-open="modal-about">About &amp; Contact</button></div></div></footer>
+<div aria-label="Privacy Policy" aria-modal="true" class="modal-overlay mtd-tool-legal-overlay" id="modal-privacy" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Privacy Policy" class="modal-close" type="button">×</button>
+<h3>Privacy Policy</h3>
+<br/>
+<p>MiniToolsDeck operates with a client-first privacy architecture. All utility calculations, image conversions, and data formatting occur directly inside your browser. We do not store or transmit user files to external servers.</p>
+</div>
+</div><div aria-label="Terms of Service" aria-modal="true" class="modal-overlay mtd-tool-legal-overlay" id="modal-terms" role="dialog">
+<div class="modal-content">
+<button aria-label="Close Terms of Service" class="modal-close" type="button">×</button>
+<h3>Terms of Service</h3>
+<br/>
+<p>MiniToolsDeck provides web utilities "as is" without warranties of any kind.</p>
+</div>
+</div><div aria-label="About &amp; Contact" aria-modal="true" class="modal-overlay mtd-tool-legal-overlay" id="modal-about" role="dialog">
+<div class="modal-content">
+<button aria-label="Close About &amp; Contact" class="modal-close" type="button">×</button>
+<h3>About &amp; Contact</h3>
+<br/>
+<p>MiniToolsDeck is the modern creator and growth stack—a suite of lightning-fast browser utilities built for digital marketers, developers, and content professionals.</p>
+<br/>
+<p>For inquiries, email: <strong>contact@minitoolsdeck.com</strong></p>
+</div>
+</div>
 <style id="campaign-creative-styles">
 .studio-layout .campaign-intro,.studio-layout .campaign-note{font-size:12px;line-height:1.6;color:var(--muted);margin:10px 0 16px}
 .studio-layout .campaign-note{border-top:1px solid var(--edge);padding-top:13px}
@@ -4292,5 +4374,129 @@ $('retouchbefore').addEventListener('pointerdown',()=>{retouchHold=true;retouchD
  };
  // Preview and transport are never written back into editor canvas: original pixels remain unchanged.
  select(0);swapTab(false);
+})();
+</script><script defer src="/assets/tool-privacy-footer.js"></script><script id="studio-phase17-2-entry">
+/* Phase 17.2: legacy image-converter links open the correct workspace. */
+window.addEventListener('load', function () {
+  try {
+    const tool = new URLSearchParams(window.location.search).get('tool');
+    if (tool !== 'convert') return;
+    const tab = document.querySelector('.studio-layout .tool[data-tool="convert"]');
+    if (tab) tab.click();
+  } catch (err) { console.warn('Studio entry selection:', err); }
+});
+</script><script id="studio-aspect-ratio-calculator-script">
+/* Phase 17.3 — Legacy Aspect Ratio Calculator functionality, migrated in-place. No network access. */
+(()=>{'use strict';
+ const by=id=>document.getElementById(id), c=by('canvas'), box=by('aspect-ratio-calculator-studio');
+ if(!box)return;
+ const ids=['ar-source-w','ar-source-h','ar-target-w','ar-target-h'];
+ const sourceW=by(ids[0]),sourceH=by(ids[1]),targetW=by(ids[2]),targetH=by(ids[3]);
+ const format=n=>Number(n).toLocaleString('en-US');
+ const integer=v=>Number.isSafeInteger(Number(v)) && Number(v)>0 && Number(v)<=100000?Number(v):null;
+ const gcd=(a,b)=>{a=Math.round(a);b=Math.round(b);while(b){[a,b]=[b,a%b]}return a||1};
+ const ratioText=(w,h)=>{const d=gcd(w,h);return `${w/d}:${h/d}`};
+ let locked=true,desiredRatio=null,lastSourceKey='',manuallyChanged=false;
+ const note=(txt,error=false)=>{const el=by('ar-status');el.textContent=txt;el.classList.toggle('ar-error',error)};
+ const markLock=()=>{by('ar-lock').setAttribute('aria-pressed',String(locked));by('ar-unlock').setAttribute('aria-pressed',String(!locked))};
+ const sourceRatio=()=>integer(sourceW.value)/integer(sourceH.value);
+ function calculate(changed=''){
+  const sw=integer(sourceW.value),sh=integer(sourceH.value);
+  if((changed==='source' || changed==='target-w') && locked && sw && sh){
+   const tw=integer(targetW.value);if(tw){const targetRatio=desiredRatio||sw/sh;targetH.value=Math.min(100000,Math.max(1,Math.round(tw/targetRatio)))}
+  }else if(changed==='target-h' && locked && sw && sh){
+   const th=integer(targetH.value);if(th){const targetRatio=desiredRatio||sw/sh;targetW.value=Math.min(100000,Math.max(1,Math.round(th*targetRatio)))}
+  }
+  const tw=integer(targetW.value),th=integer(targetH.value);
+  if(!sw||!sh||!tw||!th){
+   by('ar-result-dims').textContent='Enter valid dimensions';by('ar-result-ratio').textContent='Each value must be a positive whole number (up to 100,000).';
+   for(const id of ['ar-result-scale','ar-result-pixels','ar-result-fit'])by(id).textContent='—';
+   by('ar-result-source').textContent=sw&&sh?ratioText(sw,sh):'—';by('ar-result-explain').textContent='Correct the dimensions to continue.';by('ar-use').disabled=true;return false;
+  }
+  const targetAR=tw/th,originalAR=sw/sh,scaleFit=Math.min(tw/sw,th/sh),scaleFill=Math.max(tw/sw,th/sh),mode=by('ar-mode').value;
+  const pixels=(tw*th/1e6).toFixed(2)+' MP';
+  const ratioDelta=Math.abs(targetAR-originalAR)/originalAR;
+  const scale=mode==='cover'?scaleFill:mode==='stretch'?tw/sw:scaleFit;
+  let fit='None',explain='The target preserves the original proportions.';
+  if(ratioDelta>.00001){
+   if(mode==='contain'){
+    const rw=Math.min(tw,Math.round(sw*scaleFit)),rh=Math.min(th,Math.round(sh*scaleFit));
+    const px=Math.max(0,tw-rw),py=Math.max(0,th-rh);
+    fit=`${px} × ${py} px padding`;
+    explain=`Fits ${rw.toLocaleString()} × ${rh.toLocaleString()} inside ${tw.toLocaleString()} × ${th.toLocaleString()}, with padding rather than crop.`;
+   }else if(mode==='cover'){
+    const rw=Math.round(sw*scaleFill),rh=Math.round(sh*scaleFill);
+    fit=`${Math.max(0,rw-tw)} × ${Math.max(0,rh-th)} px crop`;
+    explain=`Fills the frame; source edges may be cropped after scaling to ${format(rw)} × ${format(rh)}.`;
+   }else{fit='Stretched';explain='Stretch changes source proportions; circles and faces may be distorted.'}
+  }
+  by('ar-result-dims').textContent=`${format(tw)} × ${format(th)} px`;
+  by('ar-result-ratio').textContent='Aspect Ratio · '+ratioText(tw,th);
+  by('ar-result-source').textContent=ratioText(sw,sh);
+  by('ar-result-scale').textContent=mode==='stretch'?`${(tw/sw*100).toFixed(1)}% W · ${(th/sh*100).toFixed(1)}% H`:`${(scale*100).toFixed(1)}%`;
+  by('ar-result-pixels').textContent=pixels;
+  by('ar-result-fit').textContent=fit;by('ar-result-explain').textContent=explain;
+  by('ar-use').disabled=!(by('drop')?.classList.contains('has-image'))||tw>12000||th>12000||tw*th>40000000;
+  return true;
+ }
+ function setLock(on){locked=!!on;desiredRatio=null;markLock();calculate(on?'target-w':'')}
+ by('ar-lock').addEventListener('click',()=>setLock(true));by('ar-unlock').addEventListener('click',()=>setLock(false));
+ for(const [id,kind] of [['ar-source-w','source'],['ar-source-h','source'],['ar-target-w','target-w'],['ar-target-h','target-h']]){
+  by(id).addEventListener('input',()=>{if(kind==='source')manuallyChanged=true;if(kind.startsWith('target'))by('ar-size-preset').value='';calculate(kind)});
+ }
+ by('ar-size-preset').addEventListener('change',e=>{
+  const val=e.target.value;if(!val)return;const [w,h]=val.split('x').map(Number);targetW.value=w;targetH.value=h;locked=false;desiredRatio=null;markLock();calculate();note('Preset selected. Target dimensions are unlocked to preserve this format.');
+ });
+ box.querySelectorAll('[data-ar-ratio]').forEach(btn=>btn.addEventListener('click',()=>{
+  const [a,b]=btn.dataset.arRatio.split('/').map(Number);if(!a||!b)return;
+  const w=integer(targetW.value)||1200;
+  targetW.value=w;targetH.value=Math.max(1,Math.min(100000,Math.round(w*b/a)));
+  locked=true;desiredRatio=a/b;markLock();by('ar-size-preset').value='';calculate();note(`Ratio ${a}:${b} selected.`);
+ }));
+ by('ar-mode').addEventListener('change',()=>calculate());
+ by('ar-current').addEventListener('click',()=>{
+  if(!by('drop')?.classList.contains('has-image')){note('Add an image first, or enter the original dimensions manually.',true);return}
+  sourceW.value=c.width;sourceH.value=c.height;manuallyChanged=false;
+  if(locked)desiredRatio=null;
+  calculate(locked?'target-w':'');note(`Using current image: ${format(c.width)} × ${format(c.height)} px.`);
+ });
+ by('ar-reset').addEventListener('click',()=>{sourceW.value=1920;sourceH.value=1080;targetW.value=1280;targetH.value=720;locked=true;desiredRatio=null;manuallyChanged=false;by('ar-size-preset').value='';by('ar-mode').value='contain';markLock();calculate();note('Calculator reset.');});
+ async function copyValue(s){
+  try{if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(s);note(`Copied ${s}`);return}}
+  catch(e){}
+  const field=document.createElement('textarea');field.value=s;field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();
+  let okay=false;try{okay=document.execCommand('copy')}catch(e){}field.remove();note(okay?`Copied ${s}`:`Copy unavailable in this preview. Value: ${s}`,!okay);
+ }
+ by('ar-copy-dims').addEventListener('click',()=>{if(calculate())copyValue(`${targetW.value} × ${targetH.value} px`)});
+ by('ar-copy-ratio').addEventListener('click',()=>{if(calculate())copyValue(ratioText(+targetW.value,+targetH.value))});
+ by('ar-use').addEventListener('click',()=>{
+  if(!calculate())return;
+  if(!by('drop')?.classList.contains('has-image')){note('Upload an image before applying target dimensions.',true);return}
+  const tw=+targetW.value,th=+targetH.value;
+  if(tw>12000||th>12000||tw*th>40000000){note('Resize editor supports up to 12,000 px and 40 megapixels. Try a smaller target.',true);return}
+  by('width').value=tw;by('height').value=th;by('lock').checked=false;by('preset').value='';
+  by('resizemode').value=by('ar-mode').value;
+  by('resizemode').dispatchEvent(new Event('change',{bubbles:true}));
+  by('resizestatus').textContent=`Ready: ${format(tw)} × ${format(th)} px. Select Apply Resize / Crop to update the image.`;
+  note('Dimensions transferred. Apply Resize / Crop to make changes.');
+ });
+ // Handle changes to the active image without replacing manually entered calculator values.
+ const dims=by('dimensions'),drop=by('drop');
+ function refreshCurrent(){
+  const has=drop.classList.contains('has-image');const key=has?`${c.width}x${c.height}:${by('filename')?.textContent||''}`:'';
+  if(has&&key!==lastSourceKey){
+   lastSourceKey=key;
+   if(!manuallyChanged){sourceW.value=c.width;sourceH.value=c.height;if(locked)desiredRatio=null;}
+  }else if(!has){lastSourceKey=''}
+  calculate();
+ }
+ new MutationObserver(refreshCurrent).observe(drop,{attributes:true,attributeFilter:['class']});
+ if(dims)new MutationObserver(refreshCurrent).observe(dims,{childList:true,characterData:true,subtree:true});
+ // Legacy links open this panel automatically without needing a source image.
+ const params=new URLSearchParams(location.search);
+ if(params.get('aspect')==='1'){
+  window.addEventListener('load',()=>{document.querySelector('.studio-layout .tool[data-tool="resize"]')?.click();box.open=true;box.scrollIntoView({block:'nearest'});refreshCurrent()});
+ }
+ markLock();calculate();refreshCurrent();
 })();
 </script></body></html>

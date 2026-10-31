@@ -17,12 +17,37 @@
     },
     {
       "source": "/image-aspect-ratio-calculator/",
-      "destination": "/smart-image-resizer/",
+      "destination": "/smart-image-studio/?tool=resize&aspect=1",
       "permanent": true
     },
     {
       "source": "/social-media-engagement-calculator/",
       "destination": "/algorithm-exposure-score/",
+      "permanent": true
+    },
+    {
+      "source": "/batch-image-converter/",
+      "destination": "/smart-image-studio/?tool=convert",
+      "permanent": true
+    },
+    {
+      "source": "/batch-image-converter",
+      "destination": "/smart-image-studio/?tool=convert",
+      "permanent": true
+    },
+    {
+      "source": "/smart-image-resizer",
+      "destination": "/smart-image-studio/?tool=resize&aspect=1",
+      "permanent": true
+    },
+    {
+      "source": "/smart-image-resizer/",
+      "destination": "/smart-image-studio/?tool=resize&aspect=1",
+      "permanent": true
+    },
+    {
+      "source": "/image-aspect-ratio-calculator",
+      "destination": "/smart-image-studio/?tool=resize&aspect=1",
       "permanent": true
     }
   ]

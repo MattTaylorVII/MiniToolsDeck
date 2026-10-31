@@ -1,0 +1,40 @@
+
+/* Midnight Signature footer — consistent with the existing official header logo */
+footer.mtd-signature-footer{background:linear-gradient(150deg,#10243a 0%,#0b1c2e 62%,#091828 100%)!important;border-top:1px solid #29445b!important;color:#aabed0!important;padding:35px max(22px,calc((100vw - 1220px)/2)) 20px!important;text-align:left!important;box-shadow:inset 0 1px 0 rgba(204,236,251,.045)!important}
+footer.mtd-signature-footer .mtd-footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:28px;max-width:1220px;margin:0 auto 27px}
+footer.mtd-signature-footer .mtd-footer-brand-block{min-width:0;max-width:520px}
+footer.mtd-signature-footer .mtd-footer-brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none!important;color:#f3f8fc!important;font-size:20px;font-weight:800;letter-spacing:-.035em;line-height:1.25}
+footer.mtd-signature-footer .mtd-footer-brand .brand-icon{display:grid;place-items:center;flex:0 0 43px;width:43px;height:43px;border-radius:11px;background:linear-gradient(135deg,#1a766f,#0d4c5a);border:1px solid rgba(101,222,211,.3);color:#9df5e9;font-size:20px}
+footer.mtd-signature-footer .mtd-footer-brand .brand-accent{color:#65ded3}
+footer.mtd-signature-footer .mtd-footer-tagline{font-size:10px;letter-spacing:.14em;font-weight:800;color:#64ded2;margin:16px 0 9px}
+footer.mtd-signature-footer .mtd-footer-description{font-size:12px;line-height:1.65;color:#aabed0;margin:0}
+footer.mtd-signature-footer .mtd-footer-explore{display:flex;flex-direction:column;gap:11px;align-items:flex-start;min-width:135px}
+footer.mtd-signature-footer .mtd-footer-explore strong{color:#e8f1f9;font-size:12px;font-weight:800;margin-bottom:3px}
+footer.mtd-signature-footer a:not(.mtd-footer-brand){color:#aabed0;text-decoration:none;font-size:12px;transition:color .15s ease}
+footer.mtd-signature-footer a:hover,footer.mtd-signature-footer button:hover{color:#67e2d7!important}
+footer.mtd-signature-footer a:focus-visible,footer.mtd-signature-footer button:focus-visible{outline:2px solid #67e2d7;outline-offset:4px;border-radius:3px}
+footer.mtd-signature-footer .mtd-footer-bottom{max-width:1220px;margin:0 auto;border-top:1px solid #2a465b;padding-top:19px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+footer.mtd-signature-footer .mtd-footer-bottom p{color:#8fa7b9!important;font-size:11px!important;line-height:1.5!important;margin:0!important}
+footer.mtd-signature-footer .footer-links{display:flex!important;flex-wrap:wrap!important;gap:9px 22px!important;align-items:center!important;justify-content:flex-end!important;margin:0!important}
+footer.mtd-signature-footer .footer-links button{color:#aabed0!important;background:transparent!important;border:0!important;box-shadow:none!important;padding:4px 0!important;margin:0!important;font-size:11px!important;font-weight:500!important;cursor:pointer!important;min-height:0!important;text-transform:none!important}
+@media(max-width:620px){footer.mtd-signature-footer{padding:28px 20px 22px!important}footer.mtd-signature-footer .mtd-footer-top{flex-direction:column;gap:23px}footer.mtd-signature-footer .mtd-footer-explore{gap:9px}footer.mtd-signature-footer .mtd-footer-bottom{align-items:flex-start;flex-direction:column;gap:10px}footer.mtd-signature-footer .footer-links{justify-content:flex-start!important;gap:8px 17px!important}}
+
+
+/* Uniform per-tool privacy note: custom wording, consistent component and placement. */
+main .mtd-tool-privacy{box-sizing:border-box;width:100%;max-width:none;display:flex;align-items:flex-start;gap:10px;border:1px solid #27665e;background:#103331;color:#bdece6;border-radius:12px;padding:15px 18px;margin:28px 0 0;font-family:Inter,system-ui,sans-serif;font-size:13px;font-weight:500;line-height:1.6;text-align:left;letter-spacing:0;box-shadow:none}
+main .mtd-tool-privacy .mtd-privacy-symbol{color:#a3f2de;margin-top:2px;flex:0 0 auto}
+main .mtd-tool-privacy span{flex:1;min-width:0}
+body.light-theme main .mtd-tool-privacy{background:#e7f8f2;color:#1c6155;border-color:#92cbbb}
+body.light-theme main .mtd-tool-privacy .mtd-privacy-symbol{color:#177968}
+@media(max-width:620px){main .mtd-tool-privacy{padding:13px 14px;font-size:12px}}
+@media print{main .mtd-tool-privacy,footer.mtd-signature-footer{display:none!important}}
+
+
+/* Dialogs accompany the shared homepage footer on every tool page. */
+.mtd-tool-legal-overlay.modal-overlay{display:none;position:fixed;inset:0;z-index:100000;align-items:center;justify-content:center;background:rgba(3,12,23,.76);padding:20px}
+.mtd-tool-legal-overlay .modal-content{position:relative;box-sizing:border-box;background:#112337;color:#e7f2f9;border:1px solid #39536b;border-radius:16px;padding:27px 30px;max-height:80vh;overflow-y:auto;width:min(100%,620px);box-shadow:0 22px 65px rgba(0,0,0,.48);font:inherit;line-height:1.65}
+.mtd-tool-legal-overlay .modal-content h3{font-size:19px;margin:0 36px 14px 0;color:#f3f8fc;font-weight:800}
+.mtd-tool-legal-overlay .modal-content p{color:#c4d3e1;font-size:13px;line-height:1.7;margin:8px 0}
+.mtd-tool-legal-overlay .modal-close{position:absolute;top:12px;right:15px;border:0;background:transparent!important;color:#e1f4f4!important;box-shadow:none;font-size:26px;min-width:30px;min-height:32px;cursor:pointer;padding:0}
+.mtd-tool-legal-overlay .modal-close:focus-visible{outline:2px solid #57ded2;outline-offset:3px;border-radius:4px}
+@media(max-width:620px){.mtd-tool-legal-overlay .modal-content{padding:22px 19px}}
