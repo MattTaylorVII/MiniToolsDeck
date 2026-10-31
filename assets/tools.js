@@ -1542,7 +1542,7 @@
             } else {
                 reportEl.innerHTML = '<div style="display:grid;gap:.55rem;">' + targets.map(term => {
                     const escaped = keywordEscapeHTML(term);
-                    const re = new RegExp('(^|[^\p{L}\p{N}])' + term.split(/\s+/).map(x=>x.replace(/[.*+?^${}()|[\]\\]/g,'\$&')).join('\s+') + '(?=$|[^\p{L}\p{N}])','giu');
+                    const re = new RegExp('(^|[^\\p{L}\\p{N}])' + term.split(/\s+/).map(x => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\s+') + '(?=$|[^\\p{L}\\p{N}])', 'giu');
                     const matches = [...raw.matchAll(re)].length;
                     const density = total ? matches / total * 100 : 0;
                     return `<div style="display:flex;justify-content:space-between;align-items:center;gap:.75rem;border-bottom:1px solid var(--border-color);padding:.45rem 0;"><span style="overflow-wrap:anywhere;"><strong>${escaped}</strong><br><small>${matches} exact match${matches===1?'':'es'}</small></span><strong style="white-space:nowrap;color:var(--accent);">${density.toFixed(2)}%</strong></div>`;
@@ -2091,6 +2091,7 @@
             if (source.length > 5 * 1024 * 1024) { status.textContent = 'This SVG is over 5 MB. Please use a smaller file.'; return; }
             if (!window.DOMParser || !window.XMLSerializer) { status.textContent = 'This browser does not support the XML tools needed to clean SVG.'; return; }
             try {
+                if (/<!\s*(?:DOCTYPE|ENTITY)\b/i.test(source)) throw new Error('SVG documents with DTDs or entities are not supported.');
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(source, 'image/svg+xml');
                 if (doc.querySelector('parsererror')) throw new Error('The markup is not valid XML. Check for missing tags, unescaped ampersands, or mismatched quotes.');
@@ -2104,19 +2105,25 @@
                 const minify = document.getElementById('svg-minify-whitespace').checked;
                 const walker = doc.createTreeWalker(root, NodeFilter.SHOW_ALL);
                 const nodesToRemove = [];
-                let node = walker.nextNode();
+                let node = root;
                 while (node) {
                     if (removeComments && node.nodeType === Node.COMMENT_NODE) nodesToRemove.push(node);
                     else if (node.nodeType === Node.ELEMENT_NODE) {
                         const localName = (node.localName || '').toLowerCase();
-                        if (removeTitleDesc && ['title', 'desc'].includes(localName)) nodesToRemove.push(node);
+                        if (['script','foreignobject','iframe','object','embed','animate','animatemotion','animatetransform','set'].includes(localName)) nodesToRemove.push(node);
+                        else if (localName === 'style' && /@import\b|url\(\s*['"]?\s*(?:https?:|\/\/|javascript:|data:)/i.test(node.textContent || '')) nodesToRemove.push(node);
+                        else if (removeTitleDesc && ['title', 'desc'].includes(localName)) nodesToRemove.push(node);
                         else if (removeMetadata && ['metadata'].includes(localName)) nodesToRemove.push(node);
-                        else if (removeMetadata && node.attributes) {
+                        else if (node.attributes) {
                             for (let i = node.attributes.length - 1; i >= 0; i--) {
                                 const attr = node.attributes[i];
                                 const attrName = (attr.name || '').toLowerCase();
                                 const attrNs = attr.namespaceURI || '';
-                                if (attrNs.includes('inkscape') || attrNs.includes('sodipodi') || attrName.startsWith('inkscape:') || attrName.startsWith('sodipodi:')) node.removeAttributeNode(attr);
+                                const v = (attr.value || '').trim();
+                                const externalReference = (attrName === 'href' || attrName.endsWith(':href')) && v && !v.startsWith('#') && !/^data:image\/(?:png|jpeg|gif|webp);base64,[a-z0-9+/=]+$/i.test(v);
+                                const dangerousUrl = /url\(\s*['"]?\s*(?:https?:|\/\/|javascript:|data:)/i.test(v) || /^\s*javascript:/i.test(v);
+                                const editorMetadata = removeMetadata && (attrNs.includes('inkscape') || attrNs.includes('sodipodi') || attrName.startsWith('inkscape:') || attrName.startsWith('sodipodi:'));
+                                if (attrName.startsWith('on') || externalReference || dangerousUrl || editorMetadata) node.removeAttributeNode(attr);
                             }
                         }
                     }
@@ -2137,7 +2144,7 @@
                 if (svgPreviewUrl) URL.revokeObjectURL(svgPreviewUrl);
                 svgPreviewUrl = URL.createObjectURL(new Blob([output], { type: 'image/svg+xml;charset=utf-8' }));
                 document.getElementById('svg-preview').src = svgPreviewUrl;
-                status.textContent = 'SVG cleaned successfully. Review the preview before downloading; some SVG features may depend on external assets or editor-specific metadata.';
+                status.textContent = 'SVG cleaned successfully. Scripts, event handlers and unsafe external references are removed. Review the result before downloading.';
                 updateSvgInputStats();
             } catch (error) {
                 status.textContent = error && error.message ? error.message : 'Could not clean this SVG. Check the markup and try again.';
